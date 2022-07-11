@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { GuardsCheckEnd, Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService, GenericService } from '../services';
-import { environment } from 'src/environments/environment' ;
+import { environment as envr  }from 'src/environments/environment' ;
 
 @Component({
   selector: 'app-root',
@@ -16,6 +16,8 @@ export class homeComponent implements OnInit {
   loginForm: FormGroup;
   email: string;
   genk: GenericService;
+  appid: string;
+  elpsbase: string;
 
   constructor(private cd: ChangeDetectorRef,
     private router: Router,
@@ -23,18 +25,20 @@ export class homeComponent implements OnInit {
     private gen: GenericService,
     private auth: AuthenticationService) {
       this.genk = gen;
+      this.elpsbase = envr.elpsBase;
+      this.appid = envr.appid;
 
-      // this.route.params.subscribe(params => {
-      //   console.log(params); // { orderby: "price" }
-      //   this.email = params["email"];
-      //   //console.log(this.orderby); // price
-      //   if(this.email != null){
-      //     this.auth.login(this.email)
-      //       .subscribe(result => {
-      //         this.router.navigate(['/' + this.genk.company, 'dashboard']);
-      //       });
-      //   }
-      // });
+      this.route.queryParams.subscribe(params => {
+        console.log(params); // { orderby: "price" }
+        this.email = params["email"];
+        //console.log(this.orderby); // price
+        if(this.email != null){
+          this.auth.login(this.email, "")
+            .subscribe(result => {
+              this.router.navigate(['/' + this.genk.company, 'dashboard']);
+            });
+        }
+      });
   }
 
   ngOnInit(): void {
