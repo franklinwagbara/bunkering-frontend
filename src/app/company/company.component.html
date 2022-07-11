@@ -17,9 +17,9 @@
             <div style="margin: 0 20px;">
                 <span (click)="showApplications()" class="dropdown-toggle">Applications</span>
                 <div>
-                    <div *ngIf="showapply" (click)="showApplications()" class="menumodal">
-                        <span [routerLink]="['/' + genk.company, 'applications']" style="margin-bottom: 7px;">Applications</span>
-                        <span href="/Company/Apply">Apply</span>
+                    <div *ngIf="showapplications" (click)="showApplications()" class="menumodal">
+                        <span [routerLink]="['/' + genk.company, 'applications']" style="margin-bottom: 7px;"></span>
+                        <span href="/Company/Apply">Apply</span><br><br>
                         <span href="/Company/MyApplications">My Applications</span>
                     </div>
                 </div>
