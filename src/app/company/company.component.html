@@ -1,34 +1,39 @@
-<div style="background-color: rgb(2, 30, 56); color: white; display: flex; position: fixed; width: 100%;">
-    <div class="divmid" style="margin-right: 100px;">
-        <img src="assets/image/NUPRC_logo.png" style="width: 100px;" alt="NUPRC Logo">
-        <div>
-            <span style="font-size: 30px; color: goldenrod">AUS2</span>
-        </div>
-    </div>
-    <div style="display: flex; align-items: center; width: 100%;">
-
-        <div style="display: flex">
+<div (click)="closeAll()">
+    <div style="background-color: rgb(43, 76, 102); color: white; display: flex; align-items: center; position: fixed; width: 100%; top: 0; z-index: 2;">
+        <div class="divmid" style="margin-right: 100px;">
+           <div>
+            <img src="assets/image/NUPRC_logo.png" style="width: 100px;" alt="NUPRC Logo">
+           </div>
             <div>
+                <span style="font-size: 30px; color: rgb(143, 182, 182); font-weight: 600; text-shadow: 1px 1px 1px rgb(255, 255, 255, 0.9);">AUS2</span>
+            </div>
+        </div>
+        <div style="display: flex; align-items: center; width: 100%;">
+            <div style="margin: 0 20px;" [routerLink]="['/' + genk.company, 'dashboard']">
                 <span>Dashboard</span>
             </div>
             <div>
                 <span (click)="showApply()">Applications</span>
-                
-                <div *ngIf="showapply" (click)="showApply()" style="background-color: whitesmoke; display: block; text-align: center;">
+
+                <div *ngIf="showapply" (click)="showApply()"
+                    style="background-color: whitesmoke; text-align: start; z-index: 3; display: block; position: fixed;">
                     <span href="/Company/Apply">Apply</span><br>
                     <span href="/Company/MyApplications">My Applications</span>
                 </div>
             </div>
 
 
-            <div>
-                <span (click)="showAccount()" class="nav-link dropdown-toggle"> My Account </span>
-                <div *ngIf="showaccount" (click)="showAccount()" style="background-color: whitesmoke; text-align: start; z-index: 3; display: block; position: fixed;">
-                    <span [routerLink]="['/' + genk.company, 'companyprofile']">Company Profile</span><br>
-                    <span href="/Auth/ChangePassword">Change Password</span><br>
-                    <span href="/Company/Messages">Messages</span><br>
-                    <span href="/Company/MySchedule"> My Schedule <b class="badge badge-warning" id="ScheduleCount">0</b> </span>
 
+            <div style="margin: 0 20px;">
+                <span (click)="showAccount()" class="dropdown-toggle">My Account </span>
+                <div>
+                    <div *ngIf="showaccount" (click)="showAccount()" class="menumodal">
+                        <div [routerLink]="['/' + genk.company, 'companyprofile']" style="margin-bottom: 7px;">Company
+                            Profile</div>
+                        <div style="margin-bottom: 7px;" href="/Auth/ChangePassword">Change Password</div>
+                        <div style="margin-bottom: 7px;" href="/Company/Messages">Messages</div>
+                        <div style="margin-bottom: 7px;" href="/Company/MySchedule"> My Schedule</div>
+                    </div>
                 </div>
             </div>
 
@@ -36,29 +41,32 @@
                 <span> My Permits</span>
             </div>
 
-            <div>
-                <span>Template</span>
-                <div>
-                    <span Download Template A></span>
-                    <span> Download Template B</span>
+            <div style="margin: 0 20px;">
+                <span (click)="showTemplate()" class="dropdown-toggle"> Templates
+                    <div *ngIf="showtemplate" (click)="showTemplate()" class="menumodal">
+                        <span [routerLink]="['/' + genk.company, 'template']"></span>
+                        <span href="/Auth/Download Template A">Download Template A</span><br>
+                        <span href="/Company/Download Template B">Download Template B</span>
+
+                    </div>
+                </span>
+
+            </div>
+
+            <div style="display: flex; margin: 0 40px 0 auto;">
+                <div class="divmid" style="margin-right: 20px;">
+                    <span class="material-icons">person</span><span> Bisipopoo</span>
                 </div>
+
+                <div (click)="logout()" class="divmid" st>
+                    <span class="material-icons">power_settings_new</span><span> Logout</span>
+                </div>
+
             </div>
 
         </div>
-
-        <div style="display: flex; margin: 0 40px 0 auto;">
-            <div class="divmid" style="margin-right: 20px;">
-                <span class="material-icons">person</span><span> Bisipopool</span>
-            </div>
-
-            <div (click)="logout()" class="divmid" st>
-                <span class="material-icons">power_settings_new</span><span> Logout</span>
-            </div>
-
-        </div>
-
     </div>
-</div>
-<div>
-    <router-outlet></router-outlet>
+    <div class="pagestyle">
+        <router-outlet></router-outlet>
+    </div>
 </div>

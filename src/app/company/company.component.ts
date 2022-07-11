@@ -13,6 +13,9 @@ export class CompanyComponent implements OnInit {
   auth: AuthenticationService;
   showapply = false;
   showaccount = false;
+  showtemplate: boolean;
+  showmyapplication: any;
+  modalactive = false;
 
   constructor(private gen: GenericService,
     private authenticationService: AuthenticationService,
@@ -27,7 +30,7 @@ export class CompanyComponent implements OnInit {
   }
 
   showApply() {
-    if (this.showapply) {
+    if (this.showmyapplication) {
       this.showapply = false;
     } else {
       this.showapply = true;
@@ -37,13 +40,50 @@ export class CompanyComponent implements OnInit {
   showAccount() {
     if (this.showaccount) {
       this.showaccount = false;
+      //this.closeAll();
     } else {
       this.showaccount = true;
     }
   }
 
-  logout() {
+  showTemplate() {
+    //debugger;
+    if (this.showtemplate) {
+      this.showtemplate = false;
+    } else {
+        this.showtemplate = true;
+        this.cd.markForCheck();
+      
+    }
+  }
+
+  closeAll() {
+    //debugger;
+    if (this.modalactive) {
+      if (this.showaccount) {
+        this.showaccount = false;
+      }
+      if (this.showtemplate) {
+        this.showtemplate = false;
+      }
+      if (this.showapply) {
+        this.showapply = false;
+      }
+      this.modalactive = false;
+    }
+    else {
+      this.modalactive = true;
+    }
+    this.cd.markForCheck();
+  }
+
+  logout(): void {
     this.auth.logout();
     this.router.navigate(['/' + this.genk.home]);
   }
+}
+
+
+function showMyApplication() {
+  throw new Error('Function not implemented.');
 }

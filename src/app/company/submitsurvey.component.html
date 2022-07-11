@@ -1,0 +1,149 @@
+<div class="container">
+            <a class="navbar-brand" href="/Company/Dashboard">
+                <img src="assets/image/NUPRC_logo.png" width="80%" height="50" class="d-inline-block align-top" alt="NUPRC Image Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarsExample07">
+
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/Company/Dashboard"> Dashboard <span class="sr-only">(current)</span></a>
+                    </li>
+
+                    <li class="nav-item dropdown active">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Applications</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown07">
+                            <a class="dropdown-item" href="/Company/Apply">Apply</a>
+                            <a class="dropdown-item" href="/Company/MyApplications">My Applications</a>
+                        </div>
+                    </li>
+
+
+                    <li class="nav-item dropdown active">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Account <b class="badge badge-warning" id="NotifyCount">0</b> </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown07">
+                            <a class="dropdown-item" href="/Company/CompanyInformation">Company Profile</a>
+                            <a class="dropdown-item" href="/Auth/ChangePassword">Change Password</a>
+                            <a class="dropdown-item" href="/Company/Messages">Messages</a>
+                            <a class="dropdown-item" href="/Company/MySchedule"> My Schedule <b class="badge badge-warning" id="ScheduleCount">0</b> </a>
+
+                        </div>
+                    </li>
+
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/Company/MyPermits"> My Permits</a>
+                    </li>
+
+                    <li class="nav-item dropdown active">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Template<b class="badge badge-warning" id=""></b> </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown07">
+                            <a class="dropdown-item" href="/Company/TemplateADownload"><i class="fas fa-download"></i> Download Template A</a>
+                            <a class="dropdown-item" href="/Company/TemplateBDownload"><i class="fas fa-download"></i> Download Template B</a>
+
+                        </div>
+                    </li>
+
+                </ul>
+
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link text-warning" href="/Company/CompanyInformation"> <i class="fa fa-user"> </i><b> bisipopool</b> <span class="sr-only">(current)</span></a>
+                    </li>
+
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/Auth/Logout"> <i class="fa fa-power-off"> </i> Logout <span class="sr-only">(current)</span></a>
+                    </li>
+
+                </ul>
+
+            </div>
+        </div>
+    
+
+
+
+
+
+    <div class="container" style="box-shadow:0 0 5px #c5c5c5; padding: 0 15px 20px 15px; background:white;">
+        <div class="panel-body">
+            <br><br><p></p>
+            
+
+<div class="row" id="BackImage">
+
+    <br>
+    <h3 class="DashCompanyName">SubSurface Pressure Survey Report</h3>
+    <br>
+</div>
+
+<br>
+
+<div id="SubmitSurveyResultLoader" style="padding:20px">
+
+    <form action="#" id="SubmitSurveyResult">
+
+        <div class="row">
+            <div class="col-md-7">
+                <div style="display:none"><input value="2" id="RequestId" name="RequestId"></div>
+                <span>
+                    <label for="UploadedFile" class="btn btn-primary"><i class="fas fa-cloud-upload-alt"></i> Upload Template B (Excel File)</label>
+                    <label style="color:green; font-weight:bold">File Name:</label> <label id="filename" name="filename" class="label-success"></label>
+                    <input type="file" id="UploadedFile" style="visibility:hidden" name="UploadedFile" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+                </span>
+
+            </div>
+                    <div class="col-md-2">
+                        <input type="submit" name="Submit" value="Submit Template B" class="btn btn-success">
+                    </div>
+        </div>
+        <div id="successmessage"> </div>
+        <div id="errormessage"> </div>
+
+
+
+    </form>
+
+</div>
+
+<hr><br>
+
+<div class="row">
+    <div class="col-md-12" style="background-color:white">
+        <label style="margin-left:300px; font-weight:bolder; font-size:25px; color:green"> 2022 SubSurface Pressure Survey Report</label>
+        <hr>
+        <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper no-footer"><div class="dt-buttons">          <button class="dt-button buttons-copy buttons-html5" tabindex="0" aria-controls="DataTables_Table_0"><span>Copy</span></button> <button class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="DataTables_Table_0"><span>Excel</span></button> <button class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="DataTables_Table_0"><span>CSV</span></button> <button class="dt-button buttons-pdf buttons-html5" tabindex="0" aria-controls="DataTables_Table_0"><span>PDF</span></button> <button class="dt-button buttons-print" tabindex="0" aria-controls="DataTables_Table_0"><span>Print</span></button> </div><div class="dataTables_length" id="DataTables_Table_0_length"><label>Show <select name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" class=""><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div><div id="DataTables_Table_0_filter" class="dataTables_filter"><label>Search:<input type="search" class="" placeholder="" aria-controls="DataTables_Table_0"></label></div><div id="DataTables_Table_0_processing" class="dataTables_processing" style="display: none;">Processing...</div><table class="table table-striped table-bordered table-condensed table-responsive SurveyDT dataTable no-footer" style="font-size: small; width: 1340px;" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+            <thead>
+                <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Field: activate to sort column descending" style="width: 29.2375px;">Field</th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 57.3875px;" aria-label="Reservoir: activate to sort column ascending">Reservoir</th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 65.275px;" aria-label="Remaining Reserves: activate to sort column ascending">Remaining Reserves</th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 27.1375px;" aria-label="Well: activate to sort column ascending">Well</th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 41.8px;" aria-label="Date of Survey: activate to sort column ascending">Date of Survey</th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 70.4875px;" aria-label="Oil(mmbbl) NCO at 60/60: activate to sort column ascending">Oil(mmbbl) NCO at 60/60</th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 53.2375px;" aria-label="Water (mmbbl): activate to sort column ascending">Water (mmbbl)</th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 73.875px;" aria-label="Gas(MMscf): activate to sort column ascending">Gas(MMscf)</th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 60.6125px;" aria-label="BS&amp;amp;W(%): activate to sort column ascending">BS&amp;W(%)</th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 103.525px;" aria-label="GOR(scf/mmbbl) : activate to sort column ascending">GOR(scf/mmbbl) </th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 67.675px;" aria-label="Bean(64th) : activate to sort column ascending">Bean(64th) </th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 41.4125px;" aria-label="Datum Depth (ft. ss): activate to sort column ascending">Datum Depth (ft. ss)</th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 86.725px;" aria-label="Initial RES. Pressure(psig): activate to sort column ascending">Initial RES. Pressure(psig)</th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 60.6875px;" aria-label="THP(psig): activate to sort column ascending">THP(psig)</th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 61.1875px;" aria-label="CHP(psig): activate to sort column ascending">CHP(psig)</th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 35.125px;" aria-label="FBHP MP perf.(psig): activate to sort column ascending">FBHP MP perf.(psig)</th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 35.125px;" aria-label="SBHP MP perf.(psig): activate to sort column ascending">SBHP MP perf.(psig)</th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 75px;" aria-label="Calc. Res. Press. at datum(psig): activate to sort column ascending">Calc. Res. Press. at datum(psig)</th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 74.7625px;" aria-label="Productivity Index (b/d/psig): activate to sort column ascending">Productivity Index (b/d/psig)</th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 41.8px;" aria-label="Date of Last Survey: activate to sort column ascending">Date of Last Survey</th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 52.2625px;" aria-label="Remarks: activate to sort column ascending">Remarks</th></tr>
+            </thead>
+            <tbody><tr class="odd"><td valign="top" colspan="21" class="dataTables_empty">No data available in table</td></tr></tbody>
+
+        </table><div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">Showing 0 to 0 of 0 entries</div><div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate"><a class="paginate_button previous disabled" aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0" id="DataTables_Table_0_previous">Previous</a><span></span><a class="paginate_button next disabled" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0" id="DataTables_Table_0_next">Next</a></div></div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+            <br>
+            <br>
+        </div>
+    </div>
+    <div class="mylivechat_inline mylivechat_template5 mylivechat_template_float_right mylivechat_template_float_bottom" style="font-family: Poppins; min-width: 100px; height: 76px; right: 16px; bottom: 15px;"><div class="mylivechat_collapsed" style="background-color: rgb(2, 117, 216); border: 0px solid rgb(32, 112, 176); color: white; min-width: 180px; display: none;"><div class="mylivechat_collapsed_text" style="font-size: 15px; color: white; text-indent: 9px;">Send us a message</div><div class="mylivechat_sprite" title="Maximize" image="up" sprite="up" style="background-repeat: no-repeat; max-width: 32px; background-position: -4px -148px;"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" x="0px" y="0px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve" image="up"><polygon points="16,10 26,20 24.6,21.4 16,12.8 7.4,21.4 6,20 "></polygon></svg></div></div><div class="mylivechat_expanded_outer" style="display: none;"><div class="mylivechat_expanded" style="min-height: 470px;"><div class="mylivechat_expanded_title" style="background-color: rgb(2, 117, 216); border: 0px solid rgb(32, 112, 176); color: white;"><div class="mylivechat_expanded_text" style="font-size: 15px; color: white; text-indent: 9px;"></div><div class="mylivechat_sprite" title="Minimize" image="down" sprite="down" style="cursor: pointer; background-repeat: no-repeat; max-width: 32px; background-position: -4px -52px;"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 32 32" image="down"><path d="M11,22c-0.6,0-1-0.4-1-1s0.4-1,1-1h15c0.6,0,1,0.4,1,1s-0.4,1-1,1H11z"></path></svg></div><div class="mylivechat_sprite" title="End Chat" image="exit" sprite="exit" style="cursor: pointer; display: none; background-repeat: no-repeat; max-width: 32px; background-position: -4px -76px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" image="exit"><path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path></svg></div><div class="mylivechat_sprite" title="Pop-out" image="open" sprite="open" style="cursor: pointer; display: none; background-repeat: no-repeat; max-width: 32px; background-position: -4px -4px;"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 32 32" image="open"><polygon points="10 6 10 8 22.59 8 6 24.59 7.41 26 24 9.41 24 22 26 22 26 6 10 6"></polygon></svg></div></div><div class="mylivechat_container" style="border: 0px solid transparent; box-sizing: border-box; display: none;"></div></div></div><div class="mylivechat_buttonround" title="Send us a message" style="position: relative; background-color: rgb(2, 117, 216); color: rgb(255, 255, 255); border-radius: 99px !important; left: 12px; width: 52px; top: 27px; height: 52px; transform: translate(0px, 4.24151e-15px);"><img alt="round button" src="https://a2.mylivechat.com/Customization/Template/InlineChatRoundOnline_1.png" style="position: absolute; width: 24px; height: 24px; left: 14px; top: 14px;"><div class="mylivechat_buttonround_tooltip" style="position: absolute; top: 7px; line-height: 38px; background-color: rgb(2, 117, 216); color: white; font-size: 15px; right: 68px;">Send us a message<div class="mylivechat_buttonround_tooltip_arrow" style="position: absolute; top: 11px; width: 12px; height: 0px; border-color: transparent rgb(2, 117, 216); border-style: solid; box-sizing: content-box; left: 100%; border-width: 10px 0px 10px 12px;"></div></div></div></div><nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="box-shadow: 0 3px 5px black;">
+        </nav>
+        
+
+    <br><br>
+
+          <footer class="container text-center">
+
+              Copyright © 2022. The  Nigerian Upstream Petroleum Regulator Commission 
+          </footer>
+
+    <br><br>

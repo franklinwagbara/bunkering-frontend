@@ -11,6 +11,7 @@ import { MyApplicationComponent } from './myapplication.component';
 import { MyScheduleComponent } from './myschedule.component';
 import { PermitsComponent } from './permits.component'
 import { RegisterDirectorComponent } from './registerdirector.component';
+import { SubmitSurveyComponent } from './submitsurvey.component';
 
 const routes: Routes = [
     {path: '', component: DashboardComponent},
@@ -25,6 +26,7 @@ const routes: Routes = [
     {path: 'companyinformation', component: CompanyInformationComponent},
     {path: 'companydirectors', component: CompanyDirectorsComponent},
     {path: 'registerdirectors', component: RegisterDirectorComponent},
+    {path: 'submitsurvey', component: SubmitSurveyComponent},
 ];
 
 @NgModule({
