@@ -3,8 +3,9 @@ import { Router } from '@angular/router';
 
 @Component({
   templateUrl: 'companyinformation.component.html',
-  styleUrls: ['company.component.scss']})
+  styleUrls: ['../company.component.scss']})
 
 export class CompanyInformationComponent {
     
 }
+

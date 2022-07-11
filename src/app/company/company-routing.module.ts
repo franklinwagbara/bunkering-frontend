@@ -2,9 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApplyComponent } from './apply.component';
 import { ChangePasswordComponent } from './changepassword.component';
-import { CompanyDirectorsComponent } from './companydirectors.component';
-import { CompanyInformationComponent } from './companyinformation.component';
-import { CompanyProfileComponent } from './companyprofile.component';
 import { DashboardComponent } from './dashboard.component';
 import { MessagesComponent } from './messeges.component';
 import { MyApplicationComponent } from './myapplication.component';
@@ -12,6 +9,7 @@ import { MyScheduleComponent } from './myschedule.component';
 import { MypermitsComponent } from './mypermits.component'
 import { RegisterDirectorComponent } from './registerdirector.component';
 import { SubmitSurveyComponent } from './submitsurvey.component';
+import { CompanyInformationComponent } from './company-information/companyinformation.component';
 
 const routes: Routes = [
     {path: '', component: DashboardComponent},
@@ -19,14 +17,17 @@ const routes: Routes = [
     {path: 'messages', component: MessagesComponent},
     {path: 'myschedule', component: MyScheduleComponent},
     {path: 'changepassword', component: ChangePasswordComponent},
-    {path: 'companyprofile', component: CompanyProfileComponent},
     {path: 'mypermits', component: MypermitsComponent},
     {path: 'apply', component: ApplyComponent},
     {path: 'myapplication', component: MyApplicationComponent},
-    {path: 'companyinformation', component: CompanyInformationComponent},
-    {path: 'companydirectors', component: CompanyDirectorsComponent},
     {path: 'registerdirector', component: RegisterDirectorComponent},
     {path: 'submitsurvey', component: SubmitSurveyComponent},
+    {
+      path: 'companyinformation',
+      component: CompanyInformationComponent,
+      loadChildren: () => import('./company-information/company-information.module').then(m => m.CompanyInformationModule)
+    },
+
 ];
 
 @NgModule({

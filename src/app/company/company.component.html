@@ -29,7 +29,7 @@
                 <span (click)="showAccount()" class="dropdown-toggle">My Account </span>
                 <div>
                     <div *ngIf="showaccount" (click)="showAccount()" class="menumodal">
-                        <div [routerLink]="['/' + genk.company, 'companyprofile']" style="margin-bottom: 7px;">Company Profile</div>
+                        <div [routerLink]="['/' + genk.company, 'companyinformation']" style="margin-bottom: 7px;">Company Profile</div>
                         <div [routerLink]="['/' + genk.company, 'changepassword']" style="margin-bottom: 7px;">Change Password</div>
                         <div [routerLink]="['/' + genk.company, 'messages']" style="margin-bottom: 7px;">Messages</div>
                         <div [routerLink]="['/' + genk.company, 'myschedule']" style="margin-bottom: 7px;">My Schedule</div>
