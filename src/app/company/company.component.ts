@@ -16,6 +16,7 @@ export class CompanyComponent implements OnInit {
   showtemplate: boolean;
   showmyapplication: any;
   modalactive = false;
+  showapplications: boolean;
 
   constructor(private gen: GenericService,
     private authenticationService: AuthenticationService,
@@ -29,11 +30,11 @@ export class CompanyComponent implements OnInit {
 
   }
 
-  showApply() {
-    if (this.showmyapplication) {
-      this.showapply = false;
+  showApplications() {
+    if (this.showapplications) {
+      this.showapplications = false;
     } else {
-      this.showapply = true;
+      this.showapplications = true;
     }
   }
 

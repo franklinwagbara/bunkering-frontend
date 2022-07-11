@@ -12,13 +12,16 @@
             <div style="margin: 0 20px;" [routerLink]="['/' + genk.company, 'dashboard']">
                 <span>Dashboard</span>
             </div>
-            <div>
-                <span (click)="showApply()">Applications</span>
 
-                <div *ngIf="showapply" (click)="showApply()"
-                    style="background-color: whitesmoke; text-align: start; z-index: 3; display: block; position: fixed;">
-                    <span href="/Company/Apply">Apply</span><br>
-                    <span href="/Company/MyApplications">My Applications</span>
+
+            <div style="margin: 0 20px;">
+                <span (click)="showApplications()" class="dropdown-toggle">Applications</span>
+                <div>
+                    <div *ngIf="showapply" (click)="showApplications()" class="menumodal">
+                        <span [routerLink]="['/' + genk.company, 'applications']" style="margin-bottom: 7px;">Applications</span>
+                        <span href="/Company/Apply">Apply</span>
+                        <span href="/Company/MyApplications">My Applications</span>
+                    </div>
                 </div>
             </div>
 
@@ -28,8 +31,7 @@
                 <span (click)="showAccount()" class="dropdown-toggle">My Account </span>
                 <div>
                     <div *ngIf="showaccount" (click)="showAccount()" class="menumodal">
-                        <div [routerLink]="['/' + genk.company, 'companyprofile']" style="margin-bottom: 7px;">Company
-                            Profile</div>
+                        <div [routerLink]="['/' + genk.company, 'companyprofile']" style="margin-bottom: 7px;">Company Profile</div>
                         <div style="margin-bottom: 7px;" href="/Auth/ChangePassword">Change Password</div>
                         <div style="margin-bottom: 7px;" href="/Company/Messages">Messages</div>
                         <div style="margin-bottom: 7px;" href="/Company/MySchedule"> My Schedule</div>
@@ -41,21 +43,26 @@
                 <span> My Permits</span>
             </div>
 
-            <div style="margin: 0 20px;">
-                <span (click)="showTemplate()" class="dropdown-toggle"> Templates
-                    <div *ngIf="showtemplate" (click)="showTemplate()" class="menumodal">
-                        <span [routerLink]="['/' + genk.company, 'template']"></span>
-                        <span href="/Auth/Download Template A">Download Template A</span><br>
-                        <span href="/Company/Download Template B">Download Template B</span>
-
+            <div>
+                <div style="margin: 0 20px;">
+                    <span (click)="showTemplate()" class="dropdown-toggle"> Templates</span>
+            
+                    <div>
+                        <div *ngIf="showtemplate" (click)="showTemplate()" class="menumodal">
+                            <span [routerLink]="['/' + genk.company, 'template']"></span>
+                            <span href="/Auth/Download Template A">Download Template A</span><br>
+                            <span href="/Company/Download Template B">Download Template B</span>
+            
+                        </div>
                     </div>
-                </span>
-
+            
+                </div>
             </div>
 
+            
             <div style="display: flex; margin: 0 40px 0 auto;">
                 <div class="divmid" style="margin-right: 20px;">
-                    <span class="material-icons">person</span><span> Bisipopoo</span>
+                    <span class="material-icons">person</span><span> bisipopool</span>
                 </div>
 
                 <div (click)="logout()" class="divmid" st>
