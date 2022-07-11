@@ -7,7 +7,7 @@ import { CompanyProfileComponent } from './companyprofile.component';
 import { DashboardComponent } from './dashboard.component';
 import { MessagesComponent } from './messeges.component';
 import { MyScheduleComponent } from './myschedule.component';
-import { PermitsComponent } from './permits.component';
+import { MypermitsComponent } from './mypermits.component';
 import { ApplyComponent } from './apply.component';
 import { MyApplicationComponent } from './myapplication.component';
 import { CompanyDirectorsComponent } from './companydirectors.component';
@@ -22,7 +22,7 @@ import { CompanyComponent } from './company.component';
   ],
   declarations: [
     DashboardComponent, MessagesComponent, ChangePasswordComponent, MyScheduleComponent,
-    CompanyProfileComponent, PermitsComponent, ApplyComponent, MyApplicationComponent,
+    CompanyProfileComponent, MypermitsComponent, ApplyComponent, MyApplicationComponent,
     CompanyInformationComponent, CompanyDirectorsComponent, RegisterDirectorComponent, 
     CompanyComponent
   ],

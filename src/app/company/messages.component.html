@@ -1,197 +1,188 @@
-<div>
-    <div style="border: solid 1px grey; width: 90%; margin: 5% auto 5% auto; border-radius: 50px; box-shadow: 4px 4px 8px rgba(246, 243, 243, 0.3); box-shadow: 10px 10px 35px 0px rgba(0,0,0,0.75);">
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="box-shadow: 0 3px 5px black;">
-
-    <div class="container">
-        <a class="navbar-brand" href="/Company/Dashboard">
-            <img src="assets/image/NUPRC_logo.png" width="120" height="80" class="d-inline-block align-top" alt="">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-between" id="navbarsExample07">
-
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/Company/Dashboard"> Dashboard <span class="sr-only">(current)</span></a>
-                </li>
-
-                <li class="nav-item dropdown active">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Applications</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown07">
-                        <a class="dropdown-item" href="/Company/Apply">Apply</a>
-                        <a class="dropdown-item" href="/Company/MyApplications">My Applications</a>
-                    </div>
-                </li>
-
-
-                <li class="nav-item dropdown active">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Account <b class="badge badge-warning" id="NotifyCount">0</b> </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown07">
-                        <a class="dropdown-item" href="/Company/CompanyInformation">Company Profile</a>
-                        <a class="dropdown-item" href="/Auth/ChangePassword">Change Password</a>
-                        <a class="dropdown-item" href="/Company/Messages">Messages</a>
-                        <a class="dropdown-item" href="/Company/MySchedule"> My Schedule <b class="badge badge-warning" id="ScheduleCount">0</b> </a>
-
-                    </div>
-                </li>
-
-                <li class="nav-item active">
-                    <a class="nav-link" href="/Company/MyPermits"> My Permits</a>
-                </li>
-
-                <li class="nav-item dropdown active">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Template<b class="badge badge-warning" id=""></b> </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown07">
-                        <a class="dropdown-item" href="/Company/TemplateADownload"><i class="fas fa-download"></i> Download Template A</a>
-                        <a class="dropdown-item" href="/Company/TemplateBDownload"><i class="fas fa-download"></i> Download Template B</a>
-
-                    </div>
-                </li>
-
-            </ul>
-
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link text-warning" href="/Company/CompanyInformation"> <i class="fa fa-user"> </i><b> bisipopool</b> <span class="sr-only">(current)</span></a>
-                </li>
-
-                <li class="nav-item active">
-                    <a class="nav-link" href="/Auth/Logout"> <i class="fa fa-power-off"> </i> Logout <span class="sr-only">(current)</span></a>
-                </li>
-
-            </ul>
-
-        </div>
-    </div>
-</nav>
-
-
-
-
-
 <div class="container" style="box-shadow:0 0 5px #c5c5c5; padding: 0 15px 20px 15px; background:white;">
     <div class="panel-body">
-        <br><br><p></p>
-        
+        <br><br>
+        <p></p>
+
+        <div>
+
+            <div class="row" id="BackImage">
+
+                <br>
+                <h3 class="DashCompanyName">All Messages</h3>
+                <hr>
+            </div>
+
+            <br>
 
 
-<div>
+            <div id="MyFacilityTable_wrapper" class="dataTables_wrapper no-footer">
+                <div class="dt-buttons"> <button class="dt-button buttons-collection buttons-page-length" tabindex="0"
+                        aria-controls="MyFacilityTable" aria-haspopup="true"><span>Show 1000 rows</span></button>
+                    <button class="dt-button buttons-copy buttons-html5" tabindex="0"
+                        aria-controls="MyFacilityTable"><span>Copy</span></button> <button
+                        class="dt-button buttons-csv buttons-html5" tabindex="0"
+                        aria-controls="MyFacilityTable"><span>CSV</span></button> <button
+                        class="dt-button buttons-excel buttons-html5" tabindex="0"
+                        aria-controls="MyFacilityTable"><span>Excel</span></button> <button
+                        class="dt-button buttons-pdf buttons-html5" tabindex="0"
+                        aria-controls="MyFacilityTable"><span>PDF</span></button> <button
+                        class="dt-button buttons-print" tabindex="0" aria-controls="MyFacilityTable"><span>Print
+                            all</span></button> <button class="dt-button buttons-collection buttons-colvis" tabindex="0"
+                        aria-controls="MyFacilityTable" aria-haspopup="true"><span>Change columns</span></button> </div>
+                <div id="MyFacilityTable_filter" class="dataTables_filter"><label>Search:<input type="search" class=""
+                            placeholder="" aria-controls="MyFacilityTable"></label></div>
+                <div id="MyFacilityTable_processing" class="dataTables_processing" style="display: none;">Processing...
+                </div>
+                <table class="table table-bordered table-hover dataTable no-footer" id="MyFacilityTable" role="grid"
+                    aria-describedby="MyFacilityTable_info">
+                    <thead>
+                        <tr role="row">
+                            <th class="sorting_desc" tabindex="0" aria-controls="MyFacilityTable" rowspan="1"
+                                colspan="1" aria-sort="descending"
+                                aria-label=" Seen : activate to sort column ascending"> Seen </th>
+                            <th class="sorting" tabindex="0" aria-controls="MyFacilityTable" rowspan="1" colspan="1"
+                                aria-label=" Message Subject: activate to sort column ascending"
+                                style="width: 743.35px;"> Message Subject</th>
+                            <th class="sorting" tabindex="0" aria-controls="MyFacilityTable" rowspan="1" colspan="1"
+                                aria-label=" Date : activate to sort column ascending" style="width: 213.075px;"> Date
+                            </th>
+                            <th class="sorting" tabindex="0" aria-controls="MyFacilityTable" rowspan="1" colspan="1"
+                                aria-label=" Action : activate to sort column ascending" style="width: 160.15px;">
+                                Action </th>
+                        </tr>
+                    </thead>
 
-    <div class="row" id="BackImage">
-
-        <br>
-        <h3 class="DashCompanyName">All Messages</h3>
-        <hr>
-    </div>
-
-    <br>
+                    <tbody>
 
 
-    <div id="MyFacilityTable_wrapper" class="dataTables_wrapper no-footer"><div class="dt-buttons">                     <button class="dt-button buttons-collection buttons-page-length" tabindex="0" aria-controls="MyFacilityTable" aria-haspopup="true"><span>Show 1000 rows</span></button> <button class="dt-button buttons-copy buttons-html5" tabindex="0" aria-controls="MyFacilityTable"><span>Copy</span></button> <button class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="MyFacilityTable"><span>CSV</span></button> <button class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="MyFacilityTable"><span>Excel</span></button> <button class="dt-button buttons-pdf buttons-html5" tabindex="0" aria-controls="MyFacilityTable"><span>PDF</span></button> <button class="dt-button buttons-print" tabindex="0" aria-controls="MyFacilityTable"><span>Print all</span></button> <button class="dt-button buttons-collection buttons-colvis" tabindex="0" aria-controls="MyFacilityTable" aria-haspopup="true"><span>Change columns</span></button> </div><div id="MyFacilityTable_filter" class="dataTables_filter"><label>Search:<input type="search" class="" placeholder="" aria-controls="MyFacilityTable"></label></div><div id="MyFacilityTable_processing" class="dataTables_processing" style="display: none;">Processing...</div><table class="table table-bordered table-hover dataTable no-footer" id="MyFacilityTable" role="grid" aria-describedby="MyFacilityTable_info">
-        <thead>
-            <tr role="row"><th class="sorting_desc" tabindex="0" aria-controls="MyFacilityTable" rowspan="1" colspan="1" aria-sort="descending" aria-label=" Seen : activate to sort column ascending"> Seen </th><th class="sorting" tabindex="0" aria-controls="MyFacilityTable" rowspan="1" colspan="1" aria-label=" Message Subject: activate to sort column ascending" style="width: 743.35px;"> Message Subject</th><th class="sorting" tabindex="0" aria-controls="MyFacilityTable" rowspan="1" colspan="1" aria-label=" Date : activate to sort column ascending" style="width: 213.075px;"> Date </th><th class="sorting" tabindex="0" aria-controls="MyFacilityTable" rowspan="1" colspan="1" aria-label=" Action : activate to sort column ascending" style="width: 160.15px;"> Action </th></tr>
-        </thead>
 
-        <tbody>
 
-                    
-                    
-                    
-                    
-                    
-                    
-                    
 
-        <tr style="background:#c0efd5" role="row" class="odd">
-                        <td class="sorting_1">
+
+
+
+
+                        <tr style="background:#c0efd5" role="row" class="odd">
+                            <td class="sorting_1">
                                 <i class="fas fa-envelope text-success"></i>
-                        </td>
+                            </td>
 
-                        <td>
-                            <span> Application Approved with Permit NO : NUPRC/UMR/RM/PRS/EPERMIT/2021/0002 </span>
-                        </td>
+                            <td>
+                                <span> Application Approved with Permit NO : NUPRC/UMR/RM/PRS/EPERMIT/2021/0002 </span>
+                            </td>
 
-                        <td> 4/22/2021 10:44:54 AM</td>
+                            <td> 4/22/2021 10:44:54 AM</td>
 
-                        <td> <a class="btn btn-primary btn-sm" target="_blank" href="/Company/Message/TWc9PQ==/TVRZPQ=="> <i class="fa fa-eye"> </i> View Message </a></td>
-                    </tr><tr style="background:#c0efd5" role="row" class="even">
-                        <td class="sorting_1">
+                            <td> <a class="btn btn-primary btn-sm" target="_blank"
+                                    href="/Company/Message/TWc9PQ==/TVRZPQ=="> <i class="fa fa-eye"> </i> View Message
+                                </a></td>
+                        </tr>
+                        <tr style="background:#c0efd5" role="row" class="even">
+                            <td class="sorting_1">
                                 <i class="fas fa-envelope text-success"></i>
-                        </td>
+                            </td>
 
-                        <td>
-                            <span> Application Submitted with Ref : 345041621103430 </span>
-                        </td>
+                            <td>
+                                <span> Application Submitted with Ref : 345041621103430 </span>
+                            </td>
 
-                        <td> 4/22/2021 9:36:12 AM</td>
+                            <td> 4/22/2021 9:36:12 AM</td>
 
-                        <td> <a class="btn btn-primary btn-sm" target="_blank" href="/Company/Message/TWc9PQ==/TVRVPQ=="> <i class="fa fa-eye"> </i> View Message </a></td>
-                    </tr><tr style="background:#c0efd5" role="row" class="odd">
-                        <td class="sorting_1">
+                            <td> <a class="btn btn-primary btn-sm" target="_blank"
+                                    href="/Company/Message/TWc9PQ==/TVRVPQ=="> <i class="fa fa-eye"> </i> View Message
+                                </a></td>
+                        </tr>
+                        <tr style="background:#c0efd5" role="row" class="odd">
+                            <td class="sorting_1">
                                 <i class="fas fa-envelope text-success"></i>
-                        </td>
+                            </td>
 
-                        <td>
-                            <span> Survey Proposal Application Initiated with Ref : 345041621103430 </span>
-                        </td>
+                            <td>
+                                <span> Survey Proposal Application Initiated with Ref : 345041621103430 </span>
+                            </td>
 
-                        <td> 4/21/2021 2:48:27 PM</td>
+                            <td> 4/21/2021 2:48:27 PM</td>
 
-                        <td> <a class="btn btn-primary btn-sm" target="_blank" href="/Company/Message/TWc9PQ==/TVRRPQ=="> <i class="fa fa-eye"> </i> View Message </a></td>
-                    </tr><tr style="background:#c0efd5" role="row" class="even">
-                        <td class="sorting_1">
+                            <td> <a class="btn btn-primary btn-sm" target="_blank"
+                                    href="/Company/Message/TWc9PQ==/TVRRPQ=="> <i class="fa fa-eye"> </i> View Message
+                                </a></td>
+                        </tr>
+                        <tr style="background:#c0efd5" role="row" class="even">
+                            <td class="sorting_1">
                                 <i class="fas fa-envelope text-success"></i>
-                        </td>
+                            </td>
 
-                        <td>
-                            <span> Survey Proposal Application Initiated with Ref : 345041621103430 </span>
-                        </td>
+                            <td>
+                                <span> Survey Proposal Application Initiated with Ref : 345041621103430 </span>
+                            </td>
 
-                        <td> 4/21/2021 9:39:26 AM</td>
+                            <td> 4/21/2021 9:39:26 AM</td>
 
-                        <td> <a class="btn btn-primary btn-sm" target="_blank" href="/Company/Message/TWc9PQ==/TVRNPQ=="> <i class="fa fa-eye"> </i> View Message </a></td>
-                    </tr><tr style="background:#c0efd5" role="row" class="odd">
-                        <td class="sorting_1">
+                            <td> <a class="btn btn-primary btn-sm" target="_blank"
+                                    href="/Company/Message/TWc9PQ==/TVRNPQ=="> <i class="fa fa-eye"> </i> View Message
+                                </a></td>
+                        </tr>
+                        <tr style="background:#c0efd5" role="row" class="odd">
+                            <td class="sorting_1">
                                 <i class="fas fa-envelope text-success"></i>
-                        </td>
+                            </td>
 
-                        <td>
-                            <span> Survey Proposal Application Initiated with Ref : 345041621103430 </span>
-                        </td>
+                            <td>
+                                <span> Survey Proposal Application Initiated with Ref : 345041621103430 </span>
+                            </td>
 
-                        <td> 4/16/2021 10:40:02 AM</td>
+                            <td> 4/16/2021 10:40:02 AM</td>
 
-                        <td> <a class="btn btn-primary btn-sm" target="_blank" href="/Company/Message/TWc9PQ==/TVRJPQ=="> <i class="fa fa-eye"> </i> View Message </a></td>
-                    </tr><tr style="background:#c0efd5" role="row" class="even">
-                        <td class="sorting_1">
+                            <td> <a class="btn btn-primary btn-sm" target="_blank"
+                                    href="/Company/Message/TWc9PQ==/TVRJPQ=="> <i class="fa fa-eye"> </i> View Message
+                                </a></td>
+                        </tr>
+                        <tr style="background:#c0efd5" role="row" class="even">
+                            <td class="sorting_1">
                                 <i class="fas fa-envelope text-success"></i>
-                        </td>
+                            </td>
 
-                        <td>
-                            <span> REMINDER FOR 2022 Nigerian Upstream Petroleum Regulatory Commission (NUPRC) SURVEY PROGRAMME </span>
-                        </td>
+                            <td>
+                                <span> REMINDER FOR 2022 Nigerian Upstream Petroleum Regulatory Commission (NUPRC)
+                                    SURVEY PROGRAMME </span>
+                            </td>
 
-                        <td> 4/16/2021 10:35:27 AM</td>
+                            <td> 4/16/2021 10:35:27 AM</td>
 
-                        <td> <a class="btn btn-primary btn-sm" target="_blank" href="/Company/Message/TWc9PQ==/TVRFPQ=="> <i class="fa fa-eye"> </i> View Message </a></td>
-                    </tr><tr role="row" class="odd">
-                        <td class="sorting_1">
+                            <td> <a class="btn btn-primary btn-sm" target="_blank"
+                                    href="/Company/Message/TWc9PQ==/TVRFPQ=="> <i class="fa fa-eye"> </i> View Message
+                                </a></td>
+                        
+                        <tr role="row" class="odd">
+                            <td class="sorting_1">
                                 <i class="fas fa-envelope-open text-dark"></i>
-                        </td>
+                            </td>
 
-                        <td>
-                            <span> 2022 Nigerian Upstream Petroleum Regulatory Commission (NUPRC) SURVEY PROGRAMME </span>
-                        </td>
+                            <td>
+                                <span> 2022 Nigerian Upstream Petroleum Regulatory Commission (NUPRC) SURVEY PROGRAMME
+                                </span>
+                            </td>
 
-                        <td> 4/16/2021 10:34:31 AM</td>
+                            <td> 4/16/2021 10:34:31 AM</td>
 
-                        <td> <a class="btn btn-primary btn-sm" target="_blank" href="/Company/Message/TWc9PQ==/TVRBPQ=="> <i class="fa fa-eye"> </i> View Message </a></td>
-                    </tr></tbody>
+                            <td> <a class="btn btn-primary btn-sm" target="_blank"
+                                    href="/Company/Message/TWc9PQ==/TVRBPQ=="> <i class="fa fa-eye"> </i> View Message
+                                </a></td>
+                        </tr>
+                    </tbody>
 
-    </table><div class="dataTables_info" id="MyFacilityTable_info" role="status" aria-live="polite">Showing 1 to 7 of 7 entries</div><div class="dataTables_paginate paging_simple_numbers" id="MyFacilityTable_paginate"><a class="paginate_button previous disabled" aria-controls="MyFacilityTable" data-dt-idx="0" tabindex="0" id="MyFacilityTable_previous">Previous</a><span><a class="paginate_button current" aria-controls="MyFacilityTable" data-dt-idx="1" tabindex="0">1</a></span><a class="paginate_button next disabled" aria-controls="MyFacilityTable" data-dt-idx="2" tabindex="0" id="MyFacilityTable_next">Next</a></div></div>
+                </table>
+                <div class="dataTables_info" id="MyFacilityTable_info" role="status" aria-live="polite">Showing 1 to 7
+                    of 7 entries</div>
+                <div class="dataTables_paginate paging_simple_numbers" id="MyFacilityTable_paginate"><a
+                        class="paginate_button previous disabled" aria-controls="MyFacilityTable" data-dt-idx="0"
+                        tabindex="0" id="MyFacilityTable_previous">Previous</a><span><a class="paginate_button current"
+                            aria-controls="MyFacilityTable" data-dt-idx="1" tabindex="0">1</a></span><a
+                        class="paginate_button next disabled" aria-controls="MyFacilityTable" data-dt-idx="2"
+                        tabindex="0" id="MyFacilityTable_next">Next</a></div>
+            </div>
 
-</div>
+        </div>
 
 
 

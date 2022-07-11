@@ -9,8 +9,7 @@
             </div>
         </div>
         <div style="display: flex; align-items: center; width: 100%;">
-            <div style="margin: 0 20px;" [routerLink]="['/' + genk.company, 'dashboard']">
-                <span>Dashboard</span>
+            <div style="margin: 0 20px;" [routerLink]="['/' + genk.company, 'dashboard']"><span>Dashboard</span>
             </div>
 
 
@@ -18,9 +17,8 @@
                 <span (click)="showApplications()" class="dropdown-toggle">Applications</span>
                 <div>
                     <div *ngIf="showapplications" (click)="showApplications()" class="menumodal">
-                        <span [routerLink]="['/' + genk.company, 'applications']" style="margin-bottom: 7px;"></span>
-                        <span href="/Company/Apply">Apply</span><br><br>
-                        <span href="/Company/MyApplications">My Applications</span>
+                        <div [routerLink]="['/' + genk.company, 'apply']" style="margin-bottom: 7px;">Apply</div>
+                        <div [routerLink]="['/' + genk.company, 'myapplication']" style="margin-bottom: 7px;">My Application</div>
                     </div>
                 </div>
             </div>
@@ -32,16 +30,18 @@
                 <div>
                     <div *ngIf="showaccount" (click)="showAccount()" class="menumodal">
                         <div [routerLink]="['/' + genk.company, 'companyprofile']" style="margin-bottom: 7px;">Company Profile</div>
-                        <div style="margin-bottom: 7px;" href="/Auth/ChangePassword">Change Password</div>
-                        <div style="margin-bottom: 7px;" href="/Company/Messages">Messages</div>
-                        <div style="margin-bottom: 7px;" href="/Company/MySchedule"> My Schedule</div>
+                        <div [routerLink]="['/' + genk.company, 'changepassword']" style="margin-bottom: 7px;">Change Password</div>
+                        <div [routerLink]="['/' + genk.company, 'messages']" style="margin-bottom: 7px;">Messages</div>
+                        <div [routerLink]="['/' + genk.company, 'myschedule']" style="margin-bottom: 7px;">My Schedule</div>
                     </div>
                 </div>
             </div>
 
-            <div>
-                <span> My Permits</span>
+            
+            <div>                   
+                <div [routerLink]="['/' + genk.company, 'mypermits']" style="margin-bottom: 0 20px;"><span>My Permits</span></div>
             </div>
+            
 
             <div>
                 <div style="margin: 0 20px;">

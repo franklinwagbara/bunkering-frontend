@@ -9,7 +9,7 @@ import { DashboardComponent } from './dashboard.component';
 import { MessagesComponent } from './messeges.component';
 import { MyApplicationComponent } from './myapplication.component';
 import { MyScheduleComponent } from './myschedule.component';
-import { PermitsComponent } from './permits.component'
+import { MypermitsComponent } from './mypermits.component'
 import { RegisterDirectorComponent } from './registerdirector.component';
 import { SubmitSurveyComponent } from './submitsurvey.component';
 
@@ -20,12 +20,12 @@ const routes: Routes = [
     {path: 'myschedule', component: MyScheduleComponent},
     {path: 'changepassword', component: ChangePasswordComponent},
     {path: 'companyprofile', component: CompanyProfileComponent},
-    {path: 'permits', component: PermitsComponent},
+    {path: 'mypermits', component: MypermitsComponent},
     {path: 'apply', component: ApplyComponent},
     {path: 'myapplication', component: MyApplicationComponent},
     {path: 'companyinformation', component: CompanyInformationComponent},
     {path: 'companydirectors', component: CompanyDirectorsComponent},
-    {path: 'registerdirectors', component: RegisterDirectorComponent},
+    {path: 'registerdirector', component: RegisterDirectorComponent},
     {path: 'submitsurvey', component: SubmitSurveyComponent},
 ];
 
