@@ -12,6 +12,7 @@ export class AdminComponent implements OnInit {
 
 
   constructor(private router: Router, private gen: GenericService) { 
+    // this.router.navigate(['/admin/dashboard']);
   }
 
   ngOnInit(): void {

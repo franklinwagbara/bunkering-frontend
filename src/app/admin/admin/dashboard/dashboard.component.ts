@@ -13,7 +13,7 @@ export class DashboardComponent implements OnInit {
   // displapAppFiveDays = true;
 
 
-  constructor(private generic: GenericService, private auth: AuthenticationService, private router: Router) {
+  constructor(public generic: GenericService, private auth: AuthenticationService, private router: Router) {
     this.auth.getStaffDashboard()
       .subscribe(result => {
         if(result.success){

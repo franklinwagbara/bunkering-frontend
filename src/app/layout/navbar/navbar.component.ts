@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Router } from '@angular/router';
+import { AuthenticationService, GenericService } from '../../services';
 
 @Component({
   selector: 'app-navbar',
@@ -12,8 +13,17 @@ export class NavbarComponent implements OnInit {
   public focus;
   public listTitles: any[];
   public location: Location;
-  constructor(location: Location,  private element: ElementRef, private router: Router) {
+  public user: any;
+  generic: GenericService;
+
+  constructor(
+    location: Location, 
+    private auth: AuthenticationService, 
+    private element: ElementRef, 
+    private router: Router) {
     this.location = location;
+    this.user = JSON.parse(localStorage.getItem("currentUser"));
+
   }
 
   ngOnInit() {
@@ -31,6 +41,11 @@ export class NavbarComponent implements OnInit {
         }
     }
     return 'Dashboard';
+  }
+
+  logout(): void{
+    this.auth.logout();
+    this.router.navigate(['/home']);
   }
 
 }
