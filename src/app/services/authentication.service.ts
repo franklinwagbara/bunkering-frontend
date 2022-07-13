@@ -46,7 +46,7 @@ export class AuthenticationService {
     }
 
     getStaffDashboard(){
-        return this.http.post<any>(`${environment.apiUrl}/admin/staff-dashboard`, {})
+        return this.http.get<any>(`${environment.apiUrl}/admin/staff-dashboard`, {})
             .pipe(retry(this.num), map(res => {
                 return res;
             }));

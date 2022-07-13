@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 import { AuthenticationService, GenericService } from '../services';
 
 @Component({
@@ -80,7 +81,9 @@ export class CompanyComponent implements OnInit {
 
   logout(): void {
     this.auth.logout();
-    this.router.navigate(['/' + this.genk.home]);
+    window.location.href = environment.apiUrl + '/auth/log-out';
+    // this.router.navigate([environment.apiUrl + '/auth/log-out']);
+    // this.router.navigate(['/' + this.genk.home]);
   }
 }
 
