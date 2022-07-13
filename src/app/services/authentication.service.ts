@@ -45,6 +45,13 @@ export class AuthenticationService {
         this.isLoggedIn = false;
     }
 
+    getStaffDashboard(){
+        return this.http.post<any>(`${environment.apiUrl}/admin/staff-dashboard`, {})
+            .pipe(retry(this.num), map(res => {
+                return res;
+            }));
+    }
+
     getCompanyResource(companyCode: string) {
         return this.http.get<any>(`${environment.apiUrl}/account/getCompanyResource`, {params: {companyCode: companyCode}})
             .pipe(retry(this.num));

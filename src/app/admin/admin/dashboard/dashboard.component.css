@@ -1,0 +1,19 @@
+.dsh-cards{
+    min-height: 120px; 
+    border-radius: 6px;
+    display: inline-block;
+    min-width: 17rem;;
+    margin-left: 1.8em;
+    padding: 1.5em 2em .5em 2em;
+}
+.dsh-cards-items{
+    font-size: xx-large;
+    display: block;
+    margin-bottom: 2.0rem;
+}
+.dsh-items{
+    background-color: white; 
+    min-height: 25rem; 
+    margin: 3.0rem 0.9rem 1.0rem 1.5rem; 
+    border-radius: 5px;
+}
