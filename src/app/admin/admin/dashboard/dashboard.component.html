@@ -1,0 +1,94 @@
+<div>
+    <div>
+        <span class="card dsh-cards">
+            <span class="dsh-cards-items">
+                <span>{{model.deskCount}}</span>
+                <i class="ni ni-tv-2 text-primary" style="font-size: larger; float: right;"></i>
+            </span>
+            <span>
+                <a href="#" [routerLink]="['/admin/staff-desk']">
+                    My Desk
+                </a>            
+            </span>
+        </span>
+        <span class="card dsh-cards">
+            <span class="dsh-cards-items">
+                <span>{{model.approvedCount}}</span>
+                <i class="fa fa-solid fa-check" style="font-size: larger; float: right;"></i>
+            </span>
+            <span>Total Applications Approved</span>
+        </span>
+        <span class="card dsh-cards">
+            <span class="dsh-cards-items">
+                <span>{{model.processingCount}}</span>
+                <i class="fa fa-cart-arrow-down" style="font-size: larger; float: right;"></i>
+            </span>
+            <span>Total Applications in Process</span>
+        </span>
+        <span class="card dsh-cards">
+            <span class="dsh-cards-items">
+                <span>{{model.rejectedCount}}</span>
+                <i class="fa fa-cart-arrow-down" style="font-size: larger; float: right;"></i>
+            </span>
+            <span>Total Applications Declined</span>
+        </span>
+    </div>
+    <div class="dsh-items">
+        <div class="col-md-5" style="float: left; margin-right: 5px;">
+            <h2>Application(s) in process for the past three weeks</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Application Ref.</th>
+                        <th>Company Name</th>
+                        <th>Category</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <div *ngIf="model.onStaffDeskForFiveDays.length == 0; else displapAppFiveDays">
+                        <tr>
+                            <td [attr.colspan]="4">No pending app(s) for the past 5 days</td>
+                        </tr>
+                    </div>
+                    <ng-template #displapAppFiveDays>
+                        <tr *ngFor="let appsfiveDays of model.onStaffDeskForFiveDays">
+                            <td>{{appsfiveDays['ApplicationId']}}</td>
+                            <td>{{appsfiveDays['ApplicantName']}}</td>
+                            <td>{{appsfiveDays['LicenseTypeCode']}}</td>
+                            <td>{{appsfiveDays['AddedDate']}}</td>
+                        </tr>
+                    </ng-template>    
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6" style="float: right">
+            <h2>Application(s) on staff desk for the past five days</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Application Ref.</th>
+                        <th>Company Name</th>
+                        <th>Category</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <div *ngIf="model.inProcessingForThreeWeeks.length == 0; else displapAppThreeWeeks">
+                        <tr>
+                            <td [attr.colspan]="4">No pending app(s) for the past three weeks</td>
+                        </tr>
+                    </div>
+                    <ng-template #displapAppThreeWeeks>
+                        <tr *ngFor="let appsthreeWeek of model.inProcessingForThreeWeeks">
+                            <td>{{appsthreeWeek['ApplicationId']}}</td>
+                            <td>{{appsthreeWeek['ApplicantName']}}</td>
+                            <td>{{appsthreeWeek['LicenseTypeCode']}}</td>
+                            <td>{{appsthreeWeek['AddedDate']}}</td>
+                        </tr>
+                    </ng-template>    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -29,13 +29,19 @@ export class homeComponent implements OnInit {
       this.appid = envr.appid;
 
       this.route.queryParams.subscribe(params => {
-        console.log(params); // { orderby: "price" }
+        console.log(params);
         this.email = params["email"];
-        //console.log(this.orderby); // price
         if(this.email != null){
           this.auth.login(this.email, "")
             .subscribe(result => {
-              this.router.navigate(['/' + this.genk.company, 'dashboard']);
+              if(result.success){
+                if(result.data.data.userType == "COMPANY"){
+                  this.router.navigate(['/' + this.genk.company, 'dashboard']);
+                }
+                else{
+                  this.router.navigate(['/' + this.genk.admin]);
+                }
+              }
             });
         }
       });
