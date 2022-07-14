@@ -1,16 +1,14 @@
 <div class="card-body" id="CompanyDiv">
 
-    
+
 
     <!-- Tab panes -->
     <div class="tab-content tabcontent-border">
 
         <div class="tab-pane active" id="CompanyProfile" role="tabpanel">
-            <div class="p-20">
+            <div [formGroup]="profileForm" class="p-20">
                 <br>
-                <form action="#" id="FormCompanyProfile">
-
-                    <input type="text" hidden="" name="txtRegAddressId" id="txtRegAddressId" class="">
+                <input type="text" hidden="" name="txtRegAddressId" id="txtRegAddressId" class="">
                     <input type="text" hidden="" name="txtOperationalAddressId" id="txtOperationalAddressId" class="">
 
                     <div id="FormCompanyProfileInfo" style="display: none;"><div class="alert alert-info"> <i class="fa fa-check-circle"> </i> <span class="">Company's profile updated successfully. </span> </div></div>
@@ -22,70 +20,70 @@
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label class="control-label"> Company name </label>
-                                <input type="text" readonly="" name="name" id="txtCompanyName" class="form-control" required="">
+                                <input type="text" readonly="" [(ngModel)]="companyName" class="form-control" required="">
                             </div>
                         </div>
 
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label class="control-label"> Business Type </label>
-                                <input type="text" readonly="" name="business_Type" id="txtBusinessType" class="form-control" required="">
+                                <input type="text" readonly="" [(ngModel)]="businessType" class="form-control" required="">
                             </div>
                         </div>
 
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label class="control-label text-danger"> Company email </label>
-                                <input type="text" readonly="" name="user_Id" id="txtCompanyEmail" class="form-control" required="">
+                                <input type="text" readonly="" [(ngModel)]="companyEmail" class="form-control" required="">
                             </div>
                         </div>
 
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label class="control-label"> Contact Person's First Name </label>
-                                <input type="text" name="contact_FirstName" id="txtContactFirstName" class="form-control" required="">
+                                <input type="text" formControlName="FirstName" [(ngModel)]="firstName" class="form-control" required="">
                             </div>
                         </div>
 
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label class="control-label"> Contact Person's Last Name </label>
-                                <input type="text" name="contact_LastName" id="txtContactLastName" class="form-control" required="">
+                                <input type="text" formControlName="LastName" [(ngModel)]="lastName" class="form-control" required="">
                             </div>
                         </div>
 
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label class="control-label"> Contact Person's Telephone </label>
-                                <input type="text" name="contact_Phone" id="txtContactNo" class="form-control" required="">
+                                <input type="text" formControlName="Telephone" [(ngModel)]="telephone" class="form-control" required="">
                             </div>
                         </div>
 
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label class="control-label text-danger"> Registration Number </label>
-                                <input type="text" readonly="" name="rC_Number" id="txtRegNo" class="form-control" required="">
+                                <input type="text" readonly="" [(ngModel)]="regNumber" class="form-control" required="">
                             </div>
                         </div>
 
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label class="control-label text-purple">TIN Number </label>
-                                <input type="text" name="tin_Number" id="txtTinNo" class="form-control" required="" disabled="">
+                                <input type="text" [(ngModel)]="tinNumber" class="form-control" required="" disabled="">
                             </div>
                         </div>
 
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label class="control-label"> Year Incorporated </label>
-                                <input type="number" readonly="" name="year_Incorporated" id="txtYear" class="form-control" required="">
+                                <input type="number" readonly="" [(ngModel)]="yearIncorporated" class="form-control" required="">
                             </div>
                         </div>
 
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label class="control-label"> Nationality </label>
-                                <select name="nationality" id="txtNationality" class="form-control" required="">
+                                <select name="nationality" [(ngModel)]="nationality" formControlName="Nationality" class="form-control" required="">
                                     <option value=""> </option>
                                     <option value="">Select Nationality</option>
                                     <option value="Aaland Islands">Aaland Islands</option>
@@ -343,24 +341,24 @@
 
                         <div class="form-group col-sm-3">
                             <label for="CompanyView_Total_Asset">Total Assets</label>
-                            <input class="form-control" id="txtTotalAssets" type="number">
+                            <input class="form-control" type="number "[(ngModel)]="totalAssets" formControlName="TotalAssets" >
                         </div>
 
                         <div class="form-group col-sm-3">
                             <label for="CompanyView_No_Staff">No. of Staff</label>
-                            <input class="form-control" id="txtStaffNo" type="number" name="CompanyView.No_Staff">
+                            <input class="form-control" type="number" [(ngModel)]="noOfStaff" formControlName="NoOfStaff" >
                         </div>
 
 
                         <div class="form-group col-sm-3">
                             <label for="CompanyView_Yearly_Revenue">Yearly Revenue</label>
-                            <input class="form-control" type="number" id="txtYearlyRevenue" name="CompanyView.Yearly_Revenue">
+                            <input class="form-control" type="number" [(ngModel)]="yearlyRevenue" formControlName="YearlyRevenue" >
                         </div>
 
 
                         <div class="form-group col-sm-3">
                             <label for="CompanyView_No_Expatriate">No. of Expertriates</label>
-                            <input class="form-control" id="txtExpatriateNo" name="CompanyView.No_Expatriate" type="number">
+                            <input class="form-control" formControlName="NoofExpertriates" type="number"[(ngModel)]="noofExpertriates">
                         </div>
 
 
@@ -370,7 +368,7 @@
 
                     <button type="submit" class="btn btn-success m-b-10 m-l-5">Update Profile</button>
 
-                </form>
+
             </div>
         </div>
 

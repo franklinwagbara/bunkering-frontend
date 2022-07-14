@@ -1,6 +1,6 @@
-<div>
-        <!-- <div [routerLink]="['/' + genk.companyinformation, 'companyprofile']" style="margin-bottom: 7px;">Company Profile</div>
-        <div [routerLink]="['/' + genk.companyinformation, 'companyaddress']" style="margin-bottom: 7px;">Company Address</div>                
-        <div [routerLink]="['/' + genk.companyinformation, 'companydirector']" style="margin-bottom: 7px;">Company Director</div>
-        </div> -->
+<div style="display:flex; width:30%; justify-content: space-between; font-weight: 500; ">
+  <div [routerLink]="['/' + genk.company, genk.companyinformation, 'companyprofile']" style="margin-bottom: 7px;">Company Profile</div>
+  <div [routerLink]="['/' + genk.company, genk.companyinformation, 'companyaddress']" style="margin-bottom: 7px;">Company Address </div>
+  <div [routerLink]="['/' + genk.company, genk.companyinformation, 'companydirector']" style="margin-bottom: 7px;">Company Director</div>
+</div>
 <router-outlet></router-outlet>

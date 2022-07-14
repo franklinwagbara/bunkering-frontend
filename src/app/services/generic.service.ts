@@ -5,6 +5,7 @@ import { HttpEventType, HttpParams} from '@angular/common/http';
 export class GenericService {
     account = 'account';
     company = 'company';
+    companyinformation = 'companyinformation';
     home = 'home';
     authCode = 'dd20c4e0-be39-4f25-90ff-a5b92693e12b';
 }
