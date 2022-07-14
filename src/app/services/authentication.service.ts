@@ -52,6 +52,13 @@ export class AuthenticationService {
             }));
     }
 
+    getStaffDesk(){
+        return this.http.get<any>(`${environment.apiUrl}/admin/get-staff-desk`, {})
+            .pipe(retry(this.num), map(res => {
+                return res;
+            }));
+    }
+
     getCompanyResource(companyCode: string) {
         return this.http.get<any>(`${environment.apiUrl}/account/getCompanyResource`, {params: {companyCode: companyCode}})
             .pipe(retry(this.num));
