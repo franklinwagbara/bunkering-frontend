@@ -6,11 +6,14 @@ import { CompanyInformationComponent } from './companyinformation.component';
 import { CompanyAddressComponent } from './companyaddress.component';
 import { CompanyDirectorComponent } from './companydirector.component';
 import { CompanyInformationRoutingModule } from './company-information.routing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
-    CommonModule, 
-    CompanyInformationRoutingModule
+    CommonModule,
+    CompanyInformationRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     CompanyProfileComponent, CompanyInformationComponent, CompanyAddressComponent,
