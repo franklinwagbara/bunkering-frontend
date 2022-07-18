@@ -10,7 +10,9 @@ import { Router } from '@angular/router';
 export class StaffdeskComponent implements OnInit {
   apps = [];
 
-  constructor(private router: Router, private auth: AuthenticationService) { }
+  constructor(private router: Router, private auth: AuthenticationService) {
+    
+  }
 
   ngOnInit(): void {
     this.auth.getStaffDesk().subscribe(res=>{

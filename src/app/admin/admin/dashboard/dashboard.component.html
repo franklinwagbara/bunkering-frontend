@@ -3,7 +3,7 @@
         <span class="card dsh-cards">
             <span class="dsh-cards-items">
                 <span>{{model.deskCount}}</span>
-                <i class="ni ni-tv-2 text-primary" style="font-size: larger; float: right;"></i>
+                <i class="fa fa-solid fa-cog text-warning" style="font-size: 30px; float: right;"></i>
             </span>
             <span>
                 <a href="#" [routerLink]="['/admin/staff-desk']">
@@ -14,21 +14,21 @@
         <span class="card dsh-cards">
             <span class="dsh-cards-items">
                 <span>{{model.approvedCount}}</span>
-                <i class="fa fa-solid fa-check" style="font-size: larger; float: right;"></i>
+                <i class="fa fa-solid fa-check-circle text-success" style="font-size: 30px; float: right;"></i>
             </span>
             <span>Total Applications Approved</span>
         </span>
         <span class="card dsh-cards">
             <span class="dsh-cards-items">
                 <span>{{model.processingCount}}</span>
-                <i class="fa fa-cart-arrow-down" style="font-size: larger; float: right;"></i>
+                <i class="fa fa-plus-circle text-info" style="font-size: 30px; float: right;"></i>
             </span>
             <span>Total Applications in Process</span>
         </span>
         <span class="card dsh-cards">
             <span class="dsh-cards-items">
                 <span>{{model.rejectedCount}}</span>
-                <i class="fa fa-cart-arrow-down" style="font-size: larger; float: right;"></i>
+                <i class="fa fa-minus-circle text-danger" style="font-size: 30px; float: right;"></i>
             </span>
             <span>Total Applications Declined</span>
         </span>

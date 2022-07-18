@@ -9,8 +9,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { StaffdeskComponent } from '../staffdesk/staffdesk.component';
 import { AdminLayoutComponent } from 'src/app/layout/admin-layout/admin-layout.component';
-
-
+import { ApplicationComponent } from '../application/application.component';
+import { ViewApplicationComponent } from '../view-application/view-application.component';
+import { SuperadminLayoutComponent } from 'src/app/layout/superadmin-layout/superadmin-layout.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,10 @@ import { AdminLayoutComponent } from 'src/app/layout/admin-layout/admin-layout.c
     FooterComponent,
     DashboardComponent,
     StaffdeskComponent,
-    AdminLayoutComponent
+    AdminLayoutComponent,
+    ApplicationComponent,
+    ViewApplicationComponent,
+    SuperadminLayoutComponent
   ],
   imports: [
     CommonModule,

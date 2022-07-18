@@ -89,36 +89,33 @@
         </div>
       </form> -->
       <!-- Navigation -->
-      <ul class="navbar-nav">
+      <!-- <ul class="navbar-nav">
           <li *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
-              <a routerLinkActive="active" [routerLink]="[menuItem.path]" class="nav-link">
+              <a routerLinkActive="active" [routerLink]="[menuItem.path]" class="nav-link" style="margin-bottom: 25px;">
                   <i class="ni {{menuItem.icon}}"></i>
                   {{menuItem.title}}
               </a>
           </li>
-      </ul>
-      <!-- Divider -->
-      <!-- <hr class="my-3"> -->
-      <!-- Heading -->
-      <!-- <h6 class="navbar-heading text-muted">Documentation</h6> -->
-      <!-- Navigation -->
-      <!-- <ul class="navbar-nav mb-md-3">
-        <li class="nav-item">
-          <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard-angular/documentation/tutorial">
-            <i class="ni ni-spaceship"></i> Getting started
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard-angular/documentation/colors">
-            <i class="ni ni-palette"></i> Foundation
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard-angular/documentation/alerts">
-            <i class="ni ni-ui-04"></i> Components
-          </a>
-        </li>
       </ul> -->
+      <div>
+        <ul class="navbar-nav" [ngSwitch] = "user['userRoles']">
+          <li class="nav-item">
+            <a routerLinkActive="active" [routerLink]="'/admin'" class="nav-link" style="margin-bottom: 25px;">
+              <i class="ni ni-tv-2 text-primary"></i>
+              Dashboard
+            </a>
+          </li>
+          <div *ngSwitchCase="'SUPERADMIN'">
+            <!-- <li class="nav-item">
+              <a routerLinkActive="active" href="#" class="nav-link" style="margin-bottom: 25px;">
+                  <i class="ni fa fa-cog text-info"></i>
+                  Staff Desk
+              </a>
+            </li> -->
+            <app-superadmin-layout></app-superadmin-layout>
+          </div>
+        </ul> 
+      </div>
     </div>
   </div>
 </nav>
