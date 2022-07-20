@@ -1,19 +1,39 @@
-<li class="nav-item">
-    <a routerLinkActive="active" href="#" class="nav-link" style="margin-bottom: 25px;">
+<li class="nav-item sidebar-nav collapsible-header">
+    <a routerLinkActive="active" href="#" class="nav-link nav-link-collapsee">
         <i class="ni fa fa-cog text-info"></i>
-        Staff Desk
+        Desk
     </a>
+    <div class="nav-item-link collapsible-body" style="transition-property: height;">
+        <ul class="sub-menu">
+            <li class="current-menu-item">
+                <a class="nav-link" href="#">
+                    <span>My Desk</span>
+                </a>
+            </li>
+            <li class="current-menu-item">
+                <a class="nav-link" href="#">
+                    <span>Staff Desk</span>
+                </a>
+            </li>
+        </ul>
+    </div>
 </li>
-<li class="nav-item">
-    <a class="nav-link" style="margin-bottom: 25px;" aria-expanded="false" data-toggle="collapse" data-target="#apps">
+<li class="nav-item collapsible-header">
+    <a
+        href="#"
+        class="nav-link nav-link-collapse active">
         <i class="ni fab fa-accessible-icon"></i>
         Applications
     </a>
-    <ul class="collapse" data-toggle="collapse" id="apps">
-        <li>
-            <a href="#">
-                <span>All Applications</span>
-            </a>
-        </li>
-    </ul>
+    <div class="nav-item-link collapsible-body" style="transition-property: height;">
+        <ul class="sub-menu">
+            <li class="current-menu-item">
+                <a class="nav-link" href="#">
+                    <span>All Applications</span>
+                </a>
+            </li>
+        </ul>
+    </div>
 </li>
+
+

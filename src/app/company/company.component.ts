@@ -34,8 +34,10 @@ export class CompanyComponent implements OnInit {
   showApplications() {
     if (this.showapplications) {
       this.showapplications = false;
+      this.showaccount = false;
     } else {
       this.showapplications = true;
+      this.showaccount = false;
     }
   }
 
