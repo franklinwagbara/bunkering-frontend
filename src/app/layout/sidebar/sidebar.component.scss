@@ -43,7 +43,6 @@
     display: block;
     text-align: center;
     padding-top: 1rem;
-    padding-bottom: 1rem;
 }
 .pt-0, .py-0 {
     padding-top: 0 !important;
@@ -51,7 +50,7 @@
 .navbar-light .navbar-brand {
     color: rgba(0, 0, 0, 0.9);
 }
-.navbar-vertical .navbar-brand {
+.navbar-vertical {
     margin-right: 0;
 }
 .navbar-collapse {

@@ -13,15 +13,23 @@
     <!-- Collapse -->
     <div class="collapse navbar-collapse"  [ngbCollapse]="isCollapsed" id="sidenav-collapse-main">
       <div>
+        <hr />
+        <div class="text-center">
+          <a routerLinkActive="active" [routerLink]="'/admin'" class="nav-link">
+            <!-- <i class="ni ni-tv-2 text-primary"></i> -->
+            MAIN NAVIGATION
+          </a>
+        </div>
+        <hr />
         <ul class="navbar-nav collapsible collapsible-accordion" [ngSwitch] = "user['userRoles']" id="side-menu">
-          <li class="nav-item  collapsible-header">
-            <a routerLinkActive="active" [routerLink]="'/admin'" class="nav-link">
-              <i class="ni ni-tv-2 text-primary"></i>
-              Dashboard
-            </a>
-          </li>
           <div *ngSwitchCase="'SUPERADMIN'" style="display: block; transition-property: height;">
             <app-superadmin-layout></app-superadmin-layout>
+          </div>
+          <div *ngSwitchCase="'INSPECTOR'" style="display: block; transition-property: height;">
+            <app-inspector-layout></app-inspector-layout>
+          </div>
+          <div *ngSwitchCase="'SUPERVISOR'" style="display: block; transition-property: height;">
+            <app-inspector-layout></app-inspector-layout>
           </div>
         </ul> 
       </div>
