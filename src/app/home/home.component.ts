@@ -35,7 +35,7 @@ export class homeComponent implements OnInit {
           this.auth.login(this.email, "")
             .subscribe(result => {
               if(result.responseCode == "00"){
-                if(result.data.userType == "COMPANY"){
+                if(result.data.userType == "Company"){
                   this.router.navigate(['/' + this.genk.company, 'dashboard']);
                 }
                 else{

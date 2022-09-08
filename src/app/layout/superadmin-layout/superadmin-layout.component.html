@@ -43,6 +43,31 @@
     <a
         href="#"
         class="nav-link nav-link-collapse active">
+        <i class="ni fas fa-money-bill-wave text-primary"aria-hidden="true"></i>
+
+        Payments
+    </a>
+    <div class="nav-item-link collapsible-body" style="transition-property: height;">
+        <ul class="sub-menu">
+            <li class="current-menu-item">
+                <a class="nav-link" href="#">
+                    <i class="ni far fa-address-book text-warning"></i>
+                    <span>All Payments</span>
+                </a>
+            </li>
+            <li class="current-menu-item">
+                <a class="nav-link" href="#">
+                    <i class="ni far fa-address-book text-warning"></i>
+                    <span>Extra Payments</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</li>
+<li class="nav-item collapsible-header">
+    <a
+        href="#"
+        class="nav-link nav-link-collapse active">
         <i class="ni fas fa-chart-area text-warning"></i>
         Reports
     </a>
@@ -85,7 +110,7 @@
                 </a>
             </li>
             <li class="current-menu-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="#" [routerLink]="['/admin/modules-setting']">
                     <i class="ni fa fa-book-open text-warning"></i>
                     <span>Module Settings</span>
                 </a>
@@ -94,6 +119,12 @@
                 <a class="nav-link" href="#">
                     <i class="ni fa fa-book text-warning"></i>
                     <span>App. Stage Docs.</span>
+                </a>
+            </li>
+            <li class="current-menu-item">
+                <a class="nav-link" href="#" [routerLink]="['/admin/field-zone-office']">
+                    <i class="ni fa fa-book text-warning"></i>
+                    <span>Field/Zonal Offices</span>
                 </a>
             </li>
         </ul>

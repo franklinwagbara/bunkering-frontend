@@ -19,7 +19,7 @@ export class AllStaffComponent implements OnInit {
   form: FormGroup = new FormGroup({
     FirstName: new FormControl(''),
     LastName: new FormControl(''),
-    UserId: new FormControl(''),
+    Email: new FormControl(''),
     PhoneNo: new FormControl(''),
     UserRoles: new FormControl(''),
     Status: new FormControl(''),
@@ -28,7 +28,6 @@ export class AllStaffComponent implements OnInit {
   constructor(private auth: AuthenticationService, private router: Router, private modalService: NgbModal, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.modalService.dismissAll('Cross click');
     this.auth.getAllStaff().subscribe(res => {
       this.users = res.data.data.map(staff => staff);
     });
@@ -44,7 +43,7 @@ export class AllStaffComponent implements OnInit {
     this.form = this.formBuilder.group({
       FirstName: ['', Validators.required],
       LastName: ['', Validators.required],
-      UserId: ['', Validators.required, Validators.email],
+      Email: ['', Validators.required, Validators.email],
       PhoneNo: ['', Validators.required],
       UserRoles: ['', Validators.required],
       Status: ['', Validators.required],
@@ -70,6 +69,7 @@ export class AllStaffComponent implements OnInit {
   }
 
   onSubmit(){
+    this.modalService.dismissAll('Cross click');
     this.auth.addStaff(this.form.value).subscribe(res =>{
       if(res.success){
         this.open("User created successfully!")
@@ -89,8 +89,10 @@ export class AllStaffComponent implements OnInit {
   setValue(e){
     this.form.get('FirstName').setValue(e.firstName);
     this.form.get('LastName').setValue(e.lastName);
-    this.form.get('UserId').setValue(e.email);
-    this.form.get('PhoneNo').setValue(e.phoneNo)
+    this.form.get('Email').setValue(e.email);
+    this.form.get('PhoneNo').setValue(e.phoneNo);
+    this.form.get('Status').setValue(e.status);
+    this.form.get('id').setValue(e.id);
   }
 }
 
@@ -102,7 +104,7 @@ class staff{
   phoneNo: string;
   role: string;
   office: string;
-  status: string;
+  status: boolean;
   id: number;
 
   constructor(item: any){
@@ -113,7 +115,7 @@ class staff{
     this.phoneNo = item.phoneNo;
     this.id = item.id;
     this.role = item.role;
-    this.status = item.status;
+    this.status = item.boolean;
     this.office = item.office;
   }
 }

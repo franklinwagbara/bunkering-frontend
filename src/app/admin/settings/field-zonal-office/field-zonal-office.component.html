@@ -1,0 +1,27 @@
+<div class="st-desk">
+    <h2 class="text-center">Field Office List</h2>
+    <div class="card" style="padding: 1.5em;">
+        <table class="table table-striped">
+            <thead>
+                <th>#</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>State Located</th>
+                <th>Fied Type</th>
+                <th></th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let office of offices; index as i">
+                    <td>{{i+ 1}}</td>
+                    <td>{{office.description}}</td>
+                    <td>{{office.address}}</td>
+                    <td>{{office.stateName}}</td>
+                    <td>{{office.fieldType}}</td>
+                    <td>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -16,8 +16,8 @@
                 <th>Email</th>
                 <th>Phone No</th>
                 <th>User Role</th>
-                <td>Field Office</td>
-                <td>Status</td>
+                <th>Field Office</th>
+                <th>Status</th>
                 <th></th>
             </tr>
         </thead>
@@ -31,13 +31,13 @@
                 <tr *ngFor="let user of users; index as i">
                     <td>{{i + 1}}</td>
                     <td>{{user['firstName']}}</td>
-                    <td>{{user['LastName']}}</td>
+                    <td>{{user['lastName']}}</td>
                     <td>{{user['userId']}}</td>
                     <td>{{user['phoneNo']}}</td>
                     <td>{{user['role']}}</td>
                     <td>{{user['office']}}</td>
                     <td>
-                        <div *ngIf="user['status'] == 'ACTIVE'; disabledLbl">
+                        <div *ngIf="user['status']; disabledLbl">
                             <label class="alert alert-success" style="padding: 0.3rem 0.3rem !important;">
                                 ENABLED
                             </label>
@@ -84,6 +84,7 @@
         </div>
         <div class="modal-body">
             <form [formGroup] = "form" (ngSubmit)="onSubmit()">
+                <input type="hidden" formControlName="id" />
                 <div class="form-group" style="margin-bottom: 10px;">
                     <label>Select staff from the list below</label>
                     <select type="text" name="search" class="form-control staffname" id="staffname" (change)="fetchSTaff($event)">
@@ -93,7 +94,7 @@
                 </div>
                 <div class="form-group" style="margin-bottom: 10px;">
                     <label>Email</label>
-                    <input type="text" formControlName="UserId" readonly class="form-control" />
+                    <input type="text" formControlName="Email" readonly class="form-control" />
                 </div>
                 <div class="form-group" style="margin-bottom: 10px;">
                     <label>First Name</label>
@@ -112,8 +113,8 @@
                 <div class="form-group" style="margin-bottom: 10px;">
                     <label>Status</label>
                     <select type="text" formControlName="Status" class="form-control">
-                        <option value="ACTIVE">ACTIVE</option>
-                        <option value="PASSIVE">PASSIVE</option>
+                        <option value="true">Active</option>
+                        <option value="false">Inactive</option>
                     </select>
                 </div>
             </form>

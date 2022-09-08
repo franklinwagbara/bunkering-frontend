@@ -22,13 +22,13 @@
         </div>
         <hr />
         <ul class="navbar-nav collapsible collapsible-accordion" [ngSwitch] = "user['userRoles']" id="side-menu">
-          <div *ngSwitchCase="'SUPERADMIN'" style="display: block; transition-property: height;">
+          <div *ngSwitchCase="'SuperAdmin'" style="display: block; transition-property: height;">
             <app-superadmin-layout></app-superadmin-layout>
           </div>
-          <div *ngSwitchCase="'INSPECTOR'" style="display: block; transition-property: height;">
+          <div *ngSwitchCase="'Inspector'" style="display: block; transition-property: height;">
             <app-inspector-layout></app-inspector-layout>
           </div>
-          <div *ngSwitchCase="'SUPERVISOR'" style="display: block; transition-property: height;">
+          <div *ngSwitchCase="'Supervisor'" style="display: block; transition-property: height;">
             <app-inspector-layout></app-inspector-layout>
           </div>
         </ul> 

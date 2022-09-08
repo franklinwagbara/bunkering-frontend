@@ -13,8 +13,10 @@ import { ApplicationComponent } from '../application/application.component';
 import { ViewApplicationComponent } from '../view-application/view-application.component';
 import { SuperadminLayoutComponent } from 'src/app/layout/superadmin-layout/superadmin-layout.component';
 import { InspectorLayoutComponent } from 'src/app/layout/inspector-layout/inspector-layout.component';
-import { AllStaffComponent } from '../all-staff/all-staff.component';
+import { AllStaffComponent } from '../settings/all-staff/all-staff.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ModulesSettingComponent } from '../settings/modules-setting/modules-setting.component';
+import { FieldZonalOfficeComponent } from '../settings/field-zonal-office/field-zonal-office.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     ViewApplicationComponent,
     SuperadminLayoutComponent,
     InspectorLayoutComponent,
-    AllStaffComponent
+    AllStaffComponent,
+    ModulesSettingComponent,
+    FieldZonalOfficeComponent
   ],
   imports: [
     CommonModule,
