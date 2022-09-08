@@ -11,3 +11,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .ni{
     padding-right: 1.0rem;
 }
+
+.st-desk{
+    background-color: rgb(255, 255, 255); 
+    min-height: 35rem; 
+    padding: 2rem; 
+    border-radius: 5px; 
+    margin: 0 1.5rem 0 1.5rem;
+}

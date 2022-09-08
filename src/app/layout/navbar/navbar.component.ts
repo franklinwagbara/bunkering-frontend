@@ -3,6 +3,7 @@ import { ROUTES } from '../sidebar/sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthenticationService, GenericService } from '../../services';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-navbar',
@@ -45,7 +46,7 @@ export class NavbarComponent implements OnInit {
 
   logout(): void{
     this.auth.logout();
-    this.router.navigate(['/home']);
+    window.location.href = environment.apiUrl + '/auth/log-out';
   }
 
 }

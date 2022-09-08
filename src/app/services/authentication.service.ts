@@ -16,8 +16,12 @@ export class AuthenticationService {
 
 
     constructor(private http: HttpClient) {
+        // if(localStorage.getItem('currentUser') != null){
+        //     this.currentUserSubject = new BehaviorSubject<LoginModel>(JSON.parse(localStorage.getItem('currentUser')));
+        //     this.currentUser = this.currentUserSubject.asObservable();
+        // }
         this.currentUserSubject = new BehaviorSubject<LoginModel>(JSON.parse(localStorage.getItem('currentUser')));
-        this.currentUser = this.currentUserSubject.asObservable();
+            this.currentUser = this.currentUserSubject.asObservable();
     }
 
     public get currentUserValue(): LoginModel {
@@ -29,9 +33,9 @@ export class AuthenticationService {
         return this.http.post<any>(`${environment.apiUrl}/account/login`, '', {params: { email: email, code: code}})
             .pipe(retry(this.num), map(user => {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify(user.data.data));
+                    localStorage.setItem('currentUser', JSON.stringify(user.data));
                     //localStorage.setItem('iden', user.id);
-                    this.currentUserSubject.next(user.data.data);
+                    this.currentUserSubject.next(user.data);
                     this.isLoggedIn = true;
                     return user;
             }));
@@ -59,8 +63,34 @@ export class AuthenticationService {
             }));
     }
 
+    getAllStaff(){
+        return this.http.get<any>(`${environment.apiUrl}/account/all-staff`, {})
+            .pipe(retry(this.num), map(res => {
+                return res;
+            }));
+    }
+
+    getElpsStaffList(){
+        return this.http.get<any>(`${environment.apiUrl}/account/all-elps-staff`, {})
+            .pipe(retry(this.num), map(res => {
+                return res;
+            }));
+    }
+    
+    getRoles(){
+        return this.http.get<any>(`${environment.apiUrl}/account/all-staff-roles`, {})
+            .pipe(retry(this.num), map(res => {
+                return res;
+            }));
+    }
+
     getCompanyResource(companyCode: string) {
         return this.http.get<any>(`${environment.apiUrl}/account/getCompanyResource`, {params: {companyCode: companyCode}})
+            .pipe(retry(this.num));
+    }
+
+    addStaff(model: any){
+        return this.http.post<any>(`${environment.apiUrl}/account/add-staff`, model)
             .pipe(retry(this.num));
     }
 }

@@ -11,7 +11,7 @@ import { AdminModule } from './admin/admin/admin.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorInterceptor, JwtInterceptor } from './helpers';
 import { RouterModule } from '@angular/router';
-
+//import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,6 +20,7 @@ import { RouterModule } from '@angular/router';
   imports: [
     BrowserModule,
     NgbModule,
+    //ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     RouterModule,
