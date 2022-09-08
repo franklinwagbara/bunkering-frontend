@@ -9,4 +9,6 @@ export class GenericService {
     home = 'home';
     admin = 'admin';
     authCode = 'dd20c4e0-be39-4f25-90ff-a5b92693e12b';
+  sizePerPage: any;
+  sizeten: any;
 }
