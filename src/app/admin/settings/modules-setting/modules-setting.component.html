@@ -48,6 +48,8 @@
                      <th>Name</th>
                      <th>Category</th>
                      <th>Description</th>
+                     <th>Fee (₦)</th>
+                     <th>Service Charge (₦)</th>
                      <th>Status</th>
                      <th>
  
@@ -61,6 +63,8 @@
                      <td>{{phase.shortName}}</td>
                      <td>{{phase.categoryName}}</td>
                      <td>{{phase.description}}</td>
+                     <th>{{phase.fee | number : '.2-2'}}</th>
+                     <th>{{phase.serviceCharge}}</th>
                      <td>{{phase.status}}</td>
                      <td></td>
                      <td>
