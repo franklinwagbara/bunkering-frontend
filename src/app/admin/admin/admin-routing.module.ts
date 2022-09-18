@@ -6,7 +6,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { StaffdeskComponent } from '../staffdesk/staffdesk.component';
 import { ViewApplicationComponent } from '../view-application/view-application.component';
 import { ApplicationComponent } from '../application/application.component';
-import { AllStaffComponent } from '../all-staff/all-staff.component';
+import { AllStaffComponent } from '../settings/all-staff/all-staff.component';
+import { ModulesSettingComponent } from '../settings/modules-setting/modules-setting.component';
+import { FieldZonalOfficeComponent } from '../settings/field-zonal-office/field-zonal-office.component';
 
 const routes: Routes = [
   { path: '', component: AdminComponent },
@@ -15,6 +17,8 @@ const routes: Routes = [
   { path: 'view-application', component: ViewApplicationComponent },
   { path: 'application', component: ApplicationComponent },
   { path: 'all-staff', component: AllStaffComponent },
+  { path: 'modules-setting', component: ModulesSettingComponent },
+  { path: 'field-zone-office', component: FieldZonalOfficeComponent }
   
 ];
 

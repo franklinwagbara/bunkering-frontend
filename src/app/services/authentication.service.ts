@@ -93,4 +93,24 @@ export class AuthenticationService {
         return this.http.post<any>(`${environment.apiUrl}/account/add-staff`, model)
             .pipe(retry(this.num));
     }
+
+    getPhaseCategories(){
+        return this.http.get<any>(`${environment.apiUrl}/configuration/get-permit-configuration`) 
+            .pipe(retry(this.num));        
+    }
+
+    createModule(model: any){
+        return this.http.post<any>(`${environment.apiUrl}/configuration/post-module-configuration`, model)
+            .pipe(retry(this.num));
+    }
+
+    createPhase(model: any){
+        return this.http.post<any>(`${environment.apiUrl}/configuration/post-permit-configuration`, model)
+            .pipe(retry(this.num));
+    }
+
+    getOffices(){
+        return this.http.get<any>(`${environment.apiUrl}/configuration/field-offices`)
+            .pipe(retry(this.num));
+    }
 }
