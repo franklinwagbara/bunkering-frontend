@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { DecimalPipe, formatNumber } from '@angular/common';
+import { DecimalPipe, formatNumber, CommonModule } from '@angular/common';
 
 
 @Component({
@@ -115,8 +115,8 @@ class Phases{
   categoryName: string;
   description: string;
   status: boolean;
-  fee: DecimalPipe;
-  serviceCharge: DecimalPipe
+  fee: number;
+  serviceCharge: number
 
   constructor(item: any) {
     this.id = item.id
