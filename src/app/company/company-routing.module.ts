@@ -10,6 +10,7 @@ import { MypermitsComponent } from './mypermits.component'
 import { RegisterDirectorComponent } from './registerdirector.component';
 import { SubmitSurveyComponent } from './submitsurvey.component';
 import { CompanyInformationComponent } from './company-information/companyinformation.component';
+import { UploadComponent } from './upload.component';
 
 const routes: Routes = [
     {path: '', component: DashboardComponent},
@@ -22,6 +23,7 @@ const routes: Routes = [
     {path: 'myapplication', component: MyApplicationComponent},
     {path: 'registerdirector', component: RegisterDirectorComponent},
     {path: 'submitsurvey', component: SubmitSurveyComponent},
+    {path: 'upload', component: UploadComponent},
     {
       path: 'companyinformation',
       component: CompanyInformationComponent,
