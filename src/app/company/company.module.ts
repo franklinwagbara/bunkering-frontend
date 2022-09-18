@@ -11,15 +11,19 @@ import { ApplyComponent } from './apply.component';
 import { MyApplicationComponent } from './myapplication.component';
 import { RegisterDirectorComponent } from './registerdirector.component';
 import { CompanyComponent } from './company.component';
+import { UploadComponent } from './upload.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     CompanyRoutingModule
   ],
   declarations: [
     DashboardComponent, MessagesComponent, ChangePasswordComponent, MyScheduleComponent,
-    MypermitsComponent, ApplyComponent, MyApplicationComponent, RegisterDirectorComponent, CompanyComponent,
+    MypermitsComponent, ApplyComponent, MyApplicationComponent, RegisterDirectorComponent, CompanyComponent,UploadComponent,
   ],
   providers: [],
 })
