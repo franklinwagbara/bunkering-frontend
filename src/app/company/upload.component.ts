@@ -12,13 +12,6 @@ import { ApplyService } from '../services/apply.service';
 export class UploadComponent implements OnInit {
   uploadFile: File;
   uploadForm: FormGroup;
-  firstNum: number;
-  secondNum: number;
-  totalNum: number;
-  firstName: string;
-  secondName: string;
-  fullName: string;
-  Silas: string;
   state: string;
   lga: string;
   lgalist = [];
