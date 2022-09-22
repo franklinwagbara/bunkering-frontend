@@ -9,6 +9,7 @@ import { LoginModel } from '../models/login-model';
 @Injectable({ providedIn: 'root' })
 export class ApplyService {
     private num = 2;
+  getState: any;
 
 
     constructor(private http: HttpClient) {
@@ -25,6 +26,38 @@ export class ApplyService {
             }));
     }
 
+    getApplicationPhases(id: number){
+        return this.http.get<any>(`${environment.apiUrl}/application/application-phases-by-categoryId`, {params: {moduleid: id}})
+            .pipe(retry(this.num), map(res => {
+                return res;
+            }));
+    }
+
+    getLgaList() {
+        return this.http.get<any>(`${environment.apiUrl}/application/lga-list`)
+            .pipe(retry(this.num), map(res => {
+                return res;
+            }));
+    }
+
+    getStateList(){
+        return this.http.get<any>(`${environment.apiUrl}/application/state-list`)
+            .pipe(retry(this.num), map(res => {
+                return res;
+            }));
+
+    }
+
+    uploadApplyform(conbody: FormData) {
+debugger;
+        return this.http.post<any>(`${environment.apiUrl}/application/application-form`, conbody)
+          .pipe(retry(this.num),
+            map((response) => {
+              return response
+            })
+          )
+      }
+    
 
 
     getAllStaff(){
