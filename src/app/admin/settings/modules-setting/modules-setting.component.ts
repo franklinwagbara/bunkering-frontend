@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { DecimalPipe, formatNumber, CommonModule } from '@angular/common';
+import { formatNumber } from '@angular/common';
 
 
 @Component({
