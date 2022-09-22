@@ -1,6 +1,6 @@
 import { CdkAriaLive } from '@angular/cdk/a11y';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { uploadFile } from '../models/apply.model';
 import { GenericService } from '../services';
@@ -23,26 +23,22 @@ export class UploadComponent implements OnInit {
   uploadForm: FormGroup;
   state: string;
   lga: string;
-  StateId: number;
+  stateId:number;
+  statecode: string;
   uploadNewName: string;
   uploadNameDoc: string;
   genk:GenericService;
   data: any[];
   uploadBody: uploadFile = {} as uploadFile;
   uploadApplyForm: FormGroup;
-  
-  
   lgalist = [];
-  statelist = [{
-    "state": 'Abia', "lga": ['Aba North', 'Aba South', 'Arochukwu', 'Bende', 'Ikwuano', 'Isiala Ngwa North', 'Isiala Ngwa South', 'Isuikwuato', 'Obi Ngwa',
-      ' Ohafia', 'Osisioma Ngwa', 'Ugwunagbo', 'Ukwa East', 'Ukwa West', 'Umuahia North', 'Umuahia South', 'Umu Nneochi',]},
-{ "state": 'Adamawa', "lga": ['Demsa', 'Fufore'] }];
+  statelist = [];
 
 
 constructor(private cd: ChangeDetectorRef,
   private apply: ApplyService,
   private modalService:ModalService,
-  private gen: GenericService) { 
+  private gen: GenericService, private fb: FormBuilder) { 
     this.genk = gen;
 
 
@@ -50,10 +46,22 @@ constructor(private cd: ChangeDetectorRef,
 
 ngOnInit() {
  this.getCategory();
- this.getLGAList();
+ this.getStateList();
  this.data = [];
  this.fetchdata();
  this.sizePerPage = this.genk.sizeten;
+}
+
+
+initForm() {
+  this.uploadApplyForm = this.fb.group({
+    category: ["", Validators.required],
+    phase:["", Validators.required],
+    applicationType: ["", Validators.required],
+    lgaId:["", Validators.required],
+    location:["", Validators.required],
+    doc:["", Validators.required],
+  })
 }
 
 getCategory() {
@@ -73,23 +81,31 @@ getPhases() {
 
 getStateList() {
   this.apply.getStateList().subscribe(res => {
-    //debugger;
-    this.phaseList = res.data.data;
-  });
-  this.cd.markForCheck();
-}
-
-
-
-getLGAList() {
-  this.apply.getStateList().subscribe(res =>{
+    
     this.stateList = res.data.data;
   });
   this.cd.markForCheck();
 }
+
+
+
+// getLGAList() {
+//   this.apply.getLgaList().subscribe(res =>{
+//     this.lgalist= res.data.data;
+//   });
+//   this.cd.markForCheck();
+// }
 //   let obj = this.statelist.filter(x => x.state == this.state)[0];
 //    this.lgalist = obj.lga
 //  }
+
+getLgaByState() {
+  this.apply.getLgaByStateCode(this.statecode).subscribe(res => {
+    debugger;
+    this.lgalist = res.data.data;
+  });
+  this.cd.markForCheck();
+}
 
 fetchdata(){
 
@@ -119,6 +135,7 @@ fetchdata(){
 debugger;
     const formDat: FormData = new FormData();
     this.uploadBody.id = 0;
+    debugger;
     for (const key in this.uploadBody) {
       if (this.uploadBody[key]) {
         formDat.append(key.toString(), this.uploadBody[key]);
