@@ -41,7 +41,6 @@ export class ApplyService {
     }
 
     getLgaByStateCode(code: string){
-        debugger;
         return this.http.get<any>(`${environment.apiUrl}/application/lga-list-by-Id`, {params: {statecode: code}})
             .pipe(retry(this.num), map(res => {
                 return res;
