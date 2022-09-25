@@ -24,7 +24,7 @@ export class UploadComponent implements OnInit {
   state: string;
   lga: string;
   stateId:number;
-  statecode: string;
+  title: 'Upload Application';
   uploadNewName: string;
   uploadNameDoc: string;
   genk:GenericService;
@@ -33,6 +33,17 @@ export class UploadComponent implements OnInit {
   uploadApplyForm: FormGroup;
   lgalist = [];
   statelist = [];
+  category: string;
+  upload: File;
+  address: string;
+  phase: string;
+  
+
+
+ 
+
+
+
 
 
 constructor(private cd: ChangeDetectorRef,
@@ -71,8 +82,8 @@ getCategory() {
   this.cd.markForCheck();
 }
 
-getPhases() {
-  this.apply.getApplicationPhases(this.categoryId).subscribe(res => {
+getPhases(e) {
+  this.apply.getApplicationPhases(e.target.value).subscribe(res => {
     //debugger;
     this.phaseList = res.data.data;
   });
@@ -99,9 +110,8 @@ getStateList() {
 //    this.lgalist = obj.lga
 //  }
 
-getLgaByState() {
-  this.apply.getLgaByStateCode(this.statecode).subscribe(res => {
-    debugger;
+getLgaByState(e) {
+  this.apply.getLgaByStateId(e.target.value).subscribe(res => {
     this.lgalist = res.data.data;
   });
   this.cd.markForCheck();
@@ -114,7 +124,6 @@ fetchdata(){
 
 
   saveTemplate(DeFile: any) {
-    debugger;
     this.uploadFile = <File>DeFile.target.files[0];
     if (!this.uploadFile) {
         return;
@@ -135,7 +144,6 @@ fetchdata(){
 debugger;
     const formDat: FormData = new FormData();
     this.uploadBody.id = 0;
-    debugger;
     for (const key in this.uploadBody) {
       if (this.uploadBody[key]) {
         formDat.append(key.toString(), this.uploadBody[key]);
@@ -157,4 +165,26 @@ debugger;
         }
       })
   }
+
+  savecontinue(){
+    let s = this.genk.state;
+    let c = this.genk.category;
+    let p = this.genk.phase;
+    let a = this.genk.address;
+    let l = this.genk.lga;
+    let u = this.genk.upload;
+    debugger;
+    this.apply.postsavecontinue(null, this.genk.state, this.genk.category, this.genk.phase, this.genk.address, this.genk.lga, this.genk.upload)
+      .subscribe(res => {
+
+        if(res.statusCode == 300){
+          this.modalService.logNotice("Error", res.message, 'error');
+        }
+        else{
+          this.modalService.logNotice("Success", res.message, 'success');
+        }
+    })
+  }
+
+  
 }

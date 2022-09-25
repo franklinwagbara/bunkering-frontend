@@ -1,6 +1,9 @@
-<div style=" box-shadow:0 0 5px #c5c5c5; padding: 0 15px 20px 15px; background:white;">
+<div
+  style="width: 85%; border: solid 2px rgb(128, 128, 128); margin-top: 25%; background-color: rgb(253, 253, 253); border-radius:10px; box-shadow: 6px 6px 8px rgb(0, 0, 0, 0.3); margin:auto; margin-top:7% ;">
     <br>
-    <h3 style="display: flex; justify-self: center; font-size: 30px; text-shadow: #cef64c; ">Upload Application </h3>
+    <div class="container">
+    <h1>Upload Application</h1>
+    
     <hr>
 
     <form [formGroup]="uploadApplyForm" (ngSubmit)="OnSubmit()">
@@ -12,19 +15,19 @@
                 <option *ngFor="let val of statelist" value={{val.state}}>{{val.state}}</option>
             </select> -->
     
-            <select>
+            <!-- <select>
                 <option *ngFor="let val of lgalist;" value={{val}}>{{val}}</option>
             </select>
-            <br><br><br>
-    
+            <br><br><br> 
+     -->
             <div style="display:flex;width: 100%; justify-content: space-between; ">
                 <div style="width:30%; ">
-                    <label class="labelwp">State</label>
+                    <label style="font-size: 18px;">State</label>
     
-                    <div
-                    style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; padding: 5px; border-radius:7px 10px; outline:none;">
-                    <select class="inpute" [(ngModel)]="statecode" (change)="getLgaByState()">
-                            <option *ngFor="let val of stateList" value={{val.id}}>{{val.stateName}}</option>>
+                    <div style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; padding: 5px; border-radius:7px 10px;
+                     outline:none;">
+                    <select class="inpute" [(ngModel)]="stateId" (change)="getLgaByState($event)">
+                            <option *ngFor="let val of stateList" [value]="val.id">{{val.stateName}}</option>>
                             <!-- <option selected disabled>---- Please Select an Option ----</option>
                                     <option value="ABIA">Abia</option>
                                     <option value="ADAMAWA">Adamawa</option> -->
@@ -32,7 +35,7 @@
                     </div>
                 </div><br>
                 <div style="width: 30% ">
-                    <label class="labelwp">Local Government</label>
+                    <label style="font-size: 18px;">Local Government</label>
                     <div
                         style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; padding: 5px; border-radius: 20px;">
                         <select class="inpute" [(ngModel)]="lga">
@@ -46,14 +49,14 @@
     
     
                 <div style="width: 30%;">
-                    <label class="labelwp">Category</label>
+                    <label slot="font-size:18px;">Category</label>
     
                     <div
                         style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; padding: 5px; border-radius:7px 10px; outline:none;">
-                        <select class="inpute" [(ngModel)]="categoryId" (change)="getPhases()">
+                        <select class="inpute" [(ngModel)]="categoryId" (change)="getPhases($event)">
                             <!-- <option value="PHASE A ">Phase A</option>
                                 <option value="PHASE B">Phase B</option> -->
-                            <option *ngFor="let val of categoryList" value={{val.id}}>{{val.name}}</option>
+                            <option *ngFor="let val of categoryList" [value]="val.id">{{val.name}}</option>
                         </select>
                     </div>
                 </div>
@@ -110,20 +113,21 @@
     
             <br><br><br>
     
-            <div style="display:flex; justify-content:space-between ;">
-                <div style="text-align: center; margin-left: 40%; ">
-                    <!-- <input style=" padding: 10px 20px; border: none; background-color:teal; color: white" type="submit"
-                        value="Upload Excel Document" /> -->
-                    <button class="btn px-5" type="submit"   style=" padding: 10px 20px; border: none; background-color:teal; color: white">Click to Submit
-                Application</button>
-    
+                <div style="text-align: center;">
+                    <button class="submitbtn" (click)="savecontinue()">Click Here to Submit Application</button>
                 </div>
     
+                
     
     
-            </div>
+    
+            
         </div>
     </form>
+    
+
+
+    
 
     <!-- 
             <div>
@@ -229,3 +233,4 @@
 
     Copyright © 2022. Nigerian Upstream Petroleum Regulatory Commission
 </footer>
+<br><br>

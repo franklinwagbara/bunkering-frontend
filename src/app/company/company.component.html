@@ -50,8 +50,21 @@
                     <div>
                         <div *ngIf="showtemplate" (click)="showTemplate()" class="menumodal">
                             <span [routerLink]="['/' + genk.company, 'template']"></span>
-                            <span href="/Auth/Download Template A">Download Template A</span><br>
-                            <span href="/Company/Download Template B">Download Template B</span>
+                            <span><a style="
+                                text-decoration-line: none;
+                                color: green;
+                            " href="assets/image/WellLocationNotice.xlsx">Download Template A</a></span><br>
+                            <hr>
+                            <span><a style="
+                                text-decoration-line: none;
+                                color: green;
+                            " href="assets/image/WellReEntryApplicationForm.xlsx">Download Template B</a></span><br>
+                            <hr>
+                            <span><a style="
+                                text-decoration-line: none;
+                                color: green;
+                            " href="assets/image/WellReEntryWellSuspensionPermitPlugandAbandonmentPermitApplication.xlsx">Download Template C</a></span>
+                            
             
                         </div>
                     </div>
