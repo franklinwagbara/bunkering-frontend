@@ -57,7 +57,6 @@ export class ApplyService {
     }
 
     uploadApplyform(conbody: FormData) {
-debugger;
         return this.http.post<any>(`${environment.apiUrl}/application/application-form`, conbody)
           .pipe(retry(this.num),
             map((response) => {

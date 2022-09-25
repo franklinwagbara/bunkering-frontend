@@ -6,7 +6,7 @@
     
     <hr>
 
-    <form [formGroup]="uploadApplyForm" (ngSubmit)="OnSubmit()">
+    <form [formGroup]="uploadApplyForm" (ngSubmit)="submit()">
         <div>
             <br>
     
@@ -26,8 +26,8 @@
     
                     <div style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; padding: 5px; border-radius:7px 10px;
                      outline:none;">
-                    <select class="inpute" [(ngModel)]="stateId" (change)="getLgaByState($event)">
-                            <option *ngFor="let val of stateList" [value]="val.id">{{val.stateName}}</option>>
+                    <select class="inpute" [value]="stateId" (change)="getLgaByState($event)">
+                            <option *ngFor="let val of stateList" [value]="val.id">{{val.stateName}}</option>
                             <!-- <option selected disabled>---- Please Select an Option ----</option>
                                     <option value="ABIA">Abia</option>
                                     <option value="ADAMAWA">Adamawa</option> -->
@@ -38,7 +38,7 @@
                     <label style="font-size: 18px;">Local Government</label>
                     <div
                         style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; padding: 5px; border-radius: 20px;">
-                        <select class="inpute" [(ngModel)]="lga">
+                        <select formControlName="lgaId" class="inpute" [(ngModel)]="lgaId">
                             <option *ngFor="let val of lgalist" value={{val.id}}>{{val.lgaName}}</option>
                             <!-- <option selected disabled>---- Please Select an Option ----</option>
                                     <option value="ABIA NORTH">Abia North</option>
@@ -53,7 +53,7 @@
     
                     <div
                         style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; padding: 5px; border-radius:7px 10px; outline:none;">
-                        <select class="inpute" [(ngModel)]="categoryId" (change)="getPhases($event)">
+                        <select class="inpute" formControlName="categoryId" [value]="categoryId" (change)="getPhases($event)">
                             <!-- <option value="PHASE A ">Phase A</option>
                                 <option value="PHASE B">Phase B</option> -->
                             <option *ngFor="let val of categoryList" [value]="val.id">{{val.name}}</option>
@@ -70,8 +70,8 @@
     
                     <div
                         style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; border:none; outline: none; padding: 7px 10px; border-radius: 10px;">
-                        <select class="inpute">
-                            <option *ngFor="let val of phaseList" value={{val.id}}>{{val.shortName}}</option>
+                        <select formControlName="phaseId" class="inpute" [(ngModel)]="phaseId">
+                            <option *ngFor="let val of phaseList" [value]="val.id">{{val.shortName}}</option>
                         </select>
                     </div>
                 </div>
@@ -82,7 +82,7 @@
                     <div style="display: flex;">
                         <div
                             style="box-shadow: 1px 1px 2px 1px rgb(0, 0, 0, 0.3); width: 100%; border-radius: 10px; padding: 7px 10px;">
-                            <input style="width: 100%; border: none; outline: none;" type="text">
+                            <input formControlName="address" [(ngModel)]="address" style="width: 100%; border: none; outline: none;">
                         </div>
                     </div>
                 </div>
@@ -114,7 +114,7 @@
             <br><br><br>
     
                 <div style="text-align: center;">
-                    <button class="submitbtn" (click)="savecontinue()">Click Here to Submit Application</button>
+                    <button class="submitbtn" (click)="submit()">Click Here to Submit Application</button>
                 </div>
     
                 

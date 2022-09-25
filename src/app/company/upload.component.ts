@@ -1,6 +1,5 @@
-import { CdkAriaLive } from '@angular/cdk/a11y';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { uploadFile } from '../models/apply.model';
 import { GenericService } from '../services';
@@ -17,13 +16,14 @@ export class UploadComponent implements OnInit {
   categoryList: any;
   stateList: any;  
   phaseList: any;
-  phaseId: number;
+  phaseId: number = 1;
   sizePerPage=10;
-  categoryId: number;
+  categoryId: string = '';
   uploadForm: FormGroup;
   state: string;
   lga: string;
-  stateId:number;
+  lgaId: string = '';
+  stateId: number;
   title: 'Upload Application';
   uploadNewName: string;
   uploadNameDoc: string;
@@ -34,25 +34,16 @@ export class UploadComponent implements OnInit {
   lgalist = [];
   statelist = [];
   category: string;
-  upload: File;
-  address: string;
+  address: string = '';
   phase: string;
+  applicationTypeId: string = '';
   
-
-
- 
-
-
-
-
 
 constructor(private cd: ChangeDetectorRef,
   private apply: ApplyService,
   private modalService:ModalService,
   private gen: GenericService, private fb: FormBuilder) { 
     this.genk = gen;
-
-
   }
 
 ngOnInit() {
@@ -65,14 +56,18 @@ ngOnInit() {
 
 
 initForm() {
-  this.uploadApplyForm = this.fb.group({
-    category: ["", Validators.required],
-    phase:["", Validators.required],
-    applicationType: ["", Validators.required],
-    lgaId:["", Validators.required],
-    location:["", Validators.required],
-    doc:["", Validators.required],
+  this.uploadApplyForm = new FormGroup ({
+    'categoryId': new FormControl(this.categoryId, [Validators.required]),
+    'phaseId': new FormControl(this.phaseId, [Validators.required]),
+    'applicationTypeId': new FormControl(this.applicationTypeId, [Validators.required]),
+    'lgaId': new FormControl(this.lgaId),
+    'address': new FormControl(this.address, [Validators.required]),
+    'uploadFile': new FormControl(this.uploadFile, [Validators.required]),
   })
+}
+
+get f() {
+  return this.uploadApplyForm.controls;
 }
 
 getCategory() {
@@ -83,6 +78,7 @@ getCategory() {
 }
 
 getPhases(e) {
+  this.categoryId = e.target.value;
   this.apply.getApplicationPhases(e.target.value).subscribe(res => {
     //debugger;
     this.phaseList = res.data.data;
@@ -140,21 +136,23 @@ fetchdata(){
      // let dockind = this.gen.getExt(this.File.name);
   }
    
-  OnSubmit() {
-debugger;
-    const formDat: FormData = new FormData();
-    this.uploadBody.id = 0;
-    for (const key in this.uploadBody) {
-      if (this.uploadBody[key]) {
-        formDat.append(key.toString(), this.uploadBody[key]);
-      }
-    }
+  submit() {
+    debugger;
+    let addr = this.f['address'].value;
+    let a = this.categoryId;
+    let b = this.phaseId;
 
+    const formDat: FormData = new FormData();
+    formDat.append('id', '0');
+    formDat.append('categoryId', this.categoryId.toString());
+    formDat.append('phaseId', this.phaseId.toString());
+    formDat.append('applicationTypeId', this.applicationTypeId);
+    formDat.append('lgaId', this.lgaId.toString());
+    formDat.append('address', this.address.toString());
     if (this.uploadFile) {
-      formDat.append(this.uploadNameDoc, this.uploadFile, this.uploadNewName);
+      formDat.append('doc', this.uploadFile, this.uploadNewName);
     }
-    this.apply.uploadApplyform(formDat)
-      .subscribe(res => {
+    this.apply.uploadApplyform(formDat).subscribe(res => {
 
         if (res.statusCode == 300) {
           this.modalService.logNotice("Error", res.message, 'error');
@@ -166,25 +164,25 @@ debugger;
       })
   }
 
-  savecontinue(){
-    let s = this.genk.state;
-    let c = this.genk.category;
-    let p = this.genk.phase;
-    let a = this.genk.address;
-    let l = this.genk.lga;
-    let u = this.genk.upload;
-    debugger;
-    this.apply.postsavecontinue(null, this.genk.state, this.genk.category, this.genk.phase, this.genk.address, this.genk.lga, this.genk.upload)
-      .subscribe(res => {
+  // savecontinue(){
+  //   // let s = this.genk.state;
+  //   // let c = this.genk.category;
+  //   // let p = this.genk.phase;
+  //   // let a = this.genk.address;
+  //   // let l = this.genk.lga;
+  //   // let u = this.genk.upload;
+  //   //debugger;
+  //   this.apply.postsavecontinue(null, this.genk.state, this.genk.category, this.genk.phase, this.genk.address, this.genk.lga, this.genk.upload)
+  //     .subscribe(res => {
 
-        if(res.statusCode == 300){
-          this.modalService.logNotice("Error", res.message, 'error');
-        }
-        else{
-          this.modalService.logNotice("Success", res.message, 'success');
-        }
-    })
-  }
+  //       if(res.statusCode == 300){
+  //         this.modalService.logNotice("Error", res.message, 'error');
+  //       }
+  //       else{
+  //         this.modalService.logNotice("Success", res.message, 'success');
+  //       }
+  //   })
+  // }
 
   
 }
