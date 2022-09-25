@@ -40,8 +40,9 @@ export class ApplyService {
             }));
     }
 
-    getLgaByStateCode(code: string){
-        return this.http.get<any>(`${environment.apiUrl}/application/lga-list-by-Id`, {params: {statecode: code}})
+    getLgaByStateId(id: number){
+        debugger;
+        return this.http.get<any>(`${environment.apiUrl}/application/lga-list-by-Id`, {params: {id }})
             .pipe(retry(this.num), map(res => {
                 return res;
             }));
@@ -56,7 +57,6 @@ export class ApplyService {
     }
 
     uploadApplyform(conbody: FormData) {
-debugger;
         return this.http.post<any>(`${environment.apiUrl}/application/application-form`, conbody)
           .pipe(retry(this.num),
             map((response) => {
@@ -67,12 +67,15 @@ debugger;
     
 
 
-    getAllStaff(){
-        return this.http.get<any>(`${environment.apiUrl}/account/all-staff`, {})
-            .pipe(retry(this.num), map(res => {
-                return res;
-            }));
-    }
+      postsavecontinue(data: any,state: string, category: string, lga, phase:string, address: string, uploadFile:string,){
+
+        return this.http.post<any>(`${environment.apiUrl}/application/postsavecontinue`, data, {params: {state: state, category: category, lga: lga, phase:phase, address: address, uploadFile: uploadFile}})
+        .pipe(retry(this.num),
+        map((response) => {
+          return response
+        })
+        )
+      }
    
 
     

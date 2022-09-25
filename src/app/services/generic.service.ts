@@ -11,6 +11,13 @@ export class GenericService {
     authCode = 'dd20c4e0-be39-4f25-90ff-a5b92693e12b';
   sizePerPage: any;
   sizeten: any;
+  state: string;
+  address: string;
+  category: string;
+  lga: string;
+  phase: string;
+  upload: string;
+
 
   getExpDoc(value: string, type: string) {
     let ext;
