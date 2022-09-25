@@ -113,4 +113,9 @@ export class AuthenticationService {
         return this.http.get<any>(`${environment.apiUrl}/configuration/field-offices`)
             .pipe(retry(this.num));
     }
+
+    addFieldOffice(model: any){
+        return this.http.post<any>(`${environment.apiUrl}/configuration/add-field-office`, model)
+            .pipe(retry(this.num));
+    }
 }
