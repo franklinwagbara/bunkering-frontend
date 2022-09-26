@@ -16,13 +16,13 @@ export class UploadComponent implements OnInit {
   categoryList: any;
   stateList: any;  
   phaseList: any;
-  phaseId: number = 1;
+  phaseId: number;
   sizePerPage=10;
   categoryId: string = '';
   uploadForm: FormGroup;
   state: string;
   lga: string;
-  lgaId: string = '';
+  LgaId: number;
   stateId: number;
   title: 'Upload Application';
   uploadNewName: string;
@@ -47,6 +47,7 @@ constructor(private cd: ChangeDetectorRef,
   }
 
 ngOnInit() {
+  this.initForm();
  this.getCategory();
  this.getStateList();
  this.data = [];
@@ -59,15 +60,25 @@ initForm() {
   this.uploadApplyForm = new FormGroup ({
     'categoryId': new FormControl(this.categoryId, [Validators.required]),
     'phaseId': new FormControl(this.phaseId, [Validators.required]),
-    'applicationTypeId': new FormControl(this.applicationTypeId, [Validators.required]),
-    'lgaId': new FormControl(this.lgaId),
-    'address': new FormControl(this.address, [Validators.required]),
-    'uploadFile': new FormControl(this.uploadFile, [Validators.required]),
+    'lgaId': new FormControl(this.LgaId),
+    'location': new FormControl(this.address, [Validators.required]),
+    'file': new FormControl('', [Validators.required]),
+    'doc': new FormControl('', [Validators.required]),
   })
 }
 
 get f() {
   return this.uploadApplyForm.controls;
+}
+
+onFileChange(event) {
+  
+  if (event.target.files.length > 0) {
+    const file = event.target.files[0];
+    this.uploadApplyForm.patchValue({
+      file: file
+    });
+  }
 }
 
 getCategory() {
@@ -138,20 +149,19 @@ fetchdata(){
    
   submit() {
     debugger;
-    let addr = this.f['address'].value;
+    // let addr = this.f['address'].value;
     let a = this.categoryId;
     let b = this.phaseId;
 
     const formDat: FormData = new FormData();
-    formDat.append('id', '0');
-    formDat.append('categoryId', this.categoryId.toString());
-    formDat.append('phaseId', this.phaseId.toString());
-    formDat.append('applicationTypeId', this.applicationTypeId);
-    formDat.append('lgaId', this.lgaId.toString());
-    formDat.append('address', this.address.toString());
-    if (this.uploadFile) {
-      formDat.append('doc', this.uploadFile, this.uploadNewName);
-    }
+    formDat.append('categoryId', this.uploadApplyForm.get('categoryId').value);
+    formDat.append('phaseId', this.uploadApplyForm.get('phaseId').value);
+    formDat.append('LgaId', this.uploadApplyForm.get('lgaId').value);
+    formDat.append('location', this.uploadApplyForm.get('location').value);
+    formDat.append('doc', this.uploadApplyForm.get('file').value);
+    // if (this.uploadFile) {
+    //   formDat.append('doc', this.uploadFile, this.uploadNewName);
+    // }
     this.apply.uploadApplyform(formDat).subscribe(res => {
 
         if (res.statusCode == 300) {
