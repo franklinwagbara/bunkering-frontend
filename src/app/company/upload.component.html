@@ -1,135 +1,133 @@
 <div
-  style="width: 85%; border: solid 2px rgb(128, 128, 128); margin-top: 25%; background-color: rgb(253, 253, 253); border-radius:10px; box-shadow: 6px 6px 8px rgb(0, 0, 0, 0.3); margin:auto; margin-top:7% ;">
+    style="width: 85%; border: solid 2px rgb(128, 128, 128); margin-top: 25%; background-color: rgb(253, 253, 253); border-radius:10px; box-shadow: 6px 6px 8px rgb(0, 0, 0, 0.3); margin:auto; margin-top:7% ;">
     <br>
     <div class="container">
-    <h1>Upload Application</h1>
-    
-    <hr>
+        <h1 style=" padding: 10px 20px; border: none; background-color:teal; color: white">Upload Application</h1>
 
-    <form [formGroup]="uploadApplyForm" (ngSubmit)="submit()">
-        <div>
-            <br>
-    
-            <br>
-            <!-- <select (change)="getLGAList()">
+        <hr>
+
+        <form [formGroup]="uploadApplyForm" (ngSubmit)="submit()">
+            <div>
+                <!-- <select (change)="getLGAList()">
                 <option *ngFor="let val of statelist" value={{val.state}}>{{val.state}}</option>
             </select> -->
-    
-            <!-- <select>
+
+                <!-- <select>
                 <option *ngFor="let val of lgalist;" value={{val}}>{{val}}</option>
             </select>
-            <br><br><br> 
+             
      -->
-            <div style="display:flex;width: 100%; justify-content: space-between; ">
-                <div style="width:30%; ">
-                    <label style="font-size: 18px;">State</label>
-    
-                    <div style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; padding: 5px; border-radius:7px 10px;
-                     outline:none;">
-                    <select class="inpute" [value]="stateId" (change)="getLgaByState($event)">
-                            <option *ngFor="let val of stateList" [value]="val.id">{{val.stateName}}</option>
-                            <!-- <option selected disabled>---- Please Select an Option ----</option>
+
+     <br><br>
+                <div style="display:flex;width: 100%; justify-content: space-between; ">
+                    <div style="width:30%; ">
+                        <label style="font-size: 18px;">State</label>
+                        <div
+                            style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; padding: 5px; border-radius: 20px; outline: none">
+
+                            <select class="inpute" style="width: 100%; border: none; outline: none;" [value]="stateId"
+                                (change)="getLgaByState($event)">
+                                <option *ngFor="let val of stateList" [value]="val.id">{{val.stateName}}</option>
+                                <!-- <option selected disabled>---- Please Select an Option ----</option>
                                     <option value="ABIA">Abia</option>
                                     <option value="ADAMAWA">Adamawa</option> -->
-                        </select>
+                            </select>
+                        </div>
                     </div>
-                </div><br>
-                <div style="width: 30% ">
-                    <label style="font-size: 18px;">Local Government</label>
-                    <div
-                        style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; padding: 5px; border-radius: 20px;">
-                        <select formControlName="lgaId" class="inpute" [(ngModel)]="lgaId">
-                            <option *ngFor="let val of lgalist" value={{val.id}}>{{val.lgaName}}</option>
-                            <!-- <option selected disabled>---- Please Select an Option ----</option>
+                    <div style="width: 30% ">
+                        <label style="font-size: 18px;">Local Government</label>
+                        <div
+                            style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; padding: 5px; border-radius: 20px;">
+                            <select formControlName="lgaId" nmae="lgaId" style="width: 100%; border: none; outline: none;"
+                                class="inpute">
+                                <option *ngFor="let val of lgalist" [value]="val.id">{{val.lgaName}}</option>
+                                <!-- <option selected disabled>---- Please Select an Option ----</option>
                                     <option value="ABIA NORTH">Abia North</option>
                                     <option value="DAMSA">Damsa</option> -->
-                        </select>
+                            </select>
+                        </div>
                     </div>
-                </div>
-    
-    
-                <div style="width: 30%;">
-                    <label slot="font-size:18px;">Category</label>
-    
-                    <div
-                        style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; padding: 5px; border-radius:7px 10px; outline:none;">
-                        <select class="inpute" formControlName="categoryId" [value]="categoryId" (change)="getPhases($event)">
-                            <!-- <option value="PHASE A ">Phase A</option>
+
+
+                    <div style="width: 30%;">
+                        <label style="font-size:18px;">Category</label>
+
+                        <div
+                            style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; padding: 5px; border-radius:7px 10px; outline:none;">
+                            <select class="inpute" style="width: 100%; border: none; outline: none;"
+                                formControlName="categoryId" [value]="categoryId" (change)="getPhases($event)">
+                                <!-- <option value="PHASE A ">Phase A</option>
                                 <option value="PHASE B">Phase B</option> -->
-                            <option *ngFor="let val of categoryList" [value]="val.id">{{val.name}}</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-    
-            <br>
-    
-            <div style="display:flex; width: 100%; justify-content: space-between;">
-                <div style=" width: 30%;">
-                    <label class="labelwp">Phase</label>
-    
-                    <div
-                        style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; border:none; outline: none; padding: 7px 10px; border-radius: 10px;">
-                        <select formControlName="phaseId" class="inpute" [(ngModel)]="phaseId">
-                            <option *ngFor="let val of phaseList" [value]="val.id">{{val.shortName}}</option>
-                        </select>
-                    </div>
-                </div>
-    
-    
-                <div style="width: 30%;">
-                    <label class="labelwp">Address</label>
-                    <div style="display: flex;">
-                        <div
-                            style="box-shadow: 1px 1px 2px 1px rgb(0, 0, 0, 0.3); width: 100%; border-radius: 10px; padding: 7px 10px;">
-                            <input formControlName="address" [(ngModel)]="address" style="width: 100%; border: none; outline: none;">
+                                <option *ngFor="let val of categoryList" [value]="val.id">{{val.name}}</option>
+                            </select>
                         </div>
                     </div>
                 </div>
-                <br><br><br>
-                <div style="width: 30%;">
-                    <label class="labelwp">Upload File/Document</label>
-                    <div style="display: flex;">
-                        <div
-                            style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; border-radius: 20px; padding: 7px 10px;">
-                            <input type="file" formControlName="uploadFile" class="inpute" accept=".xlsx"
-                                (change)="saveTemplate($event)">
-                        </div>
-                    </div>
-                </div>
+
                 <br><br>
-    
-    
-    
-    
-                <!-- <div style="width:30% ">
+
+                <div style="display:flex; width: 100%; justify-content: space-between;">
+                    <div style=" width: 30%;">
+                        <label style="font-size:18px;">Phase</label>
+
+                        <div
+                            style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; border:none; outline: none; padding: 7px 10px; border-radius: 10px;">
+                            <select formControlName="phaseId" style="width: 100%; border: none; outline: none;"
+                                class="inpute" name="phaseId">
+                                <option *ngFor="let val of phaseList" [value]="val.id">{{val.shortName}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div style="width: 30%;">
+                        <label style="font-size:18px;">Address</label>
+                        <div style="display: flex;">
+                            <div
+                                style="box-shadow: 1px 1px 2px 1px rgb(0, 0, 0, 0.3); width: 100%; border-radius: 10px; padding: 7px 10px;">
+                                <input formControlName="location" name="location" [(ngModel)]="address"
+                                    style="width: 100%; border: none; outline: none;">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="width: 30%;">
+                        <label style="font-size:18px;">Upload File/Document</label>
+                        <div style="display: flex;">
+                            <div
+                                style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; border-radius: 20px; padding: 7px 10px;">
+                                <input type="file" formControlName="doc" name="uploadFile" (change)="onFileChange($event)" class="inpute" accept=".xlsx"
+                                    (change)="saveTemplate($event)">
+                            </div>
+                        </div>
+                    </div>
+                    <br><br>
+
+
+
+
+                    <!-- <div style="width:30% ">
                 <input style="display: none;" #hem type="file" class="submitbtn" value="Upload Excel Document"/>
                 <button style=" padding: 7px 10px; border-radius: 10px; width: 100%; border: none; background-color:rgb(0, 128, 128); color: white"
                     (click)="hem.click()">Upload Excel Document</button>
     
             </div> -->
-            </div>
-    
-    
-            <br><br><br>
-    
-                <div style="text-align: center;">
-                    <button class="submitbtn" (click)="submit()">Save & Continue</button>
                 </div>
-    
-                
-    
-    
-    
-            
-        </div>
-    </form>
-    
 
 
-    
+                <br><br><br>
 
-    <!-- 
+                <div style="text-align: center;">
+                    <button style=" padding: 10px 20px; border: none; background-color:teal; color: white" (click)="submit()">Save & Continue</button>
+                </div>
+            </div>
+        </form>
+
+
+
+
+
+        <!-- 
             <div>
 
                 <div id="MyFacilityTable_wrapper" class="dataTables_wrapper no-footer">
@@ -222,15 +220,15 @@
  -->
 
 
-    <br>
-    <br>
-</div>
+        <br>
+        <br>
+    </div>
 
 
-<br><br>
+    <br><br>
 
-<footer class="container text-center">
+    <footer class="container text-center">
 
-    Copyright © 2022. Nigerian Upstream Petroleum Regulatory Commission
-</footer>
-<br><br>
+        Copyright © 2022. Nigerian Upstream Petroleum Regulatory Commission
+    </footer>
+    <br><br>
