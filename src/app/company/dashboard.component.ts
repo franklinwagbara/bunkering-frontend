@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit {
     private router: Router,
     private auth: AuthenticationService) {
       this.generic = gen;
+      
   }
 
   ngOnInit(): void {
