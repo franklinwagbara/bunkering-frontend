@@ -148,7 +148,6 @@ fetchdata(){
   }
    
   submit() {
-    debugger;
     // let addr = this.f['address'].value;
     let a = this.categoryId;
     let b = this.phaseId;
