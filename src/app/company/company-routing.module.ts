@@ -11,6 +11,7 @@ import { RegisterDirectorComponent } from './registerdirector.component';
 import { SubmitSurveyComponent } from './submitsurvey.component';
 import { CompanyInformationComponent } from './company-information/companyinformation.component';
 import { UploadComponent } from './upload.component';
+import { PreviewAppComponent } from './company-information/previewapp.component';
 
 const routes: Routes = [
     {path: '', component: DashboardComponent},
@@ -24,6 +25,8 @@ const routes: Routes = [
     {path: 'registerdirector', component: RegisterDirectorComponent},
     {path: 'submitsurvey', component: SubmitSurveyComponent},
     {path: 'upload', component: UploadComponent},
+    {path: 'previewapp', component: PreviewAppComponent},
+
     {
       path: 'companyinformation',
       component: CompanyInformationComponent,
