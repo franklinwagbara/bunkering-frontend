@@ -78,11 +78,6 @@ export class ApplyService {
    
 
     getappdetailsbyId(id: number){
-<<<<<<< HEAD
-        debugger;
-        
-=======
->>>>>>> 07ba5cc74efc42fcf2890a896c0cf5da14f546e5
         return this.http.get<any>(`${environment.apiUrl}/application/get-app-details-by-id`, {params: {id }})
             .pipe(retry(this.num), map(res => {
                 return res;
