@@ -16,7 +16,7 @@
                         <div
                             style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; padding: 5px; border-radius:5px 5px; outline:none;">
                             <select class="inpute" style="width: 100%; border: none; outline: none;"
-                                formControlName="categoryId" [value]="categoryId" (change)="getPhases($event)">
+                                formControlName="categoryId"(change)="getPhases($event)" [(ngModel)]="previewBody.categoryId">
                                 <option disabled>---- Please Select Category ----</option>
                                 <option *ngFor="let val of categoryList" [value]="val.id">{{val.name}}</option>
                             </select>
@@ -29,7 +29,7 @@
                         <div
                             style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; border:none; outline: none; padding: 5px 5px; border-radius: 10px;">
                             <select formControlName="phaseId" style="width: 100%; border: none; outline: none;"
-                                class="inpute" name="phaseId">
+                                class="inpute" name="phaseId" [(ngModel)]="previewBody.phaseId">
                                 <option disabled>---- Please Select Permit ----</option>
                                 <option *ngFor="let val of phaseList" [value]="val.id">{{val.shortName}}</option>
                             </select>
@@ -56,9 +56,9 @@
                         <div
                             style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; padding: 5px; border-radius: 20px; outline: none">
 
-                            <select class="inpute" style="width: 100%; border: none; outline: none;" [value]="stateId"
-                                (change)="getLgaByState($event)">
-                                <option [value]="5" selected></option>
+                            <select class="inpute" style="width: 100%; border: none; outline: none;" name="stateId" formControlName="stateId"
+                                (change)="getLgaByState($event)" [(ngModel)]="previewBody.stateId">
+                                <option disabled></option>
                                 <option *ngFor="let val of stateList" [value]="val.id">{{val.stateName}}</option>
 
                                 <!-- <option value="ABIA">Abia</option>
@@ -71,9 +71,9 @@
                         <div
                             style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; padding: 5px; border-radius: 20px;">
                             <select formControlName="lgaId" nmae="lgaId"
-                                style="width: 100%; border: none; outline: none;" class="inpute">
+                                style="width: 100%; border: none; outline: none;" class="inpute" [(ngModel)]="previewBody.lgaId">
                                 <option selected>---- Please Select LGA ----</option>
-                                <option *ngFor="let val of lgalist" [value]="val.id">{{val.lgaName}}</option>
+                                <option *ngFor="let val of lgaList" [value]="val.id">{{val.lgaName}}</option>
                                 <!-- <option selected disabled>---- Please Select an Option ----</option>
                                     <option value="ABIA NORTH">Abia North</option>
                                     <option value="DAMSA">Damsa</option> -->
@@ -91,185 +91,39 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Well Location Category</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        
-                    </tr>
-                </tbody>
-                <tfooter>
-                    
-                </tfooter>
-            </table>
-        </div>
-
-
-
-
-
-                    <br><br><br>
-                    <div style="display:flex; margin: auto;">
-                        <div style="text-align: center;">
-                            <button
-                                style="margin: auto; padding: 10px 20px;  border: none; border-radius: 10px; background-color:teal; color: white"
-                                (click)=" submit()">Update Appplication</button>
-                        </div>
-                        <div style="text-align: center;">
-                            <button
-                                style=" padding: 10px 20px; border: none; border-radius: 10px; background-color:teal; color: white;"
-                                (click)=" submit()" [routerLink]="['/' + genk.company, 'previewapp']">Proceed to Make
-                                Payment</button>
-                        </div>
-                    </div>
                 </div>
-            </div>
-<<<<<<< HEAD
-        </div>
-        <div>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Well Location Category</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        
-                    </tr>
-                </tbody>
-                <tfooter>
-                    
-                </tfooter>
-            </table>
-        </div>
-
-        <br><br><br>
-        <div style="display:flex; margin: auto;">
-            <div style="text-align: center;">
-                <button
-                    style="margin: auto; padding: 10px 20px;  border: none; border-radius: 10px; background-color:teal; color: white"
-                    (click)=" submit()">Update Appplication</button>
-            </div>
-            <div style="text-align: center;">
-                <button
-                    style=" padding: 10px 20px; border: none; border-radius: 10px; background-color:teal; color: white"
-                    (click)=" submit()" [routerLink]="['/' + genk.company, 'previewapp']">Proceed to Make Payment</button>
-            </div>
-        </div>
-    </div>
-</form>
-=======
-            
-        </form>
->>>>>>> 8693cc25754a4084e43d482e940860c7951eaade
-
-
-
-
-
-        <!-- 
-            <div>
-
-                <div id="MyFacilityTable_wrapper" class="dataTables_wrapper no-footer">
-                    <div class="dt-buttons"> <button class="dt-button buttons-collection buttons-page-length"
-                            tabindex="0" aria-controls="MyFacilityTable" aria-haspopup="true"><span>Show 1000
-                                rows</span></button> <button class="dt-button buttons-copy buttons-html5" tabindex="0"
-                            aria-controls="MyFacilityTable"><span>Copy</span></button> <button
-                            class="dt-button buttons-csv buttons-html5" tabindex="0"
-                            aria-controls="MyFacilityTable"><span>CSV</span></button> <button
-                            class="dt-button buttons-excel buttons-html5" tabindex="0"
-                            aria-controls="MyFacilityTable"><span>Excel</span></button> <button
-                            class="dt-button buttons-pdf buttons-html5" tabindex="0"
-                            aria-controls="MyFacilityTable"><span>PDF</span></button> <button
-                            class="dt-button buttons-print" tabindex="0" aria-controls="MyFacilityTable"><span>Print
-                                all</span></button> <button class="dt-button buttons-collection buttons-colvis"
-                            tabindex="0" aria-controls="MyFacilityTable" aria-haspopup="true"><span>Change
-                                columns</span></button> </div>
-                    <div id="MyFacilityTable_filter" class="dataTables_filter"><label>Search:<input type="search"
-                                class="" placeholder="" aria-controls="MyFacilityTable"></label></div>
-                    <div id="MyFacilityTable_processing" class="dataTables_processing" style="display: none;">
-                        Processing...</div>
-                    <table class="table table-bordered table-hover dataTable no-footer" id="MyFacilityTable"
-                        style="font-size:small" role="grid" aria-describedby="MyFacilityTable_info">
+                <div>
+                    <table class="table table-striped">
                         <thead>
-                            <tr role="row">
-                                <th class="sorting_desc" tabindex="0" aria-controls="MyFacilityTable" rowspan="1"
-                                    colspan="1" aria-sort="descending"
-                                    aria-label=" Permit NO: activate to sort column ascending"> Permit NO</th>
-                                <th class="sorting" tabindex="0" aria-controls="MyFacilityTable" rowspan="1" colspan="1"
-                                    aria-label=" App. Ref. NO. : activate to sort column ascending"
-                                    style="width: 102.6px;"> App. Ref. NO. </th>
-                                <th class="sorting" tabindex="0" aria-controls="MyFacilityTable" rowspan="1" colspan="1"
-                                    aria-label=" Company : activate to sort column ascending" style="width: 69.625px;">
-                                    Company </th>
-                                <th class="sorting" tabindex="0" aria-controls="MyFacilityTable" rowspan="1" colspan="1"
-                                    aria-label=" Address : activate to sort column ascending" style="width: 347.862px;">
-                                    Address </th>
-                                <th class="sorting" tabindex="0" aria-controls="MyFacilityTable" rowspan="1" colspan="1"
-                                    aria-label=" Issue Date : activate to sort column ascending"
-                                    style="width: 75.15px;"> Issue Date </th>
-                                <th class="sorting" tabindex="0" aria-controls="MyFacilityTable" rowspan="1" colspan="1"
-                                    aria-label=" Expiry Date : activate to sort column ascending"
-                                    style="width: 85.7875px;"> Expiry Date </th>
-                                <th class="sorting" tabindex="0" aria-controls="MyFacilityTable" rowspan="1" colspan="1"
-                                    aria-label=" Action : activate to sort column ascending" style="width: 143.538px;">
-                                    Action </th>
+                            <tr>
+                                <th>#</th>
+                                <th>Well Location Category</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
-
-
-                            <tr role="row" class="odd">
-                                <td class="sorting_1"> NUPRC/UMR/RM/PRS/EPERMIT/2022/0001</td>
-                                <td> 345041621103430</td>
-                                <td> Daniel And Sons Nig. LTD</td>
-                                <td> 4 Augustus Aikhomu, Mabushi 900271, Abuja, Nigeria</td>
-                                <td> May 26, 2022 </td>
-                                <td>
-                                    April 22, 2022
-
-                                    <br>
-                                    <b class="text-danger"> Expired Permit </b>
-                                </td>
-
-                                <td>
-                                    <div class="btn-group" role="group">
-                                        <a class="btn btn-primary btn-sm" href="/Permits/ViewPermit/TWc9PQ==/_view"
-                                            target="_blank"> <i class="fa fa-eye"> </i> View </a>
-                                        <a class="btn btn-success btn-sm" href="/Permits/ViewPermit/TWc9PQ==/_download"
-                                            target="_blank"> <i class="fa fa-file-download"> </i> Download </a>
-                                    </div>
-                                </td>
+                            <tr>
+                                
                             </tr>
                         </tbody>
                     </table>
-                    <div class="dataTables_info" id="MyFacilityTable_info" role="status" aria-live="polite">Showing 1 to
-                        1 of 1 entries</div>
-                    <div class="dataTables_paginate paging_simple_numbers" id="MyFacilityTable_paginate"><a
-                            class="paginate_button previous disabled" aria-controls="MyFacilityTable" data-dt-idx="0"
-                            tabindex="0" id="MyFacilityTable_previous">Previous</a><span><a
-                                class="paginate_button current" aria-controls="MyFacilityTable" data-dt-idx="1"
-                                tabindex="0">1</a></span><a class="paginate_button next disabled"
-                            aria-controls="MyFacilityTable" data-dt-idx="2" tabindex="0"
-                            id="MyFacilityTable_next">Next</a></div>
                 </div>
-
             </div>
-
-        </div>
- -->
-
+            <br><br><br>
+            <div style="display:flex; margin: auto;">
+                <div style="text-align: center;">
+                    <button
+                        style="margin: auto; padding: 10px 20px;  border: none; border-radius: 10px; background-color:teal; color: white"
+                        (click)=" submit()">Update Appplication</button>
+                </div>
+                <div style="text-align: center;">
+                    <button
+                        style=" padding: 10px 20px; border: none; border-radius: 10px; background-color:teal; color: white;"
+                        (click)=" submit()" [routerLink]="['/' + genk.company, 'previewapp']">Proceed to Make
+                        Payment</button>
+                </div>
+            </div>
+        </form>
 
         <br>
         <br>
@@ -283,3 +137,4 @@
         Copyright © 2022. Nigerian Upstream Petroleum Regulatory Commission
     </footer>
     <br><br>
+</div>
