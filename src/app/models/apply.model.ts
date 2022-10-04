@@ -13,5 +13,6 @@ export class PreviewModel{
     phase: string;
     applicationType: string;
     lgaId: number;
+    stateId: number;
     location: string;
 }

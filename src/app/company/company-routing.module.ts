@@ -25,7 +25,7 @@ const routes: Routes = [
     {path: 'registerdirector', component: RegisterDirectorComponent},
     {path: 'submitsurvey', component: SubmitSurveyComponent},
     {path: 'upload', component: UploadComponent},
-    {path: 'previewapp', component: PreviewAppComponent},
+    {path: 'previewapp/:id', component: PreviewAppComponent},
 
     {
       path: 'companyinformation',
