@@ -150,7 +150,7 @@ getCompanyDetailById() {
   this.apply.getLgaByStateId(this.previewBody.stateId).subscribe(res => {
     this.lgaList = res.data.data;
   });
-  });
+});
 
 
   this.cd.markForCheck();
