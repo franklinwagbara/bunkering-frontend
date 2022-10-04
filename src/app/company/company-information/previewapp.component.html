@@ -1,5 +1,4 @@
-<div
-    style="width: 85%; border: solid 2px rgb(128, 128, 128); margin-top: 35%; background-color: rgb(253, 253, 253); 
+<div style="width: 85%; border: solid 2px rgb(128, 128, 128); margin-top: 35%; background-color: rgb(253, 253, 253); 
     border-radius:15px; box-shadow: 6px 6px 8px rgb(0, 0, 0, 0.3); margin:auto; margin-top:7% ;">
     <br>
     <div class="container">
@@ -9,47 +8,48 @@
 
         <form [formGroup]="previewForm" (ngSubmit)="submit()">
             <div>
-               
-     <div style="display:flex; width: 100%; justify-content: space-between;">
-        
-        <div style="width: 30%;">
-            <label style="font-size:18px;">Category</label>
-            <div
-                style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; padding: 5px; border-radius:5px 5px; outline:none;">
-                <select class="inpute" style="width: 100%; border: none; outline: none;"
-                    formControlName="categoryId" [value]="categoryId" (change)="getPhases($event)">
-                    <option disabled>---- Please Select Category ----</option>
-                    <option *ngFor="let val of categoryList" [value]="val.id">{{val.name}}</option>
-                </select>
-            </div>
-        </div>
-        
-        <div style=" width: 30%;">
-            <label style="font-size:18px;">Permits</label>
 
-            <div
-                style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; border:none; outline: none; padding: 5px 5px; border-radius: 10px;">
-                <select formControlName="phaseId" style="width: 100%; border: none; outline: none;"
-                    class="inpute" name="phaseId">
-                    <option disabled>---- Please Select Permit ----</option>
-                    <option *ngFor="let val of phaseList" [value]="val.id">{{val.shortName}}</option>
-                </select>
-            </div>
-        </div>
+                <div style="display:flex; width: 100%; justify-content: space-between;">
+
+                    <div style="width: 30%;">
+                        <label style="font-size:18px;">Category</label>
+                        <div
+                            style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; padding: 5px; border-radius:5px 5px; outline:none;">
+                            <select class="inpute" style="width: 100%; border: none; outline: none;"
+                                formControlName="categoryId" [value]="categoryId" (change)="getPhases($event)">
+                                <option disabled>---- Please Select Category ----</option>
+                                <option *ngFor="let val of categoryList" [value]="val.id">{{val.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style=" width: 30%;">
+                        <label style="font-size:18px;">Permits</label>
+
+                        <div
+                            style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; border:none; outline: none; padding: 5px 5px; border-radius: 10px;">
+                            <select formControlName="phaseId" style="width: 100%; border: none; outline: none;"
+                                class="inpute" name="phaseId">
+                                <option disabled>---- Please Select Permit ----</option>
+                                <option *ngFor="let val of phaseList" [value]="val.id">{{val.shortName}}</option>
+                            </select>
+                        </div>
+                    </div>
 
 
-        <div style="width: 30%;">
-            <label style="font-size:18px;">Upload File/Document</label>
-            <div style="display: flex;">
-                <div
-                    style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; border-radius: 20px; padding: 5px 5px;">
-                    <input type="file" formControlName="doc" name="uploadFile" (change)="onFileChange($event)" class="inpute" accept=".xlsx"
-                        (change)="saveTemplate($event)">
+                    <div style="width: 30%;">
+                        <label style="font-size:18px;">Upload File/Document</label>
+                        <div style="display: flex;">
+                            <div
+                                style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; border-radius: 20px; padding: 5px 5px;">
+                                <input type="file" formControlName="doc" name="uploadFile"
+                                    (change)="onFileChange($event)" class="inpute" accept=".xlsx"
+                                    (change)="saveTemplate($event)">
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-            </div>
-        </div>
-        
-    </div>
                 <div style="display:flex;width: 100%; justify-content: space-between; ">
                     <div style="width:30%; ">
                         <label style="font-size: 18px;">State</label>
@@ -60,8 +60,8 @@
                                 (change)="getLgaByState($event)">
                                 <option [value]="5" selected></option>
                                 <option *ngFor="let val of stateList" [value]="val.id">{{val.stateName}}</option>
-                                
-                                    <!-- <option value="ABIA">Abia</option>
+
+                                <!-- <option value="ABIA">Abia</option>
                                     <option value="ADAMAWA">Adamawa</option> -->
                             </select>
                         </div>
@@ -70,8 +70,8 @@
                         <label style="font-size: 18px;">Local Government</label>
                         <div
                             style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; padding: 5px; border-radius: 20px;">
-                            <select formControlName="lgaId" nmae="lgaId" style="width: 100%; border: none; outline: none;"
-                                class="inpute">
+                            <select formControlName="lgaId" nmae="lgaId"
+                                style="width: 100%; border: none; outline: none;" class="inpute">
                                 <option selected>---- Please Select LGA ----</option>
                                 <option *ngFor="let val of lgalist" [value]="val.id">{{val.lgaName}}</option>
                                 <!-- <option selected disabled>---- Please Select an Option ----</option>
@@ -93,23 +93,307 @@
                     </div>
 
 
+
+                </div><br><br>
+                <hr size="10">
+                <br><br>
+
+                <div style="display:flex;width: 100%; justify-content: space-between; ">
+
+                    <div style="width: 30%;">
+                        <label style="font-size:18px;">Well Location Category
+                        </label>
+                        <div style="display: flex;">
+                            <div
+                                style="box-shadow: 1px 1px 2px 1px rgb(0, 0, 0, 0.3); width: 100%; border-radius: 5px; padding: 5px 5px;">
+                                <input class="text" style="width: 100%; border: none; outline: none;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="width: 30%;">
+                        <label style="font-size:18px;">Field</label>
+                        <div style="display: flex;">
+                            <div
+                                style="box-shadow: 1px 1px 2px 1px rgb(0, 0, 0, 0.3); width: 100%; border-radius: 5px; padding: 5px 5px;">
+                                <input class="text" style="width: 100%; border: none; outline: none;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="width: 30%;">
+                        <label style="font-size:18px;">Block (OPL/OML)
+                        </label>
+                        <div style="display: flex;">
+                            <div
+                                style="box-shadow: 1px 1px 2px 1px rgb(0, 0, 0, 0.3); width: 100%; border-radius: 5px; padding: 5px 5px;">
+                                <input class="text" style="width: 100%; border: none; outline: none;">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <br>
+
+                <div>
+                    <div style="display:flex;width: 100%; justify-content: space-between; ">
+                        <div style="width: 30%;margin: auto 0 0; ">
+                            <label style="font-size:18px;">Terrain</label>
+                            <div style="display: flex; width: 100%;">
+                                <div
+                                    style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; padding: 5px; border-radius: 20px;">
+                                    <select class="inpute" style="width: 100%; border: none; outline: none;">
+                                        <option selected disabled>---- Please Select an Terrain----</option>
+                                        <option value="ONSHORE">ONSHORE</option>
+                                        <option value="OFFSHORE">OFFSHORE</option>
+                                        <option value="ONSHORE">ONSHORE</option>
+                                        <option value="SWAMP">SWAMP</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="width: 30%; margin: auto 0 0;">
+                            <label style="font-size:18px;">Well Pre-Spud Name</label>
+                            <div style="display: flex;">
+                                <div
+                                    style="box-shadow: 1px 1px 2px 1px rgb(0, 0, 0, 0.3); width: 100%; border-radius: 10px; padding: 7px 10px;">
+                                    <input class="inpute" style="width: 100%; border: none; outline: none;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="width: 30%; margin: auto 0 0;">
+                            <label style="font-size:18px;">Spud Date</label>
+                            <div style="display: flex;">
+                                <div
+                                    style="box-shadow: 1px 1px 2px 1px rgb(0, 0, 0, 0.3); width: 100%; border-radius: 10px; padding: 7px 10px;">
+                                    <input type="date" style="width: 100%; border: none; outline: none;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                
                     
+                        <div style="display:flex;width: 100%; justify-content: space-between; ">
+                            <div style="width: 30%; margin: auto 0 0;">
+                                <label style="font-size:18px;">Well Spud Name</label>
+                                <div style="display: flex;">
+                                    <div
+                                        style="box-shadow: 1px 1px 2px 1px rgb(0, 0, 0, 0.3); width: 100%; border-radius: 10px; padding: 7px 10px;">
+                                        <input class="inpute" style="width: 100%; border: none; outline: none;">
+                                    </div>
+                                </div>
+                            </div>
+    
+                            
+                            <div style="width: 30%;margin: auto 0 0; ">
+                                <label style="font-size:18px;">Well Class Applied</label>
+                                <div style="display: flex; width: 100%;">
+                                    <div
+                                        style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; padding: 5px; border-radius: 20px;">
+                                        <select class="inpute" style="width: 100%; border: none; outline: none;">
+                                            <option selected disabled>---- Please Select an Well----</option>
+                                            <option value="DEVELOPMENT WELL">DEVELOPMENT WELL</option>
+                                            <option value="EXPLOIRATION WELL">EXPLOIRATION WELL</option>
+                                            <option value="APPRAISAL WELL">APPRAISAL WELL</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            
+                            <div style="width: 30%; margin: auto 0 0;">
+                                <label style="font-size:18px;">Well Surface Coordinates (m)</label>
+                                <div style="display: flex;">
+                                    <div
+                                        style="box-shadow: 1px 1px 2px 1px rgb(0, 0, 0, 0.3); width: 100%; border-radius: 10px; padding: 7px 10px;">
+                                        <input type="text" style="width: 100%; border: none; outline: none;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div style="display:flex;width: 100%; justify-content: space-between; ">
+                            <div style="width: 30%; margin: auto 0 0;">
+                                <label style="font-size:18px;">Proposed Rig
+                                </label>
+                                <div style="display: flex;">
+                                    <div
+                                        style="box-shadow: 1px 1px 2px 1px rgb(0, 0, 0, 0.3); width: 100%; border-radius: 10px; padding: 7px 10px;">
+                                        <input class="inpute" style="width: 100%; border: none; outline: none;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="width: 30%; margin: auto 0 0;">
+                                <label style="font-size:18px;">Expected Volumes (Production) (BOPD)
+                                </label>
+                                <div style="display: flex;">
+                                    <div
+                                        style="box-shadow: 1px 1px 2px 1px rgb(0, 0, 0, 0.3); width: 100%; border-radius: 10px; padding: 7px 10px;">
+                                        <input class="inpute" style="width: 100%; border: none; outline: none;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="width: 30%; margin: auto 0 0;">
+                                <label style="font-size:18px;">Target Reserves (MMB)
+                                </label>
+                                <div style="display: flex;">
+                                    <div
+                                        style="box-shadow: 1px 1px 2px 1px rgb(0, 0, 0, 0.3); width: 100%; border-radius: 10px; padding: 7px 10px;">
+                                        <input class="inpute" style="width: 100%; border: none; outline: none;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <br>
+                    <div style="display:flex;width: 100%; justify-content: space-between; ">
+                        <div style="width: 30%; margin: auto 0 0;">
+                            <label style="font-size:18px;">AFE (US$MM)</label>
+                            <div style="display: flex;">
+                                <div
+                                    style="box-shadow: 1px 1px 2px 1px rgb(0, 0, 0, 0.3); width: 100%; border-radius: 10px; padding: 7px 10px;">
+                                    <input  type="number"class="inpute" style="width: 100%; border: none; outline: none;">
+                                </div>
+                            </div>
+                        </div>
+                        <div style="width: 30%; margin: auto 0 0;">
+                            <label style="font-size:18px;">Estimated Operation Days
+                            </label>
+                            <div style="display: flex;">
+                                <div
+                                    style="box-shadow: 1px 1px 2px 1px rgb(0, 0, 0, 0.3); width: 100%; border-radius: 10px; padding: 7px 10px;">
+                                    <input type="number" class="inpute" style="width: 100%; border: none; outline: none;">
+                                </div>
+                            </div>
+                        </div>
+                        <div style="width: 30%; margin: auto 0 0;">
+                            <label style="font-size:18px;">Well Completion Interval MD</label>
+                            <div style="display: flex;">
+                                <div
+                                    style="box-shadow: 1px 1px 2px 1px rgb(0, 0, 0, 0.3); width: 100%; border-radius: 10px; padding: 7px 10px;">
+                                    <input  type="number"class="inpute" style="width: 100%; border: none; outline: none;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div style="display:flex;width: 100%; justify-content: space-between; ">
+                        <div style="width: 30%; margin: auto 0 0;">
+                            <label style="font-size:18px;">Rig/Hoist for Operation
+                            </label>
+                            <div style="display: flex;">
+                                <div
+                                    style="box-shadow: 1px 1px 2px 1px rgb(0, 0, 0, 0.3); width: 100%; border-radius: 10px; padding: 7px 10px;">
+                                    <input type="text" class="inpute" style="width: 100%; border: none; outline: none;">
+                                </div>
+                            </div>
+                        </div>
+                        <div style="width: 30%; margin: auto 0 0;">
+                            <label style="font-size:18px;">Pre-Operation Production Rate (ROPD)</label>
+                            <div style="display: flex;">
+                                <div
+                                    style="box-shadow: 1px 1px 2px 1px rgb(0, 0, 0, 0.3); width: 100%; border-radius: 10px; padding: 7px 10px;">
+                                    <input type="text" class="inpute" style="width: 100%; border: none; outline: none;">
+                                </div>
+                            </div>
+                        </div>
+                        <div style="width: 30%; margin: auto 0 0;">
+                            <label style="font-size:18px;">Post-Operation Production Rate (ROPD)</label>
+                            <div style="display: flex;">
+                                <div
+                                    style="box-shadow: 1px 1px 2px 1px rgb(0, 0, 0, 0.3); width: 100%; border-radius: 10px; padding: 7px 10px;">
+                                    <input type="text" class="inpute" style="width: 100%; border: none; outline: none;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <br>
+                <div style="display:flex;width: 100%; justify-content: space-between; ">
+                    <div style="width: 30%; margin: auto 0 0;">
+                        <label style="font-size:18px;">Intitial Reserves Allocation for the Well (MMB)
+                        </label>
+                        <div style="display: flex;">
+                            <div
+                                style="box-shadow: 1px 1px 2px 1px rgb(0, 0, 0, 0.3); width: 100%; border-radius: 10px; padding: 7px 10px;">
+                                <input type="text" class="inpute" style="width: 100%; border: none; outline: none;">
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width: 30%; margin: auto 0 0;">
+                        <label style="font-size:18px;">Cumulative Production for the Well (MMB)</label>
+                        <div style="display: flex;">
+                            <div
+                                style="box-shadow: 1px 1px 2px 1px rgb(0, 0, 0, 0.3); width: 100%; border-radius: 10px; padding: 7px 10px;">
+                                <input type="text" class="inpute" style="width: 100%; border: none; outline: none;">
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width: 30%; margin: auto 0 0;">
+                        <label style="font-size:18px;">Well Name</label>
+                        <div style="display: flex;">
+                            <div
+                                style="box-shadow: 1px 1px 2px 1px rgb(0, 0, 0, 0.3); width: 100%; border-radius: 10px; padding: 7px 10px;">
+                                <input type="text" class="inpute" style="width: 100%; border: none; outline: none;">
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <br><br><br>
-                <div style="display:flex; margin: auto;">
-                    <div style="text-align: center;">
-                        <button
-                            style="margin: auto; padding: 10px 20px;  border: none; border-radius: 10px; background-color:teal; color: white"
-                            (click)=" submit()">Update Appplication</button>
+            <br>
+                <div style="display:flex;width: 100%; justify-content: space-between; ">
+                    <div style="width: 30%; margin: auto 0 0;">
+                        <label style="font-size:18px;">Nature of Operation</label>
+                        <div style="display: flex;">
+                            <div
+                                style="box-shadow: 1px 1px 2px 1px rgb(0, 0, 0, 0.3); width: 100%; border-radius: 10px; padding: 7px 10px;">
+                                <input type="text" class="inpute" style="width: 100%; border: none; outline: none;">
+                            </div>
+                        </div>
                     </div>
-                    <div style="text-align: center;">
-                        <button
-                            style=" padding: 10px 20px; border: none; border-radius: 10px; background-color:teal; color: white"
-                            (click)=" submit()" [routerLink]="['/' + genk.company, 'previewapp']">Proceed to Make Payment</button>
+                    <div style="width: 30%; margin: auto 0 0;">
+                        <label style="font-size:18px;">Plugback Interval (m) MD</label>
+                        <div style="display: flex;">
+                            <div
+                                style="box-shadow: 1px 1px 2px 1px rgb(0, 0, 0, 0.3); width: 100%; border-radius: 10px; padding: 7px 10px;">
+                                <input type="text" class="inpute" style="width: 100%; border: none; outline: none;">
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width: 30%; margin: auto 0 0;">
+                        <label style="font-size:18px;">Last Production Rate (BOPD)</label>
+                        <div style="display: flex;">
+                            <div
+                                style="box-shadow: 1px 1px 2px 1px rgb(0, 0, 0, 0.3); width: 100%; border-radius: 10px; padding: 7px 10px;">
+                                <input type="text" class="inpute" style="width: 100%; border: none; outline: none;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+                    <br><br><br>
+                    <div style="display:flex; margin: auto;">
+                        <div style="text-align: center;">
+                            <button
+                                style="margin: auto; padding: 10px 20px;  border: none; border-radius: 10px; background-color:teal; color: white"
+                                (click)=" submit()">Update Appplication</button>
+                        </div>
+                        <div style="text-align: center;">
+                            <button
+                                style=" padding: 10px 20px; border: none; border-radius: 10px; background-color:teal; color: white;"
+                                (click)=" submit()" [routerLink]="['/' + genk.company, 'previewapp']">Proceed to Make
+                                Payment</button>
+                        </div>
                     </div>
                 </div>
             </div>
+            
         </form>
 
 
