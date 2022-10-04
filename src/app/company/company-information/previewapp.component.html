@@ -1,5 +1,4 @@
-<div
-    style="width: 85%; border: solid 2px rgb(128, 128, 128); margin-top: 35%; background-color: rgb(253, 253, 253); 
+<div style="width: 85%; border: solid 2px rgb(128, 128, 128); margin-top: 35%; background-color: rgb(253, 253, 253); 
     border-radius:15px; box-shadow: 6px 6px 8px rgb(0, 0, 0, 0.3); margin:auto; margin-top:7% ;">
     <br>
     <div class="container">
@@ -9,72 +8,78 @@
 
         <form [formGroup]="previewForm" (ngSubmit)="submit()">
             <div>
-               
-     <div style="display:flex; width: 100%; justify-content: space-between;">
-        
-        <div style="width: 30%;">
-            <label style="font-size:18px;">Category</label>
-            <div
-                style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; padding: 5px; border-radius:5px 5px; outline:none;">
-                <select class="inpute" style="width: 100%; border: none; outline: none;" [(ngModel)]="previewBody.categoryId"
-                    formControlName="categoryId" [value]="categoryId" (change)="getPhases($event)">
-                    <option disabled>---- Please Select Category ----</option>
-                    <option *ngFor="let val of categoryList" [value]="val.id">{{val.name}}</option>
 
-                </select>
-            </div>
-        </div>
-        
-        <div style=" width: 30%;">
-            <label style="font-size:18px;">Permits</label>
+                <div style="display:flex; width: 100%; justify-content: space-between;">
 
-            <div
-                style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; border:none; outline: none; padding: 5px 5px; border-radius: 10px;">
-                <select formControlName="phaseId" style="width: 100%; border: none; outline: none;"
-                    class="inpute" name="phaseId" [(ngModel)]="previewBody.phaseId">
-                    <option disabled>---- Please Select Permit ----</option>
-                    <option *ngFor="let val of phaseList" [value]="val.id">{{val.shortName}}</option>
-                </select>
-            </div>
-        </div>
+                    <div style="width: 30%;">
+                        <label style="font-size:18px;">Category</label>
+                        <div
+                            style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; padding: 5px; border-radius:5px 5px; outline:none;">
+                            <select class="inpute" style="width: 100%; border: none; outline: none;"
+                                formControlName="categoryId" [value]="categoryId" (change)="getPhases($event)">
+                                <option disabled>---- Please Select Category ----</option>
+                                <option *ngFor="let val of categoryList" [value]="val.id">{{val.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style=" width: 30%;">
+                        <label style="font-size:18px;">Permits</label>
+
+                        <div
+                            style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; border:none; outline: none; padding: 5px 5px; border-radius: 10px;">
+                            <select formControlName="phaseId" style="width: 100%; border: none; outline: none;"
+                                class="inpute" name="phaseId">
+                                <option disabled>---- Please Select Permit ----</option>
+                                <option *ngFor="let val of phaseList" [value]="val.id">{{val.shortName}}</option>
+                            </select>
+                        </div>
+                    </div>
 
 
-        <div style="width: 30%;">
-            <label style="font-size:18px;">Upload File/Document</label>
-            <div style="display: flex;">
-                <div
-                    style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; border-radius: 20px; padding: 5px 5px;">
-                    <input type="file" formControlName="doc" name="uploadFile" (change)="onFileChange($event)" class="inpute" accept=".xlsx"
-                        (change)="saveTemplate($event)">
+                    <div style="width: 30%;">
+                        <label style="font-size:18px;">Upload File/Document</label>
+                        <div style="display: flex;">
+                            <div
+                                style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; border-radius: 20px; padding: 5px 5px;">
+                                <input type="file" formControlName="doc" name="uploadFile"
+                                    (change)="onFileChange($event)" class="inpute" accept=".xlsx"
+                                    (change)="saveTemplate($event)">
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-            </div>
-        </div>
-        
-    </div>
-        <div style="display:flex;width: 100%; justify-content: space-between; ">
-            <div style="width:30%; ">
-                <label style="font-size: 18px;">State</label>
-                <div
-                    style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; padding: 5px; border-radius: 20px; outline: none">
+                <div style="display:flex;width: 100%; justify-content: space-between; ">
+                    <div style="width:30%; ">
+                        <label style="font-size: 18px;">State</label>
+                        <div
+                            style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; padding: 5px; border-radius: 20px; outline: none">
 
-                    <select formControlName="stateId" class="inpute" style="width: 100%; border: none; outline: none;"
-                        class="inpute"  name="stateId" [(ngModel)]="previewBody.stateId">
-                        <option disabled>---- Please Select State` ----</option>
-                        <option *ngFor="let val of stateList" [value]="val.id">{{val.stateName}}</option>
-                    </select>
-                </div>
-            </div>
-            <div style="width: 30% ">
-                <label style="font-size: 18px;">Local Government</label>
-                <div
-                    style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; padding: 5px; border-radius: 20px;">
-                    <select formControlName="lgaId" nmae="lgaId" style="width: 100%; border: none; outline: none;"
-                        class="inpute" [(ngModel)]="previewBody.lgaId">
-                        <option selected>---- Please Select LGA ----</option>
-                        <option *ngFor="let val of lgaList" [value]="val.id">{{val.lgaName}}</option>
-                    </select>
-                </div>
-            </div>
+                            <select class="inpute" style="width: 100%; border: none; outline: none;" [value]="stateId"
+                                (change)="getLgaByState($event)">
+                                <option [value]="5" selected></option>
+                                <option *ngFor="let val of stateList" [value]="val.id">{{val.stateName}}</option>
+
+                                <!-- <option value="ABIA">Abia</option>
+                                    <option value="ADAMAWA">Adamawa</option> -->
+                            </select>
+                        </div>
+                    </div>
+                    <div style="width: 30% ">
+                        <label style="font-size: 18px;">Local Government</label>
+                        <div
+                            style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; padding: 5px; border-radius: 20px;">
+                            <select formControlName="lgaId" nmae="lgaId"
+                                style="width: 100%; border: none; outline: none;" class="inpute">
+                                <option selected>---- Please Select LGA ----</option>
+                                <option *ngFor="let val of lgalist" [value]="val.id">{{val.lgaName}}</option>
+                                <!-- <option selected disabled>---- Please Select an Option ----</option>
+                                    <option value="ABIA NORTH">Abia North</option>
+                                    <option value="DAMSA">Damsa</option> -->
+                            </select>
+                        </div>
+                    </div>
 
             <div style="width: 30%;">
                 <label style="font-size:18px;">Address</label>
@@ -86,6 +91,48 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Well Location Category</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        
+                    </tr>
+                </tbody>
+                <tfooter>
+                    
+                </tfooter>
+            </table>
+        </div>
+
+
+
+
+
+                    <br><br><br>
+                    <div style="display:flex; margin: auto;">
+                        <div style="text-align: center;">
+                            <button
+                                style="margin: auto; padding: 10px 20px;  border: none; border-radius: 10px; background-color:teal; color: white"
+                                (click)=" submit()">Update Appplication</button>
+                        </div>
+                        <div style="text-align: center;">
+                            <button
+                                style=" padding: 10px 20px; border: none; border-radius: 10px; background-color:teal; color: white;"
+                                (click)=" submit()" [routerLink]="['/' + genk.company, 'previewapp']">Proceed to Make
+                                Payment</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<<<<<<< HEAD
         </div>
         <div>
             <table class="table table-striped">
@@ -122,6 +169,10 @@
         </div>
     </div>
 </form>
+=======
+            
+        </form>
+>>>>>>> 8693cc25754a4084e43d482e940860c7951eaade
 
 
 
