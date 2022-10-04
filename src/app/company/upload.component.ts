@@ -41,7 +41,8 @@ export class UploadComponent implements OnInit {
 
 constructor(private cd: ChangeDetectorRef,
   private apply: ApplyService,
-  private modalService:ModalService,
+  private modalService: ModalService,
+  private router: Router,
   private gen: GenericService, private fb: FormBuilder) { 
     this.genk = gen;
   }
@@ -148,7 +149,6 @@ fetchdata(){
   }
    
   submit() {
-    debugger;
     // let addr = this.f['address'].value;
     let a = this.categoryId;
     let b = this.phaseId;
@@ -166,6 +166,12 @@ fetchdata(){
 
         if (res.statusCode == 300) {
           this.modalService.logNotice("Error", res.message, 'error');
+        }
+        else if( res.success){
+          if(res.data.responseCode == "00"){
+            this.router.navigate(['/company/previewapp/' + res.data.data.appid])
+
+          }
         }
         else {
           //this.loadTable_Management(res.data);

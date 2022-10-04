@@ -1,8 +1,8 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { PreviewModel, uploadFile } from 'src/app/models/apply.model';
-import { GenericService } from 'src/app/services';
+import { AuthenticationService, GenericService } from 'src/app/services';
 import { ApplyService } from 'src/app/services/apply.service';
 import { ModalService } from 'src/app/services/modal.service';
 
@@ -14,6 +14,7 @@ export class PreviewAppComponent {
     uploadFile: File;
   categoryList: any;
   stateList: any;  
+  lgaList: any;
   phaseList: any;
   phaseId: number;
   sizePerPage=10;
@@ -25,6 +26,7 @@ export class PreviewAppComponent {
   stateId: number;
   title: 'Preview App';
   uploadNewName: string;
+  appid: number;
   uploadNameDoc: string;
   genk:GenericService;
   data: any[];
@@ -42,19 +44,28 @@ export class PreviewAppComponent {
 
 constructor(private cd: ChangeDetectorRef,
   private apply: ApplyService,
+  private auth: AuthenticationService,
   private modalService:ModalService,
+  private route: ActivatedRoute,
   private gen: GenericService, private fb: FormBuilder) { 
     this.genk = gen;
   }
 
 ngOnInit() {
+  
+ this.getCompanyDetailById();
+ 
+  this.auth.getPhaseCategories().subscribe(res => {
+    this.phaseList = res.data.data.allPermits;
+  });
+
+  this.getStateList();
   this.initForm();
  this.getCategory();
- this.getStateList();
  this.data = [];
  this.fetchdata();
  this.sizePerPage = this.genk.sizeten;
- this.getCompanyDetailById(7);
+
 }
 
 
@@ -63,6 +74,7 @@ initForm() {
     'categoryId': new FormControl(this.categoryId, [Validators.required]),
     'phaseId': new FormControl(this.phaseId, [Validators.required]),
     'lgaId': new FormControl(this.LgaId),
+    'stateId': new FormControl(this.stateId),
     'location': new FormControl(this.address, [Validators.required]),
     'file': new FormControl('', [Validators.required]),
     'doc': new FormControl('', [Validators.required]),
@@ -121,19 +133,28 @@ getStateList() {
 
 getLgaByState(e) {
   this.apply.getLgaByStateId(e.target.value).subscribe(res => {
-    this.lgalist = res.data.data;
+    this.lgaList = res.data.data;
   });
   this.cd.markForCheck();
 }
 
-getCompanyDetailById(e) {
-    this.apply.getappdetailsbyId(7).subscribe(res => {
-        debugger;
-      this.previewBody = res.data.data as PreviewModel;
-      debugger;
-    });
-    this.cd.markForCheck();
-  }
+getCompanyDetailById() {
+  this.route.params.subscribe(params => {
+    this.appid = params['id'];
+  });
+
+  this.apply.getappdetailsbyId(this.appid).subscribe(res => {
+    this.previewBody = res.data.data as PreviewModel;
+
+    
+  this.apply.getLgaByStateId(this.previewBody.stateId).subscribe(res => {
+    this.lgaList = res.data.data;
+  });
+});
+
+
+  this.cd.markForCheck();
+}
 
 fetchdata(){
 

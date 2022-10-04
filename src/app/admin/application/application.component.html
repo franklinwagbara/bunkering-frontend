@@ -1,3 +1,33 @@
 <div class="st-desk">
     <h2>All Applications</h2>
+    <div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>App. Ref.</th>
+                    <th>Company Name</th>
+                    <th>Address</th>
+                    <th>Added Date</th>
+                    <th>Permit Type</th>
+                    <th>App. Stage</th>
+                    <th>RRR</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let app of applications; index as i">
+                    <td>{{i + 1}}</td>
+                    <td>{{app.reference}}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

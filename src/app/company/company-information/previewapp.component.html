@@ -8,6 +8,7 @@
 
         <form [formGroup]="previewForm" (ngSubmit)="submit()">
             <div>
+<<<<<<< HEAD
 
                 <div style="display:flex; width: 100%; justify-content: space-between;">
 
@@ -35,6 +36,36 @@
                             </select>
                         </div>
                     </div>
+=======
+               
+     <div style="display:flex; width: 100%; justify-content: space-between;">
+        
+        <div style="width: 30%;">
+            <label style="font-size:18px;">Category</label>
+            <div
+                style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; padding: 5px; border-radius:5px 5px; outline:none;">
+                <select class="inpute" style="width: 100%; border: none; outline: none;" [(ngModel)]="previewBody.categoryId"
+                    formControlName="categoryId" [value]="categoryId" (change)="getPhases($event)">
+                    <option disabled>---- Please Select Category ----</option>
+                    <option *ngFor="let val of categoryList" [value]="val.id">{{val.name}}</option>
+
+                </select>
+            </div>
+        </div>
+        
+        <div style=" width: 30%;">
+            <label style="font-size:18px;">Permits</label>
+
+            <div
+                style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; border:none; outline: none; padding: 5px 5px; border-radius: 10px;">
+                <select formControlName="phaseId" style="width: 100%; border: none; outline: none;"
+                    class="inpute" name="phaseId" [(ngModel)]="previewBody.phaseId">
+                    <option disabled>---- Please Select Permit ----</option>
+                    <option *ngFor="let val of phaseList" [value]="val.id">{{val.shortName}}</option>
+                </select>
+            </div>
+        </div>
+>>>>>>> 07ba5cc74efc42fcf2890a896c0cf5da14f546e5
 
 
                     <div style="width: 30%;">
@@ -50,6 +81,7 @@
                     </div>
 
                 </div>
+<<<<<<< HEAD
                 <div style="display:flex;width: 100%; justify-content: space-between; ">
                     <div style="width:30%; ">
                         <label style="font-size: 18px;">State</label>
@@ -340,8 +372,38 @@
                             </div>
                         </div>
                     </div>
-                </div>
+=======
+            </div>
+        </div>
+        
+    </div>
+        <div style="display:flex;width: 100%; justify-content: space-between; ">
+            <div style="width:30%; ">
+                <label style="font-size: 18px;">State</label>
+                <div
+                    style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; padding: 5px; border-radius: 20px; outline: none">
 
+                    <select formControlName="stateId" class="inpute" style="width: 100%; border: none; outline: none;"
+                        class="inpute"  name="stateId" [(ngModel)]="previewBody.stateId">
+                        <option disabled>---- Please Select State` ----</option>
+                        <option *ngFor="let val of stateList" [value]="val.id">{{val.stateName}}</option>
+                    </select>
+>>>>>>> 07ba5cc74efc42fcf2890a896c0cf5da14f546e5
+                </div>
+            </div>
+            <div style="width: 30% ">
+                <label style="font-size: 18px;">Local Government</label>
+                <div
+                    style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; padding: 5px; border-radius: 20px;">
+                    <select formControlName="lgaId" nmae="lgaId" style="width: 100%; border: none; outline: none;"
+                        class="inpute" [(ngModel)]="previewBody.lgaId">
+                        <option selected>---- Please Select LGA ----</option>
+                        <option *ngFor="let val of lgaList" [value]="val.id">{{val.lgaName}}</option>
+                    </select>
+                </div>
+            </div>
+
+<<<<<<< HEAD
             <br>
                 <div style="display:flex;width: 100%; justify-content: space-between; ">
                     <div style="width: 30%; margin: auto 0 0;">
@@ -395,6 +457,49 @@
             </div>
             
         </form>
+=======
+            <div style="width: 30%;">
+                <label style="font-size:18px;">Address</label>
+                <div style="display: flex;">
+                    <div
+                        style="box-shadow: 1px 1px 2px 1px rgb(0, 0, 0, 0.3); width: 100%; border-radius: 5px; padding: 5px 5px;">
+                        <input formControlName="location" name="location" [(ngModel)]="previewBody.location"
+                            style="width: 100%; border: none; outline: none;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Well Location Category</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+
+        <br><br><br>
+        <div style="display:flex; margin: auto;">
+            <div style="text-align: center;">
+                <button
+                    style="margin: auto; padding: 10px 20px;  border: none; border-radius: 10px; background-color:teal; color: white"
+                    (click)=" submit()">Update Appplication</button>
+            </div>
+            <div style="text-align: center;">
+                <button
+                    style=" padding: 10px 20px; border: none; border-radius: 10px; background-color:teal; color: white"
+                    (click)=" submit()" [routerLink]="['/' + genk.company, 'previewapp']">Proceed to Make Payment</button>
+            </div>
+        </div>
+    </div>
+</form>
+>>>>>>> 07ba5cc74efc42fcf2890a896c0cf5da14f546e5
 
 
 
