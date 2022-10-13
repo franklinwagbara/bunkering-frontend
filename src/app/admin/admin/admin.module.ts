@@ -17,6 +17,7 @@ import { AllStaffComponent } from '../settings/all-staff/all-staff.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModulesSettingComponent } from '../settings/modules-setting/modules-setting.component';
 import { FieldZonalOfficeComponent } from '../settings/field-zonal-office/field-zonal-office.component';
+import { PhasedocumentsComponent } from '../settings/phasedocuments/phasedocuments.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { FieldZonalOfficeComponent } from '../settings/field-zonal-office/field-
     InspectorLayoutComponent,
     AllStaffComponent,
     ModulesSettingComponent,
-    FieldZonalOfficeComponent
+    FieldZonalOfficeComponent,
+    PhasedocumentsComponent
   ],
   imports: [
     CommonModule,

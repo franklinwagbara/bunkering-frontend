@@ -14,6 +14,7 @@ import { formatNumber } from '@angular/common';
 export class ModulesSettingComponent implements OnInit {
 category: Category[];
 phases: Phases[]; 
+phaseStages: any;
 closeResult: string;
 form: FormGroup = new FormGroup({
   Name: new FormControl(''),
@@ -37,6 +38,7 @@ form: FormGroup = new FormGroup({
       if(result.success){
         this.category = result.data.data.allModules.map(cat => cat);
         this.phases = result.data.data.allPermits.map(phase => phase);
+        this.phaseStages = result.data.data.permitStages;
       }
     });
 
@@ -87,6 +89,10 @@ form: FormGroup = new FormGroup({
         this.modalService.dismissAll('Cross click');
       }
     });
+  }
+
+  createPhaseStage(){
+    
   }
 
 }

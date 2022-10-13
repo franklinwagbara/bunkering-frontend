@@ -38,8 +38,17 @@
     });
 
     $('.staffname').select2({
-            placeholder : 'Search for staff by name or email'
-         });
+      placeholder : 'Search for staff by name or email'
+    });
+
+    $('#compDocIds').select2({
+      placeholder : 'Search documents',
+      dropdownParent: $('#compDocIds')
+    });
+
+    $('#facDocIds').select2({
+      placeholder : 'Search documents'
+    });
 });
 </script>
 </html>
