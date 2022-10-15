@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { GuardsCheckEnd, Router, ActivatedRoute } from '@angular/router';
-import { AuthenticationService, GenericService } from '../services';
+import { AuthenticationService, GenericService } from '../shared/services';
 import { environment as envr  }from 'src/environments/environment' ;
 
 @Component({

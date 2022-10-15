@@ -3,7 +3,7 @@ import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/c
 import { Observable, EMPTY } from 'rxjs';
 import { catchError, retry} from 'rxjs/operators';
 
-import { AuthenticationService, GenericService} from '../services';
+import { AuthenticationService, GenericService} from '../shared/services';
 import { Router} from '@angular/router';
 import { Location } from '@angular/common';
 

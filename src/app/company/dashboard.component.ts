@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../services';
-import { GenericService } from '../services/generic.service';
+import { AuthenticationService } from '../shared/services';
+import { GenericService } from '../shared/services/generic.service';
 
 @Component({
   templateUrl: 'dashboard.component.html',

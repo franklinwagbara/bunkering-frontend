@@ -1,6 +1,10 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
-import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import {
+  Location,
+  LocationStrategy,
+  PathLocationStrategy,
+} from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthenticationService, GenericService } from '../../services';
 import { environment } from 'src/environments/environment';
@@ -8,7 +12,7 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
   public focus;
@@ -18,35 +22,34 @@ export class NavbarComponent implements OnInit {
   generic: GenericService;
 
   constructor(
-    location: Location, 
-    private auth: AuthenticationService, 
-    private element: ElementRef, 
-    private router: Router) {
+    location: Location,
+    private auth: AuthenticationService,
+    private element: ElementRef,
+    private router: Router
+  ) {
     this.location = location;
-    this.user = JSON.parse(localStorage.getItem("currentUser"));
-
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
   }
 
   ngOnInit() {
-    this.listTitles = ROUTES.filter(listTitle => listTitle);
+    this.listTitles = ROUTES.filter((listTitle) => listTitle);
   }
-  getTitle(){
+  getTitle() {
     var titlee = this.location.prepareExternalUrl(this.location.path());
-    if(titlee.charAt(0) === '#'){
-        titlee = titlee.slice( 1 );
+    if (titlee.charAt(0) === '#') {
+      titlee = titlee.slice(1);
     }
 
-    for(var item = 0; item < this.listTitles.length; item++){
-        if(this.listTitles[item].path === titlee){
-            return this.listTitles[item].title;
-        }
+    for (var item = 0; item < this.listTitles.length; item++) {
+      if (this.listTitles[item].path === titlee) {
+        return this.listTitles[item].title;
+      }
     }
     return 'Dashboard';
   }
 
-  logout(): void{
+  logout(): void {
     this.auth.logout();
     window.location.href = environment.apiUrl + '/auth/log-out';
   }
-
 }
