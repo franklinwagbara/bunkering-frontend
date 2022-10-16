@@ -12,20 +12,24 @@ import { MyApplicationComponent } from './myapplication.component';
 import { RegisterDirectorComponent } from './registerdirector.component';
 import { CompanyComponent } from './company.component';
 import { UploadComponent } from './upload.component';
-import { PreviewAppComponent } from './company-information/previewapp.component';
+import { PreviewAppComponent } from './previewapp.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PaymentComponent } from './payment.component';
+import { LayoutModule } from '../layout/layout.module';
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    CompanyRoutingModule
+    CompanyRoutingModule,
+    LayoutModule
   ],
   declarations: [
     DashboardComponent, MessagesComponent, ChangePasswordComponent, MyScheduleComponent,
     MypermitsComponent, ApplyComponent, MyApplicationComponent, RegisterDirectorComponent, 
-    CompanyComponent,UploadComponent, ApplyComponent, PreviewAppComponent,
+    CompanyComponent,UploadComponent, ApplyComponent, PreviewAppComponent, PaymentComponent,
   ],
   providers: [],
 })

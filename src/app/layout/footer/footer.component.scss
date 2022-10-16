@@ -1,0 +1,20 @@
+.footer {
+  background-color: rgb(43, 76, 102);
+  height: 80px;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 2;
+}
+
+.footer-title {
+  list-style: none;
+  text-align: center;
+  color: white;
+}
+
+.footer-copyright {
+  text-align: center;
+  color: white;
+}

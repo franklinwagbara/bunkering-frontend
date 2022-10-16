@@ -1,0 +1,127 @@
+<div class="st-desk">
+    <h2>List of Staff</h2>
+    <span style="float: right;">
+        <button class="btn btn-success btn-sm" (click)="open(myNewUsermodal)">
+            <i class="fa fa-user-plus"></i>
+            Add New User
+        </button>
+        <!-- <button class="btn btn-lg btn-outline-primary" (click)="open(mymodal)">Open My Modal</button> -->
+    </span>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone No</th>
+                <th>User Role</th>
+                <th>Field Office</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <div *ngIf="users.length == 0; else displapUserList">
+                <tr>
+                    <td [attr.colspan]="9">No pending app(s) for the past 5 days</td>
+                </tr>
+            </div>
+            <ng-template #displapUserList>
+                <tr *ngFor="let user of users; index as i">
+                    <td>{{i + 1}}</td>
+                    <td>{{user['firstName']}}</td>
+                    <td>{{user['lastName']}}</td>
+                    <td>{{user['userId']}}</td>
+                    <td>{{user['phoneNo']}}</td>
+                    <td>{{user['role']}}</td>
+                    <td>{{user['office']}}</td>
+                    <td>
+                        <div *ngIf="user['status']; disabledLbl">
+                            <label class="alert alert-success" style="padding: 0.3rem 0.3rem !important;">
+                                ENABLED
+                            </label>
+                        </div>
+                        <ng-template disabledLbl>
+                            <label class="alert alert-danger" style="padding: 0.3rem 0.3rem !important;">
+                                DISABLED
+                            </label>
+                        </ng-template>
+                    </td>
+                    <td>
+                        <button class="btn btn-info btn-sm" style="height: 1.8rem !important;" (click)="open(mymodal)">
+                            <i class="fa fa-user"></i>
+                            Edit
+                        </button>
+                    </td>
+                </tr>
+            </ng-template>    
+        </tbody>
+    </table>     
+    <ng-template #mymodal let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Add New User</h4>
+          <button type="button" class="close btn-danger" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup] = "form" (ngSubmit)="onSubmit()">
+
+            </form>
+        </div>
+        <div class="modal-footer">
+          <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button> -->
+        </div>
+      </ng-template>         
+
+      <ng-template #myNewUsermodal let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Add New User</h4>
+          <button type="button" class="close btn-danger" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup] = "form" (ngSubmit)="onSubmit()">
+                <input type="hidden" formControlName="id" />
+                <div class="form-group" style="margin-bottom: 10px;">
+                    <label>Select staff from the list below</label>
+                    <select type="text" name="search" class="form-control staffname" id="staffname" (change)="fetchSTaff($event)">
+                        <option disabled selected>Select staff</option>
+                        <option *ngFor="let staff of staffList;" value="{{staff.email}}">{{staff.firstName}} {{staff.lastName}} ({{staff.email}})</option>
+                    </select>
+                </div>
+                <div class="form-group" style="margin-bottom: 10px;">
+                    <label>Email</label>
+                    <input type="text" formControlName="Email" readonly class="form-control" />
+                </div>
+                <div class="form-group" style="margin-bottom: 10px;">
+                    <label>First Name</label>
+                    <input type="text" formControlName="FirstName" class="form-control" />
+                </div>
+                <div class="form-group" style="margin-bottom: 10px;">
+                    <label>Last Name</label>
+                    <input type="text" formControlName="LastName" class="form-control" />
+                </div>
+                <div class="form-group" style="margin-bottom: 10px;">
+                    <label>User Role</label>
+                    <select type="text" formControlName="UserRoles" class="form-control">
+                        <option *ngFor="let role of roles;" value="{{role.name}}">{{role.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group" style="margin-bottom: 10px;">
+                    <label>Status</label>
+                    <select type="text" formControlName="Status" class="form-control">
+                        <option value="true">Active</option>
+                        <option value="false">Inactive</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button> -->
+          <button type="button" class="btn btn-outline-dark" (click)="onSubmit()">Add new User</button>
+        </div>
+      </ng-template>  
+</div>

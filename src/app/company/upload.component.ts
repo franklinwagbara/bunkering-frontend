@@ -37,6 +37,11 @@ export class UploadComponent implements OnInit {
   address: string = '';
   phase: string;
   applicationTypeId: string = '';
+  stagelist = [];
+  phasestages:any;
+  
+
+
   
 
 constructor(private cd: ChangeDetectorRef,
@@ -52,7 +57,6 @@ ngOnInit() {
  this.getCategory();
  this.getStateList();
  this.data = [];
- this.fetchdata();
  this.sizePerPage = this.genk.sizeten;
 }
 
@@ -94,6 +98,8 @@ getPhases(e) {
   this.apply.getApplicationPhases(e.target.value).subscribe(res => {
     //debugger;
     this.phaseList = res.data.data;
+    // this.stagelist = res.data.data;
+    
   });
   this.cd.markForCheck();
 }
@@ -105,6 +111,7 @@ getStateList() {
   });
   this.cd.markForCheck();
 }
+
 
 
 
@@ -125,8 +132,9 @@ getLgaByState(e) {
   this.cd.markForCheck();
 }
 
-fetchdata(){
-
+changePhaseList(value: string){
+  this.genk.phaseShortName = value;
+  this.cd.markForCheck();
 }
 
 
