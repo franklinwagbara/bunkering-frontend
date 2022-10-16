@@ -300,7 +300,7 @@ toggleActive(){
         "header": "SPUD DATE"
     },
     {
-        "columnDef": "wellSpudDate",
+        "columnDef": "wellSpudName",
         "header": "WELL SPUD NAME"
     },
     {

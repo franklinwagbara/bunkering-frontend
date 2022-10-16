@@ -209,13 +209,13 @@
             </div> -->
             </div>
             <br><br><br>
-            <div style="display:flex; width: 100%;">
+            <div style="display:flex; width: 100%; margin-left: 30%;">
                 <div style="text-align: center; margin-right: 10%; flex-wrap: wrap">
                     <button [disabled]="canSubmit" [class]="canSubmit ? 'disa divmid' : 'tilbtn divmid'" style="padding: 20px;  border: none; border-radius: 2px; background-color:teal; color: white"
                         (click)="submit()" >Update Application</button>
                 </div>
                 <div style="text-align: center;">
-                    <button [disabled]="!canSubmit" [class]="!canSubmit ? 'disa divmid' : 'tilbtn divmid'" style="padding: 20px; border: none; border-radius: 2px; background-color: dodgerblue; color: white;"
+                    <button [disabled]="!canSubmit" [class]="!canSubmit ? 'disa divmid' : 'tilbtn divmid'" style="padding: 20px; border: none; border-radius: 3px; background-color: dodgerblue; color: white;"
                          [routerLink]="['/' + genk.company, 'previewapp']">Proceed to Make Payment</button>
                 </div>
             </div>
