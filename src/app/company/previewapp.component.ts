@@ -92,11 +92,11 @@ get columns() {
     return this.noticeColumn;
   }
 
-  if (this.genk.phaseShortName?.toUpperCase() == 'WELL APPLICATION ENTRY') {
+  if (this.genk.phaseShortName?.toUpperCase() == 'WELL REENTRY SUSPENSION PERMIT PLUG AND ABANDOMENT PERMIT') {
     return this.entryAColumn;
   }
 
-  if (this.genk.phaseShortName?.toUpperCase() == 'WELL APPLICATION ENTRY') {
+  if (this.genk.phaseShortName?.toUpperCase() == 'WELL REENTRY APPLICATION FORM ') {
     return this.entryBColumn;
   }
 
@@ -328,50 +328,7 @@ toggleActive(){
       "columnDef": "afe",
       "header": "AFE"
   },
-  {
-      "columnDef": "estimatedOperationDays",
-      "header": "ESTIMATED OPERATION DAYS"
-  },
-  {
-    "columnDef": "wellName",
-    "header": "WELL NAME"
-  },
-  {
-  "columnDef": "natureOfOperation",
-  "header": "NATURE OF OPERATION"
-  },
-  {
-      "columnDef": "wellCompletionInterval",
-      "header": "WELL COMPLETETION INTERVAL"
-  },
-  {
-      "columnDef": "rigForOperation",
-      "header": "RIG FOR OPERATION"
-  },
-  {
-      "columnDef": "preOperationProductionRate",
-      "header": "PRE OPERATION PRODUCTION RATE"
-  },
-  {
-      "columnDef": "postOperationProductionRate",
-      "header": "POST OPERATION PRODUCTION RATE"
-  },
-  {
-      "columnDef": "initialReservesAllocationOfWell",
-      "header": "INTITIAL RESERVES ALLOCATION OF WELL"
-  },
-  {
-    "columnDef": "cumulativeProductionForWell",
-    "header": "CUMULATIVE PRODUCTION OF WELL"
-  },
-  {
-  "columnDef": "plugbackInterval",
-  "header": "PLUGBACK INTERVAL"
-  },
-  {
-      "columnDef": "lastProductionRate",
-      "header": "LAST PRODUCTION RATE"
-  }]
+  ]
 
   entryAColumn = [
     {
@@ -380,78 +337,25 @@ toggleActive(){
         
     },
     {
-        "columnDef": "field",
-        "header": "FIELD"
+        "columnDef": "wellName",
+        "header": "WELL NAME"
     },
     {
-      "columnDef": "block",
-      "header": "BLOCK"
+      "columnDef": "natureOfOperation",
+      "header": "NATURE OF OPERATION"
     },
     {
-    "columnDef": "terrain",
-    "header": "TERRAIN"
+    "columnDef": "plugbackInterval",
+    "header": "PLUGBACK INTERVAL"
     },
-    {
-        "columnDef": "spudDate",
-        "header": "SPUD DATE"
-    },
-    {
-        "columnDef": "wellSpudDate",
-        "header": "WELL SPUD NAME"
-    },
-    {
-      "columnDef": "wellClassApplied",
-      "header": "WELL CLASS APPLIED"
-      
-  },
-  {
-      "columnDef": "wellSurfaceCoordinates",
-      "header": "WELL SURFACE COORDINATES "
-  },
-  {
-    "columnDef": "proposedRig",
-    "header": "PROPOSED RIG"
-  },
-  {
-  "columnDef": "expectedVoloume",
-  "header": "EXPECTED VOLUMES "
-  },
-  {
-      "columnDef": "targetReserves",
-      "header": "TARGET RESERVES"
-  },
-  {
-      "columnDef": "afe",
-      "header": "AFE"
-  },
-  {
-      "columnDef": "estimatedOperationDays",
-      "header": "ESTIMATED OPERATION DAYS"
-  },
-  {
-    "columnDef": "wellName",
-    "header": "WELL NAME"
-  },
-  {
-  "columnDef": "natureOfOperation",
-  "header": "NATURE OF OPERATION"
-  },
-  {
-      "columnDef": "wellCompletionInterval",
-      "header": "WELL COMPLETETION INTERVAL"
-  },
   {
       "columnDef": "rigForOperation",
       "header": "RIG FOR OPERATION"
   },
   {
-      "columnDef": "preOperationProductionRate",
-      "header": "PRE OPERATION PRODUCTION RATE"
-  },
-  {
-      "columnDef": "postOperationProductionRate",
-      "header": "POST OPERATION PRODUCTION RATE"
-  },
+    "columnDef": "lastProductionRate",
+    "header": "LAST PRODUCTION RATE"
+},
   {
       "columnDef": "initialReservesAllocationOfWell",
       "header": "INTITIAL RESERVES ALLOCATION OF WELL"
@@ -461,13 +365,13 @@ toggleActive(){
     "header": "CUMULATIVE PRODUCTION OF WELL"
   },
   {
-  "columnDef": "plugbackInterval",
-  "header": "PLUGBACK INTERVAL"
-  },
-  {
-      "columnDef": "lastProductionRate",
-      "header": "LAST PRODUCTION RATE"
-  }]
+    "columnDef": "afe",
+    "header": "AFE"
+},
+{
+    "columnDef": "estimatedOperationDays",
+    "header": "ESTIMATED OPERATION DAYS"
+},]
 
   entryBColumn = [
     {
@@ -476,42 +380,39 @@ toggleActive(){
         
     },
     {
-        "columnDef": "field",
-        "header": "FIELD"
+      "columnDef": "wellName",
+      "header": "WELL NAME"
     },
     {
-      "columnDef": "block",
-      "header": "BLOCK"
+      "columnDef": "natureOfOperation",
+      "header": "NATURE OF OPERATION"
+      },
+      {
+        "columnDef": "wellCompletionInterval",
+        "header": "WELL COMPLETETION INTERVAL"
     },
     {
-    "columnDef": "terrain",
-    "header": "TERRAIN"
-    },
-    {
-        "columnDef": "spudDate",
-        "header": "SPUD DATE"
-    },
-    {
-        "columnDef": "wellSpudDate",
-        "header": "WELL SPUD NAME"
-    },
-    {
-      "columnDef": "wellClassApplied",
-      "header": "WELL CLASS APPLIED"
-      
+      "columnDef": "rigForOperation",
+      "header": "RIG FOR OPERATION"
   },
   {
-      "columnDef": "wellSurfaceCoordinates",
-      "header": "WELL SURFACE COORDINATES "
-  },
-  {
-    "columnDef": "proposedRig",
-    "header": "PROPOSED RIG"
-  },
-  {
-  "columnDef": "expectedVoloume",
-  "header": "EXPECTED VOLUMES "
-  },
+    "columnDef": "preOperationProductionRate",
+    "header": "PRE OPERATION PRODUCTION RATE"
+},
+{
+  "columnDef": "postOperationProductionRate",
+  "header": "POST OPERATION PRODUCTION RATE"
+},
+
+{
+  "columnDef": "initialReservesAllocationOfWell",
+  "header": "INTITIAL RESERVES ALLOCATION OF WELL"
+},
+{
+  "columnDef": "cumulativeProductionForWell",
+  "header": "CUMULATIVE PRODUCTION OF WELL"
+},
+
   {
       "columnDef": "targetReserves",
       "header": "TARGET RESERVES"
@@ -523,48 +424,5 @@ toggleActive(){
   {
       "columnDef": "estimatedOperationDays",
       "header": "ESTIMATED OPERATION DAYS"
-  },
-  {
-    "columnDef": "wellName",
-    "header": "WELL NAME"
-  },
-  {
-  "columnDef": "natureOfOperation",
-  "header": "NATURE OF OPERATION"
-  },
-  {
-      "columnDef": "wellCompletionInterval",
-      "header": "WELL COMPLETETION INTERVAL"
-  },
-  {
-      "columnDef": "rigForOperation",
-      "header": "RIG FOR OPERATION"
-  },
-  {
-      "columnDef": "preOperationProductionRate",
-      "header": "PRE OPERATION PRODUCTION RATE"
-  },
-  {
-      "columnDef": "postOperationProductionRate",
-      "header": "POST OPERATION PRODUCTION RATE"
-  },
-  {
-      "columnDef": "initialReservesAllocationOfWell",
-      "header": "INTITIAL RESERVES ALLOCATION OF WELL"
-  },
-  {
-    "columnDef": "cumulativeProductionForWell",
-    "header": "CUMULATIVE PRODUCTION OF WELL"
-  },
-  {
-  "columnDef": "plugbackInterval",
-  "header": "PLUGBACK INTERVAL"
-  },
-  {
-      "columnDef": "lastProductionRate",
-      "header": "LAST PRODUCTION RATE"
-  }]
-
-
-    
+  },]
 }
