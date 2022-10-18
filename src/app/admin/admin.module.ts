@@ -1,7 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ModalDismissReasons, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  MatSnackBarModule,
+  MAT_SNACK_BAR_DEFAULT_OPTIONS,
+} from '@angular/material/snack-bar';
 
 import { ApplicationComponent } from './application/application.component';
 import { AllStaffComponent } from './settings/all-staff/all-staff.component';
@@ -13,6 +17,7 @@ import { AdminRoutingModule } from './admin/admin-routing.module';
 import { AdminComponent } from './admin/admin.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { SharedModule } from '../shared/shared.module';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -32,8 +37,12 @@ import { SharedModule } from '../shared/shared.module';
     NgbModule,
     ReactiveFormsModule,
     SharedModule,
+    MatGridListModule,
+    MatSnackBarModule,
   ],
   exports: [],
-  providers: [],
+  providers: [
+    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2500 } },
+  ],
 })
 export class AdminModule {}

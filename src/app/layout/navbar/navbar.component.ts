@@ -6,7 +6,7 @@ import {
   PathLocationStrategy,
 } from '@angular/common';
 import { Router } from '@angular/router';
-import { AuthenticationService, GenericService } from '../../services';
+import { AuthenticationService, GenericService } from '../../shared/services';
 import { environment } from 'src/environments/environment';
 
 @Component({

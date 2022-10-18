@@ -1,12 +1,61 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import {
+  MatSnackBarModule,
+  MAT_SNACK_BAR_DEFAULT_OPTIONS,
+} from '@angular/material/snack-bar';
+
+import { FormDialogComponent } from './reusable-components/form-dialog/form-dialog.component';
+import { PhaseFormComponent } from './reusable-components/phase-form/phase-form.component';
 import { TableComponent } from './reusable-components/table/table.component';
-import { LayoutModule } from './layout/layout.module';
+import { CategoryFormComponent } from './reusable-components/category-form/category-form.component';
+import { StageFormComponent } from './reusable-components/stage-form/stage-form.component';
+import { ProgressBarComponent } from './reusable-components/progress-bar/progress-bar.component';
+import { PermitStageFormComponent } from './reusable-components/permit-stage-form/permit-stage-form.component';
 
 @NgModule({
-  declarations: [TableComponent],
-  imports: [CommonModule, LayoutModule],
-  providers: [],
-  exports: [TableComponent],
+  declarations: [
+    TableComponent,
+    FormDialogComponent,
+    PhaseFormComponent,
+    CategoryFormComponent,
+    StageFormComponent,
+    ProgressBarComponent,
+    PermitStageFormComponent,
+  ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatTableModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatDialogModule,
+    MatSnackBarModule,
+    MatProgressBarModule,
+  ],
+  providers: [
+    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2500 } },
+  ],
+  exports: [
+    TableComponent,
+    FormDialogComponent,
+    PhaseFormComponent,
+    ProgressBarComponent,
+  ],
 })
 export class SharedModule {}

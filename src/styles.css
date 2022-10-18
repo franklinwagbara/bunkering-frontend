@@ -1,21 +1,45 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-
-.collapsible-header{
-    margin: 1.0rem;
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-.ni{
-    padding-right: 1.0rem;
+.collapsible-header {
+  margin: 1rem;
 }
 
-.st-desk{
-    background-color: rgb(255, 255, 255); 
-    min-height: 35rem; 
-    padding: 2rem; 
-    border-radius: 5px; 
-    margin: 0 1.5rem 0 1.5rem;
+.ni {
+  padding-right: 1rem;
+}
+
+.st-desk {
+  background-color: rgb(255, 255, 255);
+  min-height: 35rem;
+  padding: 2rem;
+  border-radius: 5px;
+  margin: 0 1.5rem 0 1.5rem;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+.success {
+  background-color: #40a64a;
+  color: rgb(255, 255, 255);
+}
+
+.warning {
+  background-color: #fcbf1f;
+  color: rgb(255, 255, 255);
+}
+
+.error {
+  background-color: #d53343;
+  color: rgb(255, 255, 255);
 }

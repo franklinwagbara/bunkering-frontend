@@ -1,0 +1,14 @@
+.setting-desk {
+  background-color: rgb(255, 255, 255);
+  min-height: fit-content;
+  padding: 2rem;
+  border-radius: 5px;
+  margin: 0 1.5rem 0 1.5rem;
+}
+
+.table-wrapper {
+  border: 1px solid rgb(204, 197, 197);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}

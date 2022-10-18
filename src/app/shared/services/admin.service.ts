@@ -139,11 +139,51 @@ export class AdminService {
       .pipe(retry(this.num));
   }
 
+  deleteModule(moduleId: number) {
+    return this.http
+      .delete<any>(
+        `${environment.apiUrl}/configuration/delete-module-configuration?id=${moduleId}`
+      )
+      .pipe(retry(this.num));
+  }
+
   createPhase(model: any) {
     return this.http
       .post<any>(
         `${environment.apiUrl}/configuration/post-permit-configuration`,
         model
+      )
+      .pipe(
+        retry(this.num),
+        map((res) => res)
+      );
+  }
+
+  createPermitStage(model: any) {
+    console.log('permit form model', model);
+    return this.http
+      .post<any>(`${environment.apiUrl}/configuration/post-permit-stage`, model)
+      .pipe(
+        retry(this.num),
+        map((res) => res)
+      );
+  }
+
+  deletePhase(id: number) {
+    return this.http
+      .delete<any>(
+        `${environment.apiUrl}/configuration/delete-permit-configuration`,
+        {
+          params: { permitID: id },
+        }
+      )
+      .pipe(retry(this.num));
+  }
+
+  deletePermitStage(id: number) {
+    return this.http
+      .delete<any>(
+        `${environment.apiUrl}/configuration/delete-permit-stage?id=${id}`
       )
       .pipe(retry(this.num));
   }
