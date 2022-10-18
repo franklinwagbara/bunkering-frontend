@@ -1,25 +1,20 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthenticationService, GenericService } from '../services';
+import { AuthenticationService, GenericService } from '../shared/services';
 
 @Component({
   templateUrl: 'apply.component.html',
-  styleUrls: ['company.component.scss']})
-
-export class ApplyComponent{
+  styleUrls: ['company.component.scss'],
+})
+export class ApplyComponent {
   genk: GenericService;
-  
 
-  constructor(private gen: GenericService,
+  constructor(
+    private gen: GenericService,
     private router: Router,
-    private auth: AuthenticationService) {
-      this.genk = gen;
+    private auth: AuthenticationService
+  ) {
+    this.genk = gen;
   }
-
-    
-    }
-
-  
-      
-
+}

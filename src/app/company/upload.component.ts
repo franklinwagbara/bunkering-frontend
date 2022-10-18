@@ -1,10 +1,10 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { uploadFile } from '../models/apply.model';
-import { GenericService } from '../services';
-import { ApplyService } from '../services/apply.service';
-import { ModalService } from '../services/modal.service';
+import { uploadFile } from '../shared/models/apply.model';
+import { GenericService } from '../shared/services';
+import { ApplyService } from '../shared/services/apply.service';
+import { ModalService } from '../shared/services/modal.service';
 
 @Component({
   templateUrl: 'upload.component.html',

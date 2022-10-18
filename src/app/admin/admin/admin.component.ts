@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationService, GenericService } from '../../services';
+import { AuthenticationService, GenericService } from '../../shared/services';
 
 @Component({
   selector: 'app-admin',

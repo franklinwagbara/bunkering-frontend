@@ -9,17 +9,15 @@ import { ApplyComponent } from '../apply.component';
 import { PreviewAppComponent } from './previewapp.component';
 
 const routes: Routes = [
-  {path: '', component: CompanyProfileComponent},
-  {path: 'companyprofile', component: CompanyProfileComponent},
+  { path: '', component: CompanyProfileComponent },
+  { path: 'companyprofile', component: CompanyProfileComponent },
   //{path: 'companyinformation', component: CompanyInformationComponent},
-  {path: 'companyaddress', component: CompanyAddressComponent},
-  {path: 'companydirector', component: CompanyDirectorComponent},
-  
-]
-
+  { path: 'companyaddress', component: CompanyAddressComponent },
+  { path: 'companydirector', component: CompanyDirectorComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class CompanyInformationRoutingModule { }
+export class CompanyInformationRoutingModule {}

@@ -1,0 +1,54 @@
+button {
+  margin: 16px 8px;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.table-container {
+  min-height: fit-content;
+  width: 98%;
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 10px;
+}
+
+table {
+  width: 100%;
+}
+
+td,
+th {
+  width: fit-content;
+}
+
+.table-controls {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+}
+
+.table-title {
+  text-align: center;
+  padding-top: 50px;
+  font-size: large;
+}
+
+.margin-left {
+  margin-right: 20px;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.table-group {
+  display: flex;
+  flex-direction: column;
+}
