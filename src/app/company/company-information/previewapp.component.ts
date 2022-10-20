@@ -1,23 +1,28 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { PreviewModel, uploadFile } from 'src/app/models/apply.model';
-import { AuthenticationService, GenericService } from 'src/app/services';
-import { ApplyService } from 'src/app/services/apply.service';
-import { ModalService } from 'src/app/services/modal.service';
+import { PreviewModel, uploadFile } from 'src/app/shared/models/apply.model';
+import { AuthenticationService, GenericService } from 'src/app/shared/services';
+import { ApplyService } from 'src/app/shared/services/apply.service';
+import { ModalService } from 'src/app/shared/services/modal.service';
 
 @Component({
   templateUrl: 'previewapp.component.html',
-  styleUrls: ['../company.component.scss']})
-
+  styleUrls: ['../company.component.scss'],
+})
 export class PreviewAppComponent {
-    uploadFile: File;
+  uploadFile: File;
   categoryList: any;
-  stateList: any;  
+  stateList: any;
   lgaList: any;
   phaseList: any;
   phaseId: number;
-  sizePerPage=10;
+  sizePerPage = 10;
   categoryId: string = '';
   uploadForm: FormGroup;
   state: string;
@@ -28,7 +33,7 @@ export class PreviewAppComponent {
   uploadNewName: string;
   appid: number;
   uploadNameDoc: string;
-  genk:GenericService;
+  genk: GenericService;
   data: any[];
   uploadBody: uploadFile = {} as uploadFile;
   previewForm: FormGroup;
@@ -38,147 +43,139 @@ export class PreviewAppComponent {
   address: string = '';
   phase: string;
   applicationTypeId: string = '';
-  companyDetail:any;
+  companyDetail: any;
   previewBody: PreviewModel = {} as PreviewModel;
-  
 
-constructor(private cd: ChangeDetectorRef,
-  private apply: ApplyService,
-  private auth: AuthenticationService,
-  private modalService:ModalService,
-  private route: ActivatedRoute,
-  private gen: GenericService, private fb: FormBuilder) { 
+  constructor(
+    private cd: ChangeDetectorRef,
+    private apply: ApplyService,
+    private auth: AuthenticationService,
+    private modalService: ModalService,
+    private route: ActivatedRoute,
+    private gen: GenericService,
+    private fb: FormBuilder
+  ) {
     this.genk = gen;
   }
 
-ngOnInit() {
-  
- this.getCompanyDetailById();
- 
-  this.auth.getPhaseCategories().subscribe(res => {
-    this.phaseList = res.data.data.allPermits;
-  });
+  ngOnInit() {
+    this.getCompanyDetailById();
 
-  this.getStateList();
-  this.initForm();
- this.getCategory();
- this.data = [];
- this.fetchdata();
- this.sizePerPage = this.genk.sizeten;
+    this.auth.getPhaseCategories().subscribe((res) => {
+      this.phaseList = res.data.data.allPermits;
+    });
 
-}
+    this.getStateList();
+    this.initForm();
+    this.getCategory();
+    this.data = [];
+    this.fetchdata();
+    this.sizePerPage = this.genk.sizeten;
+  }
 
-
-initForm() {
-  this.previewForm = new FormGroup ({
-    'categoryId': new FormControl(this.categoryId, [Validators.required]),
-    'phaseId': new FormControl(this.phaseId, [Validators.required]),
-    'lgaId': new FormControl(this.LgaId),
-    'stateId': new FormControl(this.stateId),
-    'location': new FormControl(this.address, [Validators.required]),
-    'file': new FormControl('', [Validators.required]),
-    'doc': new FormControl('', [Validators.required]),
-  })
-}
-
-get f() {
-  return this.previewForm.controls;
-}
-
-onFileChange(event) {
-  
-  if (event.target.files.length > 0) {
-    const file = event.target.files[0];
-    this.previewForm.patchValue({
-      file: file
+  initForm() {
+    this.previewForm = new FormGroup({
+      categoryId: new FormControl(this.categoryId, [Validators.required]),
+      phaseId: new FormControl(this.phaseId, [Validators.required]),
+      lgaId: new FormControl(this.LgaId),
+      stateId: new FormControl(this.stateId),
+      location: new FormControl(this.address, [Validators.required]),
+      file: new FormControl('', [Validators.required]),
+      doc: new FormControl('', [Validators.required]),
     });
   }
-}
 
-getCategory() {
-  this.apply.getApplicationCategory().subscribe(res => {
-    this.categoryList = res.data.data;
-  });
-  this.cd.markForCheck();
-}
+  get f() {
+    return this.previewForm.controls;
+  }
 
-getPhases(e) {
-  this.categoryId = e.target.value;
-  this.apply.getApplicationPhases(e.target.value).subscribe(res => {
-    //debugger;
-    this.phaseList = res.data.data;
-  });
-  this.cd.markForCheck();
-}
+  onFileChange(event) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.previewForm.patchValue({
+        file: file,
+      });
+    }
+  }
 
-getStateList() {
-  this.apply.getStateList().subscribe(res => {
-    
-    this.stateList = res.data.data;
-  });
-  this.cd.markForCheck();
-}
+  getCategory() {
+    this.apply.getApplicationCategory().subscribe((res) => {
+      this.categoryList = res.data.data;
+    });
+    this.cd.markForCheck();
+  }
 
+  getPhases(e) {
+    this.categoryId = e.target.value;
+    this.apply.getApplicationPhases(e.target.value).subscribe((res) => {
+      //debugger;
+      this.phaseList = res.data.data;
+    });
+    this.cd.markForCheck();
+  }
 
+  getStateList() {
+    this.apply.getStateList().subscribe((res) => {
+      this.stateList = res.data.data;
+    });
+    this.cd.markForCheck();
+  }
 
-// getLGAList() {
-//   this.apply.getLgaList().subscribe(res =>{
-//     this.lgalist= res.data.data;
-//   });
-//   this.cd.markForCheck();
-// }
-//   let obj = this.statelist.filter(x => x.state == this.state)[0];
-//    this.lgalist = obj.lga
-//  }
+  // getLGAList() {
+  //   this.apply.getLgaList().subscribe(res =>{
+  //     this.lgalist= res.data.data;
+  //   });
+  //   this.cd.markForCheck();
+  // }
+  //   let obj = this.statelist.filter(x => x.state == this.state)[0];
+  //    this.lgalist = obj.lga
+  //  }
 
-getLgaByState(e) {
-  this.apply.getLgaByStateId(e.target.value).subscribe(res => {
-    this.lgaList = res.data.data;
-  });
-  this.cd.markForCheck();
-}
+  getLgaByState(e) {
+    this.apply.getLgaByStateId(e.target.value).subscribe((res) => {
+      this.lgaList = res.data.data;
+    });
+    this.cd.markForCheck();
+  }
 
-getCompanyDetailById() {
-  this.route.params.subscribe(params => {
-    this.appid = params['id'];
-  });
+  getCompanyDetailById() {
+    this.route.params.subscribe((params) => {
+      this.appid = params['id'];
+    });
 
-  this.apply.getappdetailsbyId(this.appid).subscribe(res => {
-    this.previewBody = res.data.data as PreviewModel;
+    this.apply.getappdetailsbyId(this.appid).subscribe((res) => {
+      this.previewBody = res.data.data as PreviewModel;
 
-    
-  this.apply.getLgaByStateId(this.previewBody.stateId).subscribe(res => {
-    this.lgaList = res.data.data;
-  });
-});
+      this.apply.getLgaByStateId(this.previewBody.stateId).subscribe((res) => {
+        this.lgaList = res.data.data;
+      });
+    });
 
+    this.cd.markForCheck();
+  }
 
-  this.cd.markForCheck();
-}
-
-fetchdata(){
-
-}
-
-
+  fetchdata() {}
 
   saveTemplate(DeFile: any) {
     this.uploadFile = <File>DeFile.target.files[0];
     if (!this.uploadFile) {
-        return;
-      }
-       if (this.uploadFile.size < 1 || this.uploadFile.size > 1024 * 1024 * 50) {
-       this.uploadForm.controls['uploadFile'].setErrors({ 'incorrect': true });
-        this.uploadFile = null;
-        return;
-      } else {
-        this.uploadForm.controls['uploadFile'].setErrors(null);
-      }
-      this.uploadNewName = this.gen.getExpDoc(this.uploadFile.name, this.uploadFile.type);
-      this.uploadNameDoc = this.uploadNewName;
-     // let dockind = this.gen.getExt(this.File.name);
+      return;
+    }
+    if (this.uploadFile.size < 1 || this.uploadFile.size > 1024 * 1024 * 50) {
+      this.uploadForm.controls['uploadFile'].setErrors({ incorrect: true });
+      this.uploadFile = null;
+      return;
+    } else {
+      this.uploadForm.controls['uploadFile'].setErrors(null);
+    }
+    this.uploadNewName = this.gen.getExpDoc(
+      this.uploadFile.name,
+      this.uploadFile.type
+    );
+    this.uploadNameDoc = this.uploadNewName;
+    // let dockind = this.gen.getExt(this.File.name);
   }
-   
+
   submit() {
     debugger;
     // let addr = this.f['address'].value;
@@ -194,16 +191,13 @@ fetchdata(){
     // if (this.uploadFile) {
     //   formDat.append('doc', this.uploadFile, this.uploadNewName);
     // }
-    this.apply.uploadApplyform(formDat).subscribe(res => {
-
-        if (res.statusCode == 300) {
-          this.modalService.logNotice("Error", res.message, 'error');
-        }
-        else {
-          //this.loadTable_Management(res.data);
-          this.modalService.logNotice("Success", res.message, 'success');
-        }
-      })
+    this.apply.uploadApplyform(formDat).subscribe((res) => {
+      if (res.statusCode == 300) {
+        this.modalService.logNotice('Error', res.message, 'error');
+      } else {
+        //this.loadTable_Management(res.data);
+        this.modalService.logNotice('Success', res.message, 'success');
+      }
+    });
   }
-  
 }

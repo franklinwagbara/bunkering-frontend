@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { GuardsCheckEnd, Router, ActivatedRoute, Params } from '@angular/router';
-import { AuthenticationService, GenericService } from '../services';
+import { AuthenticationService, GenericService } from '../shared/services';
 
 @Component({
   selector: 'app-root',

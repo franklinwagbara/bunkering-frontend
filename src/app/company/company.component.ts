@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { AuthenticationService, GenericService } from '../services';
+import { AuthenticationService, GenericService } from '../shared/services';
 
 @Component({
   selector: 'app-company-details',

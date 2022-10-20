@@ -20,14 +20,22 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    CompanyRoutingModule
+    CompanyRoutingModule,
   ],
   declarations: [
-    DashboardComponent, MessagesComponent, ChangePasswordComponent, MyScheduleComponent,
-    MypermitsComponent, ApplyComponent, MyApplicationComponent, RegisterDirectorComponent, 
-    CompanyComponent,UploadComponent, ApplyComponent, PreviewAppComponent,
+    DashboardComponent,
+    MessagesComponent,
+    ChangePasswordComponent,
+    MyScheduleComponent,
+    MypermitsComponent,
+    ApplyComponent,
+    MyApplicationComponent,
+    RegisterDirectorComponent,
+    CompanyComponent,
+    UploadComponent,
+    ApplyComponent,
+    PreviewAppComponent,
   ],
   providers: [],
 })
-export class CompanyModule { }
-
+export class CompanyModule {}

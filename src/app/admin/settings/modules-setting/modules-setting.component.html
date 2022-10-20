@@ -1,243 +1,36 @@
-<div class="st-desk">
-    <h2 class=" text-center">Category(s), Phase(s) and Phase Stages Configuration</h2>
-    <div class="col-md-4 card" style="float: left; padding: 1em;">
-        <div>
-            <h2 style="float: left;">Category(s)</h2>
-            <button class="btn btn-success btn-sm" style="float:right;"  (click)="open(mymodal)">
-                <i class="fa fa-plus"></i>
-                Add New
-            </button>
-        </div>
-        <table class="table table-striped text-left">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Code</th>
-                    <th>Name</th>
-                    <th>
+<div class="setting-desk">
+  <h2 class="text-center">Category(s) and Phase(s) Settings</h2>
+  <div>
+    <div class="table-group">
+      <div class="table-wrapper">
+        <generic-table
+          [table_title]="tableTitles.categories"
+          [table_keysMappedToHeaders]="categoryTableKeysMappedToHeaders"
+          [table_content]="categories"
+          (onAddData)="onAddData($event, 'category')"
+          (onDeleteData)="onDeleteData($event, 'category')"
+        ></generic-table>
+      </div>
 
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let cat of category; index as i">
-                    <td>{{i + 1}}</td>
-                    <td>{{cat.code}}</td>
-                    <td>{{cat.name}}</td>
-                    <td>
-                        <button class="btn btn-warning btn-sm">Edit</button>&nbsp;
-                        <button class="btn btn-danger btn-sm">Delete</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+      <div class="table-wrapper">
+        <generic-table
+          [table_title]="tableTitles.phases"
+          [table_keysMappedToHeaders]="phasesTableKeysMappedToHeaders"
+          [table_content]="phases"
+          (onAddData)="onAddData($event, 'phase')"
+          (onDeleteData)="onDeleteData($event, 'phase')"
+        ></generic-table>
+      </div>
     </div>
-    <div class="col-md-7 card" style="float: right; margin-left: 2px; margin-bottom: 2rem; padding: 1em;">
-        <div>
-            <h2 style="float: left;">Phase(s)</h2>
-            <button class="btn btn-success btn-sm" style="float:right;"  (click)="open(myPhasemodal)">
-                 <i class="fa fa-plus"></i>
-                 Add New
-             </button>
-        </div>
-         <table class="table table-striped text-left">
-             <thead>
-                 <tr>
-                     <th>#</th>
-                     <th>Code</th>
-                     <th>Name</th>
-                     <th>Category</th>
-                     <th>Description</th>
-                     <th>Status</th>
-                     <th>
- 
-                     </th>
-                 </tr>
-             </thead>
-             <tbody>
-                 <tr *ngFor="let phase of phases; index as i">
-                     <td>{{i + 1}}</td>
-                     <td>{{phase.code}}</td>
-                     <td>{{phase.shortName}}</td>
-                     <td>{{phase.categoryName}}</td>
-                     <td>{{phase.description}}</td>
-                     <!-- <th>{{phase.fee | number : '.2-2'}}</th>
-                     <th>{{phase.serviceCharge}}</th> -->
-                     <td>
-                        <div *ngIf="phase.status; else status">
-                            <label class="alert alert-success">Active</label>
-                        </div>
-                        <ng-template #status>
-                            <label class="alert alert-danger">Inactive</label>
-                        </ng-template>                        
-                     </td>
-                     <td></td>
-                     <td>
-                         <button class="btn btn-warning btn-sm">Edit</button>&nbsp;
-                         <button class="btn btn-danger btn-sm">Delete</button>
-                     </td>
-                 </tr>
-             </tbody>
-         </table>
-    </div>
-    <div class="col-md-12 card" style="margin-left: 2px; margin-bottom: 2rem; padding: 1em;">
-        <div>
-            <h2 style="float: left;">Phase Stages(s)</h2>
-            <button class="btn btn-success btn-sm" style="float:right;"  (click)="open(myPhaseStagemodal)">
-                <i class="fa fa-plus"></i>
-                Add New
-            </button>
-        </div>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Code</th>
-                    <th>Name</th>
-                    <th>Permit Type</th>
-                    <th>Description</th>
-                    <th>Fee (₦)</th>
-                    <th>Service Charge (₦)</th>
-                    <th>Status</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let phaseStage of phaseStages; index as i">
-                    <td>{{i + 1}}</td>
-                    <td>{{phaseStage.code}}</td>
-                    <td>{{phaseStage.name}}</td>
-                    <td>{{phaseStage.phase.name}}</td>
-                    <td>{{phaseStage.description}}</td>
-                    <th>{{phaseStage.fee | number : '.2-2'}}</th>
-                    <th>{{phaseStage.serviceCharge | number : '.2-2'}}</th>
-                    <td>
-                        <div *ngIf="phaseStage.status; else status">
-                            <label class="alert alert-success">Active</label>
-                        </div>
-                        <ng-template #status>
-                            <label class="alert alert-danger">Inactive</label>
-                        </ng-template>
-                    </td>
-                    <td></td>
-                    <td>
-                        <button class="btn btn-warning btn-sm">Edit</button>&nbsp;
-                        <button class="btn btn-success btn-sm">Docs</button>&nbsp;
-                        <button class="btn btn-danger btn-sm">Delete</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <ng-template #mymodal let-modal>
-        <div class="modal-header">
-          <h4 class="modal-title" id="modal-basic-title">Add New Category</h4>
-          <button type="button" class="close btn-danger" aria-label="Close" (click)="modal.dismiss('Cross click')">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <form [formGroup] = "form" (ngSubmit)="createModule()">
-                <div class="fomr-group">
-                    <label>Name</label>
-                    <input name="Name" formControlName="Name" class="form-control" />
-                </div>
-                <div class="fomr-group" style="margin-bottom: 10px;">
-                    <label>Short Code</label>
-                    <input name="Code" formControlName="Code" class="form-control" />
-                </div>
-                <div class="fomr-group" style="margin-bottom: 10px;">
-                    <label>Description</label>
-                    <input name="Description" formControlName="Description" class="form-control" />
-                </div>
-            </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-dark btn-sm" (click)="createModule()">Create</button>
-        </div>
-      </ng-template>
 
-      <ng-template #myPhasemodal let-modal>
-        <div class="modal-header">
-          <h4 class="modal-title" id="modal-basic-title">Add New Phase</h4>
-          <button type="button" class="close btn-danger" aria-label="Close" (click)="modal.dismiss('Cross click')">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <form [formGroup] = "form" (ngSubmit)="createPhase()">
-                <div class="fomr-group" style="margin-bottom: 10px;">
-                    <label>Short Code</label>
-                    <input name="Code" formControlName="Code" class="form-control" />
-                </div>
-                <div class="fomr-group" style="margin-bottom: 10px;">
-                    <label>Name</label>
-                    <input name="ShortName" formControlName="ShortName" class="form-control" />
-                </div>
-                <div class="fomr-group" style="margin-bottom: 10px;">
-                    <label>Description</label>
-                    <input name="Description" formControlName="Description" class="form-control" />
-                </div>
-                <div class="fomr-group" style="margin-bottom: 10px;">
-                    <label>Category</label>
-                    <select name="CategoryId" formControlName="CategoryId" class="form-control">
-                        <option *ngFor="let cat of category" [ngValue]="cat.moduleId">{{cat.name}}</option>
-                    </select>
-                </div>
-                <div class="fomr-group" style="margin-bottom: 10px;">
-                    <label>Sort</label>
-                    <input name="Sort" type="number" formControlName="Sort" class="form-control" />
-                </div>
-            </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-dark  btn-sm" (click)="createPhase()">Create</button>
-        </div>
-      </ng-template>
-
-      <ng-template #myPhaseStagemodal let-modal>
-        <div class="modal-header">
-          <h4 class="modal-title" id="modal-basic-title">Add New Phase Stage</h4>
-          <button type="button" class="close btn-danger" aria-label="Close" (click)="modal.dismiss('Cross click')">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <form [formGroup] = "form" (ngSubmit)="createPhaseStage()">
-                <div class="fomr-group" style="margin-bottom: 10px;">
-                    <label>Short Code</label>
-                    <input name="Code" formControlName="Code" class="form-control" />
-                </div>
-                <div class="fomr-group" style="margin-bottom: 10px;">
-                    <label>Name</label>
-                    <input name="ShortName" formControlName="ShortName" class="form-control" />
-                </div>
-                <div class="fomr-group" style="margin-bottom: 10px;">
-                    <label>Description</label>
-                    <input name="Description" formControlName="Description" class="form-control" />
-                </div>
-                <div class="fomr-group" style="margin-bottom: 10px;">
-                    <label>Permit Type</label>
-                    <select name="PhaseId" formControlName="PhaseId" class="form-control">
-                        <option *ngFor="let phase of phases" [ngValue]="phase.id">{{phase.shortName}}</option>
-                    </select>
-                </div>
-                <div class="fomr-group" style="margin-bottom: 10px;">
-                    <label>Fee</label>
-                    <input type="number" step="0.01" name="Fee" formControlName="Fee" class="form-control" />
-                </div>
-                <div class="fomr-group" style="margin-bottom: 10px;">
-                    <label>Service Cgarge</label>
-                    <input type="number" step="0.01" name="ServiceCharge" formControlName="ServiceCharge" class="form-control" />
-                </div>
-                <div class="fomr-group" style="margin-bottom: 10px;">
-                    <label>Sort</label>
-                    <input name="Sort" type="number" formControlName="Sort" class="form-control" />
-                </div>
-            </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-dark  btn-sm" (click)="createPhaseStage()">Create</button>
-        </div>
-      </ng-template>
+    <div class="table-wrapper">
+      <generic-table
+        [table_title]="tableTitles.permitStages"
+        [table_keysMappedToHeaders]="permitStagesTableKeysMappedToHeaders"
+        [table_content]="permitStages"
+        (onAddData)="onAddData($event, 'permitStages')"
+        (onDeleteData)="onDeleteData($event, 'permitStage')"
+      ></generic-table>
+    </div>
+  </div>
 </div>

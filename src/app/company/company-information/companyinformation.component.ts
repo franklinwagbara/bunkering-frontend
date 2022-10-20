@@ -1,17 +1,15 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { GenericService } from 'src/app/services';
+import { GenericService } from 'src/app/shared/services';
 
 @Component({
   templateUrl: 'companyinformation.component.html',
-  styleUrls: ['../company.component.scss']})
-
+  styleUrls: ['../company.component.scss'],
+})
 export class CompanyInformationComponent {
-  genk: GenericService
+  genk: GenericService;
 
   constructor(private gen: GenericService) {
-      this.genk = gen;
+    this.genk = gen;
   }
-
 }
-
