@@ -11,6 +11,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { InspectorLayoutComponent } from './sidebar/inspector-layout/inspector-layout.component';
 import { SuperadminLayoutComponent } from './sidebar/superadmin-layout/superadmin-layout.component';
+import { NavItemComponent } from './nav-item/nav-item.component';
+import { TopNavComponent } from './top-nav/top-nav.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { SuperadminLayoutComponent } from './sidebar/superadmin-layout/superadmi
     SidebarComponent,
     InspectorLayoutComponent,
     SuperadminLayoutComponent,
+    NavItemComponent,
+    TopNavComponent,
   ],
   imports: [
     CommonModule,

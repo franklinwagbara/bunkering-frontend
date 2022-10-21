@@ -1,4 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: Raleway, sans-serif !important;
+}
 
 html,
 body {
@@ -42,4 +49,12 @@ button:disabled {
 .error {
   background-color: #d53343;
   color: rgb(255, 255, 255);
+}
+
+.hidden {
+  @apply invisible opacity-0 transition-all ease-in-out delay-75 duration-300;
+}
+
+.block {
+  @apply visible opacity-100 transition-all ease-in-out delay-1000 duration-1000;
 }

@@ -1,0 +1,31 @@
+/** dashboard css*/
+.dashboard {
+  @apply flex flex-col;
+}
+
+.top-nav {
+  @apply h-16 bg-slate-100 flex items-center px-10 justify-between;
+}
+
+.avatar img {
+  width: 90px;
+  @apply -mr-4;
+}
+
+.avatar {
+  @apply flex gap-0 items-center justify-around;
+}
+
+.account-info {
+  @apply font-bold;
+}
+
+.account-info h5 {
+  @apply text-gray-500;
+}
+
+.logout {
+  @apply flex ml-5 items-center gap-2 justify-center bg-primary hover:sepia fill-white text-white cursor-pointer px-4 py-1 rounded-xl;
+}
+
+/** Dashboard css ends here */

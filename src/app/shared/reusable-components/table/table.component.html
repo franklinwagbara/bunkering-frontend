@@ -90,6 +90,7 @@
               mat-stroked-button
               color="accent"
               *ngIf="column.cell(row) === 'edit_control'"
+              (click)="editData(row)"
             >
               Edit
             </button>

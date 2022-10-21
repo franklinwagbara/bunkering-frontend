@@ -1,19 +1,19 @@
-<nav
+<!-- <nav
   class="navbar navbar-vertical navbar-expand-md navbar-light bg-white"
   id="sidenav-main"
 >
-  <div class="container-fluid">
-    <!-- Toggler -->
-    <button
+  <div class="container-fluid"> -->
+<!-- Toggler -->
+<!-- <button
       class="navbar-toggler"
       type="button"
       (click)="isCollapsed = !isCollapsed"
       aria-controls="sidenav-collapse-main"
     >
       <span class="navbar-toggler-icon"></span>
-    </button>
-    <!-- Brand -->
-    <a
+    </button> -->
+<!-- Brand -->
+<!-- <a
       class="navbar-brand pt-0"
       routerLinkActive="active"
       [routerLink]="['/admin']"
@@ -25,9 +25,9 @@
         width="100"
       />
       <span style="font-weight: bold; font-size: xx-large">AUS II</span>
-    </a>
-    <!-- Collapse -->
-    <div
+    </a> -->
+<!-- Collapse -->
+<!-- <div
       class="collapse navbar-collapse"
       [ngbCollapse]="isCollapsed"
       id="sidenav-collapse-main"
@@ -35,9 +35,9 @@
       <div>
         <hr />
         <div class="text-center">
-          <a routerLinkActive="active" [routerLink]="'/admin'" class="nav-link">
-            <!-- <i class="ni ni-tv-2 text-primary"></i> -->
-            MAIN NAVIGATION
+          <a routerLinkActive="active" [routerLink]="'/admin'" class="nav-link"> -->
+<!-- <i class="ni ni-tv-2 text-primary"></i> -->
+<!-- MAIN NAVIGATION
           </a>
         </div>
         <hr />
@@ -68,4 +68,140 @@
       </div>
     </div>
   </div>
-</nav>
+</nav> -->
+
+<!-- <input type="checkbox" id="nav-toggle" /> -->
+<div
+  class="side-nav"
+  [ngClass]="{
+    'collapse-sidenav': !isCollapsed,
+    'unCollapse-sidenav': isCollapsed
+  }"
+>
+  <div class="logo-title">
+    <img src="../../../assets/img/brand/logo.png" alt="NUPRC" />
+    <h2>AUS II</h2>
+  </div>
+
+  <div class="nav-items">
+    <app-nav-item [title]="'DASHBOARD'" [active]="true"></app-nav-item>
+    <app-nav-item></app-nav-item>
+
+    <!-- <div
+      class="nav-item"
+      [ngClass]="{
+        'nav-item-active': activeNavItem === 'APPLICATIONS',
+        'collapse-submenu': isSubMenuCollapsed
+      }"
+      (click)="setActiveNavItem('APPLICATIONS')"
+    >
+      <div class="nav-item-control">
+        <svg
+          class="fill-purple-500"
+          xmlns="http://www.w3.org/2000/svg"
+          id="Outline"
+          viewBox="0 0 24 24"
+          width="23"
+          height="23"
+        >
+          <path
+            d="M7,0H4A4,4,0,0,0,0,4V7a4,4,0,0,0,4,4H7a4,4,0,0,0,4-4V4A4,4,0,0,0,7,0ZM9,7A2,2,0,0,1,7,9H4A2,2,0,0,1,2,7V4A2,2,0,0,1,4,2H7A2,2,0,0,1,9,4Z"
+          />
+          <path
+            d="M20,0H17a4,4,0,0,0-4,4V7a4,4,0,0,0,4,4h3a4,4,0,0,0,4-4V4A4,4,0,0,0,20,0Zm2,7a2,2,0,0,1-2,2H17a2,2,0,0,1-2-2V4a2,2,0,0,1,2-2h3a2,2,0,0,1,2,2Z"
+          />
+          <path
+            d="M7,13H4a4,4,0,0,0-4,4v3a4,4,0,0,0,4,4H7a4,4,0,0,0,4-4V17A4,4,0,0,0,7,13Zm2,7a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V17a2,2,0,0,1,2-2H7a2,2,0,0,1,2,2Z"
+          />
+          <path
+            d="M20,13H17a4,4,0,0,0-4,4v3a4,4,0,0,0,4,4h3a4,4,0,0,0,4-4V17A4,4,0,0,0,20,13Zm2,7a2,2,0,0,1-2,2H17a2,2,0,0,1-2-2V17a2,2,0,0,1,2-2h3a2,2,0,0,1,2,2Z"
+          />
+        </svg>
+
+        <span>APPLICATIONS</span>
+      </div>
+    </div>
+    <div class="nav-sub-menu">
+      <p>sub menu sub menusub menu</p>
+      <p>sub menu sub menusub menu</p>
+      <p>sub menu sub menusub menu</p>
+    </div>
+    <div
+      class="nav-item"
+      [ngClass]="{
+        'nav-item-active': activeNavItem === 'PAYMENTS',
+        'collapse-submenu': isSubMenuCollapsed
+      }"
+      (click)="setActiveNavItem('PAYMENTS')"
+    >
+      <div class="nav-item-control">
+        <svg
+          class="fill-green-500"
+          xmlns="http://www.w3.org/2000/svg"
+          id="Layer_1"
+          data-name="Layer 1"
+          viewBox="0 0 24 24"
+          width="23"
+          height="23"
+        >
+          <path
+            d="M12,16c-2.206,0-4-1.794-4-4s1.794-4,4-4,4,1.794,4,4-1.794,4-4,4ZM5.5,7c-.828,0-1.5,.672-1.5,1.5s.672,1.5,1.5,1.5,1.5-.672,1.5-1.5-.672-1.5-1.5-1.5Zm11.5,2.5c0,.828,.672,1.5,1.5,1.5s1.5-.672,1.5-1.5-.672-1.5-1.5-1.5-1.5,.672-1.5,1.5Zm-11.5,3.5c-.828,0-1.5,.672-1.5,1.5s.672,1.5,1.5,1.5,1.5-.672,1.5-1.5-.672-1.5-1.5-1.5Zm11.5,2.5c0,.828,.672,1.5,1.5,1.5s1.5-.672,1.5-1.5-.672-1.5-1.5-1.5-1.5,.672-1.5,1.5ZM.001,22.268V6.515c-.001-1.282,.703-2.442,1.836-3.026,1.316-.679,3.32-1.488,5.391-1.488,1.679,0,3.299,.549,4.867,1.079,1.398,.474,2.72,.921,3.904,.921,1.112,0,1.93-.302,2.721-.595,.368-.136,.704-.258,1.018-.341,.981-.259,2.021-.042,2.854,.598,.881,.678,1.407,1.739,1.407,2.837v13.67l-.881,.399c-.129,.059-3.194,1.431-6.346,1.431-1.66,0-3.4-.543-5.083-1.068-1.468-.458-2.987-.932-4.19-.932-2.49,0-5.348,1.289-5.377,1.301L.001,22.268Zm7.499-5.268c1.66,0,3.4,.543,5.083,1.068,1.468,.458,2.987,.932,4.19,.932,1.604,0,3.251-.478,4.227-.822V6.5c0-.168-.093-.349-.237-.459-.062-.049-.155-.104-.256-.076-.23,.061-.476,.155-.745,.254-.892,.33-2.112,.781-3.762,.781-1.679,0-3.299-.549-4.867-1.079-1.398-.474-2.72-.921-3.904-.921-1.546,0-3.18,.723-4.016,1.154-.131,.068-.213,.206-.213,.36v11.266c1.251-.391,2.898-.78,4.5-.78Z"
+          />
+        </svg>
+
+        <span>PAYMENTS</span>
+      </div>
+    </div>
+    <div
+      class="nav-item"
+      [ngClass]="{
+        'nav-item-active': activeNavItem === 'REPORTS',
+        'collapse-submenu': isSubMenuCollapsed
+      }"
+      (click)="setActiveNavItem('REPORTS')"
+    >
+      <div class="nav-item-control">
+        <svg
+          id="Layer_1"
+          height="23"
+          viewBox="0 0 24 24"
+          width="23"
+          xmlns="http://www.w3.org/2000/svg"
+          data-name="Layer 1"
+        >
+          <path
+            d="m13 8h2v2h-2v2h-2v-2h-2v-2h2v-2h2zm-6 8h10v-2h-10zm0 4h6v-2h-6zm14-18v19a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3-3v-19h5.171a3.006 3.006 0 0 1 2.829-2h2a3.006 3.006 0 0 1 2.829 2zm-2 2h-5v-1a1 1 0 0 0 -1-1h-2a1 1 0 0 0 -1 1v1h-5v17a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"
+          />
+        </svg>
+
+        <span>REPORTS</span>
+      </div>
+    </div>
+    <div
+      class="nav-item"
+      [ngClass]="{
+        'nav-item-active': activeNavItem === 'SETTINGS',
+        'collapse-submenu': isSubMenuCollapsed
+      }"
+      (click)="setActiveNavItem('SETTINGS')"
+    >
+      <div class="nav-item-control">
+        <svg
+          class="fill-pink-500"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="23"
+          height="23"
+        >
+          <g id="_01_align_center" data-name="01 align center">
+            <path
+              d="M15,24H9V20.487a9,9,0,0,1-2.849-1.646L3.107,20.6l-3-5.2L3.15,13.645a9.1,9.1,0,0,1,0-3.29L.107,8.6l3-5.2L6.151,5.159A9,9,0,0,1,9,3.513V0h6V3.513a9,9,0,0,1,2.849,1.646L20.893,3.4l3,5.2L20.85,10.355a9.1,9.1,0,0,1,0,3.29L23.893,15.4l-3,5.2-3.044-1.758A9,9,0,0,1,15,20.487Zm-4-2h2V18.973l.751-.194A6.984,6.984,0,0,0,16.994,16.9l.543-.553,2.623,1.515,1-1.732-2.62-1.513.206-.746a7.048,7.048,0,0,0,0-3.75l-.206-.746,2.62-1.513-1-1.732L17.537,7.649,16.994,7.1a6.984,6.984,0,0,0-3.243-1.875L13,5.027V2H11V5.027l-.751.194A6.984,6.984,0,0,0,7.006,7.1l-.543.553L3.84,6.134l-1,1.732L5.46,9.379l-.206.746a7.048,7.048,0,0,0,0,3.75l.206.746L2.84,16.134l1,1.732,2.623-1.515.543.553a6.984,6.984,0,0,0,3.243,1.875l.751.194Zm1-6a4,4,0,1,1,4-4A4,4,0,0,1,12,16Zm0-6a2,2,0,1,0,2,2A2,2,0,0,0,12,10Z"
+            />
+          </g>
+        </svg>
+
+        <span>SETTINGS</span>
+      </div>
+    </div> -->
+  </div>
+</div>

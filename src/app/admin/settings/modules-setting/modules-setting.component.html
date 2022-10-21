@@ -9,6 +9,7 @@
           [table_content]="categories"
           (onAddData)="onAddData($event, 'category')"
           (onDeleteData)="onDeleteData($event, 'category')"
+          (onEditData)="onEditData($event, 'category')"
         ></generic-table>
       </div>
 
@@ -19,6 +20,7 @@
           [table_content]="phases"
           (onAddData)="onAddData($event, 'phase')"
           (onDeleteData)="onDeleteData($event, 'phase')"
+          (onEditData)="onEditData($event, 'phase')"
         ></generic-table>
       </div>
     </div>
@@ -30,6 +32,7 @@
         [table_content]="permitStages"
         (onAddData)="onAddData($event, 'permitStages')"
         (onDeleteData)="onDeleteData($event, 'permitStage')"
+        (onEditData)="onEditData($event, 'permitStage')"
       ></generic-table>
     </div>
   </div>
