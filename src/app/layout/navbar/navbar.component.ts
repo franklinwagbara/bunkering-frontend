@@ -1,5 +1,4 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
-import { ROUTES } from '../sidebar/sidebar.component';
 import {
   Location,
   LocationStrategy,
@@ -8,6 +7,70 @@ import {
 import { Router } from '@angular/router';
 import { AuthenticationService, GenericService } from '../../shared/services';
 import { environment } from 'src/environments/environment';
+
+interface RouteInfo {
+  id: number;
+  path: string;
+  title: string;
+  icon: string;
+  class: string;
+}
+
+interface SubRouteInfo extends RouteInfo {
+  routeId: number;
+}
+
+export const ROUTES: RouteInfo[] = [
+  {
+    id: 1,
+    path: '/admin',
+    title: 'Dashboard',
+    icon: 'ni-tv-2 text-primary',
+    class: '',
+  },
+  {
+    id: 2,
+    path: '/admin/staff-desk',
+    title: 'My Desk',
+    icon: 'ni-planet text-info',
+    class: '',
+  },
+  {
+    id: 3,
+    path: '#',
+    title: 'Application(s)',
+    icon: 'ni-pin-3 text-success',
+    class: '',
+  },
+  {
+    id: 4,
+    path: '/admin/settings',
+    title: 'Settings',
+    icon: 'fa fa-cog text-default',
+    class: '',
+  },
+  {
+    id: 5,
+    path: '/tables',
+    title: 'Tables',
+    icon: 'ni-bullet-list-67 text-red',
+    class: '',
+  },
+  {
+    id: 6,
+    path: '/login',
+    title: 'Login',
+    icon: 'ni-key-25 text-info',
+    class: '',
+  },
+  {
+    id: 7,
+    path: '/register',
+    title: 'Register',
+    icon: 'ni-circle-08 text-pink',
+    class: '',
+  },
+];
 
 @Component({
   selector: 'app-navbar',

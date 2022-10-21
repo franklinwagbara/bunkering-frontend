@@ -84,6 +84,32 @@ export const SUBROUTES: SubRouteInfo[] = [
   },
 ];
 
+// interface SubRouteInfo {
+//   id: number;
+//   title: string;
+//   url: string;
+// }
+
+// interface RouteInfo {
+//   id: number;
+//   title: string;
+//   active: boolean;
+//   subRoutes: SubRouteInfo[];
+// }
+
+// const ROUTES: RouteInfo[] = [
+//   {
+//     id: 1,
+//     title: 'DASHBOARD',
+//     active: true,
+//     subRoutes: [
+//       {
+
+//       }
+//     ]
+//   }
+// ]
+
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
