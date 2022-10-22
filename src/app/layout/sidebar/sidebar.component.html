@@ -87,12 +87,20 @@
     <app-nav-item
       [title]="'DASHBOARD'"
       [sub-items]=""
+      [icon-name_svg]=""
+      [icon-id_svg]=""
+      [icon-color]=""
       [active]="true"
+      (onActive)="setActiveNavItem('DASHBOARD')"
     ></app-nav-item>
     <app-nav-item
       [title]="'APPLICATIONS'"
       [sub-items]=""
+      [icon-name_svg]=""
+      [icon-id_svg]=""
+      [icon-color]=""
       [active]="true"
+      (onActive)="setActiveNavItem('APPLICATIONS')"
     ></app-nav-item>
 
     <!-- <div

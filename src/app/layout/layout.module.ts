@@ -13,6 +13,7 @@ import { InspectorLayoutComponent } from './sidebar/inspector-layout/inspector-l
 import { SuperadminLayoutComponent } from './sidebar/superadmin-layout/superadmin-layout.component';
 import { NavItemComponent } from './nav-item/nav-item.component';
 import { TopNavComponent } from './top-nav/top-nav.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { TopNavComponent } from './top-nav/top-nav.component';
     ReactiveFormsModule,
     NgbModule,
     SharedModule,
+    MatIconModule,
   ],
   exports: [
     AdminLayoutComponent,
