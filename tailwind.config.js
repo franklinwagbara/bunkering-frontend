@@ -12,7 +12,7 @@ module.exports = {
       },
 
       height: {
-        card_area: "35rem",
+        card_area: "23.5rem",
         card_area_lg: "60rem",
       },
 

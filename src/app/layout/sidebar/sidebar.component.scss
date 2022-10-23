@@ -104,8 +104,7 @@
 
 /** Side nav css */
 .side-nav {
-  min-height: 100%;
-  @apply bg-primary w-full sm:w-side_nav pt-9;
+  @apply bg-primary w-full sm:w-side_nav pt-9 min-h-full;
 }
 
 .logo-title {

@@ -6,7 +6,7 @@ import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
   styleUrls: ['./admin-layout.component.css'],
 })
 export class AdminLayoutComponent implements OnInit {
-  public isCollapse: boolean = true;
+  public isCollapse: boolean = false;
 
   constructor() {}
 

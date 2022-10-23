@@ -84,16 +84,20 @@ import { Router } from '@angular/router';
 //   },
 // ];
 
-interface SubRouteInfo {
+export interface SubRouteInfo {
   id: number;
   title: string;
   url: string;
 }
 
-interface RouteInfo {
+export interface RouteInfo {
   id: number;
   title: string;
   active: boolean;
+  subMenuActive: boolean;
+  iconName: string;
+  iconId: string;
+  iconColor: string;
   subRoutes: SubRouteInfo[];
 }
 
@@ -101,12 +105,125 @@ const ROUTES: RouteInfo[] = [
   {
     id: 1,
     title: 'DASHBOARD',
+    iconName: 'home',
+    iconId: 'Outline',
+    iconColor: 'yellow',
     active: true,
+    subMenuActive: false,
+
     subRoutes: [
       {
         id: 1,
-        title: 'My Desk',
-        url: '',
+        title: 'MY DESK',
+        url: '/admin',
+      },
+      {
+        id: 2,
+        title: 'STAFF DESK',
+        url: '/admin/staff-desk',
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: 'APPLICATIONS',
+    iconName: 'apps',
+    iconId: 'Outline',
+    iconColor: 'red',
+    active: false,
+    subMenuActive: false,
+
+    subRoutes: [
+      {
+        id: 1,
+        title: 'ALL APPLICATIONS',
+        url: '#',
+      },
+    ],
+  },
+  {
+    id: 3,
+    title: 'PAYMENTS',
+    iconName: 'money-bill-wave',
+    iconId: 'Layer_1',
+    iconColor: 'green',
+    active: false,
+    subMenuActive: false,
+
+    subRoutes: [
+      {
+        id: 1,
+        title: 'ALL PAYMENTS',
+        url: '#',
+      },
+      {
+        id: 2,
+        title: 'EXTRA PAYMENTS',
+        url: '#',
+      },
+    ],
+  },
+  {
+    id: 4,
+    title: 'REPORTS',
+    iconName: 'treatment',
+    iconId: 'Layer_1',
+    iconColor: 'white',
+    active: false,
+    subMenuActive: false,
+
+    subRoutes: [
+      {
+        id: 1,
+        title: 'APPLICATION REPORT',
+        url: '#',
+      },
+      {
+        id: 2,
+        title: 'PERMIT REPORT',
+        url: '#',
+      },
+      {
+        id: 3,
+        title: 'PAYMENT REPORT',
+        url: '#',
+      },
+    ],
+  },
+  {
+    id: 4,
+    title: 'SETTINGS',
+    iconName: 'settings',
+    iconId: 'Layer_1',
+    iconColor: 'white',
+    active: false,
+    subMenuActive: false,
+
+    subRoutes: [
+      {
+        id: 1,
+        title: 'USER SETUP',
+        url: '#',
+      },
+      {
+        id: 2,
+        title: 'MODULE SETTINGS',
+        url: '/admin/settings',
+      },
+      {
+        id: 3,
+        title: 'APPPLICATION STAGE DOCS',
+        url: '#',
+      },
+      {
+        id: 4,
+        title: 'FIELD/ZONAL OFFICES',
+        url: '#',
+      },
+      {
+        id: 5,
+        title: 'BRANCHES SETUP',
+        url: '#',
       },
     ],
   },
@@ -119,9 +236,9 @@ const ROUTES: RouteInfo[] = [
 })
 export class SidebarComponent implements OnInit, OnChanges {
   user: any[];
-  public menuItems: any[];
-  public submenuItems: any[];
-  public isCollapsed = true;
+  public menuItems: RouteInfo[];
+  public submenuItems: SubRouteInfo[];
+  public isCollapsed = false;
   public activeNavItem = 'DASHBOARD';
   public isSubMenuCollapsed = true;
 
@@ -134,15 +251,28 @@ export class SidebarComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.isCollapsed = this.isCollapsedInput;
-    this.menuItems = ROUTES.filter((menuItem) => menuItem);
-    this.router.events.subscribe((event) => {
-      this.isCollapsed = true;
-    });
+    // this.menuItems = ROUTES.filter((menuItem) => menuItem);
+    this.menuItems = [...ROUTES];
+    // this.router.events.subscribe((event) => {
+    //   this.isCollapsed = true;
+    // });
     this.user = JSON.parse(localStorage.getItem('currentUser'));
   }
 
   setActiveNavItem(navItem: string) {
     this.activeNavItem = navItem;
-    this.isSubMenuCollapsed = !this.isSubMenuCollapsed;
+    this.menuItems = this.menuItems.map((menu) => {
+      if (menu.title === navItem) {
+        menu.active = true;
+        menu.subMenuActive = true;
+      } else {
+        menu.active = false;
+        menu.subMenuActive = false;
+      }
+
+      return menu;
+    });
+    this.menuItems = [...this.menuItems];
+    console.log('called', this.menuItems);
   }
 }
