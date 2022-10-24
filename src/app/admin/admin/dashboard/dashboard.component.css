@@ -1,21 +1,53 @@
-.dsh-cards{
-    min-height: 120px; 
-    border-radius: 6px;
-    display: inline-block;
-    min-width: 17rem;;
-    margin-left: 1.8em;
-    padding: 2.0em 1em .5em 2em;
-    box-shadow: 2px 3px  rgb(218, 218, 212);
+.dsh-cards {
+  min-height: 120px;
+  border-radius: 6px;
+  display: inline-block;
+  min-width: 17rem;
+  margin-left: 1.8em;
+  padding: 2em 1em 0.5em 2em;
+  box-shadow: 2px 3px rgb(218, 218, 212);
 }
-.dsh-cards-items{
-    font-size: xx-large;
-    display: block;
-    margin-bottom: 2.0rem;
+.dsh-cards-items {
+  font-size: xx-large;
+  display: block;
+  margin-bottom: 2rem;
 }
-.dsh-items{
-    background-color: white; 
-    min-height: 25rem; 
-    margin: 3.0rem 1.1rem 1.0rem 1.5rem; 
-    border-radius: 5px;
-    padding: 2rem;
+.dsh-items {
+  background-color: white;
+  min-height: 25rem;
+  margin: 3rem 1.1rem 1rem 1.5rem;
+  border-radius: 5px;
+  padding: 2rem;
 }
+
+/** dashboard css*/
+
+.card-area {
+  @apply relative px-10 bg-primary_accent mb-28 h-card_area_lg xl:mb-0 xl:h-card_area grid sm:grid-cols-2 grid-cols-1 md:grid-cols-2  xl:grid-cols-4  gap-1 lg:gap-4 2xl:gap-8 pt-14;
+}
+
+.card {
+  @apply p-5 h-44 bg-white rounded-2xl shadow-md flex flex-col gap-3;
+}
+
+.card-data {
+  @apply flex justify-between;
+}
+
+.card-title {
+  @apply self-end font-bold text-gray-600 text-sm;
+}
+
+.card-data span {
+  @apply text-8xl font-semibold;
+}
+
+.card-data div {
+  @apply flex-1;
+}
+
+.content {
+  @apply relative mx-10 -mt-content_mt bg-white border h-full rounded-3xl p-6 shadow-md;
+}
+
+/** Dashboard css ends here */
