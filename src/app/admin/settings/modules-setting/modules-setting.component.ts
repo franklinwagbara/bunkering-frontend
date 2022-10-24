@@ -71,7 +71,7 @@ export class ModulesSettingComponent implements OnInit {
   }
 
   onAddData(event: Event, type: string) {
-    const operations = {
+    const operationConfiguration = {
       category: {
         data: this.categories,
         form: CategoryFormComponent,
@@ -89,9 +89,9 @@ export class ModulesSettingComponent implements OnInit {
       },
     };
 
-    let dialogRef = this.dialog.open(operations[type].form, {
+    let dialogRef = this.dialog.open(operationConfiguration[type].form, {
       data: {
-        data: operations[type].data,
+        data: operationConfiguration[type].data,
       },
     });
 
@@ -108,7 +108,7 @@ export class ModulesSettingComponent implements OnInit {
     const typeToModelMapper = {
       category: {
         name: 'Category',
-        id: 'moduleId',
+        id: 'id',
       },
       phase: {
         name: 'Phase',
@@ -120,18 +120,25 @@ export class ModulesSettingComponent implements OnInit {
       },
     };
 
-    const listOfDataToDelete = event.selected;
+    const listOfDataToDelete = [...event];
+
+    console.log('list of data delete', listOfDataToDelete, type);
 
     const requests = (listOfDataToDelete as any[]).map((req) => {
       if (type === 'category') {
+        console.log('type', 'category', req[typeToModelMapper[type].id], req);
         return this.adminHttpService.deleteModule(
           req[typeToModelMapper[type].id]
         );
       } else if (type === 'phase') {
+        console.log('type', 'phase');
+
         return this.adminHttpService.deletePhase(
           req[typeToModelMapper[type].id]
         );
       } else {
+        console.log('type', 'phase');
+
         return this.adminHttpService.deletePermitStage(
           req[typeToModelMapper[type].id]
         );
@@ -156,6 +163,14 @@ export class ModulesSettingComponent implements OnInit {
           if (type === 'category') this.categories = responses[0];
           else if (type === 'phase') this.phases = responses[0];
           else if (type === 'permitStage') this.permitStages = responses[0];
+
+          console.log(
+            'in coming',
+            responses,
+            this.categories,
+            this.phases,
+            this.permitStages
+          );
         }
       },
       error: (error) => {
@@ -164,6 +179,10 @@ export class ModulesSettingComponent implements OnInit {
         });
       },
     });
+  }
+
+  onEditData(event: Event, type: string) {
+    console.log('on edit', event, type);
   }
 
   ngOnInit(): void {

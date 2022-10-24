@@ -33,6 +33,7 @@ const PAGESIZE = 10;
   styleUrls: ['./table.component.css'],
 })
 export class TableComponent implements OnInit, OnChanges, AfterViewInit {
+  @Input('title-color') titleColorProp?: string = 'slate';
   @Input('noControls') noControls?: boolean = false;
   @Input('noFilter') noFilter?: boolean = false;
   @Input('noAddOrDeleteButton') noAddOrDeleteButton?: boolean = false;
@@ -46,10 +47,13 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit {
   @Input('table_content') items: any[] = [];
   @Output('onAddData') onAddData = new EventEmitter<any>();
   @Output('onDeleteData') onDeleteData = new EventEmitter<any>();
+  @Output('onEditData') onEditData = new EventEmitter<any>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('tableControls') tableControlsDiv: ElementRef;
+
+  public titleColor: string = 'slate';
 
   public divFlexDirection: string = 'column';
 
@@ -109,13 +113,14 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   deleteData() {
-    this.onDeleteData.emit(this.selection);
+    // console.log('Selection', this.selection, this.dataSource.data, this.items);
+    this.onDeleteData.emit(this.selection.selected);
     this.toggleAllRows();
     this.toggleAllRows();
   }
 
   editData(row) {
-    console.log('row', row);
+    this.onEditData.emit(row);
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
@@ -146,6 +151,9 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    this.titleColor = this.titleColorProp ? this.titleColorProp : 'slate';
+    this.titleColor = `table-title ${this.titleColor}`;
+
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }

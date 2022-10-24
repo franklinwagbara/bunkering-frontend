@@ -1,12 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 html,
 body {
-  height: 100%;
-}
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .collapsible-header {
@@ -42,4 +40,16 @@ button:disabled {
 .error {
   background-color: #d53343;
   color: rgb(255, 255, 255);
+}
+
+.hidden {
+  @apply invisible opacity-0 transition-all ease-in-out delay-75 duration-300;
+}
+
+.block {
+  @apply visible opacity-100 transition-all ease-in-out delay-1000 duration-1000;
+}
+
+.page-title {
+  @apply text-center py-6 mb-6 shadow-lg;
 }
