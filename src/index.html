@@ -37,33 +37,35 @@
     <app-root></app-root>
   </body>
   <script type="text/javascript">
-    $(document).ready(function () {
-      $(document).on("click", ".nav-item", function (e) {
-        e.preventDefault();
-        var cl = $(this);
-        var wasActive = $(this)
-          .children(".nav-item-link")
-          .hasClass("active-body");
-        $(".nav-item").each(function () {
-          if ($(this).children(".nav-item-link").hasClass("active-body")) {
-            $(this)
+        $(document).ready(function () {
+          $(document).on("click", ".nav-item", function (e) {
+            e.preventDefault();
+            var cl = $(this);
+            var wasActive = $(this)
               .children(".nav-item-link")
-              .removeClass("active-body")
-              .addClass("collapsible-body");
-          }
-          //debugger;
+              .hasClass("active-body");
+            $(".nav-item").each(function () {
+              if ($(this).children(".nav-item-link").hasClass("active-body")) {
+                $(this)
+                  .children(".nav-item-link")
+                  .removeClass("active-body")
+                  .addClass("collapsible-body");
+              }
+              //debugger;
+            });
+
+        $('.staffname').select2({
+          placeholder : 'Search for staff by name or email'
         });
 
-        if (wasActive == false) {
-          cl.children(".nav-item-link")
-            .removeClass("collapsible-body")
-            .addClass("active-body");
-        }
-      });
+        $('#compDocIds').select2({
+          placeholder : 'Search documents',
+          dropdownParent: $('#compDocIds')
+        });
 
-      $(".staffname").select2({
-        placeholder: "Search for staff by name or email",
-      });
+        $('#facDocIds').select2({
+          placeholder : 'Search documents'
+        });
     });
   </script>
 </html>
