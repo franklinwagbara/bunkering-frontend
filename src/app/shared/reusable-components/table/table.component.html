@@ -1,6 +1,8 @@
 <ng-container>
   <div class="table-container mat-elevation-z8">
-    <div class="table-title">{{ title }}</div>
+    <div [class]="titleColor">
+      {{ title | uppercase }}
+    </div>
     <div
       class="table-controls table-group"
       #tableControls

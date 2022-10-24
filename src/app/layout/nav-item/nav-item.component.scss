@@ -72,3 +72,9 @@ a {
   @apply visible opacity-100 transition-all ease-in-out delay-500 duration-1000;
 }
 /**Toggle nav sub menu css ends here */
+
+.active-sub-menu-item {
+  background-color: rgb(161, 150, 29) !important;
+  color: white;
+  font-weight: bold !important;
+}

@@ -49,3 +49,7 @@ button:disabled {
 .block {
   @apply visible opacity-100 transition-all ease-in-out delay-1000 duration-1000;
 }
+
+.page-title {
+  @apply text-center py-6 mb-6 shadow-lg;
+}

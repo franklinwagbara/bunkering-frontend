@@ -20,7 +20,7 @@ export class NavItemComponent implements OnInit, OnChanges {
   public isSidebarCollapsed = false;
   public active = false;
   public isSubMenuActive = false;
-  public activeSubMenuItem = '';
+  public activeSubMenuItem: number = -1;
   public title = '';
   public subItems = null;
   public iconN = 'assets/svgs/apps.svg#$Outline';
@@ -65,6 +65,11 @@ export class NavItemComponent implements OnInit, OnChanges {
 
   setActiveNavItem(navItem: string) {
     this.isSubMenuActive = !this.isSubMenuActive;
+    this.activeSubMenuItem = -1;
     this.onActive.emit(this.title);
+  }
+
+  setActiveSubNavItem(id: number) {
+    this.activeSubMenuItem = id;
   }
 }

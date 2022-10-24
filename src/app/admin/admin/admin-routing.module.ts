@@ -9,6 +9,7 @@ import { ApplicationComponent } from '../application/application.component';
 import { AllStaffComponent } from '../settings/all-staff/all-staff.component';
 import { ModulesSettingComponent } from '../settings/modules-setting/modules-setting.component';
 import { FieldZonalOfficeComponent } from '../settings/field-zonal-office/field-zonal-office.component';
+import { AppStageDocsComponent } from '../settings/app-stage-docs/app-stage-docs.component';
 
 const routes: Routes = [
   { path: '', component: AdminComponent },
@@ -18,12 +19,12 @@ const routes: Routes = [
   { path: 'application', component: ApplicationComponent },
   { path: 'all-staff', component: AllStaffComponent },
   { path: 'modules-setting', component: ModulesSettingComponent },
-  { path: 'field-zone-office', component: FieldZonalOfficeComponent }
-  
+  { path: 'application-stage-docs', component: ModulesSettingComponent },
+  { path: 'field-zone-office', component: AppStageDocsComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AdminRoutingModule { }
+export class AdminRoutingModule {}

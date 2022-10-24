@@ -17,11 +17,15 @@
 }
 
 .account-info {
-  @apply font-bold;
+  @apply py-6 leading-tight;
+}
+
+h4 {
+  @apply font-bold text-lg flex flex-col my-0;
 }
 
 .account-info h5 {
-  @apply text-gray-500;
+  @apply text-gray-500 text-sm;
 }
 
 .logout {

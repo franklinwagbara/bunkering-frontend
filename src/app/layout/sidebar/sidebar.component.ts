@@ -9,81 +9,6 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 
-// interface RouteInfo {
-//   id: number;
-//   path: string;
-//   title: string;
-//   icon: string;
-//   class: string;
-// }
-
-// interface SubRouteInfo extends RouteInfo {
-//   routeId: number;
-// }
-
-// export const ROUTES: RouteInfo[] = [
-//   {
-//     id: 1,
-//     path: '/admin',
-//     title: 'Dashboard',
-//     icon: 'ni-tv-2 text-primary',
-//     class: '',
-//   },
-//   {
-//     id: 2,
-//     path: '/admin/staff-desk',
-//     title: 'My Desk',
-//     icon: 'ni-planet text-info',
-//     class: '',
-//   },
-//   {
-//     id: 3,
-//     path: '#',
-//     title: 'Application(s)',
-//     icon: 'ni-pin-3 text-success',
-//     class: '',
-//   },
-//   {
-//     id: 4,
-//     path: '/admin/settings',
-//     title: 'Settings',
-//     icon: 'fa fa-cog text-default',
-//     class: '',
-//   },
-//   {
-//     id: 5,
-//     path: '/tables',
-//     title: 'Tables',
-//     icon: 'ni-bullet-list-67 text-red',
-//     class: '',
-//   },
-//   {
-//     id: 6,
-//     path: '/login',
-//     title: 'Login',
-//     icon: 'ni-key-25 text-info',
-//     class: '',
-//   },
-//   {
-//     id: 7,
-//     path: '/register',
-//     title: 'Register',
-//     icon: 'ni-circle-08 text-pink',
-//     class: '',
-//   },
-// ];
-
-// export const SUBROUTES: SubRouteInfo[] = [
-//   {
-//     id: 1,
-//     routeId: 3,
-//     path: '/admin/application',
-//     title: 'Application(s)',
-//     icon: 'ni-pin-3 text-primary',
-//     class: '',
-//   },
-// ];
-
 export interface SubRouteInfo {
   id: number;
   title: string;
@@ -137,7 +62,7 @@ const ROUTES: RouteInfo[] = [
       {
         id: 1,
         title: 'ALL APPLICATIONS',
-        url: '#',
+        url: '/admin/application',
       },
     ],
   },
@@ -203,27 +128,27 @@ const ROUTES: RouteInfo[] = [
       {
         id: 1,
         title: 'USER SETUP',
-        url: '#',
+        url: '/admin/all-staff',
       },
       {
         id: 2,
         title: 'MODULE SETTINGS',
-        url: '/admin/settings',
+        url: '/admin/modules-setting',
       },
       {
         id: 3,
         title: 'APPPLICATION STAGE DOCS',
-        url: '#',
+        url: '/admin/application-stage-docs',
       },
       {
         id: 4,
         title: 'FIELD/ZONAL OFFICES',
-        url: '#',
+        url: '/admin/field-zone-office',
       },
       {
         id: 5,
         title: 'BRANCHES SETUP',
-        url: '#',
+        url: '/admin/field-zone-office',
       },
     ],
   },
@@ -251,11 +176,7 @@ export class SidebarComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.isCollapsed = this.isCollapsedInput;
-    // this.menuItems = ROUTES.filter((menuItem) => menuItem);
     this.menuItems = [...ROUTES];
-    // this.router.events.subscribe((event) => {
-    //   this.isCollapsed = true;
-    // });
     this.user = JSON.parse(localStorage.getItem('currentUser'));
   }
 

@@ -33,6 +33,7 @@ const PAGESIZE = 10;
   styleUrls: ['./table.component.css'],
 })
 export class TableComponent implements OnInit, OnChanges, AfterViewInit {
+  @Input('title-color') titleColorProp?: string = 'slate';
   @Input('noControls') noControls?: boolean = false;
   @Input('noFilter') noFilter?: boolean = false;
   @Input('noAddOrDeleteButton') noAddOrDeleteButton?: boolean = false;
@@ -51,6 +52,8 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('tableControls') tableControlsDiv: ElementRef;
+
+  public titleColor: string = 'slate';
 
   public divFlexDirection: string = 'column';
 
@@ -148,6 +151,9 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    this.titleColor = this.titleColorProp ? this.titleColorProp : 'slate';
+    this.titleColor = `table-title ${this.titleColor}`;
+
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
