@@ -19,6 +19,7 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { SharedModule } from '../shared/shared.module';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { AppStageDocsComponent } from './settings/app-stage-docs/app-stage-docs.component';
+import { ProgressBarService } from '../shared/services/progress-bar.service';
 
 @NgModule({
   declarations: [

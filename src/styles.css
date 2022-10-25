@@ -51,5 +51,19 @@ button:disabled {
 }
 
 .page-title {
-  @apply text-center py-6 mb-6 shadow-lg;
+  @apply text-center py-6 mb-6 shadow-2xl;
+}
+
+.setting-desk {
+  background-color: rgb(255, 255, 255);
+  min-height: fit-content;
+  padding: 2rem;
+  border-radius: 5px;
+  margin: 0 1.5rem 0 1.5rem;
+}
+
+.table-wrapper {
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
 }

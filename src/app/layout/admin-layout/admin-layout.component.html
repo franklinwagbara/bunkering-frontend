@@ -20,16 +20,18 @@
   </div>
 </div> -->
 
-<div class="grid md:grid-cols-[20rem_auto] min-h-screen">
+<!-- <div class="grid md:grid-cols-[20rem_auto] min-h-screen"> -->
+<div class="flex flex-row">
   <app-sidebar [isCollapsed]="isCollapse"></app-sidebar>
   <div
-    class="dashboard"
+    class="dashboard overflow-hidden"
     [ngClass]="{
       'collapse-dashboard': isCollapse,
       'unCollapse-dashboard': !isCollapse
     }"
   >
     <app-top-nav (onMenuOpen)="onMenuOpen($event)"></app-top-nav>
+    <progress-bar></progress-bar>
     <router-outlet></router-outlet>
   </div>
 </div>

@@ -14,6 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { AdminService } from '../../services/admin.service';
 import { AppException } from '../../exceptions/AppException';
+import { ProgressBarService } from '../../services/progress-bar.service';
 
 @Component({
   selector: 'app-stage-form',
@@ -31,12 +32,11 @@ export class StageFormComponent {
     private snackBar: MatSnackBar,
     private adminService: AdminService,
     private formBuilder: FormBuilder,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private progressBar: ProgressBarService
   ) {
     this.phases = data.data.phases;
     this.permitStage = data.data.permitStages;
-
-    console.log('checking', this.phases, this.permitStage);
 
     this.form = this.formBuilder.group({
       code: ['', Validators.required],
@@ -54,6 +54,8 @@ export class StageFormComponent {
   }
 
   createPermitStage() {
+    this.progressBar.open();
+
     this.adminService.createPermitStage(this.form.value).subscribe({
       next: (res) => {
         if (res.success) {
@@ -62,11 +64,15 @@ export class StageFormComponent {
           });
           this.dialogRef.close();
         }
+
+        this.progressBar.close();
       },
       error: (error: AppException) => {
         this.snackBar.open(error.message, null, {
           panelClass: ['error'],
         });
+
+        this.progressBar.close();
       },
     });
   }

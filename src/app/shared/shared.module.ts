@@ -22,6 +22,8 @@ import { CategoryFormComponent } from './reusable-components/category-form/categ
 import { StageFormComponent } from './reusable-components/stage-form/stage-form.component';
 import { ProgressBarComponent } from './reusable-components/progress-bar/progress-bar.component';
 import { PermitStageFormComponent } from './reusable-components/permit-stage-form/permit-stage-form.component';
+import { PermitStageDocFormComponent } from './reusable-components/permit-stage-doc-form/permit-stage-doc-form.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import { PermitStageFormComponent } from './reusable-components/permit-stage-for
     StageFormComponent,
     ProgressBarComponent,
     PermitStageFormComponent,
+    PermitStageDocFormComponent,
   ],
   imports: [
     CommonModule,
@@ -47,6 +50,7 @@ import { PermitStageFormComponent } from './reusable-components/permit-stage-for
     MatDialogModule,
     MatSnackBarModule,
     MatProgressBarModule,
+    NgMultiSelectDropDownModule.forRoot(),
   ],
   providers: [
     { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2500 } },

@@ -47,7 +47,7 @@
 }
 
 .content {
-  @apply relative mx-10 -mt-content_mt bg-white border h-full rounded-3xl p-6 shadow-md;
+  @apply relative mx-10 -mt-content_mt bg-white border h-[1000px] rounded-3xl p-6 shadow-md;
 }
 
 /** Dashboard css ends here */

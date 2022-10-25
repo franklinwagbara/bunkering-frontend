@@ -188,6 +188,41 @@ export class AdminService {
       .pipe(retry(this.num));
   }
 
+  createStageDocs(model: any) {
+    return this.http
+      .post<any>(
+        `${environment.apiUrl}/configuration/post-permit-stage-docs`,
+        model
+      )
+      .pipe(retry(this.num));
+  }
+
+  getAllDocs() {
+    return this.http
+      .get<any>(`${environment.apiUrl}/configuration/get-all-docs`)
+      .pipe(retry(this.num));
+  }
+
+  getAllPermitStageDocs() {
+    return this.http
+      .get<any>(`${environment.apiUrl}/configuration/get-permit-stage-docs`)
+      .pipe(retry(this.num));
+  }
+
+  deletePermitStageDocs(model) {
+    return this.http
+      .delete(`${environment.apiUrl}/configuration/route not defined yet`)
+      .pipe(retry(this.num));
+  }
+
+  getAppTypes() {
+    return this.http
+      .get<any>(
+        `${environment.apiUrl}/configuration/app type route not defined yet`
+      )
+      .pipe(retry(this.num));
+  }
+
   getOffices() {
     return this.http
       .get<any>(`${environment.apiUrl}/configuration/field-offices`)

@@ -1,4 +1,5 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ProgressBarService } from 'src/app/shared/services/progress-bar.service';
 
 @Component({
   selector: 'app-admin-layout',
@@ -8,7 +9,7 @@ import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 export class AdminLayoutComponent implements OnInit {
   public isCollapse: boolean = false;
 
-  constructor() {}
+  constructor(progressBarServe: ProgressBarService) {}
 
   ngOnInit(): void {}
 

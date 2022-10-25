@@ -11,10 +11,10 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppException } from '../../exceptions/AppException';
 import { AdminService } from '../../services/admin.service';
+import { ProgressBarService } from '../../services/progress-bar.service';
 
 @Component({
   selector: 'app-phase-form',
@@ -31,9 +31,9 @@ export class PhaseFormComponent {
     public dialogRef: MatDialogRef<PhaseFormComponent>,
     private snackBar: MatSnackBar,
     private adminService: AdminService,
-    private modalService: NgbModal,
     private formBuilder: FormBuilder,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private progressBar: ProgressBarService
   ) {
     this.categories = data.data.categories;
     this.phases = data.data.phases;
@@ -54,6 +54,7 @@ export class PhaseFormComponent {
   }
 
   createPhase() {
+    this.progressBar.open();
     this.adminService.createPhase(this.form.value).subscribe({
       next: (res) => {
         if (res.success) {
@@ -62,11 +63,14 @@ export class PhaseFormComponent {
           });
           this.dialogRef.close();
         }
+
+        this.progressBar.close();
       },
       error: (error: AppException) => {
         this.snackBar.open(error.message, null, {
           panelClass: ['error'],
         });
+        this.progressBar.close();
       },
     });
   }

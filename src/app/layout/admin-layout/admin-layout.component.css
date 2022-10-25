@@ -1,6 +1,7 @@
 /** Toggle side nav css */
 .dashboard {
-  @apply flex flex-col;
+  width: 100vw;
+  @apply relative flex flex-col min-h-screen;
 }
 
 .collapse-dashboard {

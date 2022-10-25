@@ -11,6 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { AuthenticationService } from '../../services';
+import { ProgressBarService } from '../../services/progress-bar.service';
 
 @Component({
   selector: 'app-category-form',
@@ -28,7 +29,8 @@ export class CategoryFormComponent {
     private auth: AuthenticationService,
     private modalService: NgbModal,
     private formBuilder: FormBuilder,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private progressBar: ProgressBarService
   ) {
     this.categories = data.categories;
 
@@ -44,6 +46,8 @@ export class CategoryFormComponent {
   }
 
   createCategory() {
+    this.progressBar.open();
+
     this.auth.createModule(this.form.value).subscribe({
       next: (res) => {
         if (res.success) {
@@ -52,9 +56,10 @@ export class CategoryFormComponent {
           });
           this.dialogRef.close();
         }
+
+        this.progressBar.close();
       },
       error: (error) => {
-        console.log('error dis');
         this.snackBar.open(
           'Operation failed! Could not create the Category!',
           null,
@@ -62,6 +67,7 @@ export class CategoryFormComponent {
             panelClass: ['error'],
           }
         );
+        this.progressBar.close();
       },
     });
   }
