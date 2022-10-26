@@ -229,6 +229,20 @@ export class AdminService {
       .pipe(retry(this.num));
   }
 
+  createOffice(model) {
+    return this.http
+      .post<any>(`${environment.apiUrl}/configuration/add-field-office`, model)
+      .pipe(retry(this.num));
+  }
+
+  deleteOffice(id: number) {
+    return this.http
+      .delete<any>(
+        `${environment.apiUrl}/configuration/delete field office not defined yet?id=${id}`
+      )
+      .pipe(retry(this.num));
+  }
+
   addFieldOffice(model: any) {
     return this.http
       .post<any>(`${environment.apiUrl}/configuration/add-field-office`, model)

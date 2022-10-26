@@ -24,6 +24,7 @@ import { ProgressBarComponent } from './reusable-components/progress-bar/progres
 import { PermitStageFormComponent } from './reusable-components/permit-stage-form/permit-stage-form.component';
 import { PermitStageDocFormComponent } from './reusable-components/permit-stage-doc-form/permit-stage-doc-form.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { FieldOfficeFormComponent } from './reusable-components/field-office-form/field-office-form.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     ProgressBarComponent,
     PermitStageFormComponent,
     PermitStageDocFormComponent,
+    FieldOfficeFormComponent,
   ],
   imports: [
     CommonModule,
