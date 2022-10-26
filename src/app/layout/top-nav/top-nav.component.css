@@ -4,7 +4,7 @@
 }
 
 .top-nav {
-  width: calc(100vw - 335px);
+  width: calc(100vw - 320px);
   @apply fixed z-50 h-16 shadow-md flex items-center px-10 justify-between backdrop-blur-sm bg-white/30;
 }
 
