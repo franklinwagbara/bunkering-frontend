@@ -4,7 +4,8 @@
 }
 
 .top-nav {
-  @apply h-16 bg-slate-100 flex items-center px-10 justify-between;
+  width: calc(100vw - 335px);
+  @apply fixed z-50 h-16 shadow-md flex items-center px-10 justify-between backdrop-blur-sm bg-white/30;
 }
 
 .avatar img {

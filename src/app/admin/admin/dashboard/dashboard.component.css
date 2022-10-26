@@ -23,7 +23,7 @@
 /** dashboard css*/
 
 .card-area {
-  @apply relative px-10 bg-primary_accent mb-28 h-card_area_lg xl:mb-0 xl:h-card_area grid sm:grid-cols-2 grid-cols-1 md:grid-cols-2  xl:grid-cols-4  gap-1 lg:gap-4 2xl:gap-8 pt-14;
+  @apply relative mt-4 px-10 bg-primary_accent mb-28 h-card_area_lg xl:mb-0 xl:h-card_area grid sm:grid-cols-2 grid-cols-1 md:grid-cols-2  xl:grid-cols-4  gap-1 lg:gap-4 2xl:gap-8 pt-14;
 }
 
 .card {

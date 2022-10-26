@@ -4,8 +4,12 @@
   @apply relative flex flex-col min-h-screen;
 }
 
+.content-area {
+  @apply mt-12;
+}
+
 .collapse-dashboard {
-  margin-left: -220px;
+  /* margin-left: -220px; */
   @apply transition-all ease-in-out delay-150 duration-500;
 }
 

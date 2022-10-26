@@ -158,6 +158,7 @@ export class ModulesSettingComponent implements OnInit {
 
     this.progressBar.open();
 
+    console.log('before');
     forkJoin(requests).subscribe({
       next: (res) => {
         if (res) {
@@ -176,15 +177,16 @@ export class ModulesSettingComponent implements OnInit {
           if (type === 'category') this.categories = responses[0];
           else if (type === 'phase') this.phases = responses[0].allPermits;
           else if (type === 'permitStage') this.permitStages = responses[0];
-
-          this.progressBar.close();
         }
+        this.progressBar.close();
+        console.log('in next');
       },
       error: (error) => {
         this.snackBar.open('Something went wrong while deleting data!', null, {
           panelClass: ['error'],
         });
         this.progressBar.close();
+        console.log('error');
       },
     });
   }
