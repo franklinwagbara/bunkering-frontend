@@ -23,6 +23,8 @@ export class TopNavComponent implements OnInit {
   navToggle() {
     this.menuOpen = !this.menuOpen;
     this.onMenuOpen.emit(this.menuOpen);
+
+    console.log('menuopen', this.menuOpen);
   }
 
   logout() {

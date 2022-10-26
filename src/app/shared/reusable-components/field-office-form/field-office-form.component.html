@@ -15,7 +15,7 @@
       <label>State</label>
       <select name="stateId" formControlName="stateId" class="form-control">
         <option *ngFor="let st of stateList" [ngValue]="st.id">
-          {{ st.name }}
+          {{ st.stateName }}
         </option>
       </select>
       <div

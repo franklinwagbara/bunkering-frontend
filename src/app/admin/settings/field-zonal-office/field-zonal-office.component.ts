@@ -61,7 +61,7 @@ export class FieldZonalOfficeComponent implements OnInit {
     ]).subscribe({
       next: (res) => {
         if (res[0].success) {
-          this.offices = res[0].data.data.allModules;
+          this.offices = res[0].data.data;
         }
 
         if (res[1].success) this.stateList = res[1].data.data;
@@ -94,7 +94,7 @@ export class FieldZonalOfficeComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       this.progressBarService.open();
       this.adminHttpService.getOffices().subscribe((result) => {
-        this.offices = result.data.data.allModules;
+        this.offices = result.data.data;
 
         this.progressBarService.close();
       });
@@ -138,7 +138,7 @@ export class FieldZonalOfficeComponent implements OnInit {
           const responses = res
             .map((r) => r.data.data)
             .sort((a, b) => a.length - b.length);
-          if (type === 'category') this.offices = responses[0];
+          if (type === 'fieldOffices') this.offices = responses[0];
         }
         this.progressBarService.close();
       },
@@ -174,6 +174,6 @@ export class FieldOffice {
 
 export interface State {
   id: number;
-  name: string;
-  description: string;
+  stateName: string;
+  stateCode: string;
 }
