@@ -15,6 +15,5 @@ export class AdminLayoutComponent implements OnInit {
 
   onMenuOpen(open: Event) {
     this.isCollapse = !this.isCollapse;
-    console.log(open);
   }
 }
