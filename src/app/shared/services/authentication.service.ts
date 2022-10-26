@@ -50,9 +50,11 @@ export class AuthenticationService {
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
-    //localStorage.removeItem('iden');
+
     this.currentUserSubject.next(null);
     this.isLoggedIn = false;
+
+    window.location.assign(`${environment.apiUrl}/auth/logout`);
   }
 
   getStaffDashboard() {

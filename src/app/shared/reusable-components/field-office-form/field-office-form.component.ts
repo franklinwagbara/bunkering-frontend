@@ -1,3 +1,5 @@
+import { State } from 'src/app/admin/settings/field-zonal-office/field-zonal-office.component';
+
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
@@ -10,7 +12,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AppException } from '../../exceptions/AppException';
 import { AdminService } from '../../services/admin.service';
 import { ProgressBarService } from '../../services/progress-bar.service';
-import { State } from 'src/app/admin/settings/field-zonal-office/field-zonal-office.component';
 
 @Component({
   selector: 'app-field-office-form',

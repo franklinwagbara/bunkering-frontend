@@ -238,7 +238,7 @@ export class AdminService {
   deleteOffice(id: number) {
     return this.http
       .delete<any>(
-        `${environment.apiUrl}/configuration/delete field office not defined yet?id=${id}`
+        `${environment.apiUrl}/configuration/delete-field-office?id=${id}`
       )
       .pipe(retry(this.num));
   }

@@ -1,3 +1,10 @@
+import { forkJoin } from 'rxjs';
+import { FieldOfficeFormComponent } from 'src/app/shared/reusable-components/field-office-form/field-office-form.component';
+import { AuthenticationService } from 'src/app/shared/services';
+import { AdminService } from 'src/app/shared/services/admin.service';
+import { ApplyService } from 'src/app/shared/services/apply.service';
+import { ProgressBarService } from 'src/app/shared/services/progress-bar.service';
+
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -8,12 +15,6 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { forkJoin } from 'rxjs';
-import { FieldOfficeFormComponent } from 'src/app/shared/reusable-components/field-office-form/field-office-form.component';
-import { AuthenticationService } from 'src/app/shared/services';
-import { AdminService } from 'src/app/shared/services/admin.service';
-import { ApplyService } from 'src/app/shared/services/apply.service';
-import { ProgressBarService } from 'src/app/shared/services/progress-bar.service';
 
 @Component({
   selector: 'app-field-zonal-office',
@@ -75,37 +76,6 @@ export class FieldZonalOfficeComponent implements OnInit {
       },
     });
   }
-
-  // open(content) {
-  //   this.modalService
-  //     .open(content, { ariaLabelledBy: 'modal-basic-title' })
-  //     .result.then(
-  //       (result) => {
-  //         this.closeResult = `Closed with: ${result}`;
-  //       },
-  //       (reason) => {
-  //         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-  //       }
-  //     );
-  // }
-
-  // private getDismissReason(reason: any): string {
-  //   if (reason === ModalDismissReasons.ESC) {
-  //     return 'by pressing ESC';
-  //   } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-  //     return 'by clicking on a backdrop';
-  //   } else {
-  //     return `with: ${reason}`;
-  //   }
-  // }
-
-  // addFieldOffice() {
-  //   this.auth.addFieldOffice(this.form.value).subscribe((result) => {
-  //     if (result.success) {
-  //       this.offices = result.data.data.offices.map((cat) => cat);
-  //     }
-  //   });
-  // }
 
   onAddData(event: Event, type: string) {
     const operationConfiguration = {

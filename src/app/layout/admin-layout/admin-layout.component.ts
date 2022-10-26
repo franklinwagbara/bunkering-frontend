@@ -9,7 +9,7 @@ import { ProgressBarService } from 'src/app/shared/services/progress-bar.service
 export class AdminLayoutComponent implements OnInit {
   public isCollapse: boolean = false;
 
-  constructor(progressBarServe: ProgressBarService) {}
+  constructor() {}
 
   ngOnInit(): void {}
 
