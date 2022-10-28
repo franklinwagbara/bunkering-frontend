@@ -81,7 +81,7 @@ export class NavbarComponent implements OnInit {
   public focus;
   public listTitles: any[];
   public location: Location;
-  public user: any;
+  public user: LoginModel;
   generic: GenericService;
 
   constructor(
