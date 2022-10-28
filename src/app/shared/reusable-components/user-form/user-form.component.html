@@ -1,0 +1,172 @@
+<h1 mat-dialog-title>Add New Permit Stage Document</h1>
+<div mat-dialog-content class="w-[1000px] h-screen">
+  <form [formGroup]="form" (ngSubmit)="createUser()">
+    <div class="fomr-group" style="margin-bottom: 10px">
+      <label>User Information from ELPS</label>
+      <ng-multiselect-dropdown
+        [placeholder]="'Select User'"
+        [settings]="usersDropdownSettings"
+        [data]="usersFromElps"
+        formControlName="elpsId"
+        (onSelect)="onItemSelect($event)"
+        (onSelectAll)="onSelectAll($event)"
+      >
+      </ng-multiselect-dropdown>
+    </div>
+    <div class="fomr-group" style="margin-bottom: 10px">
+      <label>First Name</label>
+      <input
+        name="firstName"
+        formControlName="firstName"
+        class="form-control"
+        [attr.disabled]="true"
+      />
+      <div
+        *ngIf="form.get('firstName')?.touched && form.get('firstName')?.invalid"
+        class="alert alert-danger"
+      >
+        First Name is required!
+      </div>
+    </div>
+
+    <div class="fomr-group" style="margin-bottom: 10px">
+      <label>Last Name</label>
+      <input
+        name="lastName"
+        formControlName="lastName"
+        class="form-control"
+        [attr.disabled]="true"
+      />
+      <div
+        *ngIf="form.get('lastName')?.touched && form.get('lastName')?.invalid"
+        class="alert alert-danger"
+      >
+        Last Name is required!
+      </div>
+    </div>
+
+    <div class="fomr-group" style="margin-bottom: 10px">
+      <label>Email</label>
+      <input
+        name="email"
+        formControlName="email"
+        class="form-control"
+        [attr.disabled]="true"
+      />
+      <div
+        *ngIf="form.get('email')?.touched && form.get('email')?.invalid"
+        class="alert alert-danger"
+      >
+        Email is required!
+      </div>
+    </div>
+
+    <div class="fomr-group" style="margin-bottom: 10px">
+      <label>Phone Number</label>
+      <input
+        name="phoneNo"
+        formControlName="phoneNo"
+        class="form-control"
+        [attr.disabled]="true"
+      />
+      <div
+        *ngIf="form.get('phoneNo')?.touched && form.get('phoneNo')?.invalid"
+        class="alert alert-danger"
+      >
+        Phone Number is required!
+      </div>
+    </div>
+
+    <div class="fomr-group" style="margin-bottom: 10px">
+      <label>User Type</label>
+      <input
+        name="userType"
+        formControlName="userType"
+        class="form-control"
+        [attr.disabled]="true"
+      />
+      <div
+        *ngIf="form.get('userType')?.touched && form.get('userType')?.invalid"
+        class="alert alert-danger"
+      >
+        User Type is required!
+      </div>
+    </div>
+
+    <div class="fomr-group" style="margin-bottom: 10px">
+      <label>User Role</label>
+      <select name="role" formControlName="role" class="form-control">
+        <option *ngFor="let ut of roles" [ngValue]="ut.name">
+          {{ ut.name }}
+        </option>
+      </select>
+      <div
+        *ngIf="form.get('role')?.touched && form.get('role')?.invalid"
+        class="alert alert-danger"
+      >
+        User role is required!
+      </div>
+    </div>
+
+    <div class="fomr-group" style="margin-bottom: 10px">
+      <label>Branch</label>
+      <select name="branchId" formControlName="branchId" class="form-control">
+        <option *ngFor="let br of branches" [ngValue]="br.id">
+          {{ br.name }}
+        </option>
+      </select>
+      <div
+        *ngIf="form.get('branchId')?.touched && form.get('officeId')?.invalid"
+        class="alert alert-danger"
+      >
+        Branch is required!
+      </div>
+    </div>
+
+    <div class="fomr-group" style="margin-bottom: 10px">
+      <label>Office</label>
+      <select name="officeId" formControlName="officeId" class="form-control">
+        <option *ngFor="let ut of offices" [ngValue]="ut.id">
+          {{ ut.name }}
+        </option>
+      </select>
+      <div
+        *ngIf="form.get('officeId')?.touched && form.get('officeId')?.invalid"
+        class="alert alert-danger"
+      >
+        Office is required!
+      </div>
+    </div>
+
+    <div class="fomr-group" style="margin-bottom: 10px">
+      <label>
+        <input name="status" formControlName="status" type="checkbox" />
+        Active?
+      </label>
+    </div>
+
+    <div class="mb-3">
+      <label for="formFile" class="form-label">Upload Signature Image</label>
+      <input
+        (change)="onFileChange($event)"
+        formControlName="signatureImage"
+        accept="image/*"
+        class="form-control"
+        type="file"
+        id="formFile"
+      />
+      <div
+        *ngIf="form.get('file')?.touched && form.get('file')?.invalid"
+        class="alert alert-danger"
+      >
+        Signature image is required!
+      </div>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="onClose()">Close</button>
+  <button mat-raised-button (click)="createUser()" [disabled]="form.invalid">
+    Create
+  </button>
+</div>

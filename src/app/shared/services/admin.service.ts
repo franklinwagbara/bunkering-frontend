@@ -55,6 +55,12 @@ export class AdminService {
     this.isLoggedIn = false;
   }
 
+  createStaff(model) {
+    return this.http
+      .post<any>(`${environment.apiUrl}/account/add-staff`, model)
+      .pipe(retry(this.num));
+  }
+
   getStaffDashboard() {
     return this.http
       .get<any>(`${environment.apiUrl}/admin/staff-dashboard`, {})
@@ -86,6 +92,12 @@ export class AdminService {
           return res;
         })
       );
+  }
+
+  deleteStaff(id: number) {
+    return this.http
+      .delete<any>(`${environment.apiUrl}/account/deactivate-staff?id={id}`)
+      .pipe(retry(this.num));
   }
 
   getElpsStaffList() {
@@ -143,6 +155,15 @@ export class AdminService {
     return this.http
       .delete<any>(
         `${environment.apiUrl}/configuration/delete-module-configuration?id=${moduleId}`
+      )
+      .pipe(retry(this.num));
+  }
+
+  editModule(model) {
+    return this.http
+      .put<any>(
+        `${environment.apiUrl}/configuration/update-module?id=${model.id}`,
+        model
       )
       .pipe(retry(this.num));
   }
@@ -209,9 +230,11 @@ export class AdminService {
       .pipe(retry(this.num));
   }
 
-  deletePermitStageDocs(model) {
+  deletePermitStageDocs(id: number) {
     return this.http
-      .delete(`${environment.apiUrl}/configuration/route not defined yet`)
+      .delete(
+        `${environment.apiUrl}/configuration/delete-permit-stage-doc-by-id?id=${id}`
+      )
       .pipe(retry(this.num));
   }
 
@@ -246,6 +269,24 @@ export class AdminService {
   addFieldOffice(model: any) {
     return this.http
       .post<any>(`${environment.apiUrl}/configuration/add-field-office`, model)
+      .pipe(retry(this.num));
+  }
+
+  getBranches() {
+    return this.http
+      .get<any>(`${environment.apiUrl}/configuration/branches`)
+      .pipe(retry(this.num));
+  }
+
+  createBranch(model) {
+    return this.http
+      .post<any>(`${environment.apiUrl}/configuration/add-branch`, model)
+      .pipe(retry(this.num));
+  }
+
+  deleteBranch(id: number) {
+    return this.http
+      .delete<any>(`${environment.apiUrl}/configuration/delete-branch?id=${id}`)
       .pipe(retry(this.num));
   }
 

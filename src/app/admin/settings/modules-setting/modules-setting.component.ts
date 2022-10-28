@@ -24,7 +24,6 @@ export class ModulesSettingComponent implements OnInit {
   phases: Phase[];
   permitStages: PermitStage[];
   closeResult: string;
-  form: FormGroup;
 
   categoryTableKeysMappedToHeaders = {
     code: 'Code',
@@ -56,21 +55,9 @@ export class ModulesSettingComponent implements OnInit {
   constructor(
     public snackBar: MatSnackBar,
     private adminHttpService: AdminService,
-    private formBuilder: FormBuilder,
     public dialog: MatDialog,
     private progressBar: ProgressBarService
-  ) {
-    this.form = this.formBuilder.group({
-      Name: ['', Validators.required],
-      ShortName: ['', Validators.required],
-      Code: ['', Validators.required],
-      Description: ['', Validators.required],
-      CategoryId: ['', Validators.required, Validators.pattern(/^\d+$/)],
-      Sort: ['', Validators.required],
-      Fee: ['', Validators.required],
-      ServiceCharge: ['', Validators.required],
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
     this.progressBar.open();
@@ -158,7 +145,6 @@ export class ModulesSettingComponent implements OnInit {
 
     this.progressBar.open();
 
-    console.log('before');
     forkJoin(requests).subscribe({
       next: (res) => {
         if (res) {
@@ -179,20 +165,57 @@ export class ModulesSettingComponent implements OnInit {
           else if (type === 'permitStage') this.permitStages = responses[0];
         }
         this.progressBar.close();
-        console.log('in next');
       },
       error: (error) => {
         this.snackBar.open('Something went wrong while deleting data!', null, {
           panelClass: ['error'],
         });
         this.progressBar.close();
-        console.log('error');
       },
     });
   }
 
   onEditData(event: Event, type: string) {
-    console.log('on edit', event, type);
+    const operationConfiguration = {
+      category: {
+        data: { categories: this.categories, currentValue: event },
+        form: CategoryFormComponent,
+      },
+      phase: {
+        data: {
+          currentValue: event,
+          categories: this.categories,
+          phases: this.phases,
+        },
+        form: PhaseFormComponent,
+      },
+      permitStages: {
+        data: {
+          currentValue: event,
+          permitStages: this.permitStages,
+          phases: this.phases,
+        },
+        form: StageFormComponent,
+      },
+    };
+
+    let dialogRef = this.dialog.open(operationConfiguration[type].form, {
+      data: {
+        data: operationConfiguration[type].data,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((res) => {
+      this.progressBar.open();
+
+      this.adminHttpService.getPhaseCategories().subscribe((res) => {
+        this.categories = res.data.data.allModules;
+        this.phases = res.data.data.allPermits;
+        this.permitStages = res.data.data.permitStages;
+
+        this.progressBar.close();
+      });
+    });
   }
 }
 

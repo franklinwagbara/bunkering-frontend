@@ -49,17 +49,7 @@ export class AppStageDocsComponent implements OnInit {
     public snackBar: MatSnackBar,
     public dialog: MatDialog,
     public progressBarService: ProgressBarService
-  ) {
-    this.form = this.formBuilder.group({
-      phaseStageId: ['', Validators.required],
-      appTypeId: ['', Validators.required],
-      docId: ['', Validators.required],
-      docType: ['', Validators.required],
-      isMandatory: ['', Validators.required],
-
-      sortId: ['', Validators.required],
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
     this.progressBarService.open();
@@ -97,7 +87,7 @@ export class AppStageDocsComponent implements OnInit {
 
   onAddData(event: Event, type: string) {
     const operationsConfiguration = {
-      permitStageDoc: {
+      permitStageDocument: {
         data: {
           categories: this.categories,
           phases: this.phases,

@@ -11,6 +11,7 @@ import { ModulesSettingComponent } from '../settings/modules-setting/modules-set
 import { FieldZonalOfficeComponent } from '../settings/field-zonal-office/field-zonal-office.component';
 import { AppStageDocsComponent } from '../settings/app-stage-docs/app-stage-docs.component';
 import { PhasedocumentsComponent } from '../settings/phasedocuments/phasedocuments.component';
+import { BranchSettingComponent } from '../settings/branch-setting/branch-setting.component';
 
 const routes: Routes = [
   { path: '', component: AdminComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'modules-setting', component: ModulesSettingComponent },
   { path: 'application-stage-docs', component: AppStageDocsComponent },
   { path: 'field-zone-office', component: FieldZonalOfficeComponent },
+  { path: 'branch-setting', component: BranchSettingComponent },
   { path: 'phasedocuments', component: PhasedocumentsComponent },
 ];
 

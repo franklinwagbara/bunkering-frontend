@@ -41,11 +41,23 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close>Close</button>
+
   <button
     mat-raised-button
     (click)="createCategory()"
     [disabled]="form.invalid"
+    *ngIf="!currentValue"
   >
     Create
+  </button>
+
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="editCategory()"
+    [disabled]="form.invalid"
+    *ngIf="currentValue"
+  >
+    Update
   </button>
 </div>

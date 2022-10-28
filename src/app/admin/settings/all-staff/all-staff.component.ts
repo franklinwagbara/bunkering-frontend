@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthenticationService } from 'src/app/shared/services';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+import { AdminService } from 'src/app/shared/services/admin.service';
+import { ProgressBarService } from 'src/app/shared/services/progress-bar.service';
+import { forkJoin } from 'rxjs';
+import { UserFormComponent } from 'src/app/shared/reusable-components/user-form/user-form.component';
+import { FieldOffice } from '../field-zonal-office/field-zonal-office.component';
+import { IBranch } from 'src/app/shared/interfaces/IBranch';
 
 @Component({
   selector: 'app-all-staff',
@@ -15,103 +15,187 @@ import {
   styleUrls: ['./all-staff.component.css'],
 })
 export class AllStaffComponent implements OnInit {
-  users: staff[];
-  userDetail: any;
-  roles: any;
-  staffList: any;
-  closeResult: string;
-  form: FormGroup = new FormGroup({
-    FirstName: new FormControl(''),
-    LastName: new FormControl(''),
-    Email: new FormControl(''),
-    PhoneNo: new FormControl(''),
-    UserRoles: new FormControl(''),
-    Status: new FormControl(''),
-  });
+  public users: Staff[];
+  public userDetail: any;
+  public roles: any;
+  public staffList: any;
+  public offices: FieldOffice[];
+  public branches: IBranch[];
+
+  tableTitles = {
+    users: 'User Settings',
+  };
+
+  userKeysMappedToHeaders = {
+    firstName: 'First Name',
+    lastName: 'Last Name',
+    email: 'Email',
+    phoneNo: 'Phone Number',
+    role: 'Role',
+    office: 'Office',
+    status: 'Status',
+  };
 
   constructor(
-    private auth: AuthenticationService,
-    private router: Router,
-    private modalService: NgbModal,
-    private formBuilder: FormBuilder
+    public snackBar: MatSnackBar,
+    private adminHttpService: AdminService,
+    public dialog: MatDialog,
+    private progressBar: ProgressBarService
   ) {}
 
   ngOnInit(): void {
-    this.auth.getAllStaff().subscribe((res) => {
-      this.users = res.data.data.map((staff) => staff);
-    });
+    this.progressBar.open();
 
-    this.auth.getElpsStaffList().subscribe((res) => {
-      this.staffList = res.data.data;
-    });
+    forkJoin([
+      this.adminHttpService.getAllStaff(),
+      this.adminHttpService.getElpsStaffList(),
+      this.adminHttpService.getRoles(),
+      this.adminHttpService.getOffices(),
+      this.adminHttpService.getBranches(),
+    ]).subscribe({
+      next: (res) => {
+        if (res[0].success) this.users = res[0].data.data;
 
-    this.auth.getRoles().subscribe((res) => {
-      this.roles = res.data.data;
-    });
+        if (res[1].success) this.staffList = res[1].data.data;
 
-    this.form = this.formBuilder.group({
-      FirstName: ['', Validators.required],
-      LastName: ['', Validators.required],
-      Email: ['', Validators.required, Validators.email],
-      PhoneNo: ['', Validators.required],
-      UserRoles: ['', Validators.required],
-      Status: ['', Validators.required],
+        if (res[2].success) this.roles = res[2].data.data;
+
+        if (res[3].success) this.offices = res[3].data.data;
+
+        if (res[4].success) this.branches = res[4].data.data;
+
+        this.progressBar.close();
+      },
+      error: (error) => {
+        this.snackBar.open(
+          'Something went wrong while retrieving data.',
+          null,
+          {
+            panelClass: ['error'],
+          }
+        );
+
+        this.progressBar.close();
+      },
     });
   }
 
-  open(content) {
-    this.modalService
-      .open(content, { ariaLabelledBy: 'modal-basic-title' })
-      .result.then(
-        (result) => {
-          this.closeResult = `Closed with: ${result}`;
+  onAddData(event: Event, type: string) {
+    const operationConfiguration = {
+      users: {
+        data: {
+          users: this.users,
+          staffList: this.staffList,
+          roles: this.roles,
+          offices: this.offices,
+          branches: this.branches,
         },
-        (reason) => {
-          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        form: UserFormComponent,
+      },
+    };
+
+    let dialogRef = this.dialog.open(operationConfiguration[type].form, {
+      data: {
+        data: operationConfiguration[type].data,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((res) => {
+      this.progressBar.open();
+
+      this.adminHttpService.getAllStaff().subscribe((res) => {
+        this.users = res.data.data;
+
+        this.progressBar.close();
+      });
+    });
+  }
+
+  onDeleteData(event: any, type: string) {
+    const typeToModelMapper = {
+      users: {
+        name: 'Users',
+        id: 'id',
+      },
+    };
+
+    const listOfDataToDelete = [...event];
+
+    const requests = (listOfDataToDelete as any[]).map((req) => {
+      if (type === 'users') {
+        return this.adminHttpService.deleteStaff(
+          req[typeToModelMapper[type].id]
+        );
+      } else
+        return this.adminHttpService.deleteStaff(
+          req[typeToModelMapper[type].id]
+        );
+    });
+
+    this.progressBar.open();
+
+    forkJoin(requests).subscribe({
+      next: (res) => {
+        if (res) {
+          this.snackBar.open(
+            `${typeToModelMapper.users.name} was deleted successfully!`,
+            null,
+            {
+              panelClass: ['success'],
+            }
+          );
+
+          const responses = res
+            .map((r) => r.data.data)
+            .sort((a, b) => a.length - b.length);
+
+          if (type === 'users') this.users = responses[0];
         }
-      );
-  }
+      },
+      error: (error) => {
+        this.snackBar.open('Something went wrong while deleting data!', null, {
+          panelClass: ['error'],
+        });
 
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
-
-  onSubmit() {
-    this.modalService.dismissAll('Cross click');
-    this.auth.addStaff(this.form.value).subscribe((res) => {
-      if (res.success) {
-        this.open('User created successfully!');
-      }
+        this.progressBar.close();
+      },
     });
   }
 
-  fetchSTaff(item) {
-    console.log(item);
-    this.staffList.filter((e) => {
-      if (item.target.value == e.email) this.setValue(e);
-    });
+  onEditData(event: Event, type: string) {
+    console.log('on edit', event, type);
   }
 
-  setValue(e) {
-    this.form.get('FirstName').setValue(e.firstName);
-    this.form.get('LastName').setValue(e.lastName);
-    this.form.get('Email').setValue(e.email);
-    this.form.get('PhoneNo').setValue(e.phoneNo);
-    this.form.get('Status').setValue(e.status);
-    this.form.get('id').setValue(e.id);
-  }
+  // onSubmit() {
+  //   this.modalService.dismissAll('Cross click');
+  //   this.auth.addStaff(this.form.value).subscribe((res) => {
+  //     if (res.success) {
+  //       this.open('User created successfully!');
+  //     }
+  //   });
+  // }
+
+  // fetchSTaff(item) {
+  //   console.log(item);
+  //   this.staffList.filter((e) => {
+  //     if (item.target.value == e.email) this.setValue(e);
+  //   });
+  // }
+
+  // setValue(e) {
+  //   this.form.get('FirstName').setValue(e.firstName);
+  //   this.form.get('LastName').setValue(e.lastName);
+  //   this.form.get('Email').setValue(e.email);
+  //   this.form.get('PhoneNo').setValue(e.phoneNo);
+  //   this.form.get('Status').setValue(e.status);
+  //   this.form.get('id').setValue(e.id);
+  // }
 }
 
-class staff {
+export class Staff {
+  userId: string;
   firstName: string;
   lastName: string;
-  userId: string;
   email: string;
   phoneNo: string;
   role: string;

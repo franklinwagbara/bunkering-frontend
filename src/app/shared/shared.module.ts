@@ -25,6 +25,8 @@ import { PermitStageFormComponent } from './reusable-components/permit-stage-for
 import { PermitStageDocFormComponent } from './reusable-components/permit-stage-doc-form/permit-stage-doc-form.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { FieldOfficeFormComponent } from './reusable-components/field-office-form/field-office-form.component';
+import { BranchFormComponent } from './reusable-components/branch-form/branch-form.component';
+import { UserFormComponent } from './reusable-components/user-form/user-form.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { FieldOfficeFormComponent } from './reusable-components/field-office-for
     PermitStageFormComponent,
     PermitStageDocFormComponent,
     FieldOfficeFormComponent,
+    BranchFormComponent,
+    UserFormComponent,
   ],
   imports: [
     CommonModule,

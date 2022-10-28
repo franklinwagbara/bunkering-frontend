@@ -20,6 +20,7 @@ import { SharedModule } from '../shared/shared.module';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { AppStageDocsComponent } from './settings/app-stage-docs/app-stage-docs.component';
 import { ProgressBarService } from '../shared/services/progress-bar.service';
+import { BranchSettingComponent } from './settings/branch-setting/branch-setting.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ProgressBarService } from '../shared/services/progress-bar.service';
     ModulesSettingComponent,
     FieldZonalOfficeComponent,
     AppStageDocsComponent,
+    BranchSettingComponent,
   ],
 
   imports: [

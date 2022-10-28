@@ -148,7 +148,7 @@ const ROUTES: RouteInfo[] = [
       {
         id: 5,
         title: 'BRANCHES SETUP',
-        url: '/admin/field-zone-office',
+        url: '/admin/branch-setting',
       },
     ],
   },
