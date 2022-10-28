@@ -1,10 +1,10 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { PreviewModel, uploadFile } from 'src/app/models/apply.model';
-import { AuthenticationService, GenericService } from 'src/app/services';
-import { ApplyService } from 'src/app/services/apply.service';
-import { ModalService } from 'src/app/services/modal.service';
+import { PreviewModel, uploadFile } from '../shared/models/apply.model';
+import { AuthenticationService, GenericService } from '../shared/services';
+import { ApplyService } from '../shared/services/apply.service';
+import { ModalService } from '../shared/services/modal.service';
 
 @Component({
   templateUrl: 'previewapp.component.html',

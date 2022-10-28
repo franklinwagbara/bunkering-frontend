@@ -132,8 +132,8 @@ getLgaByState(e) {
   this.cd.markForCheck();
 }
 
-changePhaseList(value: string){
-  this.genk.phaseShortName = value;
+changePhaseList(e){
+  this.genk.phaseShortName = e.target.value;
   this.cd.markForCheck();
 }
 

@@ -6,8 +6,8 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { LoginModel } from '../models/login-model';
-import { AuthenticationService, GenericService } from '../services';
+import { LoginModel } from '../shared/models/login-model';
+import { AuthenticationService, GenericService } from '../shared/services';
 
 @Component({
   selector: 'app-company-details',

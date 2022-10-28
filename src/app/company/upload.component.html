@@ -31,7 +31,7 @@
                         <div
                             style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; border:none; outline: none; padding: 10px 10px; border-radius: 10px;">
                             <select formControlName="phaseId" style="width: 100%; border: none; outline: none;"
-                                class="inpute" name="phaseId">
+                                class="inpute" name="phaseId" (change)="changePhaseList($event)">
                                 <option disabled>---- Please Select Permit ----</option>
                                 <option *ngFor="let val of phaseList" [value]="val.id">{{val.shortName}}</option>
                             </select>

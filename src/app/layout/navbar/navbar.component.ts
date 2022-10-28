@@ -7,6 +7,7 @@ import {
 import { Router } from '@angular/router';
 import { AuthenticationService, GenericService } from '../../shared/services';
 import { environment } from 'src/environments/environment';
+import { LoginModel } from 'src/app/shared/models/login-model';
 
 interface RouteInfo {
   id: number;
