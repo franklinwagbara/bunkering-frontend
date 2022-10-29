@@ -82,12 +82,13 @@ export class ApplyService {
     getappdetailsbyId(id: number){
         return this.http.get<any>(`${environment.apiUrl}/application/get-app-details-by-id`, {params: {id }})
             .pipe(retry(this.num), map(res => {
+                debugger;
                 return res;
             }));
     }
 
     getpermitstages(){
-        return this.http.get<any>(`${environment.apiUrl}/configuration/get-permit_stages`)
+        return this.http.get<any>(`${environment.apiUrl}/configuration/get-permit-stages`)
             .pipe(retry(this.num), map(res => {
                 return res;
             }));

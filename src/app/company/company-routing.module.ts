@@ -12,7 +12,7 @@ import { SubmitSurveyComponent } from './submitsurvey.component';
 import { CompanyInformationComponent } from './company-information/companyinformation.component';
 import { UploadComponent } from './upload.component';
 import { PreviewAppComponent } from './previewapp.component';
-import { PaymentComponent } from './payment.component';
+import { PaymentSumComponent } from './paymentsum.component';
 
 const routes: Routes = [
     {path: '', component: DashboardComponent},
@@ -27,7 +27,7 @@ const routes: Routes = [
     {path: 'submitsurvey', component: SubmitSurveyComponent},
     {path: 'upload', component: UploadComponent},
     {path: 'previewapp/:id', component: PreviewAppComponent},
-    {path: 'payment', component: PaymentComponent},
+    {path: 'paymentsum/:id', component: PaymentSumComponent},
     
 
   {

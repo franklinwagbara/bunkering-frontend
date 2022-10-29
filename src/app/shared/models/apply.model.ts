@@ -10,6 +10,7 @@ export class PreviewModel{
     categoryId: number;
     categoryCode: string;
     phaseId: number;
+    phaseStageId: number;
     phase: string;
     applicationType: string;
     lgaId: number;

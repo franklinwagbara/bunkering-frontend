@@ -14,7 +14,7 @@ import { CompanyComponent } from './company.component';
 import { UploadComponent } from './upload.component';
 import { PreviewAppComponent } from './previewapp.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PaymentComponent } from './payment.component';
+import { PaymentSumComponent } from './paymentsum.component';
 import { LayoutModule } from '../layout/layout.module';
 
 
@@ -29,7 +29,7 @@ import { LayoutModule } from '../layout/layout.module';
   declarations: [
     DashboardComponent, MessagesComponent, ChangePasswordComponent, MyScheduleComponent,
     MypermitsComponent, ApplyComponent, MyApplicationComponent, RegisterDirectorComponent, 
-    CompanyComponent,UploadComponent, ApplyComponent, PreviewAppComponent, PaymentComponent,
+    CompanyComponent,UploadComponent, ApplyComponent, PreviewAppComponent, PaymentSumComponent,
   ],
   providers: [],
 })

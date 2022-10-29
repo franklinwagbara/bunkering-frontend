@@ -65,6 +65,7 @@ initForm() {
   this.uploadApplyForm = new FormGroup ({
     'categoryId': new FormControl(this.categoryId, [Validators.required]),
     'phaseId': new FormControl(this.phaseId, [Validators.required]),
+    'phaseStageId': new FormControl('', [Validators.required]),
     'lgaId': new FormControl(this.LgaId),
     'location': new FormControl(this.address, [Validators.required]),
     'file': new FormControl('', [Validators.required]),
@@ -89,6 +90,7 @@ onFileChange(event) {
 getCategory() {
   this.apply.getApplicationCategory().subscribe(res => {
     this.categoryList = res.data.data;
+    this.cd.markForCheck();
   });
   this.cd.markForCheck();
 }
@@ -96,12 +98,16 @@ getCategory() {
 getPhases(e) {
   this.categoryId = e.target.value;
   this.apply.getApplicationPhases(e.target.value).subscribe(res => {
-    //debugger;
     this.phaseList = res.data.data;
-    // this.stagelist = res.data.data;
-    
+    this.cd.markForCheck();
   });
-  this.cd.markForCheck();
+
+  this.apply.getpermitstages().subscribe(res => {
+    //debugger;
+    this.stagelist = res.data.data;
+    this.cd.markForCheck();    
+  });
+
 }
 
 getStateList() {
@@ -133,7 +139,9 @@ getLgaByState(e) {
 }
 
 changePhaseList(e){
-  this.genk.phaseShortName = e.target.value;
+  this.phasestages = this.stagelist.filter((ps) =>{
+    return ps.phaseId == e.target.value;
+  });
   this.cd.markForCheck();
 }
 
@@ -164,6 +172,7 @@ changePhaseList(e){
     const formDat: FormData = new FormData();
     formDat.append('categoryId', this.uploadApplyForm.get('categoryId').value);
     formDat.append('phaseId', this.uploadApplyForm.get('phaseId').value);
+    formDat.append('phaseStageId', this.uploadApplyForm.get('phaseStageId').value);
     formDat.append('LgaId', this.uploadApplyForm.get('lgaId').value);
     formDat.append('location', this.uploadApplyForm.get('location').value);
     formDat.append('doc', this.uploadApplyForm.get('file').value);

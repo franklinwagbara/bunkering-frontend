@@ -4,10 +4,10 @@ import { Router } from '@angular/router';
 import { AuthenticationService, GenericService } from '../shared/services';
 
 @Component({
-  templateUrl: 'payment.component.html',
+  templateUrl: 'paymentsum.component.html',
   styleUrls: ['company.component.scss']})
 
-export class PaymentComponent{
+export class PaymentSumComponent{
   genk: GenericService;
   
 
@@ -17,6 +17,9 @@ export class PaymentComponent{
       this.genk = gen;
   }
 
+  submitpayment() {
+
+  }
     
     }
 
