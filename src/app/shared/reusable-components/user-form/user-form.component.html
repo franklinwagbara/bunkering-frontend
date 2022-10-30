@@ -78,22 +78,6 @@
     </div>
 
     <div class="fomr-group" style="margin-bottom: 10px">
-      <label>User Type</label>
-      <input
-        name="userType"
-        formControlName="userType"
-        class="form-control"
-        [attr.disabled]="true"
-      />
-      <div
-        *ngIf="form.get('userType')?.touched && form.get('userType')?.invalid"
-        class="alert alert-danger"
-      >
-        User Type is required!
-      </div>
-    </div>
-
-    <div class="fomr-group" style="margin-bottom: 10px">
       <label>User Role</label>
       <select name="role" formControlName="role" class="form-control">
         <option *ngFor="let ut of roles" [ngValue]="ut.name">

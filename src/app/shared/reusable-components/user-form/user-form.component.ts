@@ -56,7 +56,7 @@ export class UserFormComponent implements OnInit {
 
     //Appending an additional name field to allow interfacing with the ngmultiple-select textField
     this.usersFromElps = this.usersFromElps.map((user) => {
-      user.name = user.lastName + ', ' + user.firstName;
+      user.name = `${user.lastName}, ${user.firstName} (${user.email})`;
       return user;
     });
 
@@ -66,12 +66,12 @@ export class UserFormComponent implements OnInit {
       lastName: ['', Validators.required],
       email: ['', Validators.required],
       phoneNo: [''],
-      userType: ['', Validators.required],
+      userType: [''],
       role: ['', Validators.required],
       officeId: ['', Validators.required],
       branchId: ['', Validators.required],
       status: [false, Validators.required],
-      signatureImage: ['', Validators.required],
+      signatureImage: [''],
     });
   }
 
@@ -133,13 +133,10 @@ export class UserFormComponent implements OnInit {
   onClose() {}
 
   onFileChange(event: any) {
-    console.log(event.target.files[0]);
-
     this.file = event.target.files[0];
   }
 
   onItemSelect(event: ListItem) {
-    console.log('event....', event, this.form);
     this.selectedUserFromElps = this.usersFromElps.find(
       (u) => u.id === event.id
     );

@@ -8,11 +8,9 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { AuthenticationService } from '../../services';
-import { ProgressBarService } from '../../services/progress-bar.service';
 import { AdminService } from '../../services/admin.service';
+import { ProgressBarService } from '../../services/progress-bar.service';
 
 @Component({
   selector: 'app-category-form',
@@ -37,7 +35,6 @@ export class CategoryFormComponent {
     this.currentValue = data.data?.currentValue;
 
     this.form = this.formBuilder.group({
-      id: [this.currentValue ? this.currentValue.name : ''],
       name: [
         this.currentValue ? this.currentValue.name : '',
         Validators.required,
@@ -86,6 +83,9 @@ export class CategoryFormComponent {
 
   editCategory() {
     this.progressBar.open();
+
+    const formValue = this.form.value as any;
+    formValue.id = this.currentValue.id;
 
     this.adminHttpService.editModule(this.form.value).subscribe({
       next: (res) => {
