@@ -12,7 +12,6 @@ import { AllStaffComponent } from './settings/all-staff/all-staff.component';
 import { FieldZonalOfficeComponent } from './settings/field-zonal-office/field-zonal-office.component';
 import { ModulesSettingComponent } from './settings/modules-setting/modules-setting.component';
 import { StaffdeskComponent } from './staffdesk/staffdesk.component';
-import { ViewApplicationComponent } from './view-application/view-application.component';
 import { AdminRoutingModule } from './admin/admin-routing.module';
 import { AdminComponent } from './admin/admin.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
@@ -21,6 +20,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { AppStageDocsComponent } from './settings/app-stage-docs/app-stage-docs.component';
 import { ProgressBarService } from '../shared/services/progress-bar.service';
 import { BranchSettingComponent } from './settings/branch-setting/branch-setting.component';
+import { ApplicationTableComponent } from './application/view-application/application-table/application-table.component';
 
 @NgModule({
   declarations: [
@@ -28,12 +28,12 @@ import { BranchSettingComponent } from './settings/branch-setting/branch-setting
     DashboardComponent,
     StaffdeskComponent,
     ApplicationComponent,
-    ViewApplicationComponent,
     AllStaffComponent,
     ModulesSettingComponent,
     FieldZonalOfficeComponent,
     AppStageDocsComponent,
     BranchSettingComponent,
+    ApplicationTableComponent,
   ],
 
   imports: [

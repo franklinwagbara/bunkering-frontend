@@ -41,6 +41,7 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit {
   @Input('noDeleteButton') noDeleteButton?: boolean = false;
   @Input('noCheckControls') noCheckControls?: boolean = false;
   @Input('noEditControl') noEditControl?: boolean = false;
+  @Input('EnableViewControl') enableViewControl?: boolean = false;
   @Input('table_keysMappedToHeaders')
   keysMappedToHeaders: ITableKeysMappedToHeaders = {};
   @Input('table_title') title: string = 'Title';
@@ -48,6 +49,7 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit {
   @Output('onAddData') onAddData = new EventEmitter<any>();
   @Output('onDeleteData') onDeleteData = new EventEmitter<any>();
   @Output('onEditData') onEditData = new EventEmitter<any>();
+  @Output('onViewData') onViewData = new EventEmitter<any>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -93,6 +95,14 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit {
       });
     }
 
+    if (this.enableViewControl) {
+      this.columns.push({
+        columnDef: 'view_control',
+        header: '',
+        cell: (item) => 'view_control',
+      });
+    }
+
     this.columns.unshift({
       columnDef: 'select',
       header: '',
@@ -121,6 +131,10 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit {
 
   editData(row) {
     this.onEditData.emit(row);
+  }
+
+  viewData(row) {
+    this.onViewData.emit(row);
   }
 
   /** Whether the number of selected elements matches the total number of rows. */

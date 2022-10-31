@@ -62,7 +62,7 @@ const ROUTES: RouteInfo[] = [
       {
         id: 1,
         title: 'ALL APPLICATIONS',
-        url: '/admin/application',
+        url: '/admin/all-applications',
       },
     ],
   },

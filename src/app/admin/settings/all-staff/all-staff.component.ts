@@ -165,31 +165,6 @@ export class AllStaffComponent implements OnInit {
   onEditData(event: Event, type: string) {
     console.log('on edit', event, type);
   }
-
-  // onSubmit() {
-  //   this.modalService.dismissAll('Cross click');
-  //   this.auth.addStaff(this.form.value).subscribe((res) => {
-  //     if (res.success) {
-  //       this.open('User created successfully!');
-  //     }
-  //   });
-  // }
-
-  // fetchSTaff(item) {
-  //   console.log(item);
-  //   this.staffList.filter((e) => {
-  //     if (item.target.value == e.email) this.setValue(e);
-  //   });
-  // }
-
-  // setValue(e) {
-  //   this.form.get('FirstName').setValue(e.firstName);
-  //   this.form.get('LastName').setValue(e.lastName);
-  //   this.form.get('Email').setValue(e.email);
-  //   this.form.get('PhoneNo').setValue(e.phoneNo);
-  //   this.form.get('Status').setValue(e.status);
-  //   this.form.get('id').setValue(e.id);
-  // }
 }
 
 export class Staff {

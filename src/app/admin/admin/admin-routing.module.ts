@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { StaffdeskComponent } from '../staffdesk/staffdesk.component';
-import { ViewApplicationComponent } from '../view-application/view-application.component';
 import { ApplicationComponent } from '../application/application.component';
 import { AllStaffComponent } from '../settings/all-staff/all-staff.component';
 import { ModulesSettingComponent } from '../settings/modules-setting/modules-setting.component';
@@ -17,8 +16,7 @@ const routes: Routes = [
   { path: '', component: AdminComponent },
   { path: 'staff-dashboard', component: DashboardComponent },
   { path: 'staff-desk', component: StaffdeskComponent },
-  { path: 'view-application', component: ViewApplicationComponent },
-  { path: 'application', component: ApplicationComponent },
+  { path: 'all-applications', component: ApplicationComponent },
   { path: 'all-staff', component: AllStaffComponent },
   { path: 'modules-setting', component: ModulesSettingComponent },
   { path: 'application-stage-docs', component: AppStageDocsComponent },
