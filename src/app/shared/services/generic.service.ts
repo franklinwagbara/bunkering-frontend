@@ -17,6 +17,7 @@ export class GenericService {
   lga: string;
   phase: string;
   upload: string;
+  phaseShortName: string;
 
 
   getExpDoc(value: string, type: string) {

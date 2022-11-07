@@ -6,7 +6,7 @@ import { CompanyAddressComponent } from './companyaddress.component';
 import { CompanyDirectorComponent } from './companydirector.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ApplyComponent } from '../apply.component';
-import { PreviewAppComponent } from './previewapp.component';
+import { PreviewAppComponent } from '../previewapp.component';
 
 const routes: Routes = [
   { path: '', component: CompanyProfileComponent },

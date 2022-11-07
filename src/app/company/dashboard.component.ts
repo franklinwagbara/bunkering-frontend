@@ -1,28 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginModel } from '../shared/models/login-model';
 import { AuthenticationService } from '../shared/services';
 import { GenericService } from '../shared/services/generic.service';
 
 @Component({
   templateUrl: 'dashboard.component.html',
-  styleUrls: ['company.component.scss']})
-
+  styleUrls: ['company.component.scss'],
+})
 export class DashboardComponent implements OnInit {
   title = 'AUS2FrontEnd';
   showapply = false;
   showaccount = false;
   generic: GenericService;
+  currentUsername: LoginModel;
 
-  constructor(private gen: GenericService,
+  constructor(
+    private gen: GenericService,
     private router: Router,
-    private auth: AuthenticationService) {
-      this.generic = gen;
-      
+    private auth: AuthenticationService
+  ) {
+    this.generic = gen;
+    this.currentUsername = auth.currentUserValue;
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   showApply() {
     if (this.showapply) {

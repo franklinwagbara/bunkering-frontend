@@ -10,6 +10,8 @@ import { LoginModel } from '../models/login-model';
 export class ApplyService {
     private num = 2;
   getState: any;
+  phaseStageId: any;
+  phaseShortName: string;
 
 
     constructor(private http: HttpClient) {
@@ -79,6 +81,22 @@ export class ApplyService {
 
     getappdetailsbyId(id: number){
         return this.http.get<any>(`${environment.apiUrl}/application/get-app-details-by-id`, {params: {id }})
+            .pipe(retry(this.num), map(res => {
+                debugger;
+                return res;
+            }));
+    }
+
+    getpermitstages(){
+        return this.http.get<any>(`${environment.apiUrl}/configuration/get-permit-stages`)
+            .pipe(retry(this.num), map(res => {
+                return res;
+            }));
+    }
+
+
+    getpaymentbyappId(appID: number){
+        return this.http.get<any>(`${environment.apiUrl}/application/payment-summary`, {params: {appID }})
             .pipe(retry(this.num), map(res => {
                 return res;
             }));

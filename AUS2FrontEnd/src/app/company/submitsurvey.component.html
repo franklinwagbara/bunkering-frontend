@@ -1,0 +1,190 @@
+<div class="container" style="box-shadow:0 0 5px #c5c5c5; padding: 0 15px 20px 15px; background:white;">
+    <div class="panel-body">
+        <br><br>
+        <p></p>
+
+
+        <div class="row" id="BackImage">
+
+            <br>
+            <h3 class="DashCompanyName">SubSurface Pressure Survey Report</h3>
+            <br>
+        </div>
+
+        <br>
+
+        <div id="SubmitSurveyResultLoader" style="padding:20px">
+
+            <form action="#" id="SubmitSurveyResult">
+
+                <div class="row">
+                    <div class="col-md-7">
+                        <div style="display:none"><input value="2" id="RequestId" name="RequestId"></div>
+                        <span>
+                            <label for="UploadedFile" class="btn btn-primary"><i class="fas fa-cloud-upload-alt"></i>
+                                Upload Template B (Excel File)</label>
+                            <label style="color:green; font-weight:bold">File Name:</label> <label id="filename"
+                                name="filename" class="label-success"></label>
+                            <input type="file" id="UploadedFile" style="visibility:hidden" name="UploadedFile"
+                                accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+                        </span>
+
+                    </div>
+                    <div class="col-md-2">
+                        <input type="submit" name="Submit" value="Submit Template B" class="btn btn-success">
+                    </div>
+                </div>
+                <div id="successmessage"> </div>
+                <div id="errormessage"> </div>
+
+
+
+            </form>
+
+        </div>
+
+        <hr><br>
+
+        <div class="row">
+            <div class="col-md-12" style="background-color:white">
+                <label style="margin-left:300px; font-weight:bolder; font-size:25px; color:green"> 2022 SubSurface
+                    Pressure Survey Report</label>
+                <hr>
+                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper no-footer">
+                    <div class="dt-buttons"> <button class="dt-button buttons-copy buttons-html5" tabindex="0"
+                            aria-controls="DataTables_Table_0"><span>Copy</span></button> <button
+                            class="dt-button buttons-excel buttons-html5" tabindex="0"
+                            aria-controls="DataTables_Table_0"><span>Excel</span></button> <button
+                            class="dt-button buttons-csv buttons-html5" tabindex="0"
+                            aria-controls="DataTables_Table_0"><span>CSV</span></button> <button
+                            class="dt-button buttons-pdf buttons-html5" tabindex="0"
+                            aria-controls="DataTables_Table_0"><span>PDF</span></button> <button
+                            class="dt-button buttons-print" tabindex="0"
+                            aria-controls="DataTables_Table_0"><span>Print</span></button> </div>
+                    <div class="dataTables_length" id="DataTables_Table_0_length"><label>Show <select
+                                name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" class="">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select> entries</label></div>
+                    <div id="DataTables_Table_0_filter" class="dataTables_filter"><label>Search:<input type="search"
+                                class="" placeholder="" aria-controls="DataTables_Table_0"></label></div>
+                    <div id="DataTables_Table_0_processing" class="dataTables_processing" style="display: none;">
+                        Processing...</div>
+                    <table
+                        class="table table-striped table-bordered table-condensed table-responsive SurveyDT dataTable no-footer"
+                        style="font-size: small; width: 1340px;" id="DataTables_Table_0" role="grid"
+                        aria-describedby="DataTables_Table_0_info">
+                        <thead>
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1" aria-sort="ascending"
+                                    aria-label="Field: activate to sort column descending" style="width: 29.2375px;">
+                                    Field</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1" style="width: 57.3875px;"
+                                    aria-label="Reservoir: activate to sort column ascending">Reservoir</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1" style="width: 65.275px;"
+                                    aria-label="Remaining Reserves: activate to sort column ascending">Remaining
+                                    Reserves</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1" style="width: 27.1375px;"
+                                    aria-label="Well: activate to sort column ascending">Well</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1" style="width: 41.8px;"
+                                    aria-label="Date of Survey: activate to sort column ascending">Date of Survey</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1" style="width: 70.4875px;"
+                                    aria-label="Oil(mmbbl) NCO at 60/60: activate to sort column ascending">Oil(mmbbl)
+                                    NCO at 60/60</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1" style="width: 53.2375px;"
+                                    aria-label="Water (mmbbl): activate to sort column ascending">Water (mmbbl)</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1" style="width: 73.875px;"
+                                    aria-label="Gas(MMscf): activate to sort column ascending">Gas(MMscf)</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1" style="width: 60.6125px;"
+                                    aria-label="BS&amp;amp;W(%): activate to sort column ascending">BS&amp;W(%)</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1" style="width: 103.525px;"
+                                    aria-label="GOR(scf/mmbbl) : activate to sort column ascending">GOR(scf/mmbbl) </th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1" style="width: 67.675px;"
+                                    aria-label="Bean(64th) : activate to sort column ascending">Bean(64th) </th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1" style="width: 41.4125px;"
+                                    aria-label="Datum Depth (ft. ss): activate to sort column ascending">Datum Depth
+                                    (ft. ss)</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1" style="width: 86.725px;"
+                                    aria-label="Initial RES. Pressure(psig): activate to sort column ascending">Initial
+                                    RES. Pressure(psig)</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1" style="width: 60.6875px;"
+                                    aria-label="THP(psig): activate to sort column ascending">THP(psig)</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1" style="width: 61.1875px;"
+                                    aria-label="CHP(psig): activate to sort column ascending">CHP(psig)</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1" style="width: 35.125px;"
+                                    aria-label="FBHP MP perf.(psig): activate to sort column ascending">FBHP MP
+                                    perf.(psig)</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1" style="width: 35.125px;"
+                                    aria-label="SBHP MP perf.(psig): activate to sort column ascending">SBHP MP
+                                    perf.(psig)</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1" style="width: 75px;"
+                                    aria-label="Calc. Res. Press. at datum(psig): activate to sort column ascending">
+                                    Calc. Res. Press. at datum(psig)</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1" style="width: 74.7625px;"
+                                    aria-label="Productivity Index (b/d/psig): activate to sort column ascending">
+                                    Productivity Index (b/d/psig)</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1" style="width: 41.8px;"
+                                    aria-label="Date of Last Survey: activate to sort column ascending">Date of Last
+                                    Survey</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1" style="width: 52.2625px;"
+                                    aria-label="Remarks: activate to sort column ascending">Remarks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd">
+                                <td valign="top" colspan="21" class="dataTables_empty">No data available in table</td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                    <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">Showing 0
+                        to 0 of 0 entries</div>
+                    <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate"><a
+                            class="paginate_button previous disabled" aria-controls="DataTables_Table_0" data-dt-idx="0"
+                            tabindex="0" id="DataTables_Table_0_previous">Previous</a><span></span><a
+                            class="paginate_button next disabled" aria-controls="DataTables_Table_0" data-dt-idx="1"
+                            tabindex="0" id="DataTables_Table_0_next">Next</a></div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+
+        <br>
+        <br>
+    </div>
+</div>
+<br>
+
+
+
+<br><br>

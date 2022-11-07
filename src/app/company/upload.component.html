@@ -1,5 +1,4 @@
-<div
-    style="width: 85%; border: solid 2px rgb(128, 128, 128); margin-top: 35%; background-color: rgb(253, 253, 253); 
+<div style="width: 85%; border: solid 2px rgb(128, 128, 128); margin-top: 35%; background-color: rgb(253, 253, 253); 
     border-radius:15px; box-shadow: 6px 6px 8px rgb(0, 0, 0, 0.3); margin:auto; margin-top:7% ;">
     <br>
     <div class="container">
@@ -9,50 +8,50 @@
 
         <form [formGroup]="uploadApplyForm" (ngSubmit)="submit()">
             <div>
-               
-
-     <br><br>
-     <div style="display:flex; width: 100%; justify-content: space-between;">
-        
-        <div style="width: 30%;">
-            <label style="font-size:18px;">Category</label>
-            <div
-                style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; padding: 10px; border-radius:10px 10px; outline:none;">
-                <select class="inpute" style="width: 100%; border: none; outline: none;"
-                    formControlName="categoryId" [value]="categoryId" (change)="getPhases($event)">
-                    <option disabled>---- Please Select Category ----</option>
-                    <option *ngFor="let val of categoryList" [value]="val.id">{{val.name}}</option>
-                </select>
-            </div>
-        </div>
-        
-        <div style=" width: 30%;">
-            <label style="font-size:18px;">Permits</label>
-
-            <div
-                style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; border:none; outline: none; padding: 10px 10px; border-radius: 10px;">
-                <select formControlName="phaseId" style="width: 100%; border: none; outline: none;"
-                    class="inpute" name="phaseId">
-                    <option disabled>---- Please Select Permit ----</option>
-                    <option *ngFor="let val of phaseList" [value]="val.id">{{val.shortName}}</option>
-                </select>
-            </div>
-        </div>
 
 
-        <div style="width: 30%;">
-            <label style="font-size:18px;">Upload File/Document</label>
-            <div style="display: flex;">
-                <div
-                    style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; border-radius: 20px; padding: 10px 10px;">
-                    <input type="file" formControlName="doc" name="uploadFile" (change)="onFileChange($event)" class="inpute" accept=".xlsx"
-                        (change)="saveTemplate($event)">
+                <br><br>
+                <div style="display:flex; width: 100%; justify-content: space-between;">
+
+                    <div style="width: 30%;">
+                        <label style="font-size:18px;">Category</label>
+                        <div
+                            style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; padding: 10px; border-radius:10px 10px; outline:none;">
+                            <select class="inpute" style="width: 100%; border: none; outline: none;"
+                                formControlName="categoryId" [value]="categoryId" (change)="getPhases($event)">
+                                <option disabled>---- Please Select Category ----</option>
+                                <option *ngFor="let val of categoryList" [value]="val.id">{{val.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style=" width: 30%;">
+                        <label style="font-size:18px;">Permit Type</label>
+
+                        <div
+                            style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; border:none; outline: none; padding: 10px 10px; border-radius: 10px;">
+                            <select formControlName="phaseId" style="width: 100%; border: none; outline: none;"
+                                class="inpute" name="phaseId"m (change)="changePhaseList($event)">
+                                <option disabled>---- Please Select Permit ----</option>
+                                <option *ngFor="let val of phaseList" [value]="val.id">{{val.shortName}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style=" width: 30%;">
+                        <label style="font-size:18px;">Stages</label>
+
+                        <div
+                            style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; border:none; outline: none; padding: 10px 10px; border-radius: 10px;">
+                            <select formControlName="phaseStageId" style="width: 100%; border: none; outline: none;"
+                                class="inpute" name="phaseStageId">
+                                <option disabled>---- Please select Stage ----</option>
+                                <option *ngFor="let val of phasestages" [value]="val.id">{{val.name}}</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        
-    </div>
-    <br><br>
+                <br>
                 <div style="display:flex;width: 100%; justify-content: space-between; ">
                     <div style="width:30%; ">
                         <label style="font-size: 18px;">State</label>
@@ -63,8 +62,8 @@
                                 (change)="getLgaByState($event)">
                                 <option selected>---- Please Select State ----</option>
                                 <option *ngFor="let val of stateList" [value]="val.id">{{val.stateName}}</option>
-                                
-                                    <!-- <option value="ABIA">Abia</option>
+
+                                <!-- <option value="ABIA">Abia</option>
                                     <option value="ADAMAWA">Adamawa</option> -->
                             </select>
                         </div>
@@ -73,8 +72,8 @@
                         <label style="font-size: 18px;">Local Government</label>
                         <div
                             style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; padding: 10px; border-radius: 20px;">
-                            <select formControlName="lgaId" nmae="lgaId" style="width: 100%; border: none; outline: none;"
-                                class="inpute">
+                            <select formControlName="lgaId" nmae="lgaId"
+                                style="width: 100%; border: none; outline: none;" class="inpute">
                                 <option selected>---- Please Select LGA ----</option>
                                 <option *ngFor="let val of lgalist" [value]="val.id">{{val.lgaName}}</option>
                                 <!-- <option selected disabled>---- Please Select an Option ----</option>
@@ -96,15 +95,30 @@
                     </div>
 
 
-                    
+
                 </div>
-                
 
-                <br><br><br><br><br>
+                <br><br>
 
-                <div style="text-align: center;">
-                    <button style=" padding: 10px 20px; width:20%; border: none; border-radius: 10px; background-color:teal; color: white" (click)=" submit()" 
-                     [routerLink]="['/' + genk.company, 'previewapp']">Save & Continue</button>
+                <div style="width: 30%;">
+                    <label style="font-size:18px;">Upload File/Document</label>
+                    <div style="display: flex;">
+                        <div
+                            style="box-shadow: 1px 1px 4px 1px rgb(0, 0, 0, 0.3); width: 100%; border-radius: 20px; padding: 10px 10px;">
+                            <input type="file" formControlName="doc" name="uploadFile" (change)="onFileChange($event)"
+                                class="inpute" accept=".xlsx" (change)="saveTemplate($event)">
+                        </div>
+                    </div>
+                </div>
+
+
+                <br><br><br><br><br><br>
+
+
+                <div style="text-align: center; ">
+                    <button
+                        style=" padding: 10px 20px; width:30%; border: none; border-radius: 10px; background-color:teal; color: white"
+                        (click)=" submit()" [routerLink]="['/' + genk.company, 'previewapp']">Save & Continue</button>
                 </div>
             </div>
         </form>
@@ -212,15 +226,9 @@
 
 
     <br><br>
-
-    <footer class="container text-center">
-
-        Copyright © 2022. Nigerian Upstream Petroleum Regulatory Commission
-    </footer>
     <br><br>
 
-
-<!-- <div class="modal">
+    <!-- <div class="modal">
     <div class="modal-content">
         <div>
             <span>Enter your Email</span>

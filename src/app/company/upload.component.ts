@@ -37,6 +37,11 @@ export class UploadComponent implements OnInit {
   address: string = '';
   phase: string;
   applicationTypeId: string = '';
+  stagelist = [];
+  phasestages:any;
+  
+
+
   
 
 constructor(private cd: ChangeDetectorRef,
@@ -52,7 +57,6 @@ ngOnInit() {
  this.getCategory();
  this.getStateList();
  this.data = [];
- this.fetchdata();
  this.sizePerPage = this.genk.sizeten;
 }
 
@@ -61,6 +65,7 @@ initForm() {
   this.uploadApplyForm = new FormGroup ({
     'categoryId': new FormControl(this.categoryId, [Validators.required]),
     'phaseId': new FormControl(this.phaseId, [Validators.required]),
+    'phaseStageId': new FormControl('', [Validators.required]),
     'lgaId': new FormControl(this.LgaId),
     'location': new FormControl(this.address, [Validators.required]),
     'file': new FormControl('', [Validators.required]),
@@ -85,6 +90,7 @@ onFileChange(event) {
 getCategory() {
   this.apply.getApplicationCategory().subscribe(res => {
     this.categoryList = res.data.data;
+    this.cd.markForCheck();
   });
   this.cd.markForCheck();
 }
@@ -92,10 +98,16 @@ getCategory() {
 getPhases(e) {
   this.categoryId = e.target.value;
   this.apply.getApplicationPhases(e.target.value).subscribe(res => {
-    //debugger;
     this.phaseList = res.data.data;
+    this.cd.markForCheck();
   });
-  this.cd.markForCheck();
+
+  this.apply.getpermitstages().subscribe(res => {
+    //debugger;
+    this.stagelist = res.data.data;
+    this.cd.markForCheck();    
+  });
+
 }
 
 getStateList() {
@@ -105,6 +117,7 @@ getStateList() {
   });
   this.cd.markForCheck();
 }
+
 
 
 
@@ -125,8 +138,11 @@ getLgaByState(e) {
   this.cd.markForCheck();
 }
 
-fetchdata(){
-
+changePhaseList(e){
+  this.phasestages = this.stagelist.filter((ps) =>{
+    return ps.phaseId == e.target.value;
+  });
+  this.cd.markForCheck();
 }
 
 
@@ -156,6 +172,7 @@ fetchdata(){
     const formDat: FormData = new FormData();
     formDat.append('categoryId', this.uploadApplyForm.get('categoryId').value);
     formDat.append('phaseId', this.uploadApplyForm.get('phaseId').value);
+    formDat.append('phaseStageId', this.uploadApplyForm.get('phaseStageId').value);
     formDat.append('LgaId', this.uploadApplyForm.get('lgaId').value);
     formDat.append('location', this.uploadApplyForm.get('location').value);
     formDat.append('doc', this.uploadApplyForm.get('file').value);

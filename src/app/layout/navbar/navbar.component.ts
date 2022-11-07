@@ -7,6 +7,7 @@ import {
 import { Router } from '@angular/router';
 import { AuthenticationService, GenericService } from '../../shared/services';
 import { environment } from 'src/environments/environment';
+import { LoginModel } from 'src/app/shared/models/login-model';
 
 interface RouteInfo {
   id: number;
@@ -81,7 +82,7 @@ export class NavbarComponent implements OnInit {
   public focus;
   public listTitles: any[];
   public location: Location;
-  public user: any;
+  public user: LoginModel;
   generic: GenericService;
 
   constructor(
