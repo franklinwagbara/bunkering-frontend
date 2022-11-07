@@ -25,6 +25,7 @@ export class PhaseFormComponent {
   public form: FormGroup;
   public categories: Category[];
   public phases: Phase[];
+  public currentValue: Phase | null;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -37,15 +38,30 @@ export class PhaseFormComponent {
   ) {
     this.categories = data.data.categories;
     this.phases = data.data.phases;
+    this.currentValue = data.data?.currentValue;
 
     this.form = this.formBuilder.group({
-      ShortName: ['', Validators.required],
-      Code: ['', Validators.required],
-      Description: ['', Validators.required],
-      CategoryId: ['', [Validators.required, Validators.pattern(/^\d+$/)]], //Asyc validation
-      Sort: ['', Validators.required],
-      Fee: ['', Validators.required],
-      ServiceCharge: ['', Validators.required],
+      id: [this.currentValue ? this.currentValue.id : ''],
+      ShortName: [
+        this.currentValue ? this.currentValue.shortName : '',
+        Validators.required,
+      ],
+      Code: [
+        this.currentValue ? this.currentValue.code : '',
+        Validators.required,
+      ],
+      Description: [
+        this.currentValue ? this.currentValue.description : '',
+        Validators.required,
+      ],
+      CategoryId: [
+        this.currentValue ? this.currentValue.categoryId : '',
+        [Validators.required, Validators.pattern(/^\d+$/)],
+      ], //Asyc validation
+      Sort: [
+        this.currentValue ? this.currentValue.sort : '',
+        Validators.required,
+      ],
     });
   }
 
@@ -70,6 +86,36 @@ export class PhaseFormComponent {
         this.snackBar.open(error.message, null, {
           panelClass: ['error'],
         });
+        this.progressBar.close();
+      },
+    });
+  }
+
+  editPhase() {
+    console.log('editing phase', this.form.value, this.currentValue);
+    this.progressBar.open();
+
+    this.adminService.editPhase(this.form.value).subscribe({
+      next: (res) => {
+        if (res.success) {
+          this.snackBar.open('Phase was created successfully!', null, {
+            panelClass: ['success'],
+          });
+
+          this.dialogRef.close();
+        }
+
+        this.progressBar.close();
+      },
+      error: (error) => {
+        this.snackBar.open(
+          'Operation failed! Could not create the Phase',
+          null,
+          {
+            panelClass: ['error'],
+          }
+        );
+
         this.progressBar.close();
       },
     });

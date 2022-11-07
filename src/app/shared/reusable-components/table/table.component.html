@@ -24,19 +24,13 @@
         </mat-form-field>
       </div>
       <div *ngIf="!noAddOrDeleteButton">
-        <button
-          mat-raised-button
-          (click)="addData()"
-          class="demo-button"
-          *ngIf="!noAddButton"
-        >
+        <button mat-raised-button (click)="addData()" *ngIf="!noAddButton">
           Add New
         </button>
         <button
           mat-raised-button
           [disabled]="!dataSource.data.length"
           (click)="deleteData()"
-          class="demo-button"
           *ngIf="!noDeleteButton"
         >
           Delete
@@ -84,7 +78,8 @@
           <td mat-cell *matCellDef="let row">
             {{
               column.cell(row) === "undefined" ||
-              column.cell(row) === "edit_control"
+              column.cell(row) === "edit_control" ||
+              column.cell(row) === "view_control"
                 ? ""
                 : column.cell(row)
             }}
@@ -95,6 +90,15 @@
               (click)="editData(row)"
             >
               Edit
+            </button>
+            <button
+              mat-flat-button
+              color="accent"
+              class="view-button"
+              *ngIf="column.cell(row) === 'view_control'"
+              (click)="viewData(row)"
+            >
+              View Application
             </button>
           </td>
         </ng-template>

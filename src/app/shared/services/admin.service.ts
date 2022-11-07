@@ -96,7 +96,7 @@ export class AdminService {
 
   deleteStaff(id: number) {
     return this.http
-      .delete<any>(`${environment.apiUrl}/account/deactivate-staff?id={id}`)
+      .delete<any>(`${environment.apiUrl}/account/deactivate-staff?id=${id}`)
       .pipe(retry(this.num));
   }
 
@@ -151,6 +151,12 @@ export class AdminService {
       .pipe(retry(this.num));
   }
 
+  getModule() {
+    return this.http
+      .get<any>(`${environment.apiUrl}/configuration/get-module-configuration`)
+      .pipe(retry(this.num));
+  }
+
   deleteModule(moduleId: number) {
     return this.http
       .delete<any>(
@@ -162,7 +168,7 @@ export class AdminService {
   editModule(model) {
     return this.http
       .put<any>(
-        `${environment.apiUrl}/configuration/update-module?id=${model.id}`,
+        `${environment.apiUrl}/configuration/update-module-configuration`,
         model
       )
       .pipe(retry(this.num));
@@ -180,14 +186,13 @@ export class AdminService {
       );
   }
 
-  createPermitStage(model: any) {
-    console.log('permit form model', model);
+  editPhase(model: any) {
     return this.http
-      .post<any>(`${environment.apiUrl}/configuration/post-permit-stage`, model)
-      .pipe(
-        retry(this.num),
-        map((res) => res)
-      );
+      .put<any>(
+        `${environment.apiUrl}/configuration/update-permit-configuration`,
+        model
+      )
+      .pipe(retry(this.num));
   }
 
   deletePhase(id: number) {
@@ -197,6 +202,24 @@ export class AdminService {
         {
           params: { permitID: id },
         }
+      )
+      .pipe(retry(this.num));
+  }
+
+  createPermitStage(model: any) {
+    return this.http
+      .post<any>(`${environment.apiUrl}/configuration/post-permit-stage`, model)
+      .pipe(
+        retry(this.num),
+        map((res) => res)
+      );
+  }
+
+  editPermitStage(model: any) {
+    return this.http
+      .put<any>(
+        `${environment.apiUrl}/configuration/update-permit-stage`,
+        model
       )
       .pipe(retry(this.num));
   }

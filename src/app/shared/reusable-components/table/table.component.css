@@ -13,6 +13,23 @@ button {
   max-width: 100%;
   overflow-x: auto;
   margin: 10px;
+  background-color: white;
+}
+
+.mat-header-row {
+  /* @apply bg-yellow-200; */
+}
+
+.mat-header-row th {
+  @apply text-sm;
+}
+
+.mat-row {
+  @apply hover:bg-slate-300;
+}
+
+.mat-row:nth-child(odd) {
+  @apply bg-slate-100 hover:bg-slate-300;
 }
 
 table {
@@ -39,27 +56,27 @@ th {
 }
 
 .red {
-  @apply bg-red-100 text-red-600;
+  @apply bg-red-50 text-red-400;
 }
 
 .green {
-  @apply bg-green-100 text-green-600;
+  @apply bg-green-50 text-green-400;
 }
 
 .slate {
-  @apply bg-slate-100 text-slate-600;
+  @apply bg-slate-50 text-slate-400;
 }
 
 .yellow {
-  @apply bg-yellow-100 text-yellow-600;
+  @apply bg-yellow-50 text-yellow-400;
 }
 
 .blue {
-  @apply bg-blue-100 text-blue-600;
+  @apply bg-blue-50 text-blue-400;
 }
 
 .purple {
-  @apply bg-purple-100 text-purple-600;
+  @apply bg-purple-50 text-purple-400;
 }
 
 .margin-left {

@@ -25,6 +25,7 @@ export class StageFormComponent {
   public form: FormGroup;
   public phases: Phase[];
   public permitStage: PermitStage[];
+  public currentValue: PermitStage;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -37,15 +38,37 @@ export class StageFormComponent {
   ) {
     this.phases = data.data.phases;
     this.permitStage = data.data.permitStages;
+    this.currentValue = data.data?.currentValue;
 
     this.form = this.formBuilder.group({
-      code: ['', Validators.required],
-      name: ['', Validators.required],
-      description: ['', Validators.required],
-      phaseId: ['', [Validators.required, Validators.pattern(/^\d+$/)]], //Asyc validation
-      fee: ['', Validators.required],
-      serviceCharge: ['', Validators.required],
-      sort: ['', Validators.required],
+      code: [
+        this.currentValue ? this.currentValue.code : '',
+        Validators.required,
+      ],
+      name: [
+        this.currentValue ? this.currentValue.name : '',
+        Validators.required,
+      ],
+      description: [
+        this.currentValue ? this.currentValue.description : '',
+        Validators.required,
+      ],
+      phaseId: [
+        this.currentValue ? this.currentValue.phaseId : '',
+        [Validators.required, Validators.pattern(/^\d+$/)],
+      ], //Asyc validation
+      fee: [
+        this.currentValue ? this.currentValue.fee : '',
+        Validators.required,
+      ],
+      serviceCharge: [
+        this.currentValue ? this.currentValue.serviceCharge : '',
+        Validators.required,
+      ],
+      sort: [
+        this.currentValue ? this.currentValue.sort : '',
+        Validators.required,
+      ],
     });
   }
 
@@ -71,6 +94,38 @@ export class StageFormComponent {
         this.snackBar.open(error.message, null, {
           panelClass: ['error'],
         });
+
+        this.progressBar.close();
+      },
+    });
+  }
+
+  editPermitStage() {
+    this.progressBar.open();
+
+    const formValue = this.form.value as any;
+    formValue.id = this.currentValue.id;
+
+    this.adminService.editPermitStage(this.form.value).subscribe({
+      next: (res) => {
+        if (res.success) {
+          this.snackBar.open('Permit Stage was created successfully!', null, {
+            panelClass: ['success'],
+          });
+
+          this.dialogRef.close();
+        }
+
+        this.progressBar.close();
+      },
+      error: (error) => {
+        this.snackBar.open(
+          'Operation failed! Could not create the Permit Stage.',
+          null,
+          {
+            panelClass: ['error'],
+          }
+        );
 
         this.progressBar.close();
       },

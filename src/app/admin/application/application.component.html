@@ -1,33 +1,58 @@
-<div class="st-desk">
-    <h2>All Applications</h2>
-    <div>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>App. Ref.</th>
-                    <th>Company Name</th>
-                    <th>Address</th>
-                    <th>Added Date</th>
-                    <th>Permit Type</th>
-                    <th>App. Stage</th>
-                    <th>RRR</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let app of applications; index as i">
-                    <td>{{i + 1}}</td>
-                    <td>{{app.reference}}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+<!-- <div class="st-desk">
+  <h2>All Applications</h2>
+  <div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>App. Ref.</th>
+          <th>Company Name</th>
+          <th>Address</th>
+          <th>Added Date</th>
+          <th>Permit Type</th>
+          <th>App. Stage</th>
+          <th>RRR</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let app of applications; index as i">
+          <td>{{ i + 1 }}</td>
+          <td>{{ app.reference }}</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div> -->
+
+<div class="setting-desk">
+  <h2 class="page-title bg-yellow-500 text-yellow-800">ALL APPLICATIONS</h2>
+  <div>
+    <mat-tab-group>
+      <mat-tab *ngFor="let cat of categories" [label]="cat.name">
+        <div class="table-group">
+          <div class="table-wrapper">
+            <generic-table
+              [table_title]="tableTitles.applications"
+              [title-color]="'yellow'"
+              [table_keysMappedToHeaders]="applicationKeysMappedToHeaders"
+              [table_content]="getApplicationByCategoryId('1')"
+              [EnableViewControl]="true"
+              [noAddOrDeleteButton]="true"
+              [noCheckControls]="true"
+              [noEditControl]="true"
+              (onViewData)="onViewData($event, 'applications')"
+            >
+            </generic-table>
+          </div></div
+      ></mat-tab>
+    </mat-tab-group>
+  </div>
 </div>

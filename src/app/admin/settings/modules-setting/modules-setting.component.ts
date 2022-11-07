@@ -36,8 +36,6 @@ export class ModulesSettingComponent implements OnInit {
     shortName: 'Name',
     categoryName: 'Category',
     description: 'Description',
-    fee: 'Fee (₦)',
-    serviceCharge: 'Service Charge (₦)',
     status: 'Status',
   };
 

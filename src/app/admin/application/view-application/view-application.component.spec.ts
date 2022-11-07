@@ -11,9 +11,7 @@ describe('ViewApplicationComponent', () => {
       declarations: [ ViewApplicationComponent ]
     })
     .compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(ViewApplicationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
