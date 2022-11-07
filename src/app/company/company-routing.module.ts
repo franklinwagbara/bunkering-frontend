@@ -1,18 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApplyComponent } from './apply.component';
-import { ChangePasswordComponent } from './changepassword.component';
-import { DashboardComponent } from './dashboard.component';
-import { MessagesComponent } from './messeges.component';
-import { MyApplicationComponent } from './myapplication.component';
-import { MyScheduleComponent } from './myschedule.component';
-import { MypermitsComponent } from './mypermits.component';
-import { RegisterDirectorComponent } from './registerdirector.component';
-import { SubmitSurveyComponent } from './submitsurvey.component';
+import { ApplyComponent } from './apply/apply.component';
+import { ChangePasswordComponent } from './changepassword/changepassword.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { MessagesComponent } from './messages/messeges.component';
+import { MyApplicationComponent } from './my-applications/myapplication.component';
+import { MyScheduleComponent } from './schedules/myschedule.component';
+import { MypermitsComponent } from './permits/mypermits.component';
+import { RegisterDirectorComponent } from './director/registerdirector.component';
 import { CompanyInformationComponent } from './company-information/companyinformation.component';
-import { UploadComponent } from './upload.component';
-import { PreviewAppComponent } from './previewapp.component';
-import { PaymentSumComponent } from './paymentsum.component';
+import { UploadComponent } from './apply/upload.component';
+import { PreviewAppComponent } from './apply/edit-preview/previewapp.component';
+import { PaymentSumComponent } from './paymnet-summary/paymentsum.component';
 
 const routes: Routes = [
     {path: '', component: DashboardComponent},
@@ -24,7 +23,6 @@ const routes: Routes = [
     {path: 'apply', component: ApplyComponent},
     {path: 'myapplication', component: MyApplicationComponent},
     {path: 'registerdirector', component: RegisterDirectorComponent},
-    {path: 'submitsurvey', component: SubmitSurveyComponent},
     {path: 'upload', component: UploadComponent},
     {path: 'previewapp/:id', component: PreviewAppComponent},
     {path: 'paymentsum/:id', component: PaymentSumComponent},
