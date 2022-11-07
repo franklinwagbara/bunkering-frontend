@@ -24,19 +24,13 @@
         </mat-form-field>
       </div>
       <div *ngIf="!noAddOrDeleteButton">
-        <button
-          mat-raised-button
-          (click)="addData()"
-          class="demo-button"
-          *ngIf="!noAddButton"
-        >
+        <button mat-raised-button (click)="addData()" *ngIf="!noAddButton">
           Add New
         </button>
         <button
           mat-raised-button
           [disabled]="!dataSource.data.length"
           (click)="deleteData()"
-          class="demo-button"
           *ngIf="!noDeleteButton"
         >
           Delete

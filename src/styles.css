@@ -51,11 +51,12 @@ button:disabled {
 }
 
 .page-title {
-  @apply text-center py-6 mb-6 shadow-2xl;
+  box-shadow: 0px 4px 5px 0px #888888;
+  @apply text-center py-6 mb-6 rounded-full;
 }
 
 .setting-desk {
-  background-color: rgb(255, 255, 255);
+  background-color: #e5f0f6;
   min-height: fit-content;
   padding: 2rem;
   border-radius: 5px;

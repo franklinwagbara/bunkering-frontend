@@ -151,6 +151,12 @@ export class AdminService {
       .pipe(retry(this.num));
   }
 
+  getModule() {
+    return this.http
+      .get<any>(`${environment.apiUrl}/configuration/get-module-configuration`)
+      .pipe(retry(this.num));
+  }
+
   deleteModule(moduleId: number) {
     return this.http
       .delete<any>(
