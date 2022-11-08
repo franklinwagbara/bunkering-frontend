@@ -24,6 +24,7 @@ import { BranchSettingComponent } from './settings/branch-setting/branch-setting
 import { FieldZonalOfficeComponent } from './settings/field-zonal-office/field-zonal-office.component';
 import { ModulesSettingComponent } from './settings/modules-setting/modules-setting.component';
 import { StaffdeskComponent } from './staffdesk/staffdesk.component';
+import { AppProcessComponent } from './settings/app-process/app-process.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { StaffdeskComponent } from './staffdesk/staffdesk.component';
     BranchSettingComponent,
     ApplicationViewTableComponent,
     ViewApplicationComponent,
+    AppProcessComponent,
   ],
 
   imports: [

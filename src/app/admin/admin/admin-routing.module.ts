@@ -11,6 +11,7 @@ import { FieldZonalOfficeComponent } from '../settings/field-zonal-office/field-
 import { AppStageDocsComponent } from '../settings/app-stage-docs/app-stage-docs.component';
 import { PhasedocumentsComponent } from '../settings/phasedocuments/phasedocuments.component';
 import { BranchSettingComponent } from '../settings/branch-setting/branch-setting.component';
+import { AppProcessComponent } from '../settings/app-process/app-process.component';
 
 const routes: Routes = [
   { path: '', component: AdminComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'field-zone-office', component: FieldZonalOfficeComponent },
   { path: 'branch-setting', component: BranchSettingComponent },
   { path: 'phasedocuments', component: PhasedocumentsComponent },
+  { path: 'application-process', component: AppProcessComponent },
 ];
 
 @NgModule({

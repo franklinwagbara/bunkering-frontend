@@ -8,6 +8,8 @@
           [title-color]="'yellow'"
           [table_keysMappedToHeaders]="userKeysMappedToHeaders"
           [table_content]="users"
+          [noTitle]="true"
+          [table_controls_horizontal]="true"
           (onAddData)="onAddData($event, 'users')"
           (onDeleteData)="onDeleteData($event, 'users')"
           (onEditData)="onEditData($event, 'users')"

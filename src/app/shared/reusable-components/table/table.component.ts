@@ -30,10 +30,11 @@ const PAGESIZE = 10;
 @Component({
   selector: 'generic-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.css'],
+  styleUrls: ['./table.component.scss'],
 })
 export class TableComponent implements OnInit, OnChanges, AfterViewInit {
   @Input('title-color') titleColorProp?: string = 'slate';
+  @Input('noTitle') noTitle: boolean = false;
   @Input('noControls') noControls?: boolean = false;
   @Input('noFilter') noFilter?: boolean = false;
   @Input('noAddOrDeleteButton') noAddOrDeleteButton?: boolean = false;
@@ -44,6 +45,8 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit {
   @Input('EnableViewControl') enableViewControl?: boolean = false;
   @Input('table_keysMappedToHeaders')
   keysMappedToHeaders: ITableKeysMappedToHeaders = {};
+  @Input('table_controls_horizontal') table_controls_horizontal: boolean =
+    false;
   @Input('table_title') title: string = 'Title';
   @Input('table_content') items: any[] = [];
   @Output('onAddData') onAddData = new EventEmitter<any>();

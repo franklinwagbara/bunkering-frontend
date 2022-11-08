@@ -27,6 +27,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { FieldOfficeFormComponent } from './reusable-components/field-office-form/field-office-form.component';
 import { BranchFormComponent } from './reusable-components/branch-form/branch-form.component';
 import { UserFormComponent } from './reusable-components/user-form/user-form.component';
+import { ApplicationProcessFormComponent } from './reusable-components/application-process-form/application-process-form.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { UserFormComponent } from './reusable-components/user-form/user-form.com
     FieldOfficeFormComponent,
     BranchFormComponent,
     UserFormComponent,
+    ApplicationProcessFormComponent,
   ],
   imports: [
     CommonModule,

@@ -8,8 +8,6 @@ button {
 }
 
 .table-container {
-  min-height: -webkit-fit-content;
-  min-height: -moz-fit-content;
   min-height: fit-content;
   width: 98%;
   max-width: 100%;
@@ -41,8 +39,6 @@ table {
 
 td,
 th {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
 }
 
@@ -60,6 +56,7 @@ th {
   text-align: center;
   padding-top: 50px;
   font-weight: bolder;
+
   @apply flex items-center justify-center pb-4;
 }
 
@@ -101,4 +98,4 @@ th {
 
 .flex-row {
   flex-direction: row;
-}/*# sourceMappingURL=table.component.css.map */
+}

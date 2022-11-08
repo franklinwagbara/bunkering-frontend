@@ -5,6 +5,7 @@ import { map, retry } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
 import { LoginModel } from '../models/login-model';
+import { IApplicationProcess } from '../interfaces/IApplicationProcess';
 
 @Injectable({ providedIn: 'root' })
 export class AdminService {
@@ -316,6 +317,32 @@ export class AdminService {
   getApps() {
     return this.http
       .get<any>(`${environment.apiUrl}/admin/all-applications`)
+      .pipe(retry(this.num));
+  }
+
+  createApplicationProcess(model: IApplicationProcess) {
+    return this.http
+      .post<any>(`${environment.apiUrl}/configuration/add-app-process`, model)
+      .pipe(retry(this.num));
+  }
+
+  getApplicationProcesses() {
+    return this.http
+      .get<any>(`${environment.apiUrl}/configuration/all-processes`)
+      .pipe(retry(this.num));
+  }
+
+  deleteApplicationProcess(id: number) {
+    return this.http
+      .delete<any>(
+        `${environment.apiUrl}/configuration/delete-application-process/${id}`
+      )
+      .pipe(retry(this.num));
+  }
+
+  getActionsAndStatuses() {
+    return this.http
+      .get<any>(`${environment.apiUrl}/configuration/all-actions-status`)
       .pipe(retry(this.num));
   }
 }

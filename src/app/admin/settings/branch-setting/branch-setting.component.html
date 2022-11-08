@@ -8,6 +8,8 @@
           [title-color]="'blue'"
           [table_keysMappedToHeaders]="branchKeysMappedToHeaders"
           [table_content]="branches"
+          [noTitle]="true"
+          [table_controls_horizontal]="true"
           (onAddData)="onAddData($event, 'branches')"
           (onDeleteData)="onDeleteData($event, 'branches')"
           (onEditData)="onEditData($event, 'branches')"

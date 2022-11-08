@@ -1,10 +1,11 @@
 <ng-container>
   <div class="table-container mat-elevation-z8">
-    <div [class]="titleColor">
+    <div [class]="titleColor" *ngIf="!noTitle">
       {{ title | uppercase }}
     </div>
     <div
-      class="table-controls table-group"
+      class="table-controls"
+      [ngClass]="{ 'table-group': table_controls_horizontal }"
       #tableControls
       [style.display]="!noControls ? 'block' : 'none'"
     >

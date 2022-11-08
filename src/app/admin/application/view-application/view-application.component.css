@@ -1,0 +1,11 @@
+.content {
+  @apply flex flex-row w-full mt-9 gap-4;
+}
+
+.application-view {
+  @apply basis-[40%];
+}
+
+.application-controls {
+  @apply basis-[30%]  shadow-md flex flex-col gap-4;
+}/*# sourceMappingURL=view-application.component.css.map */

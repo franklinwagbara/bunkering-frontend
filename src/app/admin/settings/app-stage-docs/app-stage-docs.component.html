@@ -10,6 +10,8 @@
           [title-color]="'purple'"
           [table_keysMappedToHeaders]="permitStageDocsKeysMappedToHeaders"
           [table_content]="permitStageDocuments"
+          [noTitle]="true"
+          [table_controls_horizontal]="true"
           (onAddData)="onAddData($event, 'permitStageDocument')"
           (onDeleteData)="onDeleteData($event, 'permitStageDocument')"
           (onEditData)="onEditData($event, 'permitStageDocument')"

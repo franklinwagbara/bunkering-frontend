@@ -1,4 +1,4 @@
-.dsh-cards {
+/* .dsh-cards {
   min-height: 120px;
   border-radius: 6px;
   display: inline-block;
@@ -18,16 +18,19 @@
   margin: 3rem 1.1rem 1rem 1.5rem;
   border-radius: 5px;
   padding: 2rem;
-}
+} */
 
 /** dashboard css*/
 
 .card-area {
-  @apply relative mt-4 px-10 bg-primary_accent mb-28 h-card_area_lg xl:mb-0 xl:h-card_area grid sm:grid-cols-2 grid-cols-1 md:grid-cols-2  xl:grid-cols-4  gap-1 lg:gap-4 2xl:gap-8 pt-14;
+  @apply relative mt-4 px-10 bg-[#FCB97D] mb-28 pb-8 xl:mb-0 xl:h-card_area grid sm:grid-cols-2 grid-cols-1 md:grid-cols-2  xl:grid-cols-4  gap-1 lg:gap-4 2xl:gap-8 pt-14;
 }
 
 .card {
-  @apply p-5 h-44 bg-white rounded-2xl shadow-md flex flex-col gap-3;
+  box-shadow: 11px 14px 0px 0px #84690f;
+  border-radius: 10px;
+  border-color: transparent !important;
+  @apply p-5 h-44 bg-white  flex flex-col gap-3;
 }
 
 .card-data {
@@ -47,7 +50,8 @@
 }
 
 .content {
-  @apply relative mx-10 -mt-content_mt bg-white border h-[1000px] rounded-3xl p-6 shadow-md;
+  box-shadow: 0px 4px 5px #888888;
+  @apply relative mx-10 -mt-content_mt bg-white border h-[1000px] p-6 rounded-lg;
 }
 
 /** Dashboard css ends here */

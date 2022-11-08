@@ -112,6 +112,7 @@ export class ApplicationComponent implements OnInit, AfterViewInit {
       (app) => app.categoryId === (id as string).toString()
     );
 
+    console.log('cat id', id, this.categories);
     console.log('all applications', this.applications);
     return filteredByCategoryId.length === 0 ? null : filteredByCategoryId;
   }
