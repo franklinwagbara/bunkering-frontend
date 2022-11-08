@@ -71,16 +71,47 @@ export class ApplicationProcessFormComponent {
     this.roles = data.data.roles;
     this.actions = data.data.actions;
     this.statuses = data.data.statuses;
+    this.applicationProccess = data.data?.applicationProcess;
+
+    console.log('application process....', this.applicationProccess);
 
     this.form = this.formBuilder.group({
-      permitStageId: ['none', Validators.required],
-      branchId: ['none', Validators.required],
-      triggeredByRole: ['none', Validators.required],
-      action: ['none', Validators.required],
-      targetRole: ['none', Validators.required],
-      status: ['none', Validators.required],
-      rate: ['none'],
-      isArchived: ['none', Validators.required],
+      permitStageId: [
+        this.applicationProccess
+          ? this.applicationProccess.permitStageId
+          : 'none',
+        Validators.required,
+      ],
+      branchId: [
+        this.applicationProccess ? this.applicationProccess.branchId : 'none',
+        Validators.required,
+      ],
+      triggeredByRole: [
+        this.applicationProccess
+          ? this.applicationProccess.triggeredByRole
+          : 'none',
+        Validators.required,
+      ],
+      action: [
+        this.applicationProccess ? this.applicationProccess.action : 'none',
+        Validators.required,
+      ],
+      targetRole: [
+        this.applicationProccess ? this.applicationProccess.targetRole : 'none',
+        Validators.required,
+      ],
+      status: [
+        this.applicationProccess ? this.applicationProccess.status : 'none',
+        Validators.required,
+      ],
+      rate: [
+        this.applicationProccess ? this.applicationProccess.rate : 'none',
+        Validators.required,
+      ],
+      isArchived: [
+        this.applicationProccess ? this.applicationProccess.isArchived : 'none',
+        Validators.required,
+      ],
     });
   }
 

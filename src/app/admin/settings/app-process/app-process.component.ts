@@ -173,6 +173,33 @@ export class AppProcessComponent implements OnInit {
   }
 
   onEditData(event: any, type: string) {
-    console.log('Edit not implemented yet');
+    const operationConfiguration = {
+      applicationProcesses: {
+        data: {
+          permitStages: this.permitStages,
+          branches: this.branches,
+          roles: this.roles,
+          actions: this.actions,
+          statuses: this.statuses,
+          applicationProcess: event,
+        },
+        form: ApplicationProcessFormComponent,
+      },
+    };
+
+    let dialogRef = this.dialog.open(operationConfiguration[type].form, {
+      data: {
+        data: operationConfiguration[type].data,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((res) => {
+      this.progressBarService.open();
+
+      this.adminHttpService.getApplicationProcesses().subscribe((res) => {
+        this.applicationProcesses = res.data.data;
+        this.progressBarService.close();
+      });
+    });
   }
 }

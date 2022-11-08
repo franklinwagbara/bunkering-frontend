@@ -5,7 +5,7 @@ import { AuthenticationService, GenericService } from '../../shared/services';
 
 @Component({
   templateUrl: 'apply.component.html',
-  styleUrls: ['../company.component.scss'],
+  styleUrls: ['../company.component.css'],
 })
 export class ApplyComponent {
   genk: GenericService;

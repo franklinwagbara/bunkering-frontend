@@ -1,16 +1,23 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PreviewModel, uploadFile } from '../../../shared/models/apply.model';
-import { AuthenticationService, GenericService } from '../../../shared/services';
+import {
+  AuthenticationService,
+  GenericService,
+} from '../../../shared/services';
 import { ApplyService } from '../../../shared/services/apply.service';
 import { ModalService } from '../../../shared/services/modal.service';
 
 @Component({
   templateUrl: 'previewapp.component.html',
-  styleUrls: ['./company.component.scss']
+  styleUrls: ['../company.component.scss'],
 })
-
 export class PreviewAppComponent {
   uploadFile: File;
   categoryList: any;
@@ -47,23 +54,23 @@ export class PreviewAppComponent {
   phasestages: any;
   column: any;
 
-
-
-  constructor(private cd: ChangeDetectorRef,
+  constructor(
+    private cd: ChangeDetectorRef,
     private apply: ApplyService,
     private router: Router,
     private auth: AuthenticationService,
     private modalService: ModalService,
     private route: ActivatedRoute,
-    private gen: GenericService, private fb: FormBuilder) {
+    private gen: GenericService,
+    private fb: FormBuilder
+  ) {
     this.genk = gen;
   }
 
   ngOnInit() {
-
     this.getCompanyDetailById();
 
-    this.auth.getPhaseCategories().subscribe(res => {
+    this.auth.getPhaseCategories().subscribe((res) => {
       this.phaseList = res.data.data.allPermits;
     });
 
@@ -74,17 +81,16 @@ export class PreviewAppComponent {
     this.cd.markForCheck();
   }
 
-
   initForm() {
     this.previewForm = new FormGroup({
-      'categoryId': new FormControl(this.categoryId, [Validators.required]),
-      'phaseId': new FormControl(this.phaseId, [Validators.required]),
-      'phaseStageId': new FormControl(this.phaseId, [Validators.required]),
-      'lgaId': new FormControl(this.LgaId),
-      'stateId': new FormControl(this.stateId),
-      'location': new FormControl(this.address, [Validators.required]),
-      'file': new FormControl('', [Validators.required]),
-      'doc': new FormControl('', [Validators.required]),
+      categoryId: new FormControl(this.categoryId, [Validators.required]),
+      phaseId: new FormControl(this.phaseId, [Validators.required]),
+      phaseStageId: new FormControl(this.phaseId, [Validators.required]),
+      lgaId: new FormControl(this.LgaId),
+      stateId: new FormControl(this.stateId),
+      location: new FormControl(this.address, [Validators.required]),
+      file: new FormControl('', [Validators.required]),
+      doc: new FormControl('', [Validators.required]),
     });
     this.cd.markForCheck();
   }
@@ -93,35 +99,39 @@ export class PreviewAppComponent {
     return this.previewForm.controls;
   }
 
-
   get columns() {
     if (this.previewBody.categoryCode?.toUpperCase() == 'WLN') {
-      this.column= this.noticeColumn;
+      this.column = this.noticeColumn;
     }
 
-    if (this.previewBody.categoryCode?.toUpperCase() == 'WELL REENTRY SUSPENSION PERMIT PLUG AND ABANDOMENT PERMIT') {
-      this.column= this.entryAColumn;
+    if (
+      this.previewBody.categoryCode?.toUpperCase() ==
+      'WELL REENTRY SUSPENSION PERMIT PLUG AND ABANDOMENT PERMIT'
+    ) {
+      this.column = this.entryAColumn;
     }
 
-    if (this.previewBody.categoryCode?.toUpperCase() == 'WELL REENTRY APPLICATION FORM ') {
-      this.column= this.entryBColumn;
+    if (
+      this.previewBody.categoryCode?.toUpperCase() ==
+      'WELL REENTRY APPLICATION FORM '
+    ) {
+      this.column = this.entryBColumn;
     }
 
     return this.column;
-  };
+  }
 
   onFileChange(event) {
-
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.previewForm.patchValue({
-        file: file
+        file: file,
       });
     }
   }
 
   getCategory() {
-    this.apply.getApplicationCategory().subscribe(res => {
+    this.apply.getApplicationCategory().subscribe((res) => {
       this.categoryList = res.data.data;
     });
     this.cd.markForCheck();
@@ -129,7 +139,7 @@ export class PreviewAppComponent {
 
   getPhases(e) {
     this.categoryId = e.target.value;
-    this.apply.getApplicationPhases(e.target.value).subscribe(res => {
+    this.apply.getApplicationPhases(e.target.value).subscribe((res) => {
       //debugger;
       this.phaseList = res.data.data;
     });
@@ -144,14 +154,11 @@ export class PreviewAppComponent {
   }
 
   getStateList() {
-    this.apply.getStateList().subscribe(res => {
-
+    this.apply.getStateList().subscribe((res) => {
       this.stateList = res.data.data;
     });
     this.cd.markForCheck();
   }
-
-
 
   // getLGAList() {
   //   this.apply.getLgaList().subscribe(res =>{
@@ -164,26 +171,25 @@ export class PreviewAppComponent {
   //  }
 
   getLgaByState(e) {
-    this.apply.getLgaByStateId(e.target.value).subscribe(res => {
+    this.apply.getLgaByStateId(e.target.value).subscribe((res) => {
       this.lgaList = res.data.data;
     });
     this.cd.markForCheck();
   }
 
   getCompanyDetailById() {
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params) => {
       this.appid = params['id'];
     });
-    this.apply.getappdetailsbyId(this.appid).subscribe(res => {
+    this.apply.getappdetailsbyId(this.appid).subscribe((res) => {
       this.previewBody = res.data.data as PreviewModel;
 
-
-      this.apply.getLgaByStateId(this.previewBody.stateId).subscribe(res => {
+      this.apply.getLgaByStateId(this.previewBody.stateId).subscribe((res) => {
         this.lgaList = res.data.data;
         this.cd.markForCheck();
       });
 
-      this.apply.getpermitstages().subscribe(res => {
+      this.apply.getpermitstages().subscribe((res) => {
         this.phasestages = res.data.data.filter((ps) => {
           return ps.phaseId == this.previewBody.phaseStageId;
         });
@@ -191,14 +197,15 @@ export class PreviewAppComponent {
 
         this.cd.markForCheck();
       });
-      this.apply.getApplicationPhases(this.phasestages[0].phaseId).subscribe(res => {
-        this.phaseList = res.data.data;
-        debugger;
-        this.columns();
-        this.cd.markForCheck();
-      });
+      this.apply
+        .getApplicationPhases(this.phasestages[0].phaseId)
+        .subscribe((res) => {
+          this.phaseList = res.data.data;
+          debugger;
+          this.columns();
+          this.cd.markForCheck();
+        });
     });
-
 
     this.cd.markForCheck();
   }
@@ -208,26 +215,25 @@ export class PreviewAppComponent {
     this.cd.markForCheck();
   }
 
-
-
   saveTemplate(DeFile: any) {
     this.uploadFile = <File>DeFile.target.files[0];
     if (!this.uploadFile) {
       return;
     }
     if (this.uploadFile.size < 1 || this.uploadFile.size > 1024 * 1024 * 50) {
-      this.uploadForm.controls['uploadFile'].setErrors({ 'incorrect': true });
+      this.uploadForm.controls['uploadFile'].setErrors({ incorrect: true });
       this.uploadFile = null;
       return;
     } else {
       this.uploadForm.controls['uploadFile'].setErrors(null);
     }
-    this.uploadNewName = this.gen.getExpDoc(this.uploadFile.name, this.uploadFile.type);
+    this.uploadNewName = this.gen.getExpDoc(
+      this.uploadFile.name,
+      this.uploadFile.type
+    );
     this.uploadNameDoc = this.uploadNewName;
     // let dockind = this.gen.getExt(this.File.name);
   }
-
-
 
   changePhaseList(e) {
     this.phasestages = this.stagelist.filter((ps) => {
@@ -251,170 +257,165 @@ export class PreviewAppComponent {
     // if (this.uploadFile) {
     //   formDat.append('doc', this.uploadFile, this.uploadNewName);
     // }
-    this.apply.uploadApplyform(formDat).subscribe(res => {
-
+    this.apply.uploadApplyform(formDat).subscribe((res) => {
       if (res.statusCode == 300) {
-        this.modalService.logNotice("Error", res.message, 'error');
-      }
-      else {
+        this.modalService.logNotice('Error', res.message, 'error');
+      } else {
         //this.loadTable_Management(res.data);
-        this.modalService.logNotice("Success", res.message, 'success');
+        this.modalService.logNotice('Success', res.message, 'success');
       }
-    })
+    });
   }
 
-  displayPayment(){
+  displayPayment() {
     this.router.navigate(['/company/paymentsum/' + this.appid]);
   }
 
   noticeColumn = [
-    
     {
-      "columnDef": "field",
-      "header": "FIELD"
+      columnDef: 'field',
+      header: 'FIELD',
     },
- 
-    {
-      "columnDef": "block",
-      "header": "BLOCK"
-    },
-    {
-      "columnDef": "terrain",
-      "header": "TERRAIN"
-    },
-    {
-      "columnDef": "wellLocationCategory",
-      "header": "WELL LOCATION CATEGORY"
 
+    {
+      columnDef: 'block',
+      header: 'BLOCK',
     },
     {
-      "columnDef": "spudDate",
-      "header": "SPUD DATE"
+      columnDef: 'terrain',
+      header: 'TERRAIN',
     },
     {
-      "columnDef": "wellSpudName",
-      "header": "WELL SPUD NAME"
+      columnDef: 'wellLocationCategory',
+      header: 'WELL LOCATION CATEGORY',
     },
     {
-      "columnDef": "wellClassApplied",
-      "header": "WELL CLASS APPLIED"
-
+      columnDef: 'spudDate',
+      header: 'SPUD DATE',
     },
     {
-      "columnDef": "wellSurfaceCoordinates",
-      "header": "WELL SURFACE COORDINATES "
+      columnDef: 'wellSpudName',
+      header: 'WELL SPUD NAME',
     },
     {
-      "columnDef": "proposedRig",
-      "header": "PROPOSED RIG"
+      columnDef: 'wellClassApplied',
+      header: 'WELL CLASS APPLIED',
     },
     {
-      "columnDef": "expectedVoloume",
-      "header": "EXPECTED VOLUMES "
+      columnDef: 'wellSurfaceCoordinates',
+      header: 'WELL SURFACE COORDINATES ',
     },
     {
-      "columnDef": "targetReserves",
-      "header": "TARGET RESERVES"
+      columnDef: 'proposedRig',
+      header: 'PROPOSED RIG',
     },
     {
-      "columnDef": "afe",
-      "header": "AFE"
+      columnDef: 'expectedVoloume',
+      header: 'EXPECTED VOLUMES ',
     },
-  ]
+    {
+      columnDef: 'targetReserves',
+      header: 'TARGET RESERVES',
+    },
+    {
+      columnDef: 'afe',
+      header: 'AFE',
+    },
+  ];
 
   entryAColumn = [
     {
-      "columnDef": "wellLocationCategory",
-      "header": "WELL LOCATION CATEGORY"
-
+      columnDef: 'wellLocationCategory',
+      header: 'WELL LOCATION CATEGORY',
     },
     {
-      "columnDef": "wellName",
-      "header": "WELL NAME"
+      columnDef: 'wellName',
+      header: 'WELL NAME',
     },
     {
-      "columnDef": "natureOfOperation",
-      "header": "NATURE OF OPERATION"
+      columnDef: 'natureOfOperation',
+      header: 'NATURE OF OPERATION',
     },
     {
-      "columnDef": "plugbackInterval",
-      "header": "PLUGBACK INTERVAL"
+      columnDef: 'plugbackInterval',
+      header: 'PLUGBACK INTERVAL',
     },
     {
-      "columnDef": "rigForOperation",
-      "header": "RIG FOR OPERATION"
+      columnDef: 'rigForOperation',
+      header: 'RIG FOR OPERATION',
     },
     {
-      "columnDef": "lastProductionRate",
-      "header": "LAST PRODUCTION RATE"
+      columnDef: 'lastProductionRate',
+      header: 'LAST PRODUCTION RATE',
     },
     {
-      "columnDef": "initialReservesAllocationOfWell",
-      "header": "INTITIAL RESERVES ALLOCATION OF WELL"
+      columnDef: 'initialReservesAllocationOfWell',
+      header: 'INTITIAL RESERVES ALLOCATION OF WELL',
     },
     {
-      "columnDef": "cumulativeProductionForWell",
-      "header": "CUMULATIVE PRODUCTION OF WELL"
+      columnDef: 'cumulativeProductionForWell',
+      header: 'CUMULATIVE PRODUCTION OF WELL',
     },
     {
-      "columnDef": "afe",
-      "header": "AFE"
+      columnDef: 'afe',
+      header: 'AFE',
     },
     {
-      "columnDef": "estimatedOperationDays",
-      "header": "ESTIMATED OPERATION DAYS"
-    },]
+      columnDef: 'estimatedOperationDays',
+      header: 'ESTIMATED OPERATION DAYS',
+    },
+  ];
 
   entryBColumn = [
     {
-      "columnDef": "wellLocationCategory",
-      "header": "WELL LOCATION CATEGORY"
-
+      columnDef: 'wellLocationCategory',
+      header: 'WELL LOCATION CATEGORY',
     },
     {
-      "columnDef": "wellName",
-      "header": "WELL NAME"
+      columnDef: 'wellName',
+      header: 'WELL NAME',
     },
     {
-      "columnDef": "natureOfOperation",
-      "header": "NATURE OF OPERATION"
+      columnDef: 'natureOfOperation',
+      header: 'NATURE OF OPERATION',
     },
     {
-      "columnDef": "wellCompletionInterval",
-      "header": "WELL COMPLETETION INTERVAL"
+      columnDef: 'wellCompletionInterval',
+      header: 'WELL COMPLETETION INTERVAL',
     },
     {
-      "columnDef": "rigForOperation",
-      "header": "RIG FOR OPERATION"
+      columnDef: 'rigForOperation',
+      header: 'RIG FOR OPERATION',
     },
     {
-      "columnDef": "preOperationProductionRate",
-      "header": "PRE OPERATION PRODUCTION RATE"
+      columnDef: 'preOperationProductionRate',
+      header: 'PRE OPERATION PRODUCTION RATE',
     },
     {
-      "columnDef": "postOperationProductionRate",
-      "header": "POST OPERATION PRODUCTION RATE"
-    },
-
-    {
-      "columnDef": "initialReservesAllocationOfWell",
-      "header": "INTITIAL RESERVES ALLOCATION OF WELL"
-    },
-    {
-      "columnDef": "cumulativeProductionForWell",
-      "header": "CUMULATIVE PRODUCTION OF WELL"
+      columnDef: 'postOperationProductionRate',
+      header: 'POST OPERATION PRODUCTION RATE',
     },
 
     {
-      "columnDef": "targetReserves",
-      "header": "TARGET RESERVES"
+      columnDef: 'initialReservesAllocationOfWell',
+      header: 'INTITIAL RESERVES ALLOCATION OF WELL',
     },
     {
-      "columnDef": "afe",
-      "header": "AFE"
+      columnDef: 'cumulativeProductionForWell',
+      header: 'CUMULATIVE PRODUCTION OF WELL',
+    },
+
+    {
+      columnDef: 'targetReserves',
+      header: 'TARGET RESERVES',
     },
     {
-      "columnDef": "estimatedOperationDays",
-      "header": "ESTIMATED OPERATION DAYS"
-    },]
+      columnDef: 'afe',
+      header: 'AFE',
+    },
+    {
+      columnDef: 'estimatedOperationDays',
+      header: 'ESTIMATED OPERATION DAYS',
+    },
+  ];
 }
