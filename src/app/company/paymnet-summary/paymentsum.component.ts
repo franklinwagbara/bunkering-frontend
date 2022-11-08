@@ -5,24 +5,18 @@ import { AuthenticationService, GenericService } from '../../shared/services';
 
 @Component({
   templateUrl: 'paymentsum.component.html',
-  styleUrls: ['company.component.scss']})
-
-export class PaymentSumComponent{
+  styleUrls: ['./paymentsum.component.scss'],
+})
+export class PaymentSumComponent {
   genk: GenericService;
-  
 
-  constructor(private gen: GenericService,
+  constructor(
+    private gen: GenericService,
     private router: Router,
-    private auth: AuthenticationService) {
-      this.genk = gen;
+    private auth: AuthenticationService
+  ) {
+    this.genk = gen;
   }
 
-  submitpayment() {
-
-  }
-    
-    }
-
-  
-      
-
+  submitpayment() {}
+}

@@ -4,11 +4,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { CompanySErvice } from 'src/app/shared/services/company.service';
 
-
 @Component({
   templateUrl: 'myapplication.component.html',
-  styleUrls: ['../company.component.scss']})
-
+  styleUrls: ['./myapplication.component.scss'],
+})
 export class MyApplicationComponent implements OnInit {
   applications: Application[];
   tableTitles = {
@@ -26,24 +25,20 @@ export class MyApplicationComponent implements OnInit {
   constructor(
     private cd: ChangeDetectorRef,
     public snackBar: MatSnackBar,
-    private _company: CompanySErvice) {
-    
-  }
+    private _company: CompanySErvice
+  ) {}
 
   ngOnInit(): void {
-    this._company.getCompanyApplications().subscribe(res => {
-      if(res.success)
-      {
+    this._company.getCompanyApplications().subscribe((res) => {
+      if (res.success) {
         this.applications = res.data.data.map((app) => app);
         this.cd.markForCheck();
       }
     });
   }
-  
-  
 }
 
-interface Application{
+interface Application {
   AppReference: string;
   AddedDate: Date;
   CompanyName: string;

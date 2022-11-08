@@ -16,7 +16,7 @@ import { ModalService } from '../../../shared/services/modal.service';
 
 @Component({
   templateUrl: 'previewapp.component.html',
-  styleUrls: ['../company.component.scss'],
+  styleUrls: ['./previewapp.component.scss'],
 })
 export class PreviewAppComponent {
   uploadFile: File;

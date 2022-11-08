@@ -1,5 +1,10 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { uploadFile } from '../../shared/models/apply.model';
 import { GenericService } from '../../shared/services';
@@ -8,16 +13,15 @@ import { ModalService } from '../../shared/services/modal.service';
 
 @Component({
   templateUrl: 'upload.component.html',
-  styleUrls: ['company.component.scss']
+  styleUrls: ['./apply.component.scss'],
 })
-
 export class UploadComponent implements OnInit {
   uploadFile: File;
   categoryList: any;
-  stateList: any;  
+  stateList: any;
   phaseList: any;
   phaseId: number;
-  sizePerPage=10;
+  sizePerPage = 10;
   categoryId: string = '';
   uploadForm: FormGroup;
   state: string;
@@ -27,7 +31,7 @@ export class UploadComponent implements OnInit {
   title: 'Upload Application';
   uploadNewName: string;
   uploadNameDoc: string;
-  genk:GenericService;
+  genk: GenericService;
   data: any[];
   uploadBody: uploadFile = {} as uploadFile;
   uploadApplyForm: FormGroup;
@@ -38,132 +42,125 @@ export class UploadComponent implements OnInit {
   phase: string;
   applicationTypeId: string = '';
   stagelist = [];
-  phasestages:any;
-  
+  phasestages: any;
 
-
-  
-
-constructor(private cd: ChangeDetectorRef,
-  private apply: ApplyService,
-  private modalService: ModalService,
-  private router: Router,
-  private gen: GenericService, private fb: FormBuilder) { 
+  constructor(
+    private cd: ChangeDetectorRef,
+    private apply: ApplyService,
+    private modalService: ModalService,
+    private router: Router,
+    private gen: GenericService,
+    private fb: FormBuilder
+  ) {
     this.genk = gen;
   }
 
-ngOnInit() {
-  this.initForm();
- this.getCategory();
- this.getStateList();
- this.data = [];
- this.sizePerPage = this.genk.sizeten;
-}
+  ngOnInit() {
+    this.initForm();
+    this.getCategory();
+    this.getStateList();
+    this.data = [];
+    this.sizePerPage = this.genk.sizeten;
+  }
 
-
-initForm() {
-  this.uploadApplyForm = new FormGroup ({
-    'categoryId': new FormControl(this.categoryId, [Validators.required]),
-    'phaseId': new FormControl(this.phaseId, [Validators.required]),
-    'phaseStageId': new FormControl('', [Validators.required]),
-    'lgaId': new FormControl(this.LgaId),
-    'location': new FormControl(this.address, [Validators.required]),
-    'file': new FormControl('', [Validators.required]),
-    'doc': new FormControl('', [Validators.required]),
-  })
-}
-
-get f() {
-  return this.uploadApplyForm.controls;
-}
-
-onFileChange(event) {
-  
-  if (event.target.files.length > 0) {
-    const file = event.target.files[0];
-    this.uploadApplyForm.patchValue({
-      file: file
+  initForm() {
+    this.uploadApplyForm = new FormGroup({
+      categoryId: new FormControl(this.categoryId, [Validators.required]),
+      phaseId: new FormControl(this.phaseId, [Validators.required]),
+      phaseStageId: new FormControl('', [Validators.required]),
+      lgaId: new FormControl(this.LgaId),
+      location: new FormControl(this.address, [Validators.required]),
+      file: new FormControl('', [Validators.required]),
+      doc: new FormControl('', [Validators.required]),
     });
   }
-}
 
-getCategory() {
-  this.apply.getApplicationCategory().subscribe(res => {
-    this.categoryList = res.data.data;
+  get f() {
+    return this.uploadApplyForm.controls;
+  }
+
+  onFileChange(event) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.uploadApplyForm.patchValue({
+        file: file,
+      });
+    }
+  }
+
+  getCategory() {
+    this.apply.getApplicationCategory().subscribe((res) => {
+      this.categoryList = res.data.data;
+      this.cd.markForCheck();
+    });
     this.cd.markForCheck();
-  });
-  this.cd.markForCheck();
-}
+  }
 
-getPhases(e) {
-  this.categoryId = e.target.value;
-  this.apply.getApplicationPhases(e.target.value).subscribe(res => {
-    this.phaseList = res.data.data;
+  getPhases(e) {
+    this.categoryId = e.target.value;
+    this.apply.getApplicationPhases(e.target.value).subscribe((res) => {
+      this.phaseList = res.data.data;
+      this.cd.markForCheck();
+    });
+
+    this.apply.getpermitstages().subscribe((res) => {
+      //debugger;
+      this.stagelist = res.data.data;
+      this.cd.markForCheck();
+    });
+  }
+
+  getStateList() {
+    this.apply.getStateList().subscribe((res) => {
+      this.stateList = res.data.data;
+    });
     this.cd.markForCheck();
-  });
+  }
 
-  this.apply.getpermitstages().subscribe(res => {
-    //debugger;
-    this.stagelist = res.data.data;
-    this.cd.markForCheck();    
-  });
+  // getLGAList() {
+  //   this.apply.getLgaList().subscribe(res =>{
+  //     this.lgalist= res.data.data;
+  //   });
+  //   this.cd.markForCheck();
+  // }
+  //   let obj = this.statelist.filter(x => x.state == this.state)[0];
+  //    this.lgalist = obj.lga
+  //  }
 
-}
+  getLgaByState(e) {
+    this.apply.getLgaByStateId(e.target.value).subscribe((res) => {
+      this.lgalist = res.data.data;
+    });
+    this.cd.markForCheck();
+  }
 
-getStateList() {
-  this.apply.getStateList().subscribe(res => {
-    
-    this.stateList = res.data.data;
-  });
-  this.cd.markForCheck();
-}
-
-
-
-
-// getLGAList() {
-//   this.apply.getLgaList().subscribe(res =>{
-//     this.lgalist= res.data.data;
-//   });
-//   this.cd.markForCheck();
-// }
-//   let obj = this.statelist.filter(x => x.state == this.state)[0];
-//    this.lgalist = obj.lga
-//  }
-
-getLgaByState(e) {
-  this.apply.getLgaByStateId(e.target.value).subscribe(res => {
-    this.lgalist = res.data.data;
-  });
-  this.cd.markForCheck();
-}
-
-changePhaseList(e){
-  this.phasestages = this.stagelist.filter((ps) =>{
-    return ps.phaseId == e.target.value;
-  });
-  this.cd.markForCheck();
-}
-
-
+  changePhaseList(e) {
+    this.phasestages = this.stagelist.filter((ps) => {
+      return ps.phaseId == e.target.value;
+    });
+    this.cd.markForCheck();
+  }
 
   saveTemplate(DeFile: any) {
     this.uploadFile = <File>DeFile.target.files[0];
     if (!this.uploadFile) {
-        return;
-      }
-       if (this.uploadFile.size < 1 || this.uploadFile.size > 1024 * 1024 * 50) {
-       this.uploadForm.controls['uploadFile'].setErrors({ 'incorrect': true });
-        this.uploadFile = null;
-        return;
-      } else {
-        this.uploadForm.controls['uploadFile'].setErrors(null);
-      }
-      this.uploadNewName = this.gen.getExpDoc(this.uploadFile.name, this.uploadFile.type);
-      this.uploadNameDoc = this.uploadNewName;
-     // let dockind = this.gen.getExt(this.File.name);
+      return;
+    }
+    if (this.uploadFile.size < 1 || this.uploadFile.size > 1024 * 1024 * 50) {
+      this.uploadForm.controls['uploadFile'].setErrors({ incorrect: true });
+      this.uploadFile = null;
+      return;
+    } else {
+      this.uploadForm.controls['uploadFile'].setErrors(null);
+    }
+    this.uploadNewName = this.gen.getExpDoc(
+      this.uploadFile.name,
+      this.uploadFile.type
+    );
+    this.uploadNameDoc = this.uploadNewName;
+    // let dockind = this.gen.getExt(this.File.name);
   }
-   
+
   submit() {
     // let addr = this.f['address'].value;
     let a = this.categoryId;
@@ -172,29 +169,28 @@ changePhaseList(e){
     const formDat: FormData = new FormData();
     formDat.append('categoryId', this.uploadApplyForm.get('categoryId').value);
     formDat.append('phaseId', this.uploadApplyForm.get('phaseId').value);
-    formDat.append('phaseStageId', this.uploadApplyForm.get('phaseStageId').value);
+    formDat.append(
+      'phaseStageId',
+      this.uploadApplyForm.get('phaseStageId').value
+    );
     formDat.append('LgaId', this.uploadApplyForm.get('lgaId').value);
     formDat.append('location', this.uploadApplyForm.get('location').value);
     formDat.append('doc', this.uploadApplyForm.get('file').value);
     // if (this.uploadFile) {
     //   formDat.append('doc', this.uploadFile, this.uploadNewName);
     // }
-    this.apply.uploadApplyform(formDat).subscribe(res => {
-
-        if (res.statusCode == 300) {
-          this.modalService.logNotice("Error", res.message, 'error');
+    this.apply.uploadApplyform(formDat).subscribe((res) => {
+      if (res.statusCode == 300) {
+        this.modalService.logNotice('Error', res.message, 'error');
+      } else if (res.success) {
+        if (res.data.responseCode == '00') {
+          this.router.navigate(['/company/previewapp/' + res.data.data.appid]);
         }
-        else if( res.success){
-          if(res.data.responseCode == "00"){
-            this.router.navigate(['/company/previewapp/' + res.data.data.appid])
-
-          }
-        }
-        else {
-          //this.loadTable_Management(res.data);
-          this.modalService.logNotice("Success", res.message, 'success');
-        }
-      })
+      } else {
+        //this.loadTable_Management(res.data);
+        this.modalService.logNotice('Success', res.message, 'success');
+      }
+    });
   }
 
   // savecontinue(){
@@ -216,6 +212,4 @@ changePhaseList(e){
   //       }
   //   })
   // }
-
-  
 }

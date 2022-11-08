@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { AuthenticationService, GenericService } from '../../shared/services';
 
 @Component({
-  templateUrl: 'apply.component.html',
-  styleUrls: ['../company.component.css'],
+  templateUrl: './apply.component.html',
+  styleUrls: ['./apply.component.scss'],
 })
 export class ApplyComponent {
   genk: GenericService;

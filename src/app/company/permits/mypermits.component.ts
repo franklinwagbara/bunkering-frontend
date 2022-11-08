@@ -3,8 +3,6 @@ import { Router } from '@angular/router';
 
 @Component({
   templateUrl: 'mypermits.component.html',
-  styleUrls: ['company.component.scss']})
-
-export class MypermitsComponent {
-    
-}
+  styleUrls: ['./mypermits.component.scss'],
+})
+export class MypermitsComponent {}
