@@ -1,11 +1,12 @@
 /** Toggle side nav css */
 .dashboard {
   width: 100vw;
-  @apply relative flex flex-col min-h-screen bg-[#e5f0f6];
+  @apply relative flex flex-col min-h-screen bg-background;
 }
 
 .content-area {
-  @apply mt-12 bg-[#e5f0f6];
+  /* @apply mt-12 bg-[#e5f0f6]; */
+  @apply mt-12 bg-background;
 }
 
 .progress-bar {

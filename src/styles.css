@@ -56,11 +56,11 @@ button:disabled {
 }
 
 .setting-desk {
-  background-color: #e5f0f6;
   min-height: fit-content;
   padding: 2rem;
   border-radius: 5px;
   margin: 0 1.5rem 0 1.5rem;
+  @apply bg-background;
 }
 
 .table-wrapper {

@@ -4,7 +4,7 @@
 }
 
 .top-nav {
-  width: calc(100vw - 320px);
+  width: calc(100vw - 289px);
   @apply fixed z-50 h-16 shadow-md flex items-center px-10 justify-between backdrop-blur-sm bg-white/30 transition-all ease-in-out delay-75 duration-700;
 }
 
