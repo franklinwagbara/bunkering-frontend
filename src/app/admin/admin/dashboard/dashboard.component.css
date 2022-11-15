@@ -35,6 +35,30 @@
   @apply p-5 h-52  flex flex-col gap-3 bg-gradient-to-r from-yellow-200 to-yellow-400;
 }
 
+.card-red {
+  box-shadow: 3px 5px 1px 0px #9b4a4a;
+  border-color: transparent !important;
+  @apply bg-gradient-to-r from-red-200 to-red-400;
+}
+
+.card-green {
+  box-shadow: 3px 5px 1px 0px #519b4a;
+  border-color: transparent !important;
+  @apply bg-gradient-to-r from-green-200 to-green-400;
+}
+
+.card-blue {
+  box-shadow: 3px 5px 1px 0px #4a4f9b;
+  border-color: transparent !important;
+  @apply bg-gradient-to-r from-blue-200 to-blue-400;
+}
+
+.card-purple {
+  box-shadow: 3px 5px 1px 0px #814a9b;
+  border-color: transparent !important;
+  @apply bg-gradient-to-r from-purple-200 to-purple-400;
+}
+
 .card-data {
   @apply flex justify-between;
 }
@@ -53,7 +77,7 @@
 
 .content {
   /* box-shadow: 0px 4px 5px #888888; */
-  @apply relative mx-10 -mt-content_mt bg-content_area min-h-[1000px] p-6;
+  @apply relative mx-5 -mt-content_mt bg-content_area min-h-[1000px] p-6;
 }
 
 /** Dashboard css ends here */

@@ -10,6 +10,13 @@ import { environment } from 'src/environments/environment';
 })
 export class DashboardComponent implements OnInit {
   model: DashBoardModel;
+  messages = [];
+
+  tableTitles = {
+    messages: 'Messages',
+  };
+
+  messageKeysMappedToHeaders = {};
   // displapAppFiveDays = true;
 
   constructor(

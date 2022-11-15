@@ -25,6 +25,9 @@ import { FieldZonalOfficeComponent } from './settings/field-zonal-office/field-z
 import { ModulesSettingComponent } from './settings/modules-setting/modules-setting.component';
 import { StaffdeskComponent } from './staffdesk/staffdesk.component';
 import { AppProcessComponent } from './settings/app-process/app-process.component';
+import { ApplicationsFilteredByCategoryPipe } from './application/applications-filtered-by-category.pipe';
+import { MyDeskComponent } from './desk/my-desk/my-desk.component';
+import { BarChartComponent } from './admin/dashboard/bar-chart/bar-chart.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +43,9 @@ import { AppProcessComponent } from './settings/app-process/app-process.componen
     ApplicationViewTableComponent,
     ViewApplicationComponent,
     AppProcessComponent,
+    ApplicationsFilteredByCategoryPipe,
+    MyDeskComponent,
+    BarChartComponent,
   ],
 
   imports: [

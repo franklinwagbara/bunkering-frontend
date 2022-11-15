@@ -136,7 +136,7 @@
     <div class="card-title">MY DESK</div>
   </div>
 
-  <div class="card">
+  <div class="card card-green">
     <div class="card-data">
       <span>0</span>
       <svg
@@ -156,7 +156,7 @@
     </div>
     <div class="card-title">TOTAL APPLICATIONS APPROVED</div>
   </div>
-  <div class="card">
+  <div class="card card-blue">
     <div class="card-data">
       <span>0</span>
       <svg
@@ -175,7 +175,7 @@
     </div>
     <div class="card-title">TOTAL APPLICATIONS IN PROCESS</div>
   </div>
-  <div class="card">
+  <div class="card card-red">
     <div class="card-data">
       <span>0</span>
       <svg
@@ -196,4 +196,25 @@
     <div class="card-title">TOTAL APPLICATIONS DECLINED</div>
   </div>
 </div>
-<div class="content h-[1000px]">content</div>
+<div class="content h-[1000px]">
+  <app-bar-chart></app-bar-chart>
+  <div class="table-group mt-10">
+    <div class="table-wrapper px-0">
+      <div class="chart-title mb-4">
+        <span>{{ tableTitles.messages }}</span>
+      </div>
+      <generic-table
+        [table_title]="tableTitles.messages"
+        [title-color]="'yellow'"
+        [table_keysMappedToHeaders]="messageKeysMappedToHeaders"
+        [table_content]="messages"
+        [noAddOrDeleteButton]="true"
+        [noCheckControls]="true"
+        [noEditControl]="true"
+        [noFilter]="true"
+        [noTitle]="true"
+      >
+      </generic-table>
+    </div>
+  </div>
+</div>

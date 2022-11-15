@@ -10,7 +10,7 @@
       <mat-expansion-panel-header>
         <mat-panel-title> CURRENT DESK </mat-panel-title>
       </mat-expansion-panel-header>
-      <p>Company</p>
+      <p>{{ application.currentDesk }}</p>
     </mat-expansion-panel>
 
     <mat-expansion-panel>
@@ -48,7 +48,14 @@
       <p>extra payments</p>
     </mat-expansion-panel>
   </div>
-  <div class="application-controls">cocntrols</div>
+  <div class="application-controls">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> UPLOADED DOCUMENTS </mat-panel-title>
+      </mat-expansion-panel-header>
+      <p>Uploaded documents...</p>
+    </mat-expansion-panel>
+  </div>
 </div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close>Close</button>

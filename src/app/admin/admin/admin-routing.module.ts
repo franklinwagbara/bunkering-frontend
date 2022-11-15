@@ -12,6 +12,7 @@ import { AppStageDocsComponent } from '../settings/app-stage-docs/app-stage-docs
 import { PhasedocumentsComponent } from '../settings/phasedocuments/phasedocuments.component';
 import { BranchSettingComponent } from '../settings/branch-setting/branch-setting.component';
 import { AppProcessComponent } from '../settings/app-process/app-process.component';
+import { MyDeskComponent } from '../desk/my-desk/my-desk.component';
 
 const routes: Routes = [
   { path: '', component: AdminComponent },
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'branch-setting', component: BranchSettingComponent },
   { path: 'phasedocuments', component: PhasedocumentsComponent },
   { path: 'application-process', component: AppProcessComponent },
+  { path: 'my-desk', component: MyDeskComponent },
 ];
 
 @NgModule({

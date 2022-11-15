@@ -1,19 +1,19 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { forkJoin } from 'rxjs';
 import { AdminService } from 'src/app/shared/services/admin.service';
 import { ApplyService } from 'src/app/shared/services/apply.service';
 import { ProgressBarService } from 'src/app/shared/services/progress-bar.service';
-import { Category } from '../settings/modules-setting/modules-setting.component';
-import { ViewApplicationComponent } from './view-application/view-application.component';
+import { ViewApplicationComponent } from '../../application/view-application/view-application.component';
+import { Category } from '../../settings/modules-setting/modules-setting.component';
 
 @Component({
-  selector: 'app-application',
-  templateUrl: './application.component.html',
-  styleUrls: ['./application.component.css'],
+  selector: 'app-my-desk',
+  templateUrl: './my-desk.component.html',
+  styleUrls: ['./my-desk.component.css'],
 })
-export class ApplicationComponent implements OnInit, AfterViewInit {
+export class MyDeskComponent implements OnInit {
   public applications: IApplication[];
   public categories: Category[];
 
@@ -59,7 +59,7 @@ export class ApplicationComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.progressBar.open();
     forkJoin([
-      this.adminService.getApps(),
+      this.applicationService.getApplicationsOnMyDesk(),
       this.adminService.getModule(),
     ]).subscribe({
       next: (res) => {
@@ -85,6 +85,7 @@ export class ApplicationComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.categories = [...this.categories];
+    console.log('cateegor', this.categories);
   }
 
   onViewData(event: Event, type: string) {
