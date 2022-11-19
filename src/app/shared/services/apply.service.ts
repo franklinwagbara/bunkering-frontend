@@ -157,4 +157,14 @@ export class ApplyService {
       .get<any>(`${environment.apiUrl}/application/applications-on-my-desk`)
       .pipe(retry(this.num));
   }
+
+  createPayment_RRR(appID: any) {
+    return this.http
+      .post<any>(
+        `${environment.apiUrl}/payment/create-payment`,
+        {},
+        { params: { appID } }
+      )
+      .pipe();
+  }
 }

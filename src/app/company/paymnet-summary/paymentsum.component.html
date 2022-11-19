@@ -50,31 +50,43 @@
             <tbody>
               <tr>
                 <td class="bold">Reference No</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td class="bold">Address / Location</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td class="bold">Company Name</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td class="bold">State</td>
-                <td></td>
+                <td>{{ paymentSummary.appReference }}</td>
               </tr>
               <tr>
                 <td class="bold">RRR</td>
-                <td></td>
+                <td>
+                  {{ rrr }}
+                </td>
               </tr>
               <tr>
-                <td class="bold">Status</td>
-                <td></td>
+                <td class="bold">Address / Location</td>
+                <td>{{ paymentSummary.facilityAddress }}</td>
               </tr>
               <tr>
-                <td class="bold">Reference No</td>
-                <td></td>
+                <td class="bold">Permit Type</td>
+                <td>{{ paymentSummary.permitType }}</td>
+              </tr>
+              <tr>
+                <td class="bold">Fee</td>
+                <td>{{ paymentSummary.fee }}</td>
+              </tr>
+              <tr>
+                <td class="bold">Service Charge</td>
+                <td>{{ paymentSummary.serviceCharge }}</td>
+              </tr>
+              <tr>
+                <td class="bold">Total Amount</td>
+                <td>{{ paymentSummary.totalAmount }}</td>
+              </tr>
+              <tr>
+                <td class="bold">Documents</td>
+                <td>
+                  <ul>
+                    <li *ngFor="let doc of paymentSummary.docList">
+                      {{ doc }}
+                    </li>
+                  </ul>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -97,6 +109,7 @@
 
             <div style="text-align: center">
               <button
+                *ngIf="paymentSummary?.rrr"
                 class="submitbtn"
                 style="
                   padding: 10px 20px;
@@ -107,6 +120,21 @@
                 "
               >
                 Make Payment <span class="material-icons"> </span>
+              </button>
+
+              <button
+                *ngIf="!paymentSummary?.rrr"
+                class="submitbtn"
+                style="
+                  padding: 10px 20px;
+                  border: none;
+                  border-radius: 10px;
+                  background-color: rgb(0, 19, 128);
+                  color: white;
+                "
+                (click)="generateRRR()"
+              >
+                Generate RRR
               </button>
             </div>
             <br /><br />

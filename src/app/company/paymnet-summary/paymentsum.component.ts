@@ -14,7 +14,9 @@ import { AuthenticationService, GenericService } from '../../shared/services';
 export class PaymentSumComponent implements OnInit {
   genk: GenericService;
   application_id: number = null;
-  paymentSummary: any;
+  paymentSummary: PaymentSummary;
+  payment_RRR_Info: any;
+  rrr: string = '';
 
   constructor(
     private gen: GenericService,
@@ -37,6 +39,9 @@ export class PaymentSumComponent implements OnInit {
         next: (res) => {
           if (res.success) {
             this.paymentSummary = res.data.data;
+            this.rrr = this.paymentSummary.rrr;
+            console.log('rrr', this.rrr);
+
             this.progressbar.close();
           }
         },
@@ -47,5 +52,37 @@ export class PaymentSumComponent implements OnInit {
     });
   }
 
+  generateRRR() {
+    this.progressbar.open();
+    this.route.params.subscribe((params) => {
+      this.application_id = params['id'];
+
+      this.applicationServer.createPayment_RRR(this.application_id).subscribe({
+        next: (res) => {
+          if (res.success) {
+            this.payment_RRR_Info = res.data.data;
+            this.rrr = this.payment_RRR_Info.rrreference;
+            console.log('rrr', this.rrr, this.payment_RRR_Info, res);
+            this.progressbar.close();
+          }
+        },
+        error: (error) => {
+          console.log('loging error', error);
+        },
+      });
+    });
+  }
+
   submitpayment() {}
+}
+
+class PaymentSummary {
+  appReference: string = '';
+  permitType: string = '';
+  docList: string[] = [];
+  facilityAddress: string = '';
+  fee: string = '';
+  rrr: string = '';
+  serviceCharge: string = '';
+  totalAmount: string = '';
 }
