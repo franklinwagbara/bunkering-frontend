@@ -122,7 +122,6 @@ export class ApplyService {
       .pipe(
         retry(this.num),
         map((res) => {
-          debugger;
           return res;
         })
       );
