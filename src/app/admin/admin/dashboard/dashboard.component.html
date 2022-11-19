@@ -118,7 +118,7 @@
 <div class="card-area">
   <div class="card">
     <div class="card-data">
-      <span>0</span>
+      <span>{{ dashboardInfo?.deskCount }}</span>
       <svg
         class="fill-blue-800"
         xmlns="http://www.w3.org/2000/svg"
@@ -138,7 +138,7 @@
 
   <div class="card card-green">
     <div class="card-data">
-      <span>0</span>
+      <span>{{ dashboardInfo?.approvedCount }}</span>
       <svg
         class="fill-green-800"
         xmlns="http://www.w3.org/2000/svg"
@@ -158,7 +158,7 @@
   </div>
   <div class="card card-blue">
     <div class="card-data">
-      <span>0</span>
+      <span>{{ dashboardInfo?.processingCount }}</span>
       <svg
         class="fill-purple-800"
         xmlns="http://www.w3.org/2000/svg"
@@ -177,7 +177,7 @@
   </div>
   <div class="card card-red">
     <div class="card-data">
-      <span>0</span>
+      <span>{{ dashboardInfo?.rejectedCount }}</span>
       <svg
         class="fill-red-800"
         xmlns="http://www.w3.org/2000/svg"
@@ -196,9 +196,50 @@
     <div class="card-title">TOTAL APPLICATIONS DECLINED</div>
   </div>
 </div>
-<div class="content h-[1000px]">
+<div class="content">
   <app-bar-chart></app-bar-chart>
-  <div class="table-group mt-10">
+  <div class="row-container">
+    <div class="table-group mt-10 w-[100%] xl:w-[45%]">
+      <div class="table-wrapper px-0 w-full">
+        <div class="chart-title mb-4">
+          <span>{{ tableTitles.processingForThreeWeeks }}</span>
+        </div>
+        <generic-table
+          [title-color]="'yellow'"
+          [table_keysMappedToHeaders]="
+            processingForThreeWeekKeysMappedToHeaders
+          "
+          [table_content]="processingForThreeWeeks"
+          [noAddOrDeleteButton]="true"
+          [noCheckControls]="true"
+          [noEditControl]="true"
+          [noFilter]="true"
+          [noTitle]="true"
+        >
+        </generic-table>
+      </div>
+    </div>
+
+    <div class="table-group mt-10 w-full xl:w-[55%]">
+      <div class="table-wrapper px-0">
+        <div class="chart-title mb-4">
+          <span>{{ tableTitles.onStaffDeskForFiveDays }}</span>
+        </div>
+        <generic-table
+          [title-color]="'yellow'"
+          [table_keysMappedToHeaders]="onStaffDeskForFiveDayMappedToHeaders"
+          [table_content]="onStaffDeskForFiveDays"
+          [noAddOrDeleteButton]="true"
+          [noCheckControls]="true"
+          [noEditControl]="true"
+          [noFilter]="true"
+          [noTitle]="true"
+        >
+        </generic-table>
+      </div>
+    </div>
+  </div>
+  <div class="table-group mt-8">
     <div class="table-wrapper px-0">
       <div class="chart-title mb-4">
         <span>{{ tableTitles.messages }}</span>
