@@ -76,7 +76,9 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit {
   public dataSource = new MatTableDataSource<any>(this.items);
   public selection = new SelectionModel<any>(true, []);
 
-  constructor(private cd: ChangeDetectorRef) {}
+  constructor(private cd: ChangeDetectorRef) {
+    console.log('table data', this.items);
+  }
 
   ngOnInit(): void {
     this.headers = Object.values(this.keysMappedToHeaders);

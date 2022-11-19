@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GenericService, AuthenticationService } from 'src/app/shared/services';
+import { ProgressBarService } from 'src/app/shared/services/progress-bar.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -9,38 +10,54 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  model: DashBoardModel;
-  messages = [];
+  dashboardInfo: DashBoardModel;
+  processingForThreeWeeks: IProcessingForThreeWeeks[] = [];
+  onStaffDeskForFiveDays: IOnStaffDeskForFiveDays[] = [];
+  messages: IMessages[] = [];
 
   tableTitles = {
     messages: 'Messages',
+    processingForThreeWeeks: 'Applications in Process in the Pass Three Weeks',
+    onStaffDeskForFiveDays: 'Applcations on My Desk in the Last Five Days',
   };
 
   messageKeysMappedToHeaders = {};
+
+  processingForThreeWeekKeysMappedToHeaders = {
+    id: 'Application ID',
+    categoryId: 'Category ID',
+    // phaseStage: 'Phase Stage',
+    location: 'Location',
+    doc: 'Document',
+  };
+
+  onStaffDeskForFiveDayMappedToHeaders = {};
   // displapAppFiveDays = true;
 
   constructor(
     public generic: GenericService,
     private auth: AuthenticationService,
-    private router: Router
-  ) {
-    this.auth.getStaffDashboard().subscribe((result) => {
-      if (result.success) {
-        // var response = JSON.parse(result.data);
-        // this.model = response.data.map();
-        this.model = new DashBoardModel(result.data.data);
-      }
-    });
-  }
+    private router: Router,
+    private progressBar: ProgressBarService
+  ) {}
 
   ngOnInit(): void {
-    // this.auth.getStaffDashboard()
-    //   .subscribe(result => {
-    //     if(result.success){
-    //       var response = JSON.parse(result.data);
-    //       this.model = new DashBoardModel(response.data)
-    //     }
-    //   });
+    this.progressBar.open();
+    this.auth.getStaffDashboard().subscribe((result) => {
+      if (result.success) {
+        this.dashboardInfo = new DashBoardModel(result.data.data);
+        this.processingForThreeWeeks =
+          this.dashboardInfo.inProcessingForThreeWeeks;
+        this.onStaffDeskForFiveDays = this.dashboardInfo.onStaffDeskForFiveDays;
+        console.log(
+          'dashboard info',
+          this.dashboardInfo,
+          this.processingForThreeWeeks,
+          this.onStaffDeskForFiveDays
+        );
+        this.progressBar.close();
+      }
+    });
   }
 
   logout(): void {
@@ -67,3 +84,16 @@ class DashBoardModel {
     this.inProcessingForThreeWeeks = obj.inProcessingForThreeWeeks;
   }
 }
+
+interface IProcessingForThreeWeeks {
+  id: number;
+  categoryId: number;
+  lgaId: 0;
+  location: string;
+  phaseStageId: number;
+  applicationforms: [];
+}
+
+interface IOnStaffDeskForFiveDays {}
+
+interface IMessages {}

@@ -142,7 +142,7 @@ export class ApplyService {
   getpaymentbyappId(appID: number) {
     return this.http
       .get<any>(`${environment.apiUrl}/application/payment-summary`, {
-        params: { appID },
+        params: { id: appID },
       })
       .pipe(
         retry(this.num),
