@@ -54,7 +54,7 @@ export class AuthenticationService {
     this.currentUserSubject.next(null);
     this.isLoggedIn = false;
 
-    window.location.assign(`${environment.apiUrl}/auth/logout`);
+    window.location.assign(`${environment.apiUrl}/auth/log-out`);
   }
 
   getStaffDashboard() {
