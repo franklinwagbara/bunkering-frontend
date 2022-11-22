@@ -161,4 +161,10 @@ export class AuthenticationService {
       .post<any>(`${environment.apiUrl}/configuration/add-field-office`, model)
       .pipe(retry(this.num));
   }
+
+  submitPayment(rrr: string) {
+    return this.http.get<any>(`${environment.apiUrl}/auth/pay-online`, {
+      params: { rrr },
+    });
+  }
 }

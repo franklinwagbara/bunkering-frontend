@@ -1,14 +1,14 @@
 <div
   style="
-    width: 85%;
+    max-width: 800px;
     border: solid 2px rgb(128, 128, 128);
-    margin-top: 35%;
     background-color: rgb(253, 253, 253);
     border-radius: 15px;
     box-shadow: 6px 6px 8px rgb(0, 0, 0, 0.3);
     margin-bottom: 5%;
     margin-top: 7%;
-    margin-left: 10%;
+    margin: auto;
+    margin-bottom: 10px;
   "
 >
   <br />
@@ -50,39 +50,39 @@
             <tbody>
               <tr>
                 <td class="bold">Reference No</td>
-                <td>{{ paymentSummary.appReference }}</td>
+                <td>{{ paymentSummary?.appReference }}</td>
               </tr>
               <tr>
                 <td class="bold">RRR</td>
                 <td>
-                  {{ rrr }}
+                  {{ rrr$ | async }}
                 </td>
               </tr>
               <tr>
                 <td class="bold">Address / Location</td>
-                <td>{{ paymentSummary.facilityAddress }}</td>
+                <td>{{ paymentSummary?.facilityAddress }}</td>
               </tr>
               <tr>
                 <td class="bold">Permit Type</td>
-                <td>{{ paymentSummary.permitType }}</td>
+                <td>{{ paymentSummary?.permitType }}</td>
               </tr>
               <tr>
                 <td class="bold">Fee</td>
-                <td>{{ paymentSummary.fee }}</td>
+                <td>{{ paymentSummary?.fee }}</td>
               </tr>
               <tr>
                 <td class="bold">Service Charge</td>
-                <td>{{ paymentSummary.serviceCharge }}</td>
+                <td>{{ paymentSummary?.serviceCharge }}</td>
               </tr>
               <tr>
                 <td class="bold">Total Amount</td>
-                <td>{{ paymentSummary.totalAmount }}</td>
+                <td>{{ paymentSummary?.totalAmount }}</td>
               </tr>
               <tr>
                 <td class="bold">Documents</td>
                 <td>
                   <ul>
-                    <li *ngFor="let doc of paymentSummary.docList">
+                    <li *ngFor="let doc of paymentSummary?.docList">
                       {{ doc }}
                     </li>
                   </ul>
@@ -109,7 +109,7 @@
 
             <div style="text-align: center">
               <button
-                *ngIf="paymentSummary?.rrr"
+                *ngIf="rrr$ | async"
                 class="submitbtn"
                 style="
                   padding: 10px 20px;
@@ -118,12 +118,13 @@
                   background-color: teal;
                   color: white;
                 "
+                (click)="submitPayment()"
               >
                 Make Payment <span class="material-icons"> </span>
               </button>
 
               <button
-                *ngIf="!paymentSummary?.rrr"
+                *ngIf="!(rrr$ | async)"
                 class="submitbtn"
                 style="
                   padding: 10px 20px;

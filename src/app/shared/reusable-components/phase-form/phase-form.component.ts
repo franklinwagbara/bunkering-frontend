@@ -41,7 +41,7 @@ export class PhaseFormComponent {
     this.currentValue = data.data?.currentValue;
 
     this.form = this.formBuilder.group({
-      id: [this.currentValue ? this.currentValue.id : ''],
+      id: [this.currentValue ? this.currentValue.id : 0],
       ShortName: [
         this.currentValue ? this.currentValue.shortName : '',
         Validators.required,

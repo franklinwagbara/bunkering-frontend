@@ -2,8 +2,10 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Subject } from 'rxjs';
 import { ApplyService } from 'src/app/shared/services/apply.service';
 import { ProgressBarService } from 'src/app/shared/services/progress-bar.service';
+import { environment } from 'src/environments/environment';
 
 import { AuthenticationService, GenericService } from '../../shared/services';
 
@@ -15,8 +17,8 @@ export class PaymentSumComponent implements OnInit {
   genk: GenericService;
   application_id: number = null;
   paymentSummary: PaymentSummary;
-  payment_RRR_Info: any;
-  rrr: string = '';
+  public rrr$ = new Subject<string>();
+  private rrr: string;
 
   constructor(
     private gen: GenericService,
@@ -28,6 +30,9 @@ export class PaymentSumComponent implements OnInit {
     private snackBar: MatSnackBar
   ) {
     this.genk = gen;
+    this.rrr$.subscribe((data) => {
+      this.rrr = data;
+    });
   }
 
   ngOnInit(): void {
@@ -39,9 +44,7 @@ export class PaymentSumComponent implements OnInit {
         next: (res) => {
           if (res.success) {
             this.paymentSummary = res.data.data;
-            this.rrr = this.paymentSummary.rrr;
-            console.log('rrr', this.rrr);
-
+            this.rrr$.next(this.paymentSummary.rrr);
             this.progressbar.close();
           }
         },
@@ -60,20 +63,36 @@ export class PaymentSumComponent implements OnInit {
       this.applicationServer.createPayment_RRR(this.application_id).subscribe({
         next: (res) => {
           if (res.success) {
-            this.payment_RRR_Info = res.data.data;
-            this.rrr = this.payment_RRR_Info.rrreference;
-            console.log('rrr', this.rrr, this.payment_RRR_Info, res);
+            this.rrr$.next(res.data.data);
+
+            //todo: display success dialog
             this.progressbar.close();
           }
         },
         error: (error) => {
-          console.log('loging error', error);
+          //todo: display error dialog
+          this.progressbar.close();
         },
       });
     });
   }
 
-  submitpayment() {}
+  submitPayment() {
+    // this.auth.submitPayment(this.rrr).subscribe({
+    //   next: (res) => {
+    //     if (res.success) {
+    //       //todo: display success dialog
+    //       this.progressbar.close();
+    //     }
+    //   },
+    //   error: (error) => {
+    //     //todo: display error dialog
+    //     this.progressbar.close();
+    //   },
+    // });
+    window.location.href =
+      environment.apiUrl + '/auth/pay-online?rrr=' + this.rrr;
+  }
 }
 
 class PaymentSummary {
