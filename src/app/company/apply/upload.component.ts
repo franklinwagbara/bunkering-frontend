@@ -163,9 +163,6 @@ export class UploadComponent implements OnInit {
 
   submit() {
     // let addr = this.f['address'].value;
-    let a = this.categoryId;
-    let b = this.phaseId;
-
     const formDat: FormData = new FormData();
     formDat.append('categoryId', this.uploadApplyForm.get('categoryId').value);
     formDat.append('phaseId', this.uploadApplyForm.get('phaseId').value);
@@ -179,6 +176,9 @@ export class UploadComponent implements OnInit {
     // if (this.uploadFile) {
     //   formDat.append('doc', this.uploadFile, this.uploadNewName);
     // }
+
+    console.log('formdata', formDat);
+
     this.apply.uploadApplyform(formDat).subscribe((res) => {
       if (res.statusCode == 300) {
         this.modalService.logNotice('Error', res.message, 'error');
