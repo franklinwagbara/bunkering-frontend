@@ -117,16 +117,6 @@ export class UploadComponent implements OnInit {
     this.cd.markForCheck();
   }
 
-  // getLGAList() {
-  //   this.apply.getLgaList().subscribe(res =>{
-  //     this.lgalist= res.data.data;
-  //   });
-  //   this.cd.markForCheck();
-  // }
-  //   let obj = this.statelist.filter(x => x.state == this.state)[0];
-  //    this.lgalist = obj.lga
-  //  }
-
   getLgaByState(e) {
     this.apply.getLgaByStateId(e.target.value).subscribe((res) => {
       this.lgalist = res.data.data;
@@ -162,7 +152,6 @@ export class UploadComponent implements OnInit {
   }
 
   submit() {
-    // let addr = this.f['address'].value;
     const formDat: FormData = new FormData();
     formDat.append('categoryId', this.uploadApplyForm.get('categoryId').value);
     formDat.append('phaseId', this.uploadApplyForm.get('phaseId').value);
