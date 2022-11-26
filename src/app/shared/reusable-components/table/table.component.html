@@ -80,27 +80,62 @@
             {{
               column.cell(row) === "undefined" ||
               column.cell(row) === "edit_control" ||
-              column.cell(row) === "view_control"
+              column.cell(row) === "view_control" ||
+              column.cell(row) === "rrr_control" ||
+              column.cell(row) === "uploadDocument_control" ||
+              column.cell(row) === "confirmPayment_control"
                 ? ""
                 : column.cell(row)
             }}
-            <button
-              mat-stroked-button
-              color="accent"
-              *ngIf="column.cell(row) === 'edit_control'"
-              (click)="editData(row)"
-            >
-              Edit
-            </button>
-            <button
-              mat-flat-button
-              color="accent"
-              class="view-button"
-              *ngIf="column.cell(row) === 'view_control'"
-              (click)="viewData(row)"
-            >
-              View Application
-            </button>
+            <div>
+              <button
+                mat-stroked-button
+                color="accent"
+                *ngIf="column.cell(row) === 'edit_control'"
+                (click)="editData(row)"
+              >
+                Edit
+              </button>
+              <button
+                mat-flat-button
+                color="accent"
+                class="view-button"
+                *ngIf="column.cell(row) === 'view_control'"
+                (click)="viewData(row)"
+              >
+                View Application
+              </button>
+
+              <button
+                mat-flat-button
+                style="background-color: orchid; color: white"
+                class="view-button"
+                *ngIf="column.cell(row) === 'rrr_control'"
+                (click)="generateRRR(row)"
+              >
+                Generate RRR
+              </button>
+
+              <button
+                mat-flat-button
+                style="background-color: teal; color: white"
+                class="view-button"
+                *ngIf="column.cell(row) === 'confirmPayment_control'"
+                (click)="confirmPayment(row)"
+              >
+                Confirm Payment
+              </button>
+
+              <button
+                mat-flat-button
+                color="primary"
+                class="view-button"
+                *ngIf="column.cell(row) === 'uploadDocument_control'"
+                (click)="uploadDocument(row)"
+              >
+                Upload Document
+              </button>
+            </div>
           </td>
         </ng-template>
 

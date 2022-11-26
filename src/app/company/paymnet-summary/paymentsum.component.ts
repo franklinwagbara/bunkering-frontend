@@ -18,7 +18,10 @@ export class PaymentSumComponent implements OnInit {
   application_id: number = null;
   paymentSummary: PaymentSummary;
   public rrr$ = new Subject<string>();
+  public applicationStatus$ = new Subject<string>();
   private rrr: string;
+  public isPaymentConfirmed$ = new Subject<boolean>();
+  public isPaymentNotComfirmed$ = new Subject<boolean>();
 
   constructor(
     private gen: GenericService,
@@ -39,19 +42,34 @@ export class PaymentSumComponent implements OnInit {
     this.progressbar.open();
     this.route.params.subscribe((params) => {
       this.application_id = params['id'];
+      this.getPaymentSummary();
+    });
+  }
 
-      this.applicationServer.getpaymentbyappId(this.application_id).subscribe({
-        next: (res) => {
-          if (res.success) {
-            this.paymentSummary = res.data.data;
-            this.rrr$.next(this.paymentSummary.rrr);
-            this.progressbar.close();
-          }
-        },
-        error: (error) => {
+  getPaymentSummary() {
+    this.progressbar.open();
+    this.applicationServer.getpaymentbyappId(this.application_id).subscribe({
+      next: (res) => {
+        if (res.success) {
+          this.paymentSummary = res.data.data;
+          this.rrr$.next(this.paymentSummary.rrr);
+          this.applicationStatus$.next(this.paymentSummary.status);
           this.progressbar.close();
-        },
-      });
+
+          this.isPaymentConfirmed$.next(
+            this.paymentSummary.rrr &&
+              this.paymentSummary.status === 'PaymentConfirmed'
+          );
+
+          this.isPaymentNotComfirmed$.next(
+            this.paymentSummary.rrr &&
+              this.paymentSummary.status !== 'PaymentConfirmed'
+          );
+        }
+      },
+      error: (error) => {
+        this.progressbar.close();
+      },
     });
   }
 
@@ -64,6 +82,10 @@ export class PaymentSumComponent implements OnInit {
         next: (res) => {
           if (res.success) {
             this.rrr$.next(res.data.data);
+
+            this.isPaymentNotComfirmed$.next(
+              res.data.data && this.paymentSummary.status !== 'PaymentConfirmed'
+            );
 
             //todo: display success dialog
             this.progressbar.close();
@@ -78,24 +100,16 @@ export class PaymentSumComponent implements OnInit {
   }
 
   submitPayment() {
-    // this.auth.submitPayment(this.rrr).subscribe({
-    //   next: (res) => {
-    //     if (res.success) {
-    //       //todo: display success dialog
-    //       this.progressbar.close();
-    //     }
-    //   },
-    //   error: (error) => {
-    //     //todo: display error dialog
-    //     this.progressbar.close();
-    //   },
-    // });
     window.location.href =
       environment.apiUrl + '/auth/pay-online?rrr=' + this.rrr;
   }
+
+  uploadDocument() {
+    window.location.href = environment.apiUrl + '/upload-document';
+  }
 }
 
-class PaymentSummary {
+export class PaymentSummary {
   appReference: string = '';
   permitType: string = '';
   docList: string[] = [];
@@ -104,4 +118,5 @@ class PaymentSummary {
   rrr: string = '';
   serviceCharge: string = '';
   totalAmount: string = '';
+  status: string = '';
 }

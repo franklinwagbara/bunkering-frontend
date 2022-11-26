@@ -109,7 +109,7 @@
 
             <div style="text-align: center">
               <button
-                *ngIf="rrr$ | async"
+                *ngIf="isPaymentNotComfirmed$ | async"
                 class="submitbtn"
                 style="
                   padding: 10px 20px;
@@ -120,7 +120,7 @@
                 "
                 (click)="submitPayment()"
               >
-                Make Payment <span class="material-icons"> </span>
+                Pay Online <span class="material-icons"> </span>
               </button>
 
               <button
@@ -136,6 +136,21 @@
                 (click)="generateRRR()"
               >
                 Generate RRR
+              </button>
+
+              <button
+                *ngIf="isPaymentConfirmed$ | async"
+                class="submitbtn"
+                style="
+                  padding: 10px 20px;
+                  border: none;
+                  border-radius: 10px;
+                  background-color: rgb(0, 19, 128);
+                  color: white;
+                "
+                (click)="uploadDocument()"
+              >
+                Upload Document
               </button>
             </div>
             <br /><br />

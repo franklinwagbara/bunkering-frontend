@@ -17,6 +17,7 @@ import { ITableKeysMappedToHeaders } from 'src/app/shared/interfaces/ITableKeysM
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { Application } from 'src/app/company/my-applications/myapplication.component';
 
 interface IColumn {
   columnDef: string;
@@ -33,6 +34,9 @@ const PAGESIZE = 10;
   styleUrls: ['./table.component.scss'],
 })
 export class TableComponent implements OnInit, OnChanges, AfterViewInit {
+  @Input('enableGenerateRRR') enableGenerateRRR: boolean = false;
+  @Input('enableConfirmPayment') enableConfirmPayment: boolean = false;
+  @Input('enableUploadDocument') enableUploadDocument: boolean = false;
   @Input('title-color') titleColorProp?: string = 'slate';
   @Input('noTitle') noTitle: boolean = false;
   @Input('noControls') noControls?: boolean = false;
@@ -53,6 +57,9 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit {
   @Output('onDeleteData') onDeleteData = new EventEmitter<any>();
   @Output('onEditData') onEditData = new EventEmitter<any>();
   @Output('onViewData') onViewData = new EventEmitter<any>();
+  @Output('onGenerateRRR') onGenerateRRR = new EventEmitter<any>();
+  @Output('onConfirmPayment') onConfirmPayment = new EventEmitter<any>();
+  @Output('onUploadDocument') onUploadDocument = new EventEmitter<any>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -76,10 +83,6 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit {
   public dataSource = new MatTableDataSource<any>(this.items);
   public selection = new SelectionModel<any>(true, []);
 
-  constructor(private cd: ChangeDetectorRef) {
-    console.log('table data', this.items);
-  }
-
   ngOnInit(): void {
     this.headers = Object.values(this.keysMappedToHeaders);
     this.keys = Object.keys(this.keysMappedToHeaders);
@@ -91,6 +94,33 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit {
         cell: (item) => `${item[key]}`,
       };
     });
+
+    if (this.enableUploadDocument) {
+      this.columns.push({
+        columnDef: 'uploadDocument_control',
+        header: '',
+        cell: (item: Application) =>
+          item.rrr && item.status === 'paymentCompleted'
+            ? 'uploadDocument_control'
+            : '',
+      });
+    }
+
+    if (this.enableConfirmPayment) {
+      this.columns.push({
+        columnDef: 'confirmPayment_control',
+        header: '',
+        cell: (item: Application) => (item.rrr ? 'confirmPayment_control' : ''),
+      });
+    }
+
+    if (this.enableGenerateRRR) {
+      this.columns.push({
+        columnDef: 'rrr_control',
+        header: '',
+        cell: (item: Application) => (!item.rrr ? 'rrr_control' : ''),
+      });
+    }
 
     if (!this.noEditControl) {
       this.columns.push({
@@ -120,6 +150,18 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit {
   ngOnChanges(changes: SimpleChanges): void {
     //this.dataSource.setData(this.items);
     this.dataSource.data = this.items;
+  }
+
+  generateRRR(row) {
+    this.onGenerateRRR.emit(row);
+  }
+
+  confirmPayment(row) {
+    this.onConfirmPayment.emit(row);
+  }
+
+  uploadDocument(row) {
+    this.onUploadDocument.emit(row);
   }
 
   addData() {

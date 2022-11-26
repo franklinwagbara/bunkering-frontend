@@ -1,18 +1,34 @@
-<div class="container" style="box-shadow:0 0 5px #c5c5c5; padding: 0 15px 20px 15px; background:white;">
-    <div class="panel-body">
-
-        <div class="table-group">
-            <div class="table-wrapper">
-              <generic-table
-                [table_title]="tableTitles.app"
-                [title-color]="'yellow'"
-                [table_keysMappedToHeaders]="applicationTableKeysMappedToHeaders"
-                [table_content]="applications"
-              ></generic-table>
-            </div>
-        </div>
-
+<div
+  class="container"
+  style="
+    box-shadow: 0 0 5px #c5c5c5;
+    padding: 0 15px 20px 15px;
+    background: white;
+  "
+>
+  <div class="panel-body">
+    <div class="table-group">
+      <div class="table-wrapper">
+        <generic-table
+          [enableGenerateRRR]="true"
+          [enableConfirmPayment]="true"
+          [enableUploadDocument]="true"
+          [EnableViewControl]="true"
+          [table_title]="tableTitles.app"
+          [title-color]="'teal'"
+          [table_controls_horizontal]="true"
+          [table_keysMappedToHeaders]="applicationTableKeysMappedToHeaders"
+          [table_content]="applications$ | async"
+          [noEditControl]="true"
+          [noCheckControls]="true"
+          [noAddOrDeleteButton]="true"
+          (onGenerateRRR)="generateRRR($event)"
+          (onViewData)="viewApplication($event, 'applications')"
+        >
+        </generic-table>
+      </div>
     </div>
+  </div>
 </div>
 
-<br><br><br>
+<br /><br /><br />
