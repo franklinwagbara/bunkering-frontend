@@ -1,0 +1,54 @@
+<section class="flex flex-col justify-center">
+  <div class="upload-heading"><h1>UPLOAD APPLICATION DOCUMENTS</h1></div>
+  <div class="mx-5">
+    <div class="guidlines">
+      <h3>Please Note:</h3>
+      <ul>
+        <li>
+          All documents listed below are required and must be uploaded.
+          Subsequently, other documents may be needed and will be added to this
+          list.
+        </li>
+        <li>
+          The Maximum file size allowed is 20MB per document, any file size
+          greater than this value will not be uploaded.
+        </li>
+        <li>
+          Only JPEG, PNG, JPG, and PDF file types are allowed on this platform.
+        </li>
+      </ul>
+    </div>
+
+    <div class="required"><h3>* Required Documents</h3></div>
+    <generic-table
+      [noTitle]="true"
+      [noFilter]="true"
+      [title-color]="'teal'"
+      [table_controls_horizontal]="true"
+      [table_keysMappedToHeaders]="applicationTableKeysMappedToHeaders"
+      [table_content]="documents$ | async"
+      [noEditControl]="true"
+      [noCheckControls]="true"
+      [noAddOrDeleteButton]="true"
+    >
+    </generic-table>
+
+    <div class="required-blue"><h3>Additional Documents</h3></div>
+    <generic-table
+      [noTitle]="true"
+      [noFilter]="true"
+      [title-color]="'teal'"
+      [table_controls_horizontal]="true"
+      [table_keysMappedToHeaders]="applicationTableKeysMappedToHeaders"
+      [table_content]="documents$ | async"
+      [noEditControl]="true"
+      [noCheckControls]="true"
+      [noAddOrDeleteButton]="true"
+    >
+    </generic-table>
+  </div>
+
+  <button mat-raised-button color="primary" class="upload-button">
+    Upload Document(s)
+  </button>
+</section>
