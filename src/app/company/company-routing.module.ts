@@ -12,21 +12,22 @@ import { CompanyInformationComponent } from './company-information/companyinform
 import { UploadComponent } from './apply/upload.component';
 import { PreviewAppComponent } from './apply/edit-preview/previewapp.component';
 import { PaymentSumComponent } from './paymnet-summary/paymentsum.component';
+import { DocumentUploadComponent } from './document-upload/document-upload.component';
 
 const routes: Routes = [
-    {path: '', component: DashboardComponent},
-    {path: 'dashboard', component: DashboardComponent},
-    {path: 'messages', component: MessagesComponent},
-    {path: 'myschedule', component: MyScheduleComponent},
-    {path: 'changepassword', component: ChangePasswordComponent},
-    {path: 'mypermits', component: MypermitsComponent},
-    {path: 'apply', component: ApplyComponent},
-    {path: 'myapplication', component: MyApplicationComponent},
-    {path: 'registerdirector', component: RegisterDirectorComponent},
-    {path: 'upload', component: UploadComponent},
-    {path: 'previewapp/:id', component: PreviewAppComponent},
-    {path: 'paymentsum/:id', component: PaymentSumComponent},
-    
+  { path: '', component: DashboardComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'messages', component: MessagesComponent },
+  { path: 'myschedule', component: MyScheduleComponent },
+  { path: 'changepassword', component: ChangePasswordComponent },
+  { path: 'mypermits', component: MypermitsComponent },
+  { path: 'apply', component: ApplyComponent },
+  { path: 'myapplication', component: MyApplicationComponent },
+  { path: 'registerdirector', component: RegisterDirectorComponent },
+  { path: 'upload', component: UploadComponent },
+  { path: 'previewapp/:id', component: PreviewAppComponent },
+  { path: 'paymentsum/:id', component: PaymentSumComponent },
+  { path: 'upload-document/:id', component: DocumentUploadComponent },
 
   {
     path: 'companyinformation',

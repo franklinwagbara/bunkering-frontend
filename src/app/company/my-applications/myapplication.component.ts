@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 import { ViewApplicationComponent } from 'src/app/admin/application/view-application/view-application.component';
 import { AuthenticationService, GenericService } from 'src/app/shared/services';
 import { ApplyService } from 'src/app/shared/services/apply.service';
-import { CompanySErvice } from 'src/app/shared/services/company.service';
+import { CompanyService } from 'src/app/shared/services/company.service';
 import { ProgressBarService } from 'src/app/shared/services/progress-bar.service';
 import { environment } from 'src/environments/environment';
 import { PaymentSummary } from '../paymnet-summary/paymentsum.component';
@@ -49,7 +49,7 @@ export class MyApplicationComponent implements OnInit {
     private progressbar: ProgressBarService,
     private applicationServer: ApplyService,
     private snackBar: MatSnackBar,
-    private _company: CompanySErvice
+    private _company: CompanyService
   ) {
     this.genk = gen;
     this.rrr$.subscribe((data) => {
@@ -62,11 +62,21 @@ export class MyApplicationComponent implements OnInit {
   }
 
   getCompanyApplication() {
-    this._company.getCompanyApplications().subscribe((res) => {
-      if (res.success) {
-        this.applications = res.data.data.map((app) => app);
-        this.applications$.next(res.data.data);
-      }
+    this.progressbar.open();
+    this._company.getCompanyApplications().subscribe({
+      next: (res) => {
+        if (res.success) {
+          this.applications = res.data.data.map((app) => app);
+          this.applications$.next(res.data.data);
+
+          //todo: display success dialog
+          this.progressbar.close();
+        }
+      },
+      error: (error) => {
+        //todo: display error dialog
+        this.progressbar.close();
+      },
     });
   }
 
@@ -79,15 +89,27 @@ export class MyApplicationComponent implements OnInit {
 
           this.router.navigate(['/company/paymentsum/' + app.id]);
 
+          this.snackBar.open('RRR was generated successfully!', null, {
+            panelClass: ['success'],
+          });
+
           //todo: display success dialog
           this.progressbar.close();
         }
       },
       error: (error) => {
+        this.snackBar.open('RRR generation failed!', null, {
+          panelClass: ['error'],
+        });
+
         //todo: display error dialog
         this.progressbar.close();
       },
     });
+  }
+
+  confirmPayment(app: Application) {
+    this.router.navigate(['/company/paymentsum/' + app.id]);
   }
 
   viewApplication(event: Event, type: string) {

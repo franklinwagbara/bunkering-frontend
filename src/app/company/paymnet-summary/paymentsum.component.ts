@@ -100,12 +100,12 @@ export class PaymentSumComponent implements OnInit {
   }
 
   submitPayment() {
-    window.location.href =
-      environment.apiUrl + '/auth/pay-online?rrr=' + this.rrr;
+    this.router.navigate(['/auth/pay-online?rrr=' + this.rrr]);
   }
 
   uploadDocument() {
-    window.location.href = environment.apiUrl + '/upload-document';
+    // window.location.href = environment.apiUrl + '/upload-document';
+    this.router.navigate([`/company/upload-document/${this.application_id}`]);
   }
 }
 

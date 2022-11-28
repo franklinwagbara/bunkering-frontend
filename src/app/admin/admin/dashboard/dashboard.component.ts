@@ -49,12 +49,6 @@ export class DashboardComponent implements OnInit {
         this.processingForThreeWeeks =
           this.dashboardInfo.inProcessingForThreeWeeks;
         this.onStaffDeskForFiveDays = this.dashboardInfo.onStaffDeskForFiveDays;
-        console.log(
-          'dashboard info',
-          this.dashboardInfo,
-          this.processingForThreeWeeks,
-          this.onStaffDeskForFiveDays
-        );
         this.progressBar.close();
       }
     });
