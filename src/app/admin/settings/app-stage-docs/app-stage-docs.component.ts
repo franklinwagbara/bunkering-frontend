@@ -45,7 +45,6 @@ export class AppStageDocsComponent implements OnInit {
 
   constructor(
     private adminHttpService: AdminService,
-    private formBuilder: FormBuilder,
     public snackBar: MatSnackBar,
     public dialog: MatDialog,
     public progressBarService: ProgressBarService

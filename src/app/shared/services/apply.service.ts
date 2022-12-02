@@ -166,4 +166,72 @@ export class ApplyService {
       )
       .pipe();
   }
+
+  confirmPayment(appId: string) {
+    return this.http.get<any>(`${environment.apiUrl}/payment/confirm-payment`, {
+      params: { id: appId },
+    });
+  }
+
+  uploadCompanyFileToElps(
+    docTypeId,
+    compId,
+    facilityId,
+    email,
+    apiHash,
+    docName,
+    docType,
+    uniqueid,
+    file,
+    action: string
+  ) {
+    if (!action || (action === 'create' && docType === 'company')) {
+      return this.http.post<any>(
+        `https://elpsdemo.dpr.gov.ng/api/UploadCompanyDoc/${docTypeId}/${compId}/${email}/${apiHash}?docName=${docName}&uniqueid=${uniqueid}`,
+        file
+      );
+    } else if (action === 'update' && docType === 'company') {
+      return this.http.post<any>(
+        `https://elpsdemo.dpr.gov.ng/api/CompanyDocument/UpdateFile/${docTypeId}/${compId}/company?docid=${docTypeId}`,
+        file
+      );
+    } else if (!action || (action === 'create' && docType === 'facility')) {
+      return this.http.post<any>(
+        `https://elpsdemo.dpr.gov.ng/api/Facility/UploadFile/${docTypeId}/${compId}/${facilityId}/${email}/${apiHash}?docName=${docName}&uniqueid=${uniqueid}`,
+        file
+      );
+    } else if (action === 'update' && docType === 'facility') {
+      return this.http.post<any>(
+        `https://elpsdemo.dpr.gov.ng/api/FacilityDocument/UpdateFile/${docTypeId}/${facilityId}?docid=${docTypeId}`,
+        file
+      );
+    } else
+      return this.http.post<any>(
+        `https://elpsdemo.dpr.gov.ng/api/UploadCompanyDoc/${docTypeId}/${compId}/${email}/${apiHash}?docName=${docName}&uniqueid=${uniqueid}`,
+        file
+      );
+  }
+
+  getAllCompanyDocuments(
+    docType: 'facility' | 'company',
+    email: string,
+    apiHash: string
+  ) {
+    let url: string;
+
+    if (docType === 'company') {
+      url = `https://elpsdemo.dpr.gov.ng/api/Documents/Types/${email}/${apiHash}`;
+    } else {
+      url = `https://elpsdemo.dpr.gov.ng/api/Documents/Facility/${email}/${apiHash}/${docType}`;
+    }
+
+    return this.http.get<any>(url);
+  }
+
+  submitApplication(payload) {
+    return this.http.post<any>(
+      `${environment.apiUrl}/application/submit-application`,
+      payload
+    );
+  }
 }

@@ -21,6 +21,7 @@ import { ProgressBarService } from '../../services/progress-bar.service';
 export class FieldOfficeFormComponent {
   public form: FormGroup;
   public stateList: State[];
+  public offices: string[] = ['HQ', 'ZO', 'FO'];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -38,6 +39,7 @@ export class FieldOfficeFormComponent {
       // stateName: ['', Validators.required], // shouldn't be
       stateId: ['', Validators.required],
       address: ['', Validators.required],
+      type: ['', Validators.required],
     });
   }
 

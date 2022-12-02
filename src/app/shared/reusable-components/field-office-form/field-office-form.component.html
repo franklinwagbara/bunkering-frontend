@@ -25,6 +25,22 @@
         State is required!
       </div>
     </div>
+
+    <div class="fomr-group" style="margin-bottom: 10px">
+      <label>Office</label>
+      <select name="office" formControlName="office" class="form-control">
+        <option *ngFor="let office of offices" [ngValue]="office">
+          {{ office }}
+        </option>
+      </select>
+      <div
+        *ngIf="form.get('office')?.touched && form.get('office')?.invalid"
+        class="alert alert-danger"
+      >
+        Office is required!
+      </div>
+    </div>
+
     <div class="fomr-group" style="margin-bottom: 10px">
       <label>Address</label>
       <input name="address" formControlName="address" class="form-control" />

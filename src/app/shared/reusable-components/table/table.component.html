@@ -83,10 +83,18 @@
               column.cell(row) === "view_control" ||
               column.cell(row) === "rrr_control" ||
               column.cell(row) === "uploadDocument_control" ||
-              column.cell(row) === "confirmPayment_control"
+              column.cell(row) === "confirmPayment_control" ||
+              column.header === "Source"
                 ? ""
                 : column.cell(row)
             }}
+
+            <div
+              *ngIf="column.header === 'Source'"
+              [innerHTML]="column.cell(row)"
+            >
+              {{ column.cell(row) }}
+            </div>
             <div>
               <button
                 mat-stroked-button
@@ -110,17 +118,26 @@
                 mat-flat-button
                 style="background-color: orchid; color: white"
                 class="view-button"
-                *ngIf="column.cell(row) === 'rrr_control'"
+                *ngIf="
+                  column.header === 'Action Controls' &&
+                  column.cell(row) === 'rrr_control'
+                "
                 (click)="generateRRR(row)"
               >
                 Generate RRR
               </button>
 
+              <!-- {{ column.header | json }}
+              {{ column.cell(row) | json }} -->
+
               <button
                 mat-flat-button
                 style="background-color: teal; color: white"
                 class="view-button"
-                *ngIf="column.cell(row) === 'confirmPayment_control'"
+                *ngIf="
+                  column.header === 'Action Controls' &&
+                  column.cell(row) === 'confirmPayment_control'
+                "
                 (click)="confirmPayment(row)"
               >
                 Confirm Payment
@@ -130,11 +147,21 @@
                 mat-flat-button
                 color="primary"
                 class="view-button"
-                *ngIf="column.cell(row) === 'uploadDocument_control'"
+                *ngIf="
+                  column.header === 'Action Controls' &&
+                  column.cell(row) === 'uploadDocument_control'
+                "
                 (click)="uploadDocument(row)"
               >
                 Upload Document
               </button>
+
+              <input
+                *ngIf="column.header === 'ACTION'"
+                type="file"
+                accept=".pdf, .doc, .docx"
+                (change)="fileUpload($event, row)"
+              />
             </div>
           </td>
         </ng-template>

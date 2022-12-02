@@ -60,6 +60,7 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit {
   @Output('onGenerateRRR') onGenerateRRR = new EventEmitter<any>();
   @Output('onConfirmPayment') onConfirmPayment = new EventEmitter<any>();
   @Output('onUploadDocument') onUploadDocument = new EventEmitter<any>();
+  @Output('onFileUpload') onFileUpload = new EventEmitter<any>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -95,32 +96,54 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit {
       };
     });
 
-    if (this.enableUploadDocument) {
+    if (
+      this.enableUploadDocument ||
+      this.enableConfirmPayment ||
+      this.enableGenerateRRR
+    ) {
       this.columns.push({
-        columnDef: 'uploadDocument_control',
-        header: '',
-        cell: (item: Application) =>
-          item.rrr && item.status === 'paymentCompleted'
-            ? 'uploadDocument_control'
-            : '',
+        columnDef: 'action_controls',
+        header: 'Action Controls',
+        cell: (item: Application) => {
+          if (item.rrr && item.status === 'PaymentConfirmed')
+            return 'uploadDocument_control';
+          else if (item.rrr && item.status !== 'PaymentConfirmed')
+            return 'confirmPayment_control';
+          else if (!item.rrr) return 'rrr_control';
+          else return '';
+        },
       });
     }
 
-    if (this.enableConfirmPayment) {
-      this.columns.push({
-        columnDef: 'confirmPayment_control',
-        header: '',
-        cell: (item: Application) => (item.rrr ? 'confirmPayment_control' : ''),
-      });
-    }
+    // if (this.enableUploadDocument) {
+    //   this.columns.push({
+    //     columnDef: 'uploadDocument_control',
+    //     header: 'Action Controls',
+    //     cell: (item: Application) =>
+    //       item.rrr && item.status === 'PaymentConfirmed'
+    //         ? 'uploadDocument_control'
+    //         : '',
+    //   });
+    // }
 
-    if (this.enableGenerateRRR) {
-      this.columns.push({
-        columnDef: 'rrr_control',
-        header: '',
-        cell: (item: Application) => (!item.rrr ? 'rrr_control' : ''),
-      });
-    }
+    // if (this.enableConfirmPayment) {
+    //   this.columns.push({
+    //     columnDef: 'confirmPayment_control',
+    //     header: 'Action Controls',
+    //     cell: (item: Application) =>
+    //       item.rrr && item.status !== 'PaymentConfirmed'
+    //         ? 'confirmPayment_control'
+    //         : '',
+    //   });
+    // }
+
+    // if (this.enableGenerateRRR) {
+    //   this.columns.push({
+    //     columnDef: 'rrr_control',
+    //     header: 'Action Controls',
+    //     cell: (item: Application) => (!item.rrr ? 'rrr_control' : ''),
+    //   });
+    // }
 
     if (!this.noEditControl) {
       this.columns.push({
@@ -150,6 +173,10 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit {
   ngOnChanges(changes: SimpleChanges): void {
     //this.dataSource.setData(this.items);
     this.dataSource.data = this.items;
+  }
+
+  fileUpload(file, row) {
+    this.onFileUpload.emit({ file, doc: row });
   }
 
   generateRRR(row) {

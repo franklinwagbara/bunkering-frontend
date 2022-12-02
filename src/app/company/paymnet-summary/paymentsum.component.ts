@@ -100,7 +100,9 @@ export class PaymentSumComponent implements OnInit {
   }
 
   submitPayment() {
-    this.router.navigate(['/auth/pay-online?rrr=' + this.rrr]);
+    //this.router.navigate(['/auth/pay-online?rrr=' + this.rrr]);
+    window.location.href =
+      environment.apiUrl + '/auth/pay-online?rrr=' + this.rrr;
   }
 
   uploadDocument() {

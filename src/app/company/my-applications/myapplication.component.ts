@@ -32,7 +32,10 @@ export class MyApplicationComponent implements OnInit {
 
   applicationTableKeysMappedToHeaders = {
     appReference: 'Ap. pReference',
+    companyName: 'Company Name',
+    permitType: 'Permit Type',
     facilityAddress: 'Address/Location',
+    submittedDate: 'Date Submitted',
     status: 'Status',
   };
 
@@ -109,7 +112,30 @@ export class MyApplicationComponent implements OnInit {
   }
 
   confirmPayment(app: Application) {
-    this.router.navigate(['/company/paymentsum/' + app.id]);
+    this.progressbar.open();
+
+    this.applicationServer.confirmPayment(app.id).subscribe({
+      next: (res) => {
+        this.router.navigate(['/company/paymentsum/' + app.id]);
+        this.progressbar.close();
+      },
+      error: (error) => {
+        this.snackBar.open(
+          'Payment confirmation not successfull. Please contact support or proceed to pay online.',
+          null,
+          {
+            panelClass: ['error'],
+          }
+        );
+        this.router.navigate(['/company/paymentsum/' + app.id]);
+        this.progressbar.close();
+      },
+    });
+  }
+
+  uploadDocument(app: Application) {
+    console.log(`/company/upload-document/${app.id}`);
+    this.router.navigate([`/company/upload-document/${app.id}`]);
   }
 
   viewApplication(event: Event, type: string) {

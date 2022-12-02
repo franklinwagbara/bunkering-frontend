@@ -20,6 +20,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { LayoutModule } from '../layout/layout.module';
 import { SharedModule } from '../shared/shared.module';
 import { DocumentUploadComponent } from './document-upload/document-upload.component';
+import { AdditionalDocListFormComponent } from './document-upload/additional-doc-list-form/additional-doc-list-form.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   imports: [
@@ -30,6 +33,8 @@ import { DocumentUploadComponent } from './document-upload/document-upload.compo
     LayoutModule,
     SharedModule,
     MatButtonModule,
+    NgMultiSelectDropDownModule.forRoot(),
+    MatProgressSpinnerModule,
   ],
   declarations: [
     DashboardComponent,
@@ -46,6 +51,7 @@ import { DocumentUploadComponent } from './document-upload/document-upload.compo
     PreviewAppComponent,
     PaymentSumComponent,
     DocumentUploadComponent,
+    AdditionalDocListFormComponent,
   ],
   providers: [],
 })
