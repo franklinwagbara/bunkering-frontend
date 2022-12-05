@@ -28,6 +28,7 @@ import { FieldOfficeFormComponent } from './reusable-components/field-office-for
 import { BranchFormComponent } from './reusable-components/branch-form/branch-form.component';
 import { UserFormComponent } from './reusable-components/user-form/user-form.component';
 import { ApplicationProcessFormComponent } from './reusable-components/application-process-form/application-process-form.component';
+import { MoveApplicationFormComponent } from './reusable-components/move-application-form/move-application-form.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { ApplicationProcessFormComponent } from './reusable-components/applicati
     BranchFormComponent,
     UserFormComponent,
     ApplicationProcessFormComponent,
+    MoveApplicationFormComponent,
   ],
   imports: [
     CommonModule,

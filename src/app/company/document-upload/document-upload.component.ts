@@ -226,8 +226,8 @@ export class DocumentUploadComponent implements OnInit {
     this.progressBar.open();
 
     const payload = {
-      appId: this.application_id,
-      docs: [...this.documents, this.additionalDocuments],
+      appId: Number(this.application_id),
+      docs: [...this.documents, ...this.additionalDocuments],
     };
 
     this.applicationService.submitApplication(payload).subscribe({

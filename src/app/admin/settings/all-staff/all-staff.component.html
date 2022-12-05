@@ -4,6 +4,7 @@
     <div class="table-group">
       <div class="table-wrapper">
         <generic-table
+          [enableMoveApplication]="true"
           [table_title]="tableTitles.users"
           [title-color]="'yellow'"
           [table_keysMappedToHeaders]="userKeysMappedToHeaders"
@@ -13,6 +14,7 @@
           (onAddData)="onAddData($event, 'users')"
           (onDeleteData)="onDeleteData($event, 'users')"
           (onEditData)="onEditData($event, 'users')"
+          (onMoveApplication)="onMoveApplication($event, 'users')"
         ></generic-table>
       </div>
     </div>

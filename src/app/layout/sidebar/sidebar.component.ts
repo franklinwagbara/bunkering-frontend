@@ -59,11 +59,11 @@ const ROUTES: RouteInfo[] = [
         title: 'MY DESK',
         url: '/admin/my-desk',
       },
-      {
-        id: 2,
-        title: 'STAFF DESK',
-        url: '/admin/staff-desk',
-      },
+      // {
+      //   id: 2,
+      //   title: 'STAFF DESK',
+      //   url: '/admin/staff-desk',
+      // },
     ],
   },
   {

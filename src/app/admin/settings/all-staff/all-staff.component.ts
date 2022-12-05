@@ -8,6 +8,8 @@ import { forkJoin } from 'rxjs';
 import { UserFormComponent } from 'src/app/shared/reusable-components/user-form/user-form.component';
 import { FieldOffice } from '../field-zonal-office/field-zonal-office.component';
 import { IBranch } from 'src/app/shared/interfaces/IBranch';
+import { IApplication } from '../../application/application.component';
+import { MoveApplicationFormComponent } from 'src/app/shared/reusable-components/move-application-form/move-application-form.component';
 
 @Component({
   selector: 'app-all-staff',
@@ -33,6 +35,7 @@ export class AllStaffComponent implements OnInit {
     phoneNo: 'Phone Number',
     role: 'Role',
     office: 'Office',
+    appCount: 'Applications on Desk',
     status: 'Status',
   };
 
@@ -162,6 +165,37 @@ export class AllStaffComponent implements OnInit {
     });
   }
 
+  onMoveApplication(application: IApplication, type: string) {
+    const operationConfiguration = {
+      users: {
+        data: {
+          staffs: this.users,
+          // staffs: this.staffList,
+          roles: this.roles,
+          offices: this.offices,
+          branches: this.branches,
+        },
+        form: MoveApplicationFormComponent,
+      },
+    };
+
+    let dialogRef = this.dialog.open(operationConfiguration[type].form, {
+      data: {
+        data: operationConfiguration[type].data,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((res) => {
+      this.progressBar.open();
+
+      this.adminHttpService.getAllStaff().subscribe((res) => {
+        this.users = res.data.data;
+
+        this.progressBar.close();
+      });
+    });
+  }
+
   onEditData(event: Event, type: string) {
     console.log('on edit', event, type);
   }
@@ -176,6 +210,7 @@ export class Staff {
   role: string;
   office: string;
   status: boolean;
+  appCount: number;
   id: number;
 
   constructor(item: any) {
@@ -187,6 +222,7 @@ export class Staff {
     this.id = item.id;
     this.role = item.role;
     this.status = item.boolean;
+    this.appCount = item.appCount;
     this.office = item.office;
   }
 }

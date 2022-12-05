@@ -18,6 +18,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Application } from 'src/app/company/my-applications/myapplication.component';
+import { Staff } from 'src/app/admin/settings/all-staff/all-staff.component';
 
 interface IColumn {
   columnDef: string;
@@ -34,6 +35,7 @@ const PAGESIZE = 10;
   styleUrls: ['./table.component.scss'],
 })
 export class TableComponent implements OnInit, OnChanges, AfterViewInit {
+  @Input('enableMoveApplication') enableMoveApplication: boolean = false;
   @Input('enableGenerateRRR') enableGenerateRRR: boolean = false;
   @Input('enableConfirmPayment') enableConfirmPayment: boolean = false;
   @Input('enableUploadDocument') enableUploadDocument: boolean = false;
@@ -61,6 +63,7 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit {
   @Output('onConfirmPayment') onConfirmPayment = new EventEmitter<any>();
   @Output('onUploadDocument') onUploadDocument = new EventEmitter<any>();
   @Output('onFileUpload') onFileUpload = new EventEmitter<any>();
+  @Output('onMoveApplication') onMoveApplication = new EventEmitter<any>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -96,6 +99,18 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit {
       };
     });
 
+    if (this.enableMoveApplication) {
+      this.columns.push({
+        columnDef: 'action_controls',
+        header: 'Application Control',
+        cell: (item: Staff) => {
+          // if (item.appCount >= 0) return 'moveApplication_control';
+          if (!item.appCount) return 'moveApplication_control';
+          else return '';
+        },
+      });
+    }
+
     if (
       this.enableUploadDocument ||
       this.enableConfirmPayment ||
@@ -105,7 +120,8 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit {
         columnDef: 'action_controls',
         header: 'Action Controls',
         cell: (item: Application) => {
-          if (item.rrr && item.status === 'PaymentConfirmed')
+          if (item.rrr && item.status === 'Processing') return '';
+          else if (item.rrr && item.status === 'PaymentConfirmed')
             return 'uploadDocument_control';
           else if (item.rrr && item.status !== 'PaymentConfirmed')
             return 'confirmPayment_control';
@@ -189,6 +205,10 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit {
 
   uploadDocument(row) {
     this.onUploadDocument.emit(row);
+  }
+
+  moveApplication(row) {
+    this.onMoveApplication.emit(row);
   }
 
   addData() {

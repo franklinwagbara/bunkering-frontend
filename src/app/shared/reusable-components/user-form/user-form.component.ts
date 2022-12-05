@@ -55,8 +55,8 @@ export class UserFormComponent implements OnInit {
     this.usersFromElps = data.data.staffList;
 
     //Appending an additional name field to allow interfacing with the ngmultiple-select textField
-    this.usersFromElps = this.usersFromElps.map((user) => {
-      user.name = `${user.lastName}, ${user.firstName} (${user.email})`;
+    this.usersFromElps = this.usersFromElps?.map((user) => {
+      user.name = `${user?.lastName}, ${user?.firstName} (${user?.email})`;
       return user;
     });
 

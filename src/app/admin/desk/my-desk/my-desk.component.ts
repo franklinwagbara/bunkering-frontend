@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/compiler';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Subject } from 'rxjs';
 import { AdminService } from 'src/app/shared/services/admin.service';
 import { ApplyService } from 'src/app/shared/services/apply.service';
 import { ProgressBarService } from 'src/app/shared/services/progress-bar.service';
@@ -15,7 +16,9 @@ import { Category } from '../../settings/modules-setting/modules-setting.compone
 })
 export class MyDeskComponent implements OnInit {
   public applications: IApplication[];
-  public categories: Category[];
+  public applications$ = new Subject<IApplication[]>();
+  public categories: Category[] = [];
+  public categories$ = new Subject<Category[]>();
 
   public tableTitles = {
     applications: 'All Applications',
@@ -53,8 +56,16 @@ export class MyDeskComponent implements OnInit {
     private applicationService: ApplyService,
     public snackBar: MatSnackBar,
     public dialog: MatDialog,
-    private progressBar: ProgressBarService
-  ) {}
+    private progressBar: ProgressBarService,
+    public cd: ChangeDetectorRef
+  ) {
+    this.categories$.subscribe((data) => {
+      this.categories = [...data];
+      this.applications$.subscribe((app) => {
+        this.applications = app;
+      });
+    });
+  }
 
   ngOnInit(): void {
     this.progressBar.open();
@@ -63,10 +74,17 @@ export class MyDeskComponent implements OnInit {
       this.adminService.getModule(),
     ]).subscribe({
       next: (res) => {
-        if (res[0].success) this.applications = res[0].data.data;
+        if (res[0].success) {
+          this.applications = res[0].data.data;
+          this.applications$.next(this.applications);
+        }
 
-        if (res[1].success) this.categories = res[1].data.data;
+        if (res[1].success) {
+          this.categories = res[1].data.data;
+          this.categories$.next(res[1].data.data);
+        }
 
+        this.cd.markForCheck();
         this.progressBar.close();
       },
       error: (error) => {
@@ -84,8 +102,7 @@ export class MyDeskComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
-    this.categories = [...this.categories];
-    console.log('cateegor', this.categories);
+    // this.categories = [...this.categories];
   }
 
   onViewData(event: Event, type: string) {

@@ -30,7 +30,8 @@ export class PaymentSumComponent implements OnInit {
     private route: ActivatedRoute,
     private progressbar: ProgressBarService,
     private applicationServer: ApplyService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private cd: ChangeDetectorRef
   ) {
     this.genk = gen;
     this.rrr$.subscribe((data) => {
@@ -54,7 +55,6 @@ export class PaymentSumComponent implements OnInit {
           this.paymentSummary = res.data.data;
           this.rrr$.next(this.paymentSummary.rrr);
           this.applicationStatus$.next(this.paymentSummary.status);
-          this.progressbar.close();
 
           this.isPaymentConfirmed$.next(
             this.paymentSummary.rrr &&
@@ -66,16 +66,19 @@ export class PaymentSumComponent implements OnInit {
               this.paymentSummary.status !== 'PaymentConfirmed'
           );
         }
+        this.progressbar.close();
+        this.cd.markForCheck();
       },
       error: (error) => {
         this.progressbar.close();
+        this.cd.markForCheck();
       },
     });
   }
 
   generateRRR() {
-    this.progressbar.open();
     this.route.params.subscribe((params) => {
+      this.progressbar.open();
       this.application_id = params['id'];
 
       this.applicationServer.createPayment_RRR(this.application_id).subscribe({
@@ -89,11 +92,13 @@ export class PaymentSumComponent implements OnInit {
 
             //todo: display success dialog
             this.progressbar.close();
+            this.cd.markForCheck();
           }
         },
         error: (error) => {
           //todo: display error dialog
           this.progressbar.close();
+          this.cd.markForCheck();
         },
       });
     });

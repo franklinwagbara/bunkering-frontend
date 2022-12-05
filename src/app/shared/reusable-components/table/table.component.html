@@ -84,6 +84,7 @@
               column.cell(row) === "rrr_control" ||
               column.cell(row) === "uploadDocument_control" ||
               column.cell(row) === "confirmPayment_control" ||
+              column.cell(row) === "moveApplication_control" ||
               column.header === "Source"
                 ? ""
                 : column.cell(row)
@@ -154,6 +155,19 @@
                 (click)="uploadDocument(row)"
               >
                 Upload Document
+              </button>
+
+              <button
+                mat-flat-button
+                color="primary"
+                class="view-button"
+                *ngIf="
+                  column.header === 'Application Control' &&
+                  column.cell(row) === 'moveApplication_control'
+                "
+                (click)="moveApplication(row)"
+              >
+                Move Application
               </button>
 
               <input
