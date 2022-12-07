@@ -18,6 +18,8 @@ import { AdminService } from '../../services/admin.service';
 import { ListItem } from 'ng-multiselect-dropdown/multiselect.model';
 import { ProgressBarService } from '../../services/progress-bar.service';
 import { Staff } from 'src/app/admin/settings/all-staff/all-staff.component';
+import { GenericService } from '../../services';
+import { IApplication } from 'src/app/admin/application/application.component';
 
 @Component({
   selector: 'app-move-application-form',
@@ -26,9 +28,27 @@ import { Staff } from 'src/app/admin/settings/all-staff/all-staff.component';
 })
 export class MoveApplicationFormComponent implements OnInit {
   public form: FormGroup;
+  public appsOnStaffDesk: IApplication[] = [];
   public staffs: StaffWithName[];
+  public staff: StaffWithName;
+  public routableStaffs: StaffWithName[];
   public selectedStaffs = [];
   public staffsDropdownSettings: IDropdownSettings = {};
+
+  tableTitles = {
+    applications: "Applications on Staff's Desk",
+  };
+
+  userKeysMappedToHeaders = {
+    // firstName: 'First Name',
+    // lastName: 'Last Name',
+    // email: 'Email',
+    // phoneNo: 'Phone Number',
+    // role: 'Role',
+    // office: 'Office',
+    // appCount: 'Applications on Desk',
+    // status: 'Status',
+  };
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -38,20 +58,21 @@ export class MoveApplicationFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
     private progressBar: ProgressBarService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private gen: GenericService
   ) {
-    this.staffs = data.data.staffs;
-
-    console.log('staffs', this.staffs);
+    this.staff = data.data.staff;
+    // this.staffs = data.data.staffs;
 
     //Appending an additional name field to allow interfacing with the ngmultiple-select textField
-    this.staffs = this.staffs?.map((user) => {
-      user.name = `${user?.lastName}, ${user?.firstName} (${user?.email})`;
-      return user;
-    });
+    // this.staffs = this.staffs?.map((user) => {
+    //   user.name = `${user?.lastName}, ${user?.firstName} (${user?.email})`;
+    //   return user;
+    // });
 
     this.form = this.formBuilder.group({
       newStaffEmail: ['', Validators.required],
+      comment: ['', Validators.required],
     });
   }
 
@@ -64,6 +85,46 @@ export class MoveApplicationFormComponent implements OnInit {
       unSelectAllText: 'UnSelect All',
       allowSearchFilter: true,
     };
+
+    this.getStaffsForRerouteApplication();
+    this.getApplicationOnStaffDeskById();
+  }
+
+  getStaffsForRerouteApplication() {
+    console.log('applications', this.staff);
+    this.progressBar.open();
+    this.adminServe.getStaffsForRerouteApplication(this.staff.id).subscribe({
+      //todo: change id
+      next: (res) => {
+        this.staffs = res.map((user) => {
+          user.name = `${user?.lastName}, ${user?.firstName} (${user?.email})`;
+          return user;
+        });
+
+        console.log('resulll', res);
+
+        this.progressBar.close();
+        this.cd.markForCheck();
+      },
+      error: (error) => {
+        this.progressBar.close();
+        this.cd.markForCheck();
+      },
+    });
+  }
+
+  getApplicationOnStaffDeskById() {
+    this.adminServe.getApplicationsOnStaffDeskById(0).subscribe({
+      next: (res) => {
+        this.appsOnStaffDesk = res.data;
+        this.progressBar.close();
+        this.cd.markForCheck();
+      },
+      error: (error) => {
+        this.progressBar.close();
+        this.cd.markForCheck();
+      },
+    });
   }
 
   onClose() {

@@ -34,7 +34,7 @@ export class CompanyComponent implements OnInit {
   ) {
     this.genk = gen;
     this.auth = authenticationService;
-    this.currentUsername = this.auth.currentUserValue;
+    this.currentUsername = this.auth.currentUser;
   }
 
   ngOnInit(): void {}

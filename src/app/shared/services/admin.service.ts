@@ -84,6 +84,13 @@ export class AdminService {
       );
   }
 
+  getApplicationsOnStaffDeskById(id: any) {
+    return this.http.get<any>(
+      `${environment.apiUrl}/application/get-applications-on-desk-by-id`,
+      { params: { id } }
+    );
+  }
+
   getAllStaff() {
     return this.http
       .get<any>(`${environment.apiUrl}/account/all-staff`, {})
@@ -344,5 +351,12 @@ export class AdminService {
     return this.http
       .get<any>(`${environment.apiUrl}/configuration/all-actions-status`)
       .pipe(retry(this.num));
+  }
+
+  getStaffsForRerouteApplication(id: string) {
+    return this.http.get<any>(
+      `${environment.apiUrl}/admin/reroute-application-Dropdownlist`,
+      { params: { id } }
+    );
   }
 }

@@ -104,8 +104,7 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit {
         columnDef: 'action_controls',
         header: 'Application Control',
         cell: (item: Staff) => {
-          // if (item.appCount >= 0) return 'moveApplication_control';
-          if (!item.appCount) return 'moveApplication_control';
+          if (item.appCount > 0) return 'moveApplication_control';
           else return '';
         },
       });

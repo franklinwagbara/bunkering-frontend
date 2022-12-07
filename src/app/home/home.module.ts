@@ -6,16 +6,8 @@ import { HomeRoutingModule } from './home-routing.module';
 import { homeComponent } from './home.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    HomeRoutingModule,
-    FormsModule,
-    ReactiveFormsModule
-  ],
-  declarations: [
-    homeComponent
-  ],
+  imports: [CommonModule, HomeRoutingModule, FormsModule, ReactiveFormsModule],
+  declarations: [homeComponent],
   providers: [],
 })
-export class HomeModule { }
-
+export class HomeModule {}

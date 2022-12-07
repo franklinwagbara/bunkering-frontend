@@ -165,10 +165,11 @@ export class AllStaffComponent implements OnInit {
     });
   }
 
-  onMoveApplication(application: IApplication, type: string) {
+  onMoveApplication(staff: any, type: string) {
     const operationConfiguration = {
       users: {
         data: {
+          staff,
           staffs: this.users,
           // staffs: this.staffList,
           roles: this.roles,
@@ -211,7 +212,7 @@ export class Staff {
   office: string;
   status: boolean;
   appCount: number;
-  id: number;
+  id: any;
 
   constructor(item: any) {
     this.firstName = item.firstName;

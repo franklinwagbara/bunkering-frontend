@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
     private auth: AuthenticationService
   ) {
     this.generic = gen;
-    this.currentUsername = auth.currentUserValue;
+    this.currentUsername = auth.currentUser;
   }
 
   ngOnInit(): void {}

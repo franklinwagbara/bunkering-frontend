@@ -16,15 +16,12 @@ export class TopNavComponent implements OnInit {
   constructor(private authService: AuthenticationService) {}
 
   ngOnInit(): void {
-    this.currentUserInfo = this.authService.currentUserValue;
-    console.log('currentUser', this.currentUserInfo);
+    this.currentUserInfo = this.authService.currentUser;
   }
 
   navToggle() {
     this.menuOpen = !this.menuOpen;
     this.onMenuOpen.emit(this.menuOpen);
-
-    console.log('menuopen', this.menuOpen);
   }
 
   logout() {
