@@ -35,20 +35,29 @@ export class homeComponent implements OnInit {
     this.elpsbase = envr.elpsBase;
     this.appid = envr.appid;
 
+    // if (auth.isLoggedIn) return;
+
     this.route.queryParams.subscribe((params) => {
       this.email = params['email'];
-      if (this.email != null) {
-        this.auth.login(this.email, '').subscribe((user) => {
-          if (user) {
-            let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
+      console.log('loggged in ', this.auth.isLoggedIn);
+      // debugger;
+      if (!this.auth.isLoggedIn) {
+        this.auth
+          .login
+          // this.email, ''
+          ()
+          .subscribe((user) => {
+            if (user) {
+              let returnUrl =
+                this.route.snapshot.queryParamMap.get('returnUrl');
 
-            if (user.userType == 'Company') {
-              this.router.navigate([returnUrl || '/company/dashboard']);
-            } else {
-              this.router.navigate([returnUrl || '/admin']);
+              if (user.userType == 'Company') {
+                this.router.navigate([returnUrl || '/company/dashboard']);
+              } else {
+                this.router.navigate([returnUrl || '/admin']);
+              }
             }
-          }
-        });
+          });
       }
     });
   }

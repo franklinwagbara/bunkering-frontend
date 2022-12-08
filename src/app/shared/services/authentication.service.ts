@@ -23,32 +23,29 @@ export class AuthenticationService {
     return JSON.parse(localStorage.getItem('currentUser'));
   }
 
-  login(email: string, code: string) {
-    return this.http
-      .post<any>(`${environment.apiUrl}/account/login`, '', {
-        params: { email: email, code: code },
+  login() // email: string, code: string
+  {
+    return this.http.post<any>(`${environment.apiUrl}/account/login`, {}).pipe(
+      retry(this.num),
+      map((res) => {
+        // store user details and jwt token in local storage to keep user logged in between page refreshes
+        if (res.statusCode !== 200) {
+          return null;
+        }
+
+        const user = res.data;
+        const token = user.token;
+
+        if (!token) return null;
+
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        localStorage.setItem('token', JSON.stringify(token));
+
+        this._isLoggedIn = true;
+        this._isLoggedIn$.next(true);
+        return user;
       })
-      .pipe(
-        retry(this.num),
-        map((res) => {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
-          if (res.statusCode !== 200) {
-            return null;
-          }
-
-          const user = res.data;
-          const token = user.token;
-
-          if (!token) return null;
-
-          localStorage.setItem('currentUser', JSON.stringify(user));
-          localStorage.setItem('token', JSON.stringify(token));
-
-          this._isLoggedIn = true;
-          this._isLoggedIn$.next(true);
-          return user;
-        })
-      );
+    );
   }
 
   logout() {
