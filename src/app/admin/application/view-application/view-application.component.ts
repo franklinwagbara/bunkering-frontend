@@ -25,7 +25,7 @@ export class ViewApplicationComponent implements OnInit {
     public dialog: MatDialog,
     public progressBar: ProgressBarService
   ) {
-    this.application = data.data?.application;
+    this.application = data?.data?.application;
     console.log('application...', this.application);
   }
 

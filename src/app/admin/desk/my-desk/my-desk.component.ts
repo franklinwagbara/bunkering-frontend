@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy } from '@angular/compiler';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { forkJoin, Subject } from 'rxjs';
 import { AdminService } from 'src/app/shared/services/admin.service';
 import { ApplyService } from 'src/app/shared/services/apply.service';
@@ -57,7 +58,8 @@ export class MyDeskComponent implements OnInit {
     public snackBar: MatSnackBar,
     public dialog: MatDialog,
     private progressBar: ProgressBarService,
-    public cd: ChangeDetectorRef
+    public cd: ChangeDetectorRef,
+    private router: Router
   ) {
     this.categories$.subscribe((data) => {
       this.categories = [...data];
@@ -105,27 +107,31 @@ export class MyDeskComponent implements OnInit {
     // this.categories = [...this.categories];
   }
 
+  // onViewData(event: Event, type: string) {
+  //   const operationConfiguration = {
+  //     applications: {
+  //       data: {
+  //         application: event,
+  //       },
+  //       view: ViewApplicationComponent,
+  //     },
+  //   };
+
+  //   let dialogRef = this.dialog.open(operationConfiguration[type].view, {
+  //     data: {
+  //       data: operationConfiguration[type].data,
+  //     },
+  //     minHeight: '99vh',
+  //     minWidth: '94vw',
+  //   });
+
+  //   dialogRef.afterClosed().subscribe((res) => {
+  //     //The need to Refetch data not apparent at the moment
+  //   });
+  // }
+
   onViewData(event: Event, type: string) {
-    const operationConfiguration = {
-      applications: {
-        data: {
-          application: event,
-        },
-        view: ViewApplicationComponent,
-      },
-    };
-
-    let dialogRef = this.dialog.open(operationConfiguration[type].view, {
-      data: {
-        data: operationConfiguration[type].data,
-      },
-      minHeight: '99vh',
-      minWidth: '94vw',
-    });
-
-    dialogRef.afterClosed().subscribe((res) => {
-      //The need to Refetch data not apparent at the moment
-    });
+    this.router.navigate(['/view-application']);
   }
 
   getApplicationByCategoryId(name: string): IApplication[] | null {

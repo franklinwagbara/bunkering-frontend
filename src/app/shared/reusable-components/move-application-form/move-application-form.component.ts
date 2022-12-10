@@ -1,4 +1,10 @@
-import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
+import {
+  AfterViewChecked,
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -26,7 +32,7 @@ import { IApplication } from 'src/app/admin/application/application.component';
   templateUrl: './move-application-form.component.html',
   styleUrls: ['./move-application-form.component.css'],
 })
-export class MoveApplicationFormComponent implements OnInit {
+export class MoveApplicationFormComponent implements OnInit, AfterViewChecked {
   public form: FormGroup;
   public appsOnStaffDesk: IApplication[] = [];
   public staffs: StaffWithName[];
@@ -75,6 +81,9 @@ export class MoveApplicationFormComponent implements OnInit {
       comment: ['', Validators.required],
     });
   }
+  ngAfterViewChecked(): void {
+    this.cd.detectChanges();
+  }
 
   ngOnInit(): void {
     this.staffsDropdownSettings = {
@@ -83,6 +92,7 @@ export class MoveApplicationFormComponent implements OnInit {
       textField: 'name',
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
+      limitSelection: 1,
       allowSearchFilter: true,
     };
 
@@ -91,38 +101,30 @@ export class MoveApplicationFormComponent implements OnInit {
   }
 
   getStaffsForRerouteApplication() {
-    console.log('applications', this.staff);
     this.progressBar.open();
     this.adminServe.getStaffsForRerouteApplication(this.staff.id).subscribe({
       //todo: change id
       next: (res) => {
-        this.staffs = res.map((user) => {
-          user.name = `${user?.lastName}, ${user?.firstName} (${user?.email})`;
-          return user;
-        });
-
-        console.log('resulll', res);
+        this.staffs = res.data.data;
 
         this.progressBar.close();
-        this.cd.markForCheck();
       },
       error: (error) => {
         this.progressBar.close();
-        this.cd.markForCheck();
       },
     });
   }
 
   getApplicationOnStaffDeskById() {
-    this.adminServe.getApplicationsOnStaffDeskById(0).subscribe({
+    this.progressBar.open();
+    this.adminServe.getApplicationsOnStaffDeskById(this.staff.id).subscribe({
       next: (res) => {
+        console.log(res);
         this.appsOnStaffDesk = res.data;
         this.progressBar.close();
-        this.cd.markForCheck();
       },
       error: (error) => {
         this.progressBar.close();
-        this.cd.markForCheck();
       },
     });
   }

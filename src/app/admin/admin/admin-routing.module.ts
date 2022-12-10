@@ -13,6 +13,7 @@ import { PhasedocumentsComponent } from '../settings/phasedocuments/phasedocumen
 import { BranchSettingComponent } from '../settings/branch-setting/branch-setting.component';
 import { AppProcessComponent } from '../settings/app-process/app-process.component';
 import { MyDeskComponent } from '../desk/my-desk/my-desk.component';
+import { ViewApplicationComponent } from '../application/view-application/view-application.component';
 
 const routes: Routes = [
   { path: '', component: AdminComponent },
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'phasedocuments', component: PhasedocumentsComponent },
   { path: 'application-process', component: AppProcessComponent },
   { path: 'my-desk', component: MyDeskComponent },
+  { path: 'view-application', component: ViewApplicationComponent },
 ];
 
 @NgModule({

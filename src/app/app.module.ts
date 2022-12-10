@@ -13,6 +13,7 @@ import { ErrorInterceptor, JwtInterceptor } from './helpers';
 import { RouterModule } from '@angular/router';
 import { LayoutModule } from './layout/layout.module';
 import { ProgressBarService } from './shared/services/progress-bar.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,6 +29,7 @@ import { ProgressBarService } from './shared/services/progress-bar.service';
     CompanyModule,
     AdminModule,
     LayoutModule,
+    MatProgressSpinnerModule,
   ],
   exports: [RouterModule],
   providers: [

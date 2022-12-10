@@ -86,7 +86,7 @@ export class AdminService {
 
   getApplicationsOnStaffDeskById(id: any) {
     return this.http.get<any>(
-      `${environment.apiUrl}/application/get-applications-on-desk-by-id`,
+      `${environment.apiUrl}/admin/get-staffdesk-by-id`,
       { params: { id } }
     );
   }

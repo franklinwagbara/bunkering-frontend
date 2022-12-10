@@ -39,17 +39,17 @@ export class LoginRedirectComponent implements OnInit {
     //   this.email = params['email'];
     // });
 
-    this.login();
+    // this.login();
   }
 
-  login() {
-    //debugger;
-    this.auth
-      .login
-      // this.email, this.genk.authCode
-      ()
-      .subscribe((result) => {
-        this.router.navigate(['/' + this.genk.company, 'dashboard']);
-      });
-  }
+  // login() {
+  //   //debugger;
+  //   this.auth
+  //     .login
+  //     // this.email, this.genk.authCode
+  //     ()
+  //     .subscribe((result) => {
+  //       this.router.navigate(['/' + this.genk.company, 'dashboard']);
+  //     });
+  // }
 }
