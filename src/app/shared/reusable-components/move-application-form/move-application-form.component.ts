@@ -40,20 +40,17 @@ export class MoveApplicationFormComponent implements OnInit, AfterViewChecked {
   public routableStaffs: StaffWithName[];
   public selectedStaffs = [];
   public staffsDropdownSettings: IDropdownSettings = {};
+  private selectedApplications: IApplication[];
 
   tableTitles = {
     applications: "Applications on Staff's Desk",
   };
 
   userKeysMappedToHeaders = {
-    // firstName: 'First Name',
-    // lastName: 'Last Name',
-    // email: 'Email',
-    // phoneNo: 'Phone Number',
-    // role: 'Role',
-    // office: 'Office',
-    // appCount: 'Applications on Desk',
-    // status: 'Status',
+    appReference: 'Reference',
+    permitType: 'Permit Type',
+    companyName: 'Comany Name',
+    submittedDate: 'Submission Date',
   };
 
   constructor(
@@ -77,7 +74,7 @@ export class MoveApplicationFormComponent implements OnInit, AfterViewChecked {
     // });
 
     this.form = this.formBuilder.group({
-      newStaffEmail: ['', Validators.required],
+      id: ['', Validators.required],
       comment: ['', Validators.required],
     });
   }
@@ -119,8 +116,7 @@ export class MoveApplicationFormComponent implements OnInit, AfterViewChecked {
     this.progressBar.open();
     this.adminServe.getApplicationsOnStaffDeskById(this.staff.id).subscribe({
       next: (res) => {
-        console.log(res);
-        this.appsOnStaffDesk = res.data;
+        this.appsOnStaffDesk = res.data.data;
         this.progressBar.close();
       },
       error: (error) => {
@@ -129,14 +125,26 @@ export class MoveApplicationFormComponent implements OnInit, AfterViewChecked {
     });
   }
 
+  onSelectApp(apps: IApplication[]) {
+    console.log(this.form.value);
+    this.selectedApplications = apps;
+  }
+
   onClose() {
     this.dialogRef.close();
   }
 
-  createPermitStageDoc() {
+  rerouteApplication() {
     this.progressBar.open();
 
-    this.adminServe.createStageDocs(this.form.value).subscribe({
+    const model = {
+      newStaffId: this.form.get('id').value[0].id,
+      oldStaffId: this.staff.id,
+      comment: this.form.get('comment').value,
+      apps: [...this.selectedApplications.map((app) => app.id)],
+    };
+
+    this.adminServe.rerouteApplication(model).subscribe({
       next: (res) => {
         if (res.success) {
           this.snackBar.open(
@@ -164,20 +172,20 @@ export class MoveApplicationFormComponent implements OnInit, AfterViewChecked {
   }
 
   onItemSelect(event: ListItem) {
-    (this.form.get('docId') as FormArray).push(new FormControl(event.id));
+    (this.form.get('id') as FormArray).push(new FormControl(event.id));
   }
 
   onSelectAll(event: ListItem[]) {
     event.forEach((item) => {
-      (this.form.get('docId') as FormArray).push(new FormControl(item.id));
+      (this.form.get('id') as FormArray).push(new FormControl(item.id));
     });
   }
 
   onDeSelect(event: ListItem) {
     const targetIndex = (
-      (this.form.get('docId') as FormArray).value as Array<number>
+      (this.form.get('id') as FormArray).value as Array<number>
     ).indexOf(event.id as number);
-    (this.form.get('docId') as FormArray).removeAt(targetIndex);
+    (this.form.get('id') as FormArray).removeAt(targetIndex);
   }
 }
 

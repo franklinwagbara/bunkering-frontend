@@ -7,12 +7,13 @@
           <generic-table
             [noAddOrDeleteButton]="true"
             [noFilter]="true"
-            [enableMoveApplication]="true"
+            [noEditControl]="true"
             [table_title]="tableTitles.applications"
             [title-color]="'black'"
             [table_keysMappedToHeaders]="userKeysMappedToHeaders"
             [table_content]="appsOnStaffDesk"
             [table_controls_horizontal]="true"
+            (onSelect)="onSelectApp($event)"
           >
           </generic-table>
         </div>
@@ -20,14 +21,14 @@
     </div>
 
     <div class="w-[30%]">
-      <form [formGroup]="form" (ngSubmit)="createPermitStageDoc()">
+      <form [formGroup]="form" (ngSubmit)="rerouteApplication()">
         <div class="fomr-group" style="margin-bottom: 10px">
           <label>New Staff</label>
           <ng-multiselect-dropdown
             [placeholder]="'Select Staff'"
             [settings]="staffsDropdownSettings"
             [data]="staffs"
-            formArrayName="newStaffEmail"
+            formControlName="id"
             (onSelect)="onItemSelect($event)"
             (onSelectAll)="onSelectAll($event)"
             (onDeSelect)="onDeSelect($event)"
@@ -60,7 +61,7 @@
   <button mat-button mat-dialog-close (click)="onClose()">Close</button>
   <button
     mat-raised-button
-    (click)="createPermitStageDoc()"
+    (click)="rerouteApplication()"
     [disabled]="form.invalid"
   >
     Create

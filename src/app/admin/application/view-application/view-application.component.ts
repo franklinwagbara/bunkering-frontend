@@ -26,7 +26,7 @@ export class ViewApplicationComponent implements OnInit {
     public progressBar: ProgressBarService
   ) {
     this.application = data?.data?.application;
-    console.log('application...', this.application);
+    // console.log('application...', this.application);
   }
 
   ngOnInit(): void {

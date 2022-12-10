@@ -241,12 +241,22 @@ export class AdminService {
   }
 
   createStageDocs(model: any) {
-    return this.http
-      .post<any>(
-        `${environment.apiUrl}/configuration/post-permit-stage-docs`,
-        model
-      )
-      .pipe(retry(this.num));
+    return this.http.post<any>(
+      `${environment.apiUrl}/configuration/post-permit-stage-docs`,
+      model
+    );
+  }
+
+  rerouteApplication(model: {
+    newStaffId: string;
+    oldStaffId: string;
+    comment: string;
+    apps: number[];
+  }) {
+    return this.http.put<any>(
+      `${environment.apiUrl}/admin/reroute-application`,
+      model
+    );
   }
 
   getAllDocs() {

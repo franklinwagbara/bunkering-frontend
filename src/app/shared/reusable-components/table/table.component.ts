@@ -64,6 +64,7 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit {
   @Output('onUploadDocument') onUploadDocument = new EventEmitter<any>();
   @Output('onFileUpload') onFileUpload = new EventEmitter<any>();
   @Output('onMoveApplication') onMoveApplication = new EventEmitter<any>();
+  @Output('onSelect') onSelect = new EventEmitter<any>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -228,6 +229,10 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit {
 
   viewData(row) {
     this.onViewData.emit(row);
+  }
+
+  onSelectChange() {
+    this.onSelect.emit(this.selection.selected);
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
