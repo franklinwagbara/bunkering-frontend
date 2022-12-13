@@ -10,6 +10,11 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
+// import { MatNativeDateModule } from '@angular/material';
+import { MatNativeDateModule } from '@angular/material/core';
 import {
   MatSnackBarModule,
   MAT_SNACK_BAR_DEFAULT_OPTIONS,
@@ -29,6 +34,9 @@ import { BranchFormComponent } from './reusable-components/branch-form/branch-fo
 import { UserFormComponent } from './reusable-components/user-form/user-form.component';
 import { ApplicationProcessFormComponent } from './reusable-components/application-process-form/application-process-form.component';
 import { MoveApplicationFormComponent } from './reusable-components/move-application-form/move-application-form.component';
+import { ApproveFormComponent } from './reusable-components/approve-form/approve-form.component';
+import { SendBackFormComponent } from './reusable-components/send-back-form/send-back-form.component';
+import { AddScheduleFormComponent } from './reusable-components/add-schedule-form copy/add-schedule-form.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +53,9 @@ import { MoveApplicationFormComponent } from './reusable-components/move-applica
     UserFormComponent,
     ApplicationProcessFormComponent,
     MoveApplicationFormComponent,
+    ApproveFormComponent,
+    SendBackFormComponent,
+    AddScheduleFormComponent,
   ],
   imports: [
     CommonModule,
@@ -60,6 +71,10 @@ import { MoveApplicationFormComponent } from './reusable-components/move-applica
     MatDialogModule,
     MatSnackBarModule,
     MatProgressBarModule,
+    MatDatepickerModule,
+    MatCardModule,
+    MatNativeDateModule,
+    MatSelectModule,
     NgMultiSelectDropDownModule.forRoot(),
   ],
   providers: [

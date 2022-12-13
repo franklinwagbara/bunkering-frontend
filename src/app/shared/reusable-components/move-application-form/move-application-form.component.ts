@@ -25,7 +25,7 @@ import { ListItem } from 'ng-multiselect-dropdown/multiselect.model';
 import { ProgressBarService } from '../../services/progress-bar.service';
 import { Staff } from 'src/app/admin/settings/all-staff/all-staff.component';
 import { GenericService } from '../../services';
-import { IApplication } from 'src/app/admin/application/application.component';
+import { IApplication } from '../../interfaces/IApplication';
 
 @Component({
   selector: 'app-move-application-form',

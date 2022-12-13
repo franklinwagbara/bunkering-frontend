@@ -1,13 +1,13 @@
-import { ChangeDetectionStrategy } from '@angular/compiler';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { forkJoin, Subject } from 'rxjs';
+import { AppSource } from 'src/app/shared/constants/appSource';
+import { IApplication } from 'src/app/shared/interfaces/IApplication';
 import { AdminService } from 'src/app/shared/services/admin.service';
 import { ApplyService } from 'src/app/shared/services/apply.service';
 import { ProgressBarService } from 'src/app/shared/services/progress-bar.service';
-import { ViewApplicationComponent } from '../../application/view-application/view-application.component';
 import { Category } from '../../settings/modules-setting/modules-setting.component';
 
 @Component({
@@ -24,22 +24,6 @@ export class MyDeskComponent implements OnInit {
   public tableTitles = {
     applications: 'All Applications',
   };
-
-  addDate: Date;
-  applicationType: string;
-  applicationforms: IApplicationForm[];
-  categoryCode: string;
-  categoryId: string;
-  companyName: string;
-  currentUser: string;
-  id: number;
-  lgaId: number;
-  location: string;
-  phaseName: string;
-  phaseStageId: number;
-  reference: string;
-  stateId: number;
-  status: boolean;
 
   public applicationKeysMappedToHeaders = {
     appReference: 'Reference Number',
@@ -130,84 +114,9 @@ export class MyDeskComponent implements OnInit {
   //   });
   // }
 
-  onViewData(event: Event, type: string) {
-    this.router.navigate(['/view-application']);
+  onViewData(event: any, type: string) {
+    this.router.navigate([`/admin/view-application/${event.id}`], {
+      queryParams: { id: event.id, appSource: AppSource.MyDesk },
+    });
   }
-
-  getApplicationByCategoryId(name: string): IApplication[] | null {
-    const filteredByCategoryId = this.applications.filter(
-      (app) => app.category === name
-    );
-
-    return filteredByCategoryId.length === 0
-      ? this.applications
-      : filteredByCategoryId;
-  }
-}
-
-export interface IAppReference {}
-
-export interface IExtraPayment {}
-
-export interface IInspectionForm {}
-
-export interface ISchedule {}
-
-export interface IApplication {
-  id: number;
-  addedDate: Date;
-  appHistory: IAppReference[];
-  appReference: string;
-  appType: string;
-  applicationforms: IApplicationForm[];
-  category: string;
-  categoryCode: string;
-  categoryId: string;
-  companyName: string;
-  companyEmail: string;
-  companyAddress: string;
-  currentDesk: string;
-  currentUser: string;
-  extraPayments: IExtraPayment[];
-  facilityAddress: string;
-  facilityName: string;
-  gpsCordinates: string;
-  inspectionForm: IInspectionForm[];
-  permitType: string;
-  rrr: string;
-  schedules: ISchedule[];
-  submittedDate: string;
-  lgaId: number;
-  location: string;
-  phaseName: string;
-  phaseStageId: number;
-  stateId: number;
-  status: boolean;
-}
-
-export interface IApplicationForm {
-  afe: string;
-  block: string;
-  cumulativeProductionForWell: number;
-  estimatedOperationsDays: number;
-  expectedVolumes: number;
-  field: string;
-  initialReservesAllocationOfWell: number;
-  landSize: number;
-  lastProductionRate: number;
-  natureOfOperation: string;
-  plugBackInterval: number;
-  postOperationProductionRate: number;
-  proposedRig: string;
-  rigForOperations: string;
-  spudDate: Date;
-  targetReserves: string;
-  terrain: string;
-  wellClassApplied: string;
-  wellCompletionInterval: number;
-  wellLocationCategory: string;
-  wellName: string;
-  wellPreSpudName: string;
-  wellSpudName: string;
-  wellSurfaceCoordinates: string;
 }

@@ -8,7 +8,6 @@ import { forkJoin } from 'rxjs';
 import { UserFormComponent } from 'src/app/shared/reusable-components/user-form/user-form.component';
 import { FieldOffice } from '../field-zonal-office/field-zonal-office.component';
 import { IBranch } from 'src/app/shared/interfaces/IBranch';
-import { IApplication } from '../../application/application.component';
 import { MoveApplicationFormComponent } from 'src/app/shared/reusable-components/move-application-form/move-application-form.component';
 
 @Component({
@@ -122,7 +121,18 @@ export class AllStaffComponent implements OnInit {
       },
     };
 
-    const listOfDataToDelete = [...event];
+    const listOfDataToDelete = event.filter((s) => {
+      if (s.appCount > 0) {
+        this.snackBar.open(
+          `Cannot delete a staff with an application on their desk.`,
+          null,
+          {
+            panelClass: ['success'],
+          }
+        );
+      }
+      return s.appCount === 0;
+    });
 
     const requests = (listOfDataToDelete as any[]).map((req) => {
       if (type === 'users') {
@@ -154,6 +164,8 @@ export class AllStaffComponent implements OnInit {
 
           if (type === 'users') this.users = responses[0];
         }
+
+        this.progressBar.close();
       },
       error: (error) => {
         this.snackBar.open('Something went wrong while deleting data!', null, {
@@ -198,7 +210,35 @@ export class AllStaffComponent implements OnInit {
   }
 
   onEditData(event: Event, type: string) {
-    console.log('on edit', event, type);
+    const operationConfiguration = {
+      users: {
+        data: {
+          users: this.users,
+          staffList: this.staffList,
+          roles: this.roles,
+          offices: this.offices,
+          branches: this.branches,
+          currentValue: event,
+        },
+        form: UserFormComponent,
+      },
+    };
+
+    let dialogRef = this.dialog.open(operationConfiguration[type].form, {
+      data: {
+        data: operationConfiguration[type].data,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((res) => {
+      this.progressBar.open();
+
+      this.adminHttpService.getAllStaff().subscribe((res) => {
+        this.users = res.data.data;
+
+        this.progressBar.close();
+      });
+    });
   }
 }
 
@@ -212,9 +252,14 @@ export class Staff {
   office: string;
   status: boolean;
   appCount: number;
+  branchId: any;
+  officeId: any;
+  userType: string;
+  elpsId: string;
+  signatureImage: any;
   id: any;
 
-  constructor(item: any) {
+  constructor(item: Staff) {
     this.firstName = item.firstName;
     this.lastName = item.lastName;
     this.userId = item.userId;
@@ -222,8 +267,13 @@ export class Staff {
     this.phoneNo = item.phoneNo;
     this.id = item.id;
     this.role = item.role;
-    this.status = item.boolean;
+    this.status = item.status;
     this.appCount = item.appCount;
     this.office = item.office;
+    this.branchId = item.branchId;
+    this.officeId = item.officeId;
+    this.userType = item.userType;
+    this.elpsId = item.elpsId;
+    this.signatureImage = item.signatureImage;
   }
 }

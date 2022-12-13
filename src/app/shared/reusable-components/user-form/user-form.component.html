@@ -150,7 +150,12 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close (click)="onClose()">Close</button>
-  <button mat-raised-button (click)="createUser()" [disabled]="form.invalid">
-    Create
+  <button
+    mat-raised-button
+    [color]="!currentValue ? 'secondary' : 'primary'"
+    (click)="!currentValue ? createUser() : updateUser()"
+    [disabled]="form.invalid"
+  >
+    {{ !currentValue ? "Create" : "Update" }}
   </button>
 </div>

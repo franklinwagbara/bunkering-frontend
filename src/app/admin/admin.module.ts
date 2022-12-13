@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatButtonModule } from '@angular/material/button';
 import {
   MAT_SNACK_BAR_DEFAULT_OPTIONS,
   MatSnackBarModule,
@@ -28,6 +29,7 @@ import { AppProcessComponent } from './settings/app-process/app-process.componen
 import { ApplicationsFilteredByCategoryPipe } from './application/applications-filtered-by-category.pipe';
 import { MyDeskComponent } from './desk/my-desk/my-desk.component';
 import { BarChartComponent } from './admin/dashboard/bar-chart/bar-chart.component';
+import { FirstNPipe } from './application/view-application/first-n.pipe';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,7 @@ import { BarChartComponent } from './admin/dashboard/bar-chart/bar-chart.compone
     ApplicationsFilteredByCategoryPipe,
     MyDeskComponent,
     BarChartComponent,
+    FirstNPipe,
   ],
 
   imports: [
@@ -58,6 +61,7 @@ import { BarChartComponent } from './admin/dashboard/bar-chart/bar-chart.compone
     MatSnackBarModule,
     MatExpansionModule,
     MatTabsModule,
+    MatButtonModule,
   ],
   exports: [],
   providers: [

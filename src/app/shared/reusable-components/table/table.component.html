@@ -87,7 +87,9 @@
               column.cell(row) === "moveApplication_control" ||
               column.header === "Source"
                 ? ""
-                : column.cell(row)
+                : column.cell(row) !== "null"
+                ? column.cell(row)
+                : ""
             }}
 
             <div

@@ -28,7 +28,7 @@ const routes: Routes = [
   { path: 'phasedocuments', component: PhasedocumentsComponent },
   { path: 'application-process', component: AppProcessComponent },
   { path: 'my-desk', component: MyDeskComponent },
-  { path: 'view-application', component: ViewApplicationComponent },
+  { path: 'view-application/:id', component: ViewApplicationComponent },
 ];
 
 @NgModule({

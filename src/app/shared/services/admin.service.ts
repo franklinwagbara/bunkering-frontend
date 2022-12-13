@@ -57,9 +57,17 @@ export class AdminService {
   }
 
   createStaff(model) {
-    return this.http
-      .post<any>(`${environment.apiUrl}/account/add-staff`, model)
-      .pipe(retry(this.num));
+    return this.http.post<any>(
+      `${environment.apiUrl}/account/add-staff`,
+      model
+    );
+  }
+
+  updateStaff(model) {
+    return this.http.put<any>(
+      `${environment.apiUrl}/account/edit-staff`,
+      model
+    );
   }
 
   getStaffDashboard() {
@@ -103,9 +111,10 @@ export class AdminService {
   }
 
   deleteStaff(id: number) {
-    return this.http
-      .delete<any>(`${environment.apiUrl}/account/deactivate-staff?id=${id}`)
-      .pipe(retry(this.num));
+    return this.http.delete<any>(
+      `${environment.apiUrl}/account/delete-staff?id=${id}`,
+      {}
+    );
   }
 
   getElpsStaffList() {

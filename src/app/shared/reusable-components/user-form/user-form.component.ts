@@ -33,6 +33,7 @@ export class UserFormComponent implements OnInit {
   public offices: FieldOffice[];
   public branches: IBranch[];
   public roles: any;
+  public currentValue: Staff | null;
   public usersFromElps: StaffWithName[];
   public file: File | null = null;
   public selectedUserFromElps: StaffWithName;
@@ -53,25 +54,44 @@ export class UserFormComponent implements OnInit {
     this.branches = data.data.branches;
     this.roles = data.data.roles;
     this.usersFromElps = data.data.staffList;
+    this.currentValue = data.data?.currentValue;
+
+    let currentUserId: string;
 
     //Appending an additional name field to allow interfacing with the ngmultiple-select textField
     this.usersFromElps = this.usersFromElps?.map((user) => {
       user.name = `${user?.lastName}, ${user?.firstName} (${user?.email})`;
+
+      if (this.currentValue && user.email === this.currentValue.email)
+        currentUserId = user.id;
       return user;
     });
 
+    this.selectedUserFromElps = this.usersFromElps[0];
+
     this.form = this.formBuilder.group({
-      elpsId: ['', Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', Validators.required],
-      phoneNo: [''],
-      userType: [''],
-      role: ['', Validators.required],
-      officeId: ['', Validators.required],
-      branchId: ['', Validators.required],
-      status: [false, Validators.required],
-      signatureImage: [''],
+      elpsId: [this.currentValue ? currentUserId : '', Validators.required],
+      firstName: [this.currentValue ? this.currentValue.firstName : ''],
+      lastName: [this.currentValue ? this.currentValue.lastName : ''],
+      email: [
+        this.currentValue ? this.currentValue.email : '',
+        Validators.required,
+      ],
+      phoneNo: [this.currentValue ? this.currentValue.phoneNo : ''],
+      userType: [this.currentValue ? this.currentValue.userType : ''],
+      role: [
+        this.currentValue ? this.currentValue.role : '',
+        Validators.required,
+      ],
+      officeId: [this.currentValue ? this.currentValue.officeId : ''],
+      branchId: [this.currentValue ? this.currentValue.branchId : ''],
+      status: [
+        this.currentValue ? this.currentValue.status : '',
+        Validators.required,
+      ],
+      signatureImage: [
+        this.currentValue ? this.currentValue.signatureImage : '',
+      ],
     });
   }
 
@@ -120,6 +140,48 @@ export class UserFormComponent implements OnInit {
       error: (error) => {
         this.snackBar.open(
           'Operation failed! Could not create the Staff account.',
+          null,
+          {
+            panelClass: ['error'],
+          }
+        );
+        this.progressBar.close();
+      },
+    });
+  }
+
+  updateUser() {
+    this.progressBar.open();
+
+    this.form.controls['elpsId'].setValue(this.selectedUserFromElps.id);
+
+    const formDataToSubmit = new FormData();
+
+    formDataToSubmit.append('elpsId', this.form.get('elpsId').value);
+    formDataToSubmit.append('firstName', this.form.get('firstName').value);
+    formDataToSubmit.append('lastName', this.form.get('lastName').value);
+    formDataToSubmit.append('email', this.form.get('email').value);
+    formDataToSubmit.append('phoneNo', this.form.get('phoneNo').value);
+    formDataToSubmit.append('userType', this.form.get('userType').value);
+    formDataToSubmit.append('userRole', this.form.get('role').value);
+    formDataToSubmit.append('officeId', this.form.get('officeId').value);
+    formDataToSubmit.append('branchId', this.form.get('branchId').value);
+    formDataToSubmit.append('status', this.form.get('status').value);
+    formDataToSubmit.append('signatureImage', this.file);
+
+    this.adminService.updateStaff(formDataToSubmit).subscribe({
+      next: (res) => {
+        if (res.success) {
+          this.snackBar.open('Staff was updated successfully!', null, {
+            panelClass: ['success'],
+          });
+
+          this.dialogRef.close();
+        }
+      },
+      error: (error) => {
+        this.snackBar.open(
+          'Operation failed! Could not update the Staff account.',
           null,
           {
             panelClass: ['error'],

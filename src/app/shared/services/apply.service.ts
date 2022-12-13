@@ -15,6 +15,19 @@ export class ApplyService {
 
   constructor(private http: HttpClient) {}
 
+  processApplication(model: {
+    applicationId: number;
+    currentUserId: string;
+    action: string;
+    delegatedUserId: string;
+    comment: string;
+  }) {
+    return this.http.post<any>(
+      `${environment.apiUrl}/application/process-application`,
+      model
+    );
+  }
+
   getApplicationCategory() {
     return this.http
       .get<any>(`${environment.apiUrl}/application/application-category`, {})
@@ -155,6 +168,12 @@ export class ApplyService {
     return this.http
       .get<any>(`${environment.apiUrl}/application/applications-on-my-desk`)
       .pipe(retry(this.num));
+  }
+
+  viewApplication(id: any) {
+    return this.http.get<any>(`${environment.apiUrl}/admin/view-application`, {
+      params: { id },
+    });
   }
 
   createPayment_RRR(appID: any) {

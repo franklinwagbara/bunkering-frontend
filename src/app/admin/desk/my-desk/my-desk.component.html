@@ -6,11 +6,9 @@
         <div class="table-group">
           <div class="table-wrapper">
             <generic-table
-              [table_title]="tableTitles.applications"
-              [title-color]="'yellow'"
               [table_keysMappedToHeaders]="applicationKeysMappedToHeaders"
               [table_content]="
-                applications | applicationsFilteredByCategory: cat.name
+                applications | applicationsFilteredByCategory : cat.name
               "
               [EnableViewControl]="true"
               [noAddOrDeleteButton]="true"

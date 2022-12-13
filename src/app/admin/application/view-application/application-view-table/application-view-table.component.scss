@@ -4,7 +4,7 @@
 }
 
 .table tr:nth-child(odd) {
-  background-color: #e9a6a6;
+  background-color: #facfad;
 }
 
 .table th,
@@ -13,6 +13,6 @@ td {
 }
 
 .table th {
-  background-color: #864879;
+  background-color: #3e4e50;
   @apply text-slate-100;
 }

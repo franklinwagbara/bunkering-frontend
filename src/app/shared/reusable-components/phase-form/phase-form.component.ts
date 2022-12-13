@@ -92,13 +92,12 @@ export class PhaseFormComponent {
   }
 
   editPhase() {
-    console.log('editing phase', this.form.value, this.currentValue);
     this.progressBar.open();
 
     this.adminService.editPhase(this.form.value).subscribe({
       next: (res) => {
         if (res.success) {
-          this.snackBar.open('Phase was created successfully!', null, {
+          this.snackBar.open('Phase was updated successfully!', null, {
             panelClass: ['success'],
           });
 
@@ -109,7 +108,7 @@ export class PhaseFormComponent {
       },
       error: (error) => {
         this.snackBar.open(
-          'Operation failed! Could not create the Phase',
+          'Operation failed! Could not update the Phase',
           null,
           {
             panelClass: ['error'],
