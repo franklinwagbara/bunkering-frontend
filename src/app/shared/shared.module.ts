@@ -13,6 +13,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 // import { MatNativeDateModule } from '@angular/material';
 import { MatNativeDateModule } from '@angular/material/core';
 import {
@@ -75,6 +76,7 @@ import { AddScheduleFormComponent } from './reusable-components/add-schedule-for
     MatCardModule,
     MatNativeDateModule,
     MatSelectModule,
+    NgxMaterialTimepickerModule,
     NgMultiSelectDropDownModule.forRoot(),
   ],
   providers: [

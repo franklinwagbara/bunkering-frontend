@@ -99,3 +99,8 @@ th {
 .flex-row {
   flex-direction: row;
 }
+
+table td,
+th {
+  @apply px-4;
+}

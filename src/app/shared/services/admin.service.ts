@@ -6,6 +6,7 @@ import { map, retry } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { LoginModel } from '../models/login-model';
 import { IApplicationProcess } from '../interfaces/IApplicationProcess';
+import { Schedule } from '../reusable-components/add-schedule-form copy/add-schedule-form.component';
 
 @Injectable({ providedIn: 'root' })
 export class AdminService {
@@ -376,6 +377,13 @@ export class AdminService {
     return this.http.get<any>(
       `${environment.apiUrl}/admin/reroute-application-Dropdownlist`,
       { params: { id } }
+    );
+  }
+
+  addSchedule(model: Schedule) {
+    return this.http.post<any>(
+      `${environment.apiUrl}/admin/schedule-meeting`,
+      model
     );
   }
 }

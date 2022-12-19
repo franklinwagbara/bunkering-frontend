@@ -30,6 +30,7 @@ import { ApplicationsFilteredByCategoryPipe } from './application/applications-f
 import { MyDeskComponent } from './desk/my-desk/my-desk.component';
 import { BarChartComponent } from './admin/dashboard/bar-chart/bar-chart.component';
 import { FirstNPipe } from './application/view-application/first-n.pipe';
+import { ShowMoreComponent } from './application/view-application/show-more/show-more.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { FirstNPipe } from './application/view-application/first-n.pipe';
     MyDeskComponent,
     BarChartComponent,
     FirstNPipe,
+    ShowMoreComponent,
   ],
 
   imports: [

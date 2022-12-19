@@ -13,11 +13,18 @@ import { IApplication } from '../../interfaces/IApplication';
 import { ApplyService } from '../../services/apply.service';
 import { ApplicationActionType } from '../../constants/applicationActions';
 import { Staff } from 'src/app/admin/settings/all-staff/all-staff.component';
+import { Time } from '@angular/common';
+import { convertTimeToMilliseconds } from 'src/app/helpers/convertTimeToMilliseconds';
+import { AdminService } from '../../services/admin.service';
 
 interface Food {
   value: string;
   viewValue: string;
 }
+
+const TypesOfAppointment = ['Inspection', 'Meeting', 'Preparation'];
+
+const Venue = ['Application field location', 'Commission Office'];
 
 @Component({
   selector: 'app-add-schedule-form',
@@ -28,14 +35,10 @@ export class AddScheduleFormComponent implements OnInit {
   public form: FormGroup;
   public application: IApplication;
   public currentUser: Staff;
-
-  selected: Date | null;
-
-  foods: Food[] = [
-    { value: 'steak-0', viewValue: 'Steak' },
-    { value: 'pizza-1', viewValue: 'Pizza' },
-    { value: 'tacos-2', viewValue: 'Tacos' },
-  ];
+  public typeOfAppointment = [...TypesOfAppointment];
+  public venues = [...Venue];
+  public selected: Date | null;
+  public time: string | null;
 
   constructor(
     public dialogRef: MatDialogRef<AddScheduleFormComponent>,
@@ -45,11 +48,18 @@ export class AddScheduleFormComponent implements OnInit {
     private dialog: MatDialog,
     private appService: ApplyService,
     private progressBarService: ProgressBarService,
-    private auth: AuthenticationService
+    private auth: AuthenticationService,
+    private adminService: AdminService
   ) {
     this.application = data.data.application;
 
     this.form = this.formBuilder.group({
+      // applicationId: [this.application.id, Validators.required],
+      // scheduleBy: [this.currentUser.userId, Validators.required],
+      selectedDate: ['', Validators.required],
+      time: ['', Validators.required],
+      typeOfAppoinment: ['', Validators.required],
+      venue: ['', Validators.required],
       comment: ['', Validators.required],
     });
   }
@@ -83,18 +93,27 @@ export class AddScheduleFormComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  approve() {
+  addSchedule() {
     this.progressBarService.open();
 
+    this.selected = new Date(this.form.get('selectedDate').value);
+    this.selected.setTime(
+      convertTimeToMilliseconds(this.form.get('time').value)
+    );
+
+    this.form.get('selectedDate').setValue(this.selected);
+
     const model = {
+      id: 0,
       applicationId: this.application.id,
-      currentUserId: this.currentUser.id,
-      action: ApplicationActionType.Approve,
-      delegatedUserId: '',
+      scheduleBy: this.currentUser.id,
+      inspectionDate: this.form.controls['selectedDate'].value,
       comment: this.form.controls['comment'].value,
+      venue: this.form.controls['venue'].value,
+      typeOfAppoinment: this.form.controls['typeOfAppoinment'].value,
     };
 
-    this.appService.processApplication(model).subscribe({
+    this.adminService.addSchedule(model).subscribe({
       next: (res) => {
         if (res.success) {
           this.snackBar.open('Operation was successfully!', null, {
@@ -120,4 +139,20 @@ export class AddScheduleFormComponent implements OnInit {
       },
     });
   }
+
+  updateFormDate(value) {
+    this.form.get('selectedDate').setValue(value);
+  }
+}
+
+export interface Schedule {
+  id: number;
+  applicationId: number;
+  scheduleBy: string;
+  inspectionDate: string;
+  comment: string;
+  venue: string;
+  typeOfAppoinment: string;
+  contactPerson?: string;
+  contactPhone?: string;
 }

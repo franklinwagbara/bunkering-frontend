@@ -34,4 +34,10 @@ export interface IApplication {
   phaseStageId: number;
   stateId: number;
   status: boolean;
+  applicationDocs: IDoc[];
+}
+
+export interface IDoc {
+  docName: string;
+  docSource: string;
 }

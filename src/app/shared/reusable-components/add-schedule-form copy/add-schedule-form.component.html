@@ -1,25 +1,48 @@
 <h1 mat-dialog-title>Add Schedule</h1>
 <div mat-dialog-content class="modal-width">
-  <form [formGroup]="form" (ngSubmit)="approve()" class="form">
-    <mat-card class="calendar-card">
-      <mat-calendar [(selected)]="selected"></mat-calendar>
-    </mat-card>
+  <form [formGroup]="form" (ngSubmit)="addSchedule()" class="form">
+    <div class="datetime-control">
+      <label for="date">Date</label>
+      <mat-card id="selectedDate" class="calendar-card">
+        <mat-calendar
+          [selected]="form.get('selectedDate').value"
+          (selectedChange)="updateFormDate($event)"
+        ></mat-calendar>
+      </mat-card>
+
+      <div class="time-control">
+        <label for="time">Time</label>
+        <ngx-timepicker-field
+          id="time"
+          name="time"
+          formControlName="time"
+          [(ngModel)]="time"
+          [controlOnly]="true"
+        ></ngx-timepicker-field>
+      </div>
+      <div
+        *ngIf="form.get('time')?.touched && form.get('time')?.invalid"
+        class="alert alert-danger"
+      >
+        Time is required!
+      </div>
+    </div>
 
     <div class="top-half">
       <mat-form-field appearance="fill">
-        <mat-label>Favorite food</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let food of foods" [value]="food.value">
-            {{ food.viewValue }}
+        <mat-label>Type of Appointment</mat-label>
+        <mat-select name="typeOfAppoinment" formControlName="typeOfAppoinment">
+          <mat-option *ngFor="let type of typeOfAppointment" [value]="type">
+            {{ type }}
           </mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
-        <mat-label>Favorite food</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let food of foods" [value]="food.value">
-            {{ food.viewValue }}
+        <mat-label>Venue</mat-label>
+        <mat-select name="venue" formControlName="venue">
+          <mat-option *ngFor="let venue of venues" [value]="venue">
+            {{ venue }}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -44,8 +67,8 @@
   </form>
 </div>
 <div mat-dialog-actions>
-  <button mat-button mat-dialog-close>Close</button>
-  <button mat-raised-button (click)="approve()" [disabled]="form.invalid">
+  <button mat-button mat-dialog-close (click)="onClose()">Close</button>
+  <button mat-raised-button (click)="addSchedule()" [disabled]="form.invalid">
     Schedule
   </button>
 </div>

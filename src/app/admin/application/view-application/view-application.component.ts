@@ -10,6 +10,7 @@ import { SendBackFormComponent } from 'src/app/shared/reusable-components/send-b
 import { AdminService } from 'src/app/shared/services/admin.service';
 import { ApplyService } from 'src/app/shared/services/apply.service';
 import { ProgressBarService } from 'src/app/shared/services/progress-bar.service';
+import { ShowMoreComponent } from './show-more/show-more.component';
 
 @Component({
   selector: 'app-view-application',
@@ -21,13 +22,6 @@ export class ViewApplicationComponent implements OnInit {
   public appActions: any;
   public appId: number;
   public appSource: AppSource;
-
-  appHistoryKeysMappedToHeaders = {
-    actionBy: 'Action By',
-    actionTo: 'Action To',
-    comment: 'Remark',
-    date: 'Date',
-  };
 
   constructor(
     private snackBar: MatSnackBar,
@@ -95,6 +89,53 @@ export class ViewApplicationComponent implements OnInit {
     };
 
     let dialogRef = this.dialog.open(operationConfiguration[type].form, {
+      data: {
+        data: operationConfiguration[type].data,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((res) => {
+      this.progressBar.open();
+
+      this.getApplication().subscribe((res) => {
+        this.application = res.data.data;
+
+        this.progressBar.close();
+        this.cd.markForCheck();
+      });
+    });
+  }
+
+  showMore(type: string) {
+    const operationConfiguration = {
+      appHistory: {
+        data: {
+          appHistory: this.application.appHistory,
+        },
+      },
+      schedules: {
+        data: {
+          schedules: this.application.schedules,
+        },
+      },
+      inspectionForm: {
+        data: {
+          inspectionForm: this.application.inspectionForm,
+        },
+      },
+      extraPayments: {
+        data: {
+          extraPayments: this.application.extraPayments,
+        },
+      },
+      applicationDocs: {
+        data: {
+          applicationDocs: this.application.applicationDocs,
+        },
+      },
+    };
+
+    let dialogRef = this.dialog.open(ShowMoreComponent, {
       data: {
         data: operationConfiguration[type].data,
       },

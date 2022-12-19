@@ -27,14 +27,14 @@
 }
 
 .card-list {
-  @apply border-2 border-pink-400 px-3 py-4 rounded-md w-full;
+  @apply border-2 border-slate-200 px-3 py-4 rounded-md w-full my-3;
 
   .card-item {
     @apply bg-slate-500  min-h-[20px] pr-1 flex flex-row m-1 gap-2 w-full rounded-lg;
   }
 
   .item-title {
-    @apply text-lg px-3 py-2 flex justify-center items-center text-white;
+    @apply text-lg px-3 py-2 flex justify-center items-center text-white w-28;
   }
 
   .item-content {
