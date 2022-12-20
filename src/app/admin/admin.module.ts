@@ -4,6 +4,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+
 import {
   MAT_SNACK_BAR_DEFAULT_OPTIONS,
   MatSnackBarModule,
@@ -64,6 +66,7 @@ import { ShowMoreComponent } from './application/view-application/show-more/show
     MatExpansionModule,
     MatTabsModule,
     MatButtonModule,
+    MatIconModule,
   ],
   exports: [],
   providers: [

@@ -7,11 +7,11 @@
 }
 
 .application-view {
-  @apply basis-[40%];
+  @apply flex-1 w-[33%];
 }
 
 .application-controls {
-  @apply basis-[30%]  shadow-md flex flex-col gap-4;
+  @apply flex-1 w-[33%]  shadow-md flex flex-col gap-4;
 }
 
 .view-application {
@@ -34,14 +34,18 @@
   }
 
   .item-title {
-    @apply text-lg px-3 py-2 flex justify-center items-center text-white w-28;
+    @apply text-sm px-3 py-2 flex justify-center items-center text-white w-32;
   }
 
   .item-content {
-    @apply px-3 py-2 text-base bg-slate-100 w-full;
+    @apply px-3 py-2 text-sm bg-slate-100 w-full;
   }
 }
 
 .show-more {
   @apply bg-slate-400 text-xs text-white px-3 py-1 w-24 cursor-pointer mx-auto mt-2;
+}
+
+mat-expansion-panel {
+  min-width: 50%;
 }

@@ -29,6 +29,10 @@
             <div class="item-content">{{ history.actionBy }}</div>
           </div>
           <div class="card-item">
+            <div class="item-title">Recipient</div>
+            <div class="item-content">{{ history.sentTo }}</div>
+          </div>
+          <div class="card-item">
             <div class="item-title">Remark</div>
             <div class="item-content">{{ history.comment }}</div>
           </div>
@@ -48,17 +52,46 @@
           class="card-list"
           *ngFor="let schedule of application?.schedules | firstN : 4"
         >
+          <div
+            *ngIf="isCreatedByMe(schedule.scheduleBy)"
+            class="flex justify-end"
+          >
+            <button
+              mat-stroked-button
+              color="accent"
+              (click)="action('assignApplication')"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+          </div>
+
           <div class="card-item">
             <div class="item-title">Initiator</div>
-            <div class="item-content">{{ schedule.actionBy }}</div>
+            <div class="item-content">{{ schedule.scheduleBy }}</div>
+          </div>
+          <div class="card-item">
+            <div class="item-title">Schedule Date</div>
+            <div class="item-content">{{ schedule.scheduleDate }}</div>
+          </div>
+          <div class="card-item">
+            <div class="item-title">Expiry Date</div>
+            <div class="item-content">{{ schedule.scheduleExpiry }}</div>
+          </div>
+          <div class="card-item">
+            <div class="item-title">Company Status</div>
+            <div class="item-content">{{ schedule.companyStatus }}</div>
           </div>
           <div class="card-item">
             <div class="item-title">Remark</div>
             <div class="item-content">{{ schedule.comment }}</div>
           </div>
           <div class="card-item">
+            <div class="item-title">Approver</div>
+            <div class="item-content">{{ schedule.approver }}</div>
+          </div>
+          <div class="card-item">
             <div class="item-title">Date</div>
-            <div class="item-content">{{ schedule.date }}</div>
+            <div class="item-content">{{ schedule.status }}</div>
           </div>
         </div>
         <p class="show-more" (click)="showMore('schedules')">Show more</p>
@@ -157,6 +190,15 @@
           (click)="action('addSchedule')"
         >
           Add Schedule
+        </button>
+
+        <!-- todo: display button only if role is HMUR -->
+        <button
+          mat-stroked-button
+          color="primary"
+          (click)="action('assignApplication')"
+        >
+          Assign Application
         </button>
       </div>
     </div>

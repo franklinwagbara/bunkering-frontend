@@ -7,6 +7,7 @@ import { IApplication } from 'src/app/shared/interfaces/IApplication';
 import { AddScheduleFormComponent } from 'src/app/shared/reusable-components/add-schedule-form copy/add-schedule-form.component';
 import { ApproveFormComponent } from 'src/app/shared/reusable-components/approve-form/approve-form.component';
 import { SendBackFormComponent } from 'src/app/shared/reusable-components/send-back-form/send-back-form.component';
+import { AuthenticationService } from 'src/app/shared/services';
 import { AdminService } from 'src/app/shared/services/admin.service';
 import { ApplyService } from 'src/app/shared/services/apply.service';
 import { ProgressBarService } from 'src/app/shared/services/progress-bar.service';
@@ -25,7 +26,7 @@ export class ViewApplicationComponent implements OnInit {
 
   constructor(
     private snackBar: MatSnackBar,
-    private adminService: AdminService,
+    private auth: AuthenticationService,
     private appService: ApplyService,
     public dialog: MatDialog,
     public progressBar: ProgressBarService,
@@ -58,8 +59,11 @@ export class ViewApplicationComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    console.log('initializing viewapplication');
+  ngOnInit(): void {}
+
+  isCreatedByMe(scheduleBy: string) {
+    const currentUser = this.auth.currentUser;
+    return currentUser.userId == scheduleBy;
   }
 
   getApplication() {

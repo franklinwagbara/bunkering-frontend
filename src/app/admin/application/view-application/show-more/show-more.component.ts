@@ -41,10 +41,14 @@ export class ShowMoreComponent implements OnInit {
   };
 
   schedulesKeysMappedToHeaders = {
-    actionBy: 'Action By',
-    actionTo: 'Action To',
+    scheduleBy: 'Scheduled By',
+    scheduleDate: 'Schedule Date',
+    scheduleExpiry: 'Schedule Expiration',
     comment: 'Remark',
-    date: 'Date',
+    companyStatus: "Company's Status",
+    companyCooment: "Company's Comment",
+    approver: 'Approver',
+    status: 'Status',
   };
 
   inspectionFormKeysMappedToHeaders = {

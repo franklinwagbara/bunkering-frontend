@@ -11,19 +11,11 @@ import { AuthenticationService } from '../../services';
 import { ProgressBarService } from '../../services/progress-bar.service';
 import { IApplication } from '../../interfaces/IApplication';
 import { ApplyService } from '../../services/apply.service';
-import { ApplicationActionType } from '../../constants/applicationActions';
 import { Staff } from 'src/app/admin/settings/all-staff/all-staff.component';
-import { Time } from '@angular/common';
 import { convertTimeToMilliseconds } from 'src/app/helpers/convertTimeToMilliseconds';
 import { AdminService } from '../../services/admin.service';
 
-interface Food {
-  value: string;
-  viewValue: string;
-}
-
 const TypesOfAppointment = ['Inspection', 'Meeting', 'Preparation'];
-
 const Venue = ['Application field location', 'Commission Office'];
 
 @Component({
@@ -97,8 +89,11 @@ export class AddScheduleFormComponent implements OnInit {
     this.progressBarService.open();
 
     this.selected = new Date(this.form.get('selectedDate').value);
+
+    const dateToTime = this.selected.getTime();
+
     this.selected.setTime(
-      convertTimeToMilliseconds(this.form.get('time').value)
+      dateToTime + convertTimeToMilliseconds(this.form.get('time').value)
     );
 
     this.form.get('selectedDate').setValue(this.selected);
