@@ -46,8 +46,6 @@ export class MyApplicationComponent implements OnInit {
   constructor(
     private gen: GenericService,
     private router: Router,
-    private auth: AuthenticationService,
-    private route: ActivatedRoute,
     public dialog: MatDialog,
     private progressbar: ProgressBarService,
     private applicationServer: ApplyService,

@@ -30,12 +30,11 @@ const PAGESIZEOPTIONS = [2, 5, 10];
 const PAGESIZE = 10;
 
 @Component({
-  selector: 'generic-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss'],
+  selector: 'flat-table',
+  templateUrl: './flat-table.component.html',
+  styleUrls: ['./flat-table.component.scss'],
 })
-export class TableComponent implements OnInit, OnChanges, AfterViewInit {
-  @Input('flat') flat = false;
+export class FlatTableComponent implements OnInit, OnChanges, AfterViewInit {
   @Input('enableMoveApplication') enableMoveApplication: boolean = false;
   @Input('enableGenerateRRR') enableGenerateRRR: boolean = false;
   @Input('enableConfirmPayment') enableConfirmPayment: boolean = false;

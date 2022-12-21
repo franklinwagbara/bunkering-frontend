@@ -35,6 +35,10 @@
 
   .item-title {
     @apply text-sm px-3 py-2 flex justify-center items-center text-white w-32;
+
+    & img {
+      @apply w-8;
+    }
   }
 
   .item-content {

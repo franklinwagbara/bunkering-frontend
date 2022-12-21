@@ -386,4 +386,11 @@ export class AdminService {
       model
     );
   }
+
+  editSchedule(model: Schedule) {
+    return this.http.post<any>(
+      `${environment.apiUrl}/admin/schedule-meeting`,
+      model
+    );
+  }
 }

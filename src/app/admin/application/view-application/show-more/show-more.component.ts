@@ -66,24 +66,14 @@ export class ShowMoreComponent implements OnInit {
   };
 
   applicationDocsKeysMappedToHeaders = {
-    actionBy: 'Action By',
-    actionTo: 'Action To',
-    comment: 'Remark',
-    date: 'Date',
+    docSource: 'Source',
+    docName: 'Action To',
   };
 
   constructor(
     public dialogRef: MatDialogRef<ShowMoreComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.dataToDisplay$.subscribe((data) => {
-      console.log('data....', data);
-    });
-
-    this.dataKeysMappedToHeaders$.subscribe((key) => {
-      console.log('jeaders', key);
-    });
-
     if (data.data?.appHistory) {
       this.dataKeysMappedToHeaders$.next(this.appHistoryKeysMappedToHeaders);
       this.dataToDisplay = data.data.appHistory;
@@ -106,7 +96,15 @@ export class ShowMoreComponent implements OnInit {
       this.dataKeysMappedToHeaders$.next(
         this.applicationDocsKeysMappedToHeaders
       );
-      this.dataToDisplay = data.data.applicationDocs;
+      this.dataToDisplay = (data.data.applicationDocs as Array<any>).map(
+        (d) => {
+          d.docSource = d.docSource
+            ? `<a href="${d.docSource}" target="_blank" rel="noopener noreferrer"><img width="20" src="assets/image/pdfIcon.png" /></a>`
+            : `<img width="20" src="assets/image/no-document.png" />`;
+
+          return d;
+        }
+      );
       this.tableTitle = 'Application Documents';
     } else {
       this.dataKeysMappedToHeaders$.next({});

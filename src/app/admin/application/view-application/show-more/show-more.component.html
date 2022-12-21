@@ -2,7 +2,7 @@
 <div mat-dialog-content class="modal-width">
   <div class="table-group">
     <div class="table-wrapper">
-      <generic-table
+      <flat-table
         [table_controls_horizontal]="true"
         [table_keysMappedToHeaders]="dataKeysMappedToHeaders$ | async"
         [table_content]="dataToDisplay"
@@ -11,7 +11,7 @@
         [noEditControl]="true"
         [noTitle]="true"
       >
-      </generic-table>
+      </flat-table>
     </div>
   </div>
 </div>

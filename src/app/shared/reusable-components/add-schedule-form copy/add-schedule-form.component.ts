@@ -14,6 +14,7 @@ import { ApplyService } from '../../services/apply.service';
 import { Staff } from 'src/app/admin/settings/all-staff/all-staff.component';
 import { convertTimeToMilliseconds } from 'src/app/helpers/convertTimeToMilliseconds';
 import { AdminService } from '../../services/admin.service';
+import { ISchedule } from '../../interfaces/ISchedule';
 
 const TypesOfAppointment = ['Inspection', 'Meeting', 'Preparation'];
 const Venue = ['Application field location', 'Commission Office'];
@@ -26,6 +27,7 @@ const Venue = ['Application field location', 'Commission Office'];
 export class AddScheduleFormComponent implements OnInit {
   public form: FormGroup;
   public application: IApplication;
+  public schedule: ISchedule;
   public currentUser: Staff;
   public typeOfAppointment = [...TypesOfAppointment];
   public venues = [...Venue];
@@ -44,16 +46,29 @@ export class AddScheduleFormComponent implements OnInit {
     private adminService: AdminService
   ) {
     this.application = data.data.application;
+    this.schedule = data.data?.schedule;
 
-    this.form = this.formBuilder.group({
-      // applicationId: [this.application.id, Validators.required],
-      // scheduleBy: [this.currentUser.userId, Validators.required],
-      selectedDate: ['', Validators.required],
-      time: ['', Validators.required],
-      typeOfAppoinment: ['', Validators.required],
-      venue: ['', Validators.required],
-      comment: ['', Validators.required],
-    });
+    if (this.schedule) {
+      this.form = this.formBuilder.group({
+        selectedDate: [
+          new Date(this.schedule.scheduleDate),
+          Validators.required,
+        ],
+        time: [this.schedule.time, Validators.required],
+        typeOfAppoinment: [this.schedule.typeOfAppoinment, Validators.required],
+        venue: [this.schedule.venue, Validators.required],
+        comment: [this.schedule.comment, Validators.required],
+      });
+    } else
+      this.form = this.formBuilder.group({
+        // applicationId: [this.application.id, Validators.required],
+        // scheduleBy: [this.currentUser.userId, Validators.required],
+        selectedDate: ['', Validators.required],
+        time: ['', Validators.required],
+        typeOfAppoinment: ['', Validators.required],
+        venue: ['', Validators.required],
+        comment: ['', Validators.required],
+      });
   }
   ngOnInit(): void {
     const tempUser = this.auth.currentUser;
@@ -100,6 +115,56 @@ export class AddScheduleFormComponent implements OnInit {
 
     const model = {
       id: 0,
+      applicationId: this.application.id,
+      scheduleBy: this.currentUser.id,
+      inspectionDate: this.form.controls['selectedDate'].value,
+      comment: this.form.controls['comment'].value,
+      venue: this.form.controls['venue'].value,
+      typeOfAppoinment: this.form.controls['typeOfAppoinment'].value,
+    };
+
+    this.adminService.addSchedule(model).subscribe({
+      next: (res) => {
+        if (res.success) {
+          this.snackBar.open('Operation was successfully!', null, {
+            panelClass: ['success'],
+          });
+
+          this.dialogRef.close();
+        }
+
+        this.progressBarService.close();
+      },
+
+      error: (error) => {
+        this.snackBar.open(
+          'Operation failed! Could not perform operation!',
+          null,
+          {
+            panelClass: ['error'],
+          }
+        );
+
+        this.progressBarService.close();
+      },
+    });
+  }
+
+  editSchedule() {
+    this.progressBarService.open();
+
+    this.selected = new Date(this.form.get('selectedDate').value);
+
+    const dateToTime = this.selected.getTime();
+
+    this.selected.setTime(
+      dateToTime + convertTimeToMilliseconds(this.form.get('time').value)
+    );
+
+    this.form.get('selectedDate').setValue(this.selected);
+
+    const model = {
+      id: this.schedule.id,
       applicationId: this.application.id,
       scheduleBy: this.currentUser.id,
       inspectionDate: this.form.controls['selectedDate'].value,

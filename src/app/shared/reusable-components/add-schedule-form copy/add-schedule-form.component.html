@@ -68,7 +68,22 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close (click)="onClose()">Close</button>
-  <button mat-raised-button (click)="addSchedule()" [disabled]="form.invalid">
+  <button
+    *ngIf="schedule"
+    mat-raised-button
+    (click)="addSchedule()"
+    [disabled]="form.invalid"
+  >
+    Schedule
+  </button>
+
+  <button
+    *ngIf="!schedule"
+    mat-raised-button
+    color="primary"
+    (click)="editSchedule()"
+    [disabled]="form.invalid"
+  >
     Schedule
   </button>
 </div>

@@ -59,7 +59,7 @@
             <button
               mat-stroked-button
               color="accent"
-              (click)="action('assignApplication')"
+              (click)="action('editSchedule', schedule)"
             >
               <mat-icon>edit</mat-icon>
             </button>
@@ -165,7 +165,30 @@
           "
         >
           <div class="card-item">
-            <div class="item-title">Name</div>
+            <div class="item-title">
+              <a [href]="applicationDoc.docSource" target="_blank">
+                <img
+                  *ngIf="isPDF(applicationDoc.docSource)"
+                  src="../../../../assets/image/pdfIcon.png"
+                  alt="open file"
+                />
+
+                <img
+                  *ngIf="isIMG(applicationDoc.docSource)"
+                  src="../../../../assets/image/imageIcon.png"
+                  alt="open file"
+                />
+
+                <img
+                  *ngIf="
+                    !isIMG(applicationDoc.docSource) &&
+                    !isPDF(applicationDoc.docSource)
+                  "
+                  src="../../../../assets/image/otherFileType.png"
+                  alt="open file"
+                />
+              </a>
+            </div>
             <div class="item-content">
               <a [href]="applicationDoc.docSource" target="_blank">
                 {{ applicationDoc.docName }}

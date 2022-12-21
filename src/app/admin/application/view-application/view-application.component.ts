@@ -70,7 +70,7 @@ export class ViewApplicationComponent implements OnInit {
     return this.appService.viewApplication(this.appId);
   }
 
-  action(type: string) {
+  action(type: string, param = null) {
     const operationConfiguration = {
       approve: {
         data: {
@@ -87,6 +87,13 @@ export class ViewApplicationComponent implements OnInit {
       addSchedule: {
         data: {
           application: this.application,
+        },
+        form: AddScheduleFormComponent,
+      },
+      editSchedule: {
+        data: {
+          application: this.application,
+          schedule: param,
         },
         form: AddScheduleFormComponent,
       },
@@ -155,5 +162,22 @@ export class ViewApplicationComponent implements OnInit {
         this.cd.markForCheck();
       });
     });
+  }
+
+  isPDF(filePath: string) {
+    if (!filePath) return false;
+
+    const fileType = filePath.split('.').slice(-1)[0];
+
+    return fileType == 'pdf';
+  }
+
+  isIMG(filePath) {
+    if (!filePath) return false;
+    const imageTypes = ['png', 'jpg', 'jpeg', 'tiff'];
+
+    const fileType = filePath.split('.').slice(-1)[0];
+
+    return imageTypes.includes(fileType);
   }
 }

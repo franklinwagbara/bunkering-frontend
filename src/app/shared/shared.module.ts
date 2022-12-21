@@ -38,6 +38,7 @@ import { MoveApplicationFormComponent } from './reusable-components/move-applica
 import { ApproveFormComponent } from './reusable-components/approve-form/approve-form.component';
 import { SendBackFormComponent } from './reusable-components/send-back-form/send-back-form.component';
 import { AddScheduleFormComponent } from './reusable-components/add-schedule-form copy/add-schedule-form.component';
+import { FlatTableComponent } from './reusable-components/flat-table/flat-table.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { AddScheduleFormComponent } from './reusable-components/add-schedule-for
     ApproveFormComponent,
     SendBackFormComponent,
     AddScheduleFormComponent,
+    FlatTableComponent,
   ],
   imports: [
     CommonModule,
@@ -84,6 +86,7 @@ import { AddScheduleFormComponent } from './reusable-components/add-schedule-for
   ],
   exports: [
     TableComponent,
+    FlatTableComponent,
     FormDialogComponent,
     PhaseFormComponent,
     ProgressBarComponent,
