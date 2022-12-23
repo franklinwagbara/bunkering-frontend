@@ -5,6 +5,16 @@
       <mat-tab *ngFor="let cat of categories" [label]="cat.name">
         <div class="table-group">
           <div class="table-wrapper">
+            <!-- todo: display button only if role is HMUR -->
+            <div class="flex justify-end mr-4">
+              <button
+                mat-raised-button
+                color="primary"
+                (click)="onAssignApplication()"
+              >
+                Assign Application
+              </button>
+            </div>
             <generic-table
               [table_keysMappedToHeaders]="applicationKeysMappedToHeaders"
               [table_content]="

@@ -9,6 +9,7 @@ import { UserFormComponent } from 'src/app/shared/reusable-components/user-form/
 import { FieldOffice } from '../field-zonal-office/field-zonal-office.component';
 import { IBranch } from 'src/app/shared/interfaces/IBranch';
 import { MoveApplicationFormComponent } from 'src/app/shared/reusable-components/move-application-form/move-application-form.component';
+import { SpinnerService } from 'src/app/shared/services/spinner.service';
 
 @Component({
   selector: 'app-all-staff',
@@ -42,11 +43,13 @@ export class AllStaffComponent implements OnInit {
     public snackBar: MatSnackBar,
     private adminHttpService: AdminService,
     public dialog: MatDialog,
-    private progressBar: ProgressBarService
+    private progressBar: ProgressBarService,
+    private spinner: SpinnerService
   ) {}
 
   ngOnInit(): void {
-    this.progressBar.open();
+    // this.progressBar.open();
+    this.spinner.open();
 
     forkJoin([
       this.adminHttpService.getAllStaff(),
@@ -66,7 +69,8 @@ export class AllStaffComponent implements OnInit {
 
         if (res[4].success) this.branches = res[4].data.data;
 
-        this.progressBar.close();
+        // this.progressBar.close();
+        this.spinner.close();
       },
       error: (error) => {
         this.snackBar.open(
@@ -77,7 +81,8 @@ export class AllStaffComponent implements OnInit {
           }
         );
 
-        this.progressBar.close();
+        // this.progressBar.close();
+        this.spinner.close();
       },
     });
   }

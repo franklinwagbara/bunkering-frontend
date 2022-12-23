@@ -16,6 +16,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { IBranch } from 'src/app/shared/interfaces/IBranch';
 import { BranchFormComponent } from 'src/app/shared/reusable-components/branch-form/branch-form.component';
+import { SpinnerService } from 'src/app/shared/services/spinner.service';
 
 @Component({
   selector: 'app-branch-setting',
@@ -40,11 +41,13 @@ export class BranchSettingComponent implements OnInit {
     private applyHttpService: ApplyService,
     private formBuilder: FormBuilder,
     private progressBarService: ProgressBarService,
+    private spinner: SpinnerService,
     private adminHttpService: AdminService
   ) {}
 
   ngOnInit(): void {
-    this.progressBarService.open();
+    // this.progressBarService.open();
+    this.spinner.open();
 
     forkJoin([this.adminHttpService.getBranches()]).subscribe({
       next: (res) => {
@@ -52,7 +55,8 @@ export class BranchSettingComponent implements OnInit {
           this.branches = res[0].data.data;
         }
 
-        this.progressBarService.close();
+        // this.progressBarService.close();
+        this.spinner.close();
       },
 
       error: (error) => {
@@ -64,7 +68,8 @@ export class BranchSettingComponent implements OnInit {
           }
         );
 
-        this.progressBarService.close();
+        // this.progressBarService.close();
+        this.spinner.close();
       },
     });
   }

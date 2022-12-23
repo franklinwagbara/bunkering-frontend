@@ -8,6 +8,7 @@ import { IApplication } from 'src/app/shared/interfaces/IApplication';
 import { AdminService } from 'src/app/shared/services/admin.service';
 import { ApplyService } from 'src/app/shared/services/apply.service';
 import { ProgressBarService } from 'src/app/shared/services/progress-bar.service';
+import { SpinnerService } from 'src/app/shared/services/spinner.service';
 import { Category } from '../settings/modules-setting/modules-setting.component';
 
 @Component({
@@ -40,11 +41,14 @@ export class ApplicationComponent implements OnInit, AfterViewInit {
     public snackBar: MatSnackBar,
     public dialog: MatDialog,
     private progressBar: ProgressBarService,
+    private spinner: SpinnerService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.progressBar.open();
+    // this.progressBar.open();
+    this.spinner.open();
+
     forkJoin([
       this.adminService.getApps(),
       this.adminService.getModule(),
@@ -54,7 +58,8 @@ export class ApplicationComponent implements OnInit, AfterViewInit {
 
         if (res[1].success) this.categories = res[1].data.data;
 
-        this.progressBar.close();
+        // this.progressBar.close();
+        this.spinner.close();
       },
       error: (error) => {
         this.snackBar.open(
@@ -65,7 +70,8 @@ export class ApplicationComponent implements OnInit, AfterViewInit {
           }
         );
 
-        this.progressBar.close();
+        // this.progressBar.close();
+        this.spinner.close();
       },
     });
   }

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GenericService, AuthenticationService } from 'src/app/shared/services';
 import { ProgressBarService } from 'src/app/shared/services/progress-bar.service';
+import { SpinnerService } from 'src/app/shared/services/spinner.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -38,18 +39,23 @@ export class DashboardComponent implements OnInit {
     public generic: GenericService,
     private auth: AuthenticationService,
     private router: Router,
-    private progressBar: ProgressBarService
+    private progressBar: ProgressBarService,
+    private spinner: SpinnerService,
+    private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    this.progressBar.open();
+    this.spinner.open();
+
     this.auth.getStaffDashboard().subscribe((result) => {
       if (result.success) {
         this.dashboardInfo = new DashBoardModel(result.data.data);
         this.processingForThreeWeeks =
           this.dashboardInfo.inProcessingForThreeWeeks;
         this.onStaffDeskForFiveDays = this.dashboardInfo.onStaffDeskForFiveDays;
-        this.progressBar.close();
+
+        this.spinner.close();
+        this.cd.markForCheck();
       }
     });
   }

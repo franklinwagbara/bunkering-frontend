@@ -6,6 +6,7 @@ import { forkJoin } from 'rxjs';
 import { PermitStageDocFormComponent } from 'src/app/shared/reusable-components/permit-stage-doc-form/permit-stage-doc-form.component';
 import { AdminService } from 'src/app/shared/services/admin.service';
 import { ProgressBarService } from 'src/app/shared/services/progress-bar.service';
+import { SpinnerService } from 'src/app/shared/services/spinner.service';
 import {
   Category,
   PermitStage,
@@ -47,11 +48,13 @@ export class AppStageDocsComponent implements OnInit {
     private adminHttpService: AdminService,
     public snackBar: MatSnackBar,
     public dialog: MatDialog,
-    public progressBarService: ProgressBarService
+    public progressBarService: ProgressBarService,
+    private spinner: SpinnerService
   ) {}
 
   ngOnInit(): void {
-    this.progressBarService.open();
+    // this.progressBarService.open();
+    this.spinner.open();
 
     forkJoin([
       this.adminHttpService.getPhaseCategories(),
@@ -73,13 +76,16 @@ export class AppStageDocsComponent implements OnInit {
 
         // if (res[3].success) this.appTypes = res[3].data.data;
 
-        this.progressBarService.close();
+        // this.progressBarService.close();
+        this.spinner.close();
       },
       error: (error) => {
         this.snackBar.open('Something went wrong while retrieve data!', null, {
           panelClass: ['error'],
         });
-        this.progressBarService.close();
+
+        // this.progressBarService.close();
+        this.spinner.close();
       },
     });
   }

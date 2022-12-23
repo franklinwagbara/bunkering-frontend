@@ -4,5 +4,5 @@
   height: 100%;
   background-color: white;
   opacity: 0.9; */
-  @apply absolute z-50 bg-white w-full h-full opacity-80;
+  @apply fixed mt-16 z-40 bg-white w-full h-full opacity-80;
 }

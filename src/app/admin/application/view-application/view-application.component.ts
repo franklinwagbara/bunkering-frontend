@@ -11,6 +11,7 @@ import { AuthenticationService } from 'src/app/shared/services';
 import { AdminService } from 'src/app/shared/services/admin.service';
 import { ApplyService } from 'src/app/shared/services/apply.service';
 import { ProgressBarService } from 'src/app/shared/services/progress-bar.service';
+import { SpinnerService } from 'src/app/shared/services/spinner.service';
 import { ShowMoreComponent } from './show-more/show-more.component';
 
 @Component({
@@ -30,10 +31,12 @@ export class ViewApplicationComponent implements OnInit {
     private appService: ApplyService,
     public dialog: MatDialog,
     public progressBar: ProgressBarService,
+    private spinner: SpinnerService,
     public route: ActivatedRoute,
     private cd: ChangeDetectorRef
   ) {
     this.route.queryParams.subscribe((params) => {
+      this.spinner.open();
       this.appId = parseInt(params['id']);
 
       this.getApplication().subscribe({
@@ -43,6 +46,7 @@ export class ViewApplicationComponent implements OnInit {
           }
 
           this.progressBar.close();
+          this.spinner.close();
         },
         error: (error) => {
           this.snackBar.open(
@@ -54,6 +58,7 @@ export class ViewApplicationComponent implements OnInit {
           );
 
           this.progressBar.close();
+          this.spinner.close();
         },
       });
     });

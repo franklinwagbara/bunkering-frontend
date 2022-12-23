@@ -7,6 +7,7 @@ import { ProgressBarService } from 'src/app/shared/services/progress-bar.service
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SpinnerService } from 'src/app/shared/services/spinner.service';
 
 @Component({
   selector: 'app-field-zonal-office',
@@ -32,11 +33,13 @@ export class FieldZonalOfficeComponent implements OnInit {
     public dialog: MatDialog,
     private applyHttpService: ApplyService,
     private progressBarService: ProgressBarService,
+    private spinner: SpinnerService,
     private adminHttpService: AdminService
   ) {}
 
   ngOnInit(): void {
-    this.progressBarService.open();
+    // this.progressBarService.open();
+    this.spinner.open();
 
     forkJoin([
       this.adminHttpService.getOffices(),
@@ -49,7 +52,8 @@ export class FieldZonalOfficeComponent implements OnInit {
 
         if (res[1].success) this.stateList = res[1].data.data;
 
-        this.progressBarService.close();
+        // this.progressBarService.close();
+        this.spinner.close();
       },
       error: (error) => {
         this.snackBar.open(
@@ -59,7 +63,9 @@ export class FieldZonalOfficeComponent implements OnInit {
             panelClass: ['error'],
           }
         );
-        this.progressBarService.close();
+
+        // this.progressBarService.close();
+        this.spinner.close();
       },
     });
   }

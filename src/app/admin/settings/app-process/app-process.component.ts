@@ -8,6 +8,7 @@ import { IRole } from 'src/app/shared/interfaces/IRole';
 import { ApplicationProcessFormComponent } from 'src/app/shared/reusable-components/application-process-form/application-process-form.component';
 import { AdminService } from 'src/app/shared/services/admin.service';
 import { ProgressBarService } from 'src/app/shared/services/progress-bar.service';
+import { SpinnerService } from 'src/app/shared/services/spinner.service';
 import { PermitStage } from '../modules-setting/modules-setting.component';
 
 @Component({
@@ -42,11 +43,13 @@ export class AppProcessComponent implements OnInit {
     public snackBar: MatSnackBar,
     public dialog: MatDialog,
     private progressBarService: ProgressBarService,
-    private adminHttpService: AdminService
+    private adminHttpService: AdminService,
+    private spinner: SpinnerService
   ) {}
 
   ngOnInit(): void {
-    this.progressBarService.open();
+    // this.progressBarService.open();
+    this.spinner.open();
 
     forkJoin([
       this.adminHttpService.getApplicationProcesses(),
@@ -69,7 +72,8 @@ export class AppProcessComponent implements OnInit {
 
         if (res[4].success) this.permitStages = res[4].data.data.permitStages;
 
-        this.progressBarService.close();
+        // this.progressBarService.close();
+        this.spinner.close();
       },
 
       error: (error) => {
@@ -81,7 +85,8 @@ export class AppProcessComponent implements OnInit {
           }
         );
 
-        this.progressBarService.close();
+        // this.progressBarService.close();
+        this.spinner.close();
       },
     });
   }

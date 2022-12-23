@@ -8,6 +8,7 @@ import { AdminService } from 'src/app/shared/services/admin.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { StageFormComponent } from 'src/app/shared/reusable-components/stage-form/stage-form.component';
 import { ProgressBarService } from 'src/app/shared/services/progress-bar.service';
+import { SpinnerService } from 'src/app/shared/services/spinner.service';
 
 @Component({
   selector: 'app-modules-setting',
@@ -54,18 +55,23 @@ export class ModulesSettingComponent implements OnInit {
     public snackBar: MatSnackBar,
     private adminHttpService: AdminService,
     public dialog: MatDialog,
-    private progressBar: ProgressBarService
+    private progressBar: ProgressBarService,
+    private spinner: SpinnerService
   ) {}
 
   ngOnInit(): void {
-    this.progressBar.open();
+    // this.progressBar.open();
+    this.spinner.open();
+
     this.adminHttpService.getPhaseCategories().subscribe((result) => {
       if (result.success) {
         this.categories = result.data.data.allModules.map((cat) => cat);
         this.phases = result.data.data.allPermits.map((phase) => phase);
         this.permitStages = result.data.data.permitStages.map((stage) => stage);
       }
-      this.progressBar.close();
+
+      // this.progressBar.close();
+      this.spinner.close();
     });
   }
 
