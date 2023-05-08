@@ -14,6 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { AdminService } from '../../services/admin.service';
 import { AppException } from '../../exceptions/AppException';
+import { ProgressBarService } from '../../services/progress-bar.service';
 
 @Component({
   selector: 'app-stage-form',
@@ -24,6 +25,7 @@ export class StageFormComponent {
   public form: FormGroup;
   public phases: Phase[];
   public permitStage: PermitStage[];
+  public currentValue: PermitStage;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -31,21 +33,42 @@ export class StageFormComponent {
     private snackBar: MatSnackBar,
     private adminService: AdminService,
     private formBuilder: FormBuilder,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private progressBar: ProgressBarService
   ) {
     this.phases = data.data.phases;
     this.permitStage = data.data.permitStages;
-
-    console.log('checking', this.phases, this.permitStage);
+    this.currentValue = data.data?.currentValue;
 
     this.form = this.formBuilder.group({
-      code: ['', Validators.required],
-      name: ['', Validators.required],
-      description: ['', Validators.required],
-      phaseId: ['', [Validators.required, Validators.pattern(/^\d+$/)]], //Asyc validation
-      fee: ['', Validators.required],
-      serviceCharge: ['', Validators.required],
-      sort: ['', Validators.required],
+      code: [
+        this.currentValue ? this.currentValue.code : '',
+        Validators.required,
+      ],
+      name: [
+        this.currentValue ? this.currentValue.name : '',
+        Validators.required,
+      ],
+      description: [
+        this.currentValue ? this.currentValue.description : '',
+        Validators.required,
+      ],
+      phaseId: [
+        this.currentValue ? this.currentValue.phaseId : '',
+        [Validators.required, Validators.pattern(/^\d+$/)],
+      ], //Asyc validation
+      fee: [
+        this.currentValue ? this.currentValue.fee : '',
+        Validators.required,
+      ],
+      serviceCharge: [
+        this.currentValue ? this.currentValue.serviceCharge : '',
+        Validators.required,
+      ],
+      sort: [
+        this.currentValue ? this.currentValue.sort : '',
+        Validators.required,
+      ],
     });
   }
 
@@ -54,6 +77,8 @@ export class StageFormComponent {
   }
 
   createPermitStage() {
+    this.progressBar.open();
+
     this.adminService.createPermitStage(this.form.value).subscribe({
       next: (res) => {
         if (res.success) {
@@ -62,11 +87,47 @@ export class StageFormComponent {
           });
           this.dialogRef.close();
         }
+
+        this.progressBar.close();
       },
       error: (error: AppException) => {
         this.snackBar.open(error.message, null, {
           panelClass: ['error'],
         });
+
+        this.progressBar.close();
+      },
+    });
+  }
+
+  editPermitStage() {
+    this.progressBar.open();
+
+    const formValue = this.form.value as any;
+    formValue.id = this.currentValue.id;
+
+    this.adminService.editPermitStage(this.form.value).subscribe({
+      next: (res) => {
+        if (res.success) {
+          this.snackBar.open('Permit Stage was created successfully!', null, {
+            panelClass: ['success'],
+          });
+
+          this.dialogRef.close();
+        }
+
+        this.progressBar.close();
+      },
+      error: (error) => {
+        this.snackBar.open(
+          'Operation failed! Could not create the Permit Stage.',
+          null,
+          {
+            panelClass: ['error'],
+          }
+        );
+
+        this.progressBar.close();
       },
     });
   }

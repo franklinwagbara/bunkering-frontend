@@ -1,0 +1,85 @@
+<h1 mat-dialog-title>Add New Permit Stage Document</h1>
+<div mat-dialog-content class="w-[1000px] h-screen">
+  <form [formGroup]="form" (ngSubmit)="createPermitStageDoc()">
+    <div class="fomr-group" style="margin-bottom: 10px">
+      <label>Phase Stage</label>
+      <select
+        name="phaseStageId"
+        formControlName="phaseStageId"
+        class="form-control"
+      >
+        <option
+          *ngFor="let permitStage of permitStages"
+          [ngValue]="permitStage.id"
+        >
+          {{ permitStage.name }}
+        </option>
+      </select>
+      <div
+        *ngIf="
+          form.get('phaseStageId')?.touched && form.get('phaseStageId')?.invalid
+        "
+        class="alert alert-danger"
+      >
+        Phase Stage is required!
+      </div>
+    </div>
+
+    <div class="fomr-group" style="margin-bottom: 10px">
+      <label>Application Type</label>
+      <select name="appTypeId" formControlName="appTypeId" class="form-control">
+        <option *ngFor="let at of appTypes" [ngValue]="at.id">
+          {{ at.name }}
+        </option>
+      </select>
+      <div
+        *ngIf="form.get('appTypeId')?.touched && form.get('appTypeId')?.invalid"
+        class="alert alert-danger"
+      >
+        Application Type is required!
+      </div>
+    </div>
+
+    <div class="fomr-group" style="margin-bottom: 10px">
+      <label>Required Document(s)</label>
+      <ng-multiselect-dropdown
+        [placeholder]="'Select document(s)'"
+        [settings]="docsDropdownSettings"
+        [data]="docs"
+        formArrayName="docId"
+        (onSelect)="onItemSelect($event)"
+        (onSelectAll)="onSelectAll($event)"
+        (onDeSelect)="onDeSelect($event)"
+      >
+      </ng-multiselect-dropdown>
+    </div>
+
+    <div class="fomr-group" style="margin-bottom: 10px">
+      <label>
+        <input
+          name="isMandatory"
+          formControlName="isMandatory"
+          type="checkbox"
+        />
+        Mandatory?
+      </label>
+    </div>
+
+    <div class="fomr-group" style="margin-bottom: 10px">
+      <label>
+        <input name="status" formControlName="status" type="checkbox" />
+        Active?
+      </label>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="onClose()">Close</button>
+  <button
+    mat-raised-button
+    (click)="createPermitStageDoc()"
+    [disabled]="form.invalid"
+  >
+    Create
+  </button>
+</div>

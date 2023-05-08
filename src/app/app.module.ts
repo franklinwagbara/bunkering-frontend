@@ -12,6 +12,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorInterceptor, JwtInterceptor } from './helpers';
 import { RouterModule } from '@angular/router';
 import { LayoutModule } from './layout/layout.module';
+import { ProgressBarService } from './shared/services/progress-bar.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,11 +29,13 @@ import { LayoutModule } from './layout/layout.module';
     CompanyModule,
     AdminModule,
     LayoutModule,
+    MatProgressSpinnerModule,
   ],
   exports: [RouterModule],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    ProgressBarService,
   ],
   bootstrap: [AppComponent],
 })

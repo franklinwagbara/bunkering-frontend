@@ -1,13 +1,19 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { LoginModel } from '../shared/models/login-model';
 import { AuthenticationService, GenericService } from '../shared/services';
 
 @Component({
   selector: 'app-company-details',
   templateUrl: './company.component.html',
   styleUrls: ['./company.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CompanyComponent implements OnInit {
   genk: GenericService;
@@ -18,18 +24,20 @@ export class CompanyComponent implements OnInit {
   showmyapplication: any;
   modalactive = false;
   showapplications: boolean;
+  currentUsername: LoginModel;
 
-  constructor(private gen: GenericService,
+  constructor(
+    private gen: GenericService,
     private authenticationService: AuthenticationService,
     private router: Router,
-    private cd: ChangeDetectorRef) {
-      this.genk = gen;
-      this.auth = authenticationService;
-   }
-
-  ngOnInit(): void {
-
+    private cd: ChangeDetectorRef
+  ) {
+    this.genk = gen;
+    this.auth = authenticationService;
+    this.currentUsername = this.auth.currentUser;
   }
+
+  ngOnInit(): void {}
 
   showApplications() {
     if (this.showapplications) {
@@ -55,9 +63,8 @@ export class CompanyComponent implements OnInit {
     if (this.showtemplate) {
       this.showtemplate = false;
     } else {
-        this.showtemplate = true;
-        this.cd.markForCheck();
-      
+      this.showtemplate = true;
+      this.cd.markForCheck();
     }
   }
 
@@ -74,8 +81,7 @@ export class CompanyComponent implements OnInit {
         this.showapply = false;
       }
       this.modalactive = false;
-    }
-    else {
+    } else {
       this.modalactive = true;
     }
     this.cd.markForCheck();
@@ -88,7 +94,6 @@ export class CompanyComponent implements OnInit {
     // this.router.navigate(['/' + this.genk.home]);
   }
 }
-
 
 function showMyApplication() {
   throw new Error('Function not implemented.');

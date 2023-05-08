@@ -8,11 +8,31 @@ button {
 }
 
 .table-container {
+  min-height: -webkit-fit-content;
+  min-height: -moz-fit-content;
   min-height: fit-content;
   width: 98%;
   max-width: 100%;
   overflow-x: auto;
   margin: 10px;
+  background-color: white;
+  @apply rounded-lg;
+}
+
+.mat-header-row {
+  /* @apply bg-yellow-200; */
+}
+
+.mat-header-row th {
+  @apply text-sm;
+}
+
+.mat-row {
+  @apply hover:bg-slate-300;
+}
+
+.mat-row:nth-child(odd) {
+  @apply bg-slate-100 hover:bg-slate-300;
 }
 
 table {
@@ -21,45 +41,54 @@ table {
 
 td,
 th {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
 }
 
 .table-controls {
-  display: flex;
-  justify-content: space-between;
   padding: 15px;
+}
+
+.table-group {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between;
 }
 
 .table-title {
   text-align: center;
   padding-top: 50px;
   font-weight: bolder;
-
   @apply flex items-center justify-center pb-4;
 }
 
 .red {
-  @apply bg-red-100 text-red-600;
+  @apply bg-red-50 text-red-400;
 }
 
 .green {
-  @apply bg-green-100 text-green-600;
+  @apply bg-green-50 text-green-400;
 }
 
 .slate {
-  @apply bg-slate-100 text-slate-600;
+  @apply bg-slate-50 text-slate-400;
 }
 
 .yellow {
-  @apply bg-yellow-100 text-yellow-600;
+  @apply bg-yellow-50 text-yellow-400;
 }
 
 .blue {
-  @apply bg-blue-100 text-blue-600;
+  @apply bg-blue-50 text-blue-400;
 }
 
 .purple {
-  @apply bg-purple-100 text-purple-600;
+  @apply bg-purple-50 text-purple-400;
+}
+
+.teal {
+  @apply bg-teal-50 text-teal-400;
 }
 
 .margin-left {
@@ -74,7 +103,7 @@ th {
   flex-direction: row;
 }
 
-.table-group {
-  display: flex;
-  flex-direction: column;
-}
+table td,
+th {
+  @apply mx-4 pr-3;
+}/*# sourceMappingURL=table.component.css.map */

@@ -39,18 +39,35 @@ const ROUTES: RouteInfo[] = [
     subRoutes: [
       {
         id: 1,
-        title: 'MY DESK',
+        title: 'DASHBOARD',
         url: '/admin',
-      },
-      {
-        id: 2,
-        title: 'STAFF DESK',
-        url: '/admin/staff-desk',
       },
     ],
   },
   {
     id: 2,
+    title: 'DESK',
+    iconName: 'home',
+    iconId: 'Outline',
+    iconColor: 'yellow',
+    active: false,
+    subMenuActive: false,
+
+    subRoutes: [
+      {
+        id: 1,
+        title: 'MY DESK',
+        url: '/admin/my-desk',
+      },
+      // {
+      //   id: 2,
+      //   title: 'STAFF DESK',
+      //   url: '/admin/staff-desk',
+      // },
+    ],
+  },
+  {
+    id: 3,
     title: 'APPLICATIONS',
     iconName: 'apps',
     iconId: 'Outline',
@@ -62,12 +79,12 @@ const ROUTES: RouteInfo[] = [
       {
         id: 1,
         title: 'ALL APPLICATIONS',
-        url: '/admin/application',
+        url: '/admin/all-applications',
       },
     ],
   },
   {
-    id: 3,
+    id: 4,
     title: 'PAYMENTS',
     iconName: 'money-bill-wave',
     iconId: 'Layer_1',
@@ -89,7 +106,7 @@ const ROUTES: RouteInfo[] = [
     ],
   },
   {
-    id: 4,
+    id: 5,
     title: 'REPORTS',
     iconName: 'treatment',
     iconId: 'Layer_1',
@@ -116,7 +133,7 @@ const ROUTES: RouteInfo[] = [
     ],
   },
   {
-    id: 4,
+    id: 6,
     title: 'SETTINGS',
     iconName: 'settings',
     iconId: 'Layer_1',
@@ -148,7 +165,12 @@ const ROUTES: RouteInfo[] = [
       {
         id: 5,
         title: 'BRANCHES SETUP',
-        url: '/admin/field-zone-office',
+        url: '/admin/branch-setting',
+      },
+      {
+        id: 6,
+        title: 'APPLICATION PROCESS',
+        url: '/admin/application-process',
       },
     ],
   },
@@ -194,6 +216,5 @@ export class SidebarComponent implements OnInit, OnChanges {
       return menu;
     });
     this.menuItems = [...this.menuItems];
-    console.log('called', this.menuItems);
   }
 }

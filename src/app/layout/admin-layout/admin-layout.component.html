@@ -1,35 +1,17 @@
-<!-- Sidenav -->
-<!-- <progress-bar></progress-bar> -->
-<!-- <app-sidebar></app-sidebar> -->
-<!-- <div class="main-content"> -->
-<!-- Top navbar -->
-<!-- <app-navbar></app-navbar> -->
-<!-- Pages -->
-<!-- <div
-    style="
-      margin-left: 248px;
-      padding: 2rem;
-      margin-top: -20rem;
-      min-height: 40rem;
-    "
-  >
-    <router-outlet></router-outlet>
-  </div>
-  <div class="container-fluid">
-    <app-footer></app-footer>
-  </div>
-</div> -->
-
-<div class="grid md:grid-cols-[20rem_auto] min-h-screen">
+<div class="flex flex-row">
   <app-sidebar [isCollapsed]="isCollapse"></app-sidebar>
   <div
-    class="dashboard"
+    class="dashboard overflow-hidden"
     [ngClass]="{
       'collapse-dashboard': isCollapse,
       'unCollapse-dashboard': !isCollapse
     }"
   >
-    <app-top-nav (onMenuOpen)="onMenuOpen($event)"></app-top-nav>
-    <router-outlet></router-outlet>
+    <app-top-nav (onMenuOpen)="onMenuOpen($event)"> </app-top-nav>
+    <spinner></spinner>
+    <progress-bar></progress-bar>
+    <div class="content-area">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>

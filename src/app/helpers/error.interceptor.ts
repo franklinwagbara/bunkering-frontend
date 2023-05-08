@@ -31,18 +31,18 @@ export class ErrorInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
-      retry(2),
+      // retry(2),
       catchError((err) => {
-        if (err.status === 401 || err.status === 403) {
-          // auto logout if 401 response returned from api
-          this.authenticationService.logout();
-          let returl = this.router.routerState.snapshot.url;
-          //this.locate.replaceState('/' + this.genk.auth + '/login' + '?returnUrl=' + returl);
-          this.router.navigate(['/' + 'login'], {
-            queryParams: { returnUrl: returl },
-          });
-          //window.location.reload();
-        }
+        // if (err.status === 401 || err.status === 403) {
+        //   // auto logout if 401 response returned from api
+        //   this.authenticationService.logout();
+        //   let returl = this.router.routerState.snapshot.url;
+        //   //this.locate.replaceState('/' + this.genk.auth + '/login' + '?returnUrl=' + returl);
+        //   this.router.navigate(['/' + 'login'], {
+        //     queryParams: { returnUrl: returl },
+        //   });
+        //   //window.location.reload();
+        // }
         if (err.status === 400) {
           return throwError(() => new BadRequestException());
         } else if (err.status === 409) {

@@ -1,4 +1,5 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ProgressBarService } from 'src/app/shared/services/progress-bar.service';
 
 @Component({
   selector: 'app-admin-layout',
@@ -14,6 +15,5 @@ export class AdminLayoutComponent implements OnInit {
 
   onMenuOpen(open: Event) {
     this.isCollapse = !this.isCollapse;
-    console.log(open);
   }
 }

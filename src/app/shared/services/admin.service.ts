@@ -5,6 +5,8 @@ import { map, retry } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
 import { LoginModel } from '../models/login-model';
+import { IApplicationProcess } from '../interfaces/IApplicationProcess';
+import { Schedule } from '../reusable-components/add-schedule-form copy/add-schedule-form.component';
 
 @Injectable({ providedIn: 'root' })
 export class AdminService {
@@ -55,6 +57,20 @@ export class AdminService {
     this.isLoggedIn = false;
   }
 
+  createStaff(model) {
+    return this.http.post<any>(
+      `${environment.apiUrl}/account/add-staff`,
+      model
+    );
+  }
+
+  updateStaff(model) {
+    return this.http.put<any>(
+      `${environment.apiUrl}/account/edit-staff`,
+      model
+    );
+  }
+
   getStaffDashboard() {
     return this.http
       .get<any>(`${environment.apiUrl}/admin/staff-dashboard`, {})
@@ -77,6 +93,13 @@ export class AdminService {
       );
   }
 
+  getApplicationsOnStaffDeskById(id: any) {
+    return this.http.get<any>(
+      `${environment.apiUrl}/admin/get-staffdesk-by-id`,
+      { params: { id } }
+    );
+  }
+
   getAllStaff() {
     return this.http
       .get<any>(`${environment.apiUrl}/account/all-staff`, {})
@@ -86,6 +109,13 @@ export class AdminService {
           return res;
         })
       );
+  }
+
+  deleteStaff(id: number) {
+    return this.http.delete<any>(
+      `${environment.apiUrl}/account/delete-staff?id=${id}`,
+      {}
+    );
   }
 
   getElpsStaffList() {
@@ -139,10 +169,25 @@ export class AdminService {
       .pipe(retry(this.num));
   }
 
+  getModule() {
+    return this.http
+      .get<any>(`${environment.apiUrl}/configuration/get-module-configuration`)
+      .pipe(retry(this.num));
+  }
+
   deleteModule(moduleId: number) {
     return this.http
       .delete<any>(
         `${environment.apiUrl}/configuration/delete-module-configuration?id=${moduleId}`
+      )
+      .pipe(retry(this.num));
+  }
+
+  editModule(model) {
+    return this.http
+      .put<any>(
+        `${environment.apiUrl}/configuration/update-module-configuration`,
+        model
       )
       .pipe(retry(this.num));
   }
@@ -159,14 +204,13 @@ export class AdminService {
       );
   }
 
-  createPermitStage(model: any) {
-    console.log('permit form model', model);
+  editPhase(model: any) {
     return this.http
-      .post<any>(`${environment.apiUrl}/configuration/post-permit-stage`, model)
-      .pipe(
-        retry(this.num),
-        map((res) => res)
-      );
+      .put<any>(
+        `${environment.apiUrl}/configuration/update-permit-configuration`,
+        model
+      )
+      .pipe(retry(this.num));
   }
 
   deletePhase(id: number) {
@@ -180,10 +224,87 @@ export class AdminService {
       .pipe(retry(this.num));
   }
 
+  createPermitStage(model: any) {
+    return this.http
+      .post<any>(`${environment.apiUrl}/configuration/post-permit-stage`, model)
+      .pipe(
+        retry(this.num),
+        map((res) => res)
+      );
+  }
+
+  editPermitStage(model: any) {
+    return this.http
+      .put<any>(
+        `${environment.apiUrl}/configuration/update-permit-stage`,
+        model
+      )
+      .pipe(retry(this.num));
+  }
+
   deletePermitStage(id: number) {
     return this.http
       .delete<any>(
         `${environment.apiUrl}/configuration/delete-permit-stage?id=${id}`
+      )
+      .pipe(retry(this.num));
+  }
+
+  createStageDocs(model: any) {
+    return this.http.post<any>(
+      `${environment.apiUrl}/configuration/post-permit-stage-docs`,
+      model
+    );
+  }
+
+  rerouteApplication(model: {
+    newStaffId: string;
+    oldStaffId: string;
+    comment: string;
+    apps: number[];
+  }) {
+    return this.http.put<any>(
+      `${environment.apiUrl}/admin/reroute-application`,
+      model
+    );
+  }
+
+  assignApplication(model: {
+    newStaffId: string;
+    oldStaffId: string;
+    comment: string;
+    apps: number[];
+  }) {
+    return this.http.put<any>(
+      `${environment.apiUrl}/admin/assign-application`,
+      model
+    );
+  }
+
+  getAllDocs() {
+    return this.http
+      .get<any>(`${environment.apiUrl}/configuration/get-all-docs`)
+      .pipe(retry(this.num));
+  }
+
+  getAllPermitStageDocs() {
+    return this.http
+      .get<any>(`${environment.apiUrl}/configuration/get-permit-stage-docs`)
+      .pipe(retry(this.num));
+  }
+
+  deletePermitStageDocs(id: number) {
+    return this.http
+      .delete(
+        `${environment.apiUrl}/configuration/delete-permit-stage-doc-by-id?id=${id}`
+      )
+      .pipe(retry(this.num));
+  }
+
+  getAppTypes() {
+    return this.http
+      .get<any>(
+        `${environment.apiUrl}/configuration/app type route not defined yet`
       )
       .pipe(retry(this.num));
   }
@@ -194,9 +315,41 @@ export class AdminService {
       .pipe(retry(this.num));
   }
 
+  createOffice(model) {
+    return this.http
+      .post<any>(`${environment.apiUrl}/configuration/add-field-office`, model)
+      .pipe(retry(this.num));
+  }
+
+  deleteOffice(id: number) {
+    return this.http
+      .delete<any>(
+        `${environment.apiUrl}/configuration/delete-field-office?id=${id}`
+      )
+      .pipe(retry(this.num));
+  }
+
   addFieldOffice(model: any) {
     return this.http
       .post<any>(`${environment.apiUrl}/configuration/add-field-office`, model)
+      .pipe(retry(this.num));
+  }
+
+  getBranches() {
+    return this.http
+      .get<any>(`${environment.apiUrl}/configuration/branches`)
+      .pipe(retry(this.num));
+  }
+
+  createBranch(model) {
+    return this.http
+      .post<any>(`${environment.apiUrl}/configuration/add-branch`, model)
+      .pipe(retry(this.num));
+  }
+
+  deleteBranch(id: number) {
+    return this.http
+      .delete<any>(`${environment.apiUrl}/configuration/delete-branch?id=${id}`)
       .pipe(retry(this.num));
   }
 
@@ -204,5 +357,52 @@ export class AdminService {
     return this.http
       .get<any>(`${environment.apiUrl}/admin/all-applications`)
       .pipe(retry(this.num));
+  }
+
+  createApplicationProcess(model: IApplicationProcess) {
+    return this.http
+      .post<any>(`${environment.apiUrl}/configuration/add-app-process`, model)
+      .pipe(retry(this.num));
+  }
+
+  getApplicationProcesses() {
+    return this.http
+      .get<any>(`${environment.apiUrl}/configuration/all-processes`)
+      .pipe(retry(this.num));
+  }
+
+  deleteApplicationProcess(id: number) {
+    return this.http
+      .delete<any>(
+        `${environment.apiUrl}/configuration/delete-application-process/${id}`
+      )
+      .pipe(retry(this.num));
+  }
+
+  getActionsAndStatuses() {
+    return this.http
+      .get<any>(`${environment.apiUrl}/configuration/all-actions-status`)
+      .pipe(retry(this.num));
+  }
+
+  getStaffsForRerouteApplication(id: string) {
+    return this.http.get<any>(
+      `${environment.apiUrl}/admin/reroute-application-Dropdownlist`,
+      { params: { id } }
+    );
+  }
+
+  addSchedule(model: Schedule) {
+    return this.http.post<any>(
+      `${environment.apiUrl}/admin/schedule-meeting`,
+      model
+    );
+  }
+
+  editSchedule(model: Schedule) {
+    return this.http.post<any>(
+      `${environment.apiUrl}/admin/schedule-meeting`,
+      model
+    );
   }
 }
