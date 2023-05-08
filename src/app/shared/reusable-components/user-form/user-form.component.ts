@@ -67,10 +67,13 @@ export class UserFormComponent implements OnInit {
       return user;
     });
 
+    console.log(this.currentValue, this.usersFromElps);
+
     this.selectedUserFromElps = this.usersFromElps[0];
 
     this.form = this.formBuilder.group({
       elpsId: [this.currentValue ? currentUserId : '', Validators.required],
+      id: [this.currentValue ? this.currentValue.id : '', Validators.required],
       firstName: [this.currentValue ? this.currentValue.firstName : ''],
       lastName: [this.currentValue ? this.currentValue.lastName : ''],
       email: [
@@ -157,7 +160,8 @@ export class UserFormComponent implements OnInit {
 
     const formDataToSubmit = new FormData();
 
-    formDataToSubmit.append('elpsId', this.form.get('elpsId').value);
+    // formDataToSubmit.append('elpsId', this.form.get('elpsId').value);
+    formDataToSubmit.append('id', this.form.get('id').value);
     formDataToSubmit.append('firstName', this.form.get('firstName').value);
     formDataToSubmit.append('lastName', this.form.get('lastName').value);
     formDataToSubmit.append('email', this.form.get('email').value);

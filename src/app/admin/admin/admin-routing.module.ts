@@ -14,6 +14,7 @@ import { BranchSettingComponent } from '../settings/branch-setting/branch-settin
 import { AppProcessComponent } from '../settings/app-process/app-process.component';
 import { MyDeskComponent } from '../desk/my-desk/my-desk.component';
 import { ViewApplicationComponent } from '../application/view-application/view-application.component';
+import { TestComponent } from 'src/app/company/test/test.component';
 
 const routes: Routes = [
   { path: '', component: AdminComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'application-process', component: AppProcessComponent },
   { path: 'my-desk', component: MyDeskComponent },
   { path: 'view-application/:id', component: ViewApplicationComponent },
+  { path: 'test', component: TestComponent },
 ];
 
 @NgModule({

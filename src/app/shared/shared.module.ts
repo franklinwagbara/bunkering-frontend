@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -41,6 +42,8 @@ import { AddScheduleFormComponent } from './reusable-components/add-schedule-for
 import { FlatTableComponent } from './reusable-components/flat-table/flat-table.component';
 import { SpinnerComponent } from './reusable-components/spinner/spinner.component';
 import { AssignApplicationFormComponent } from './reusable-components/assign-application-form/assign-application-form.component';
+import { SvgIconComponent } from './reusable-components/svg-icon/svg-icon.component';
+import { DropdownComponent } from './reusable-components/dropdown/dropdown.component';
 
 @NgModule({
   declarations: [
@@ -63,10 +66,13 @@ import { AssignApplicationFormComponent } from './reusable-components/assign-app
     FlatTableComponent,
     SpinnerComponent,
     AssignApplicationFormComponent,
+    SvgIconComponent,
+    DropdownComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
+    RouterModule,
     ReactiveFormsModule,
     MatTableModule,
     MatButtonModule,
@@ -95,6 +101,8 @@ import { AssignApplicationFormComponent } from './reusable-components/assign-app
     FormDialogComponent,
     PhaseFormComponent,
     ProgressBarComponent,
+    SvgIconComponent,
+    DropdownComponent,
   ],
 })
 export class SharedModule {}

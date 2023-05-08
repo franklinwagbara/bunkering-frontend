@@ -23,6 +23,7 @@ import { DocumentUploadComponent } from './document-upload/document-upload.compo
 import { AdditionalDocListFormComponent } from './document-upload/additional-doc-list-form/additional-doc-list-form.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { TestComponent } from './test/test.component';
 
 @NgModule({
   imports: [
@@ -52,6 +53,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     PaymentSumComponent,
     DocumentUploadComponent,
     AdditionalDocListFormComponent,
+    TestComponent,
   ],
   providers: [],
 })

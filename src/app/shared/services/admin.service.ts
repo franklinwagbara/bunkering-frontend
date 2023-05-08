@@ -269,6 +269,18 @@ export class AdminService {
     );
   }
 
+  assignApplication(model: {
+    newStaffId: string;
+    oldStaffId: string;
+    comment: string;
+    apps: number[];
+  }) {
+    return this.http.put<any>(
+      `${environment.apiUrl}/admin/assign-application`,
+      model
+    );
+  }
+
   getAllDocs() {
     return this.http
       .get<any>(`${environment.apiUrl}/configuration/get-all-docs`)

@@ -26,6 +26,7 @@ import { ProgressBarService } from '../../services/progress-bar.service';
 import { Staff } from 'src/app/admin/settings/all-staff/all-staff.component';
 import { GenericService } from '../../services';
 import { IApplication } from '../../interfaces/IApplication';
+import { UserRole } from '../../constants/userRole';
 
 @Component({
   selector: 'app-assign-application-form',
@@ -66,23 +67,23 @@ export class AssignApplicationFormComponent
     private cd: ChangeDetectorRef,
     private gen: GenericService
   ) {
-    this.staffs = data.data.staffs;
+    this.staffs = data.data.staffs.filter(
+      (s: StaffWithName) => s.role == UserRole.Head
+    );
+
+    this.staffs = this.staffs.map((s: StaffWithName) => {
+      s.name = `${s.lastName}, ${s.firstName} (${s.email})`;
+      return s;
+    });
+
     this.appsOnStaffDesk = data.data.applications;
-
-    console.log('sgafss', this.staffs);
-    // this.staffs = data.data.staffs;
-
-    //Appending an additional name field to allow interfacing with the ngmultiple-select textField
-    // this.staffs = this.staffs?.map((user) => {
-    //   user.name = `${user?.lastName}, ${user?.firstName} (${user?.email})`;
-    //   return user;
-    // });
 
     this.form = this.formBuilder.group({
       id: ['', Validators.required],
       comment: ['', Validators.required],
     });
   }
+
   ngAfterViewChecked(): void {
     this.cd.detectChanges();
   }
@@ -98,23 +99,23 @@ export class AssignApplicationFormComponent
       allowSearchFilter: true,
     };
 
-    this.getStaffsForRerouteApplication();
+    // this.getStaffsForRerouteApplication();
   }
 
-  getStaffsForRerouteApplication() {
-    this.progressBar.open();
-    this.adminServe.getStaffsForRerouteApplication(this.staff.id).subscribe({
-      //todo: change id
-      next: (res) => {
-        this.staffs = res.data.data;
+  // getStaffsForRerouteApplication() {
+  //   this.progressBar.open();
+  //   this.adminServe.getStaffsForRerouteApplication(this.staff.id).subscribe({
+  //     //todo: change id
+  //     next: (res) => {
+  //       this.staffs = res.data.data;
 
-        this.progressBar.close();
-      },
-      error: (error) => {
-        this.progressBar.close();
-      },
-    });
-  }
+  //       this.progressBar.close();
+  //     },
+  //     error: (error) => {
+  //       this.progressBar.close();
+  //     },
+  //   });
+  // }
 
   onSelectApp(apps: IApplication[]) {
     console.log(this.form.value);
@@ -125,17 +126,17 @@ export class AssignApplicationFormComponent
     this.dialogRef.close();
   }
 
-  rerouteApplication() {
+  assignApplication() {
     this.progressBar.open();
 
     const model = {
       newStaffId: this.form.get('id').value[0].id,
-      oldStaffId: this.staff.id,
+      oldStaffId: null,
       comment: this.form.get('comment').value,
       apps: [...this.selectedApplications.map((app) => app.id)],
     };
 
-    this.adminServe.rerouteApplication(model).subscribe({
+    this.adminServe.assignApplication(model).subscribe({
       next: (res) => {
         if (res.success) {
           this.snackBar.open(

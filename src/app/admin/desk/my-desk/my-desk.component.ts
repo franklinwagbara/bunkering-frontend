@@ -123,29 +123,6 @@ export class MyDeskComponent implements OnInit {
     // this.categories = [...this.categories];
   }
 
-  // onViewData(event: Event, type: string) {
-  //   const operationConfiguration = {
-  //     applications: {
-  //       data: {
-  //         application: event,
-  //       },
-  //       view: ViewApplicationComponent,
-  //     },
-  //   };
-
-  //   let dialogRef = this.dialog.open(operationConfiguration[type].view, {
-  //     data: {
-  //       data: operationConfiguration[type].data,
-  //     },
-  //     minHeight: '99vh',
-  //     minWidth: '94vw',
-  //   });
-
-  //   dialogRef.afterClosed().subscribe((res) => {
-  //     //The need to Refetch data not apparent at the moment
-  //   });
-  // }
-
   onViewData(event: any, type: string) {
     this.router.navigate([`/admin/view-application/${event.id}`], {
       queryParams: { id: event.id, appSource: AppSource.MyDesk },

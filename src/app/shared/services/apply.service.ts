@@ -54,6 +54,12 @@ export class ApplyService {
       );
   }
 
+  getAllApplicationPhases() {
+    return this.http.get<any>(
+      `${environment.apiUrl}/application/application-phases`
+    );
+  }
+
   getLgaList() {
     return this.http
       .get<any>(`${environment.apiUrl}/application/lga-list`)
