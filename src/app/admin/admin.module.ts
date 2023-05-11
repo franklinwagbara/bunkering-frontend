@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {
   MatSnackBarModule,
@@ -19,6 +19,7 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { SharedModule } from '../shared/shared.module';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { AppStageDocsComponent } from './settings/app-stage-docs/app-stage-docs.component';
+import { PhasedocumentsComponent } from './settings/phasedocuments/phasedocuments.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { AppStageDocsComponent } from './settings/app-stage-docs/app-stage-docs.
     ModulesSettingComponent,
     FieldZonalOfficeComponent,
     AppStageDocsComponent,
+    PhasedocumentsComponent,
   ],
 
   imports: [
@@ -38,6 +40,7 @@ import { AppStageDocsComponent } from './settings/app-stage-docs/app-stage-docs.
     AdminRoutingModule,
     NgbModule,
     ReactiveFormsModule,
+    FormsModule,
     SharedModule,
     MatGridListModule,
     MatSnackBarModule,

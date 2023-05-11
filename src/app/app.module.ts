@@ -12,6 +12,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorInterceptor, JwtInterceptor } from './helpers';
 import { RouterModule } from '@angular/router';
 import { LayoutModule } from './layout/layout.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,6 +28,7 @@ import { LayoutModule } from './layout/layout.module';
     CompanyModule,
     AdminModule,
     LayoutModule,
+    ReactiveFormsModule,
   ],
   exports: [RouterModule],
   providers: [
