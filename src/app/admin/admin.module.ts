@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatButtonModule } from '@angular/material/button';
@@ -33,6 +33,7 @@ import { MyDeskComponent } from './desk/my-desk/my-desk.component';
 import { BarChartComponent } from './admin/dashboard/bar-chart/bar-chart.component';
 import { FirstNPipe } from './application/view-application/first-n.pipe';
 import { ShowMoreComponent } from './application/view-application/show-more/show-more.component';
+import { PhasedocumentsComponent } from './settings/phasedocuments/phasedocuments.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { ShowMoreComponent } from './application/view-application/show-more/show
     ModulesSettingComponent,
     FieldZonalOfficeComponent,
     AppStageDocsComponent,
+    PhasedocumentsComponent,
     BranchSettingComponent,
     ApplicationViewTableComponent,
     ViewApplicationComponent,
@@ -60,6 +62,7 @@ import { ShowMoreComponent } from './application/view-application/show-more/show
     AdminRoutingModule,
     NgbModule,
     ReactiveFormsModule,
+    FormsModule,
     SharedModule,
     MatGridListModule,
     MatSnackBarModule,

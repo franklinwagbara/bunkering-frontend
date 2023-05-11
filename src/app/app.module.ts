@@ -12,6 +12,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorInterceptor, JwtInterceptor } from './helpers';
 import { RouterModule } from '@angular/router';
 import { LayoutModule } from './layout/layout.module';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ProgressBarService } from './shared/services/progress-bar.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
@@ -29,6 +30,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     CompanyModule,
     AdminModule,
     LayoutModule,
+    ReactiveFormsModule,
     MatProgressSpinnerModule,
   ],
   exports: [RouterModule],
