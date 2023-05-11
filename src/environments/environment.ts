@@ -3,7 +3,6 @@
 // The list of file replacements can be found in `angular.json`.
 export const environment = {
   production: false,
-  production: false,
   // apiUrl: 'https://localhost:44356/api/aus',
   apiUrl: 'https://ausv2.azurewebsites.net/api/aus',
   elpsBase: 'https://celpsnmdpra-dev.azurewebsites.net',
