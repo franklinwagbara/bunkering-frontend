@@ -7,6 +7,8 @@ import { CategoryFormComponent } from 'src/app/shared/reusable-components/catego
 import { AdminService } from 'src/app/shared/services/admin.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { StageFormComponent } from 'src/app/shared/reusable-components/stage-form/stage-form.component';
+import { ProgressBarService } from 'src/app/shared/services/progress-bar.service';
+import { SpinnerService } from 'src/app/shared/services/spinner.service';
 
 @Component({
   selector: 'app-modules-setting',
@@ -15,15 +17,14 @@ import { StageFormComponent } from 'src/app/shared/reusable-components/stage-for
 })
 export class ModulesSettingComponent implements OnInit {
   tableTitles = {
-    categories: 'Categories Table',
-    phases: 'Phases Table',
-    permitStages: 'Permit Stages Table',
+    categories: 'Categories Settings',
+    phases: 'Phases Settings',
+    permitStages: 'Permit Stages Settings',
   };
   categories: Category[];
   phases: Phase[];
   permitStages: PermitStage[];
   closeResult: string;
-  form: FormGroup;
 
   categoryTableKeysMappedToHeaders = {
     code: 'Code',
@@ -36,8 +37,6 @@ export class ModulesSettingComponent implements OnInit {
     shortName: 'Name',
     categoryName: 'Category',
     description: 'Description',
-    fee: 'Fee (₦)',
-    serviceCharge: 'Service Charge (₦)',
     status: 'Status',
   };
 
@@ -55,18 +54,24 @@ export class ModulesSettingComponent implements OnInit {
   constructor(
     public snackBar: MatSnackBar,
     private adminHttpService: AdminService,
-    private formBuilder: FormBuilder,
-    public dialog: MatDialog
-  ) {
-    this.form = this.formBuilder.group({
-      Name: ['', Validators.required],
-      ShortName: ['', Validators.required],
-      Code: ['', Validators.required],
-      Description: ['', Validators.required],
-      CategoryId: ['', Validators.required, Validators.pattern(/^\d+$/)],
-      Sort: ['', Validators.required],
-      Fee: ['', Validators.required],
-      ServiceCharge: ['', Validators.required],
+    public dialog: MatDialog,
+    private progressBar: ProgressBarService,
+    private spinner: SpinnerService
+  ) {}
+
+  ngOnInit(): void {
+    // this.progressBar.open();
+    this.spinner.open();
+
+    this.adminHttpService.getPhaseCategories().subscribe((result) => {
+      if (result.success) {
+        this.categories = result.data.data.allModules.map((cat) => cat);
+        this.phases = result.data.data.allPermits.map((phase) => phase);
+        this.permitStages = result.data.data.permitStages.map((stage) => stage);
+      }
+
+      // this.progressBar.close();
+      this.spinner.close();
     });
   }
 
@@ -96,10 +101,14 @@ export class ModulesSettingComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
+      this.progressBar.open();
+
       this.adminHttpService.getPhaseCategories().subscribe((result) => {
-        this.categories = result.data.data.allModules.map((cat) => cat);
-        this.phases = result.data.data.allPermits.map((phase) => phase);
-        this.permitStages = result.data.data.permitStages.map((stage) => stage);
+        this.categories = result.data.data.allModules;
+        this.phases = result.data.data.allPermits;
+        this.permitStages = result.data.data.permitStages;
+
+        this.progressBar.close();
       });
     });
   }
@@ -122,28 +131,23 @@ export class ModulesSettingComponent implements OnInit {
 
     const listOfDataToDelete = [...event];
 
-    console.log('list of data delete', listOfDataToDelete, type);
-
     const requests = (listOfDataToDelete as any[]).map((req) => {
       if (type === 'category') {
-        console.log('type', 'category', req[typeToModelMapper[type].id], req);
         return this.adminHttpService.deleteModule(
           req[typeToModelMapper[type].id]
         );
       } else if (type === 'phase') {
-        console.log('type', 'phase');
-
         return this.adminHttpService.deletePhase(
           req[typeToModelMapper[type].id]
         );
       } else {
-        console.log('type', 'phase');
-
         return this.adminHttpService.deletePermitStage(
           req[typeToModelMapper[type].id]
         );
       }
     });
+
+    this.progressBar.open();
 
     forkJoin(requests).subscribe({
       next: (res) => {
@@ -161,49 +165,72 @@ export class ModulesSettingComponent implements OnInit {
             .sort((a, b) => a.length - b.length);
 
           if (type === 'category') this.categories = responses[0];
-          else if (type === 'phase') this.phases = responses[0];
+          else if (type === 'phase') this.phases = responses[0].allPermits;
           else if (type === 'permitStage') this.permitStages = responses[0];
-
-          console.log(
-            'in coming',
-            responses,
-            this.categories,
-            this.phases,
-            this.permitStages
-          );
         }
+        this.progressBar.close();
       },
       error: (error) => {
         this.snackBar.open('Something went wrong while deleting data!', null, {
           panelClass: ['error'],
         });
+        this.progressBar.close();
       },
     });
   }
 
   onEditData(event: Event, type: string) {
-    console.log('on edit', event, type);
-  }
+    const operationConfiguration = {
+      category: {
+        data: { categories: this.categories, currentValue: event },
+        form: CategoryFormComponent,
+      },
+      phase: {
+        data: {
+          currentValue: event,
+          categories: this.categories,
+          phases: this.phases,
+        },
+        form: PhaseFormComponent,
+      },
+      permitStages: {
+        data: {
+          currentValue: event,
+          permitStages: this.permitStages,
+          phases: this.phases,
+        },
+        form: StageFormComponent,
+      },
+    };
 
-  ngOnInit(): void {
-    this.adminHttpService.getPhaseCategories().subscribe((result) => {
-      if (result.success) {
-        this.categories = result.data.data.allModules.map((cat) => cat);
-        this.phases = result.data.data.allPermits.map((phase) => phase);
-        this.permitStages = result.data.data.permitStages.map((stage) => stage);
-      }
+    let dialogRef = this.dialog.open(operationConfiguration[type].form, {
+      data: {
+        data: operationConfiguration[type].data,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((res) => {
+      this.progressBar.open();
+
+      this.adminHttpService.getPhaseCategories().subscribe((res) => {
+        this.categories = res.data.data.allModules;
+        this.phases = res.data.data.allPermits;
+        this.permitStages = res.data.data.permitStages;
+
+        this.progressBar.close();
+      });
     });
   }
 }
 
 export class Category {
-  moduleId: number;
+  id: number;
   name: string;
   code: string;
   description: string;
 
   constructor(item: any) {
-    this.moduleId = item.moduleId;
+    this.id = item.id;
     this.code = item.code;
     this.name = item.name;
     this.description = item.description;

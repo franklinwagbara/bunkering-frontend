@@ -4,11 +4,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#074287",
+        // primary: "#074287",
+        primary: "#031236ed",
         primary_accent: "#92D4FA",
+        background: "#e5f0f6",
+        light: "#F1F1F1",
+        dark: "#191919",
+        card: "",
+        card_shadow: "",
+        content_area: "#e5f0f6",
       },
       width: {
-        side_nav: "20rem",
+        side_nav: "17rem",
       },
 
       height: {

@@ -1,4 +1,7 @@
-<h1 mat-dialog-title>Add New Phase</h1>
+<h1 mat-dialog-title *ngIf="!currentValue; else edit">Add New Permit Stage</h1>
+<ng-template #edit>
+  <h1 mat-dialog-title>Edit Permit Stage</h1>
+</ng-template>
 <div mat-dialog-content class="modal-width">
   <form [formGroup]="form" (ngSubmit)="createPermitStage()">
     <div class="fomr-group" style="margin-bottom: 10px">
@@ -109,7 +112,17 @@
     mat-raised-button
     (click)="createPermitStage()"
     [disabled]="form.invalid"
+    *ngIf="!currentValue"
   >
     Create
+  </button>
+
+  <button
+    mat-raised-button
+    (click)="editPermitStage()"
+    [disabled]="form.invalid"
+    *ngIf="currentValue"
+  >
+    Edit
   </button>
 </div>

@@ -15,7 +15,7 @@ export class StaffdeskComponent implements OnInit {
   ngOnInit(): void {
     this.auth.getStaffDesk().subscribe((res) => {
       if (res.success) {
-        this.apps = res.data.data.onDesk;
+        this.apps = res.data.data;
       }
     });
   }

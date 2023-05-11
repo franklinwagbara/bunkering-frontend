@@ -8,7 +8,7 @@
         *ngIf="form.get('Code')?.touched && form.get('Code')?.invalid"
         class="alert alert-danger"
       >
-        Username is required!
+        Code is required!
       </div>
     </div>
     <div class="fomr-group" style="margin-bottom: 10px">
@@ -48,11 +48,10 @@
         formControlName="CategoryId"
         class="form-control"
       >
-        <option *ngFor="let cat of categories" [ngValue]="cat.moduleId">
+        <option *ngFor="let cat of categories" [ngValue]="cat.id">
           {{ cat.name }}
         </option>
       </select>
-      <!-- {{ categories | json }} -->
       <div
         *ngIf="
           form.get('CategoryId')?.touched && form.get('CategoryId')?.invalid
@@ -60,41 +59,6 @@
         class="alert alert-danger"
       >
         Category is required!
-      </div>
-    </div>
-    <div class="fomr-group" style="margin-bottom: 10px">
-      <label>Fee</label>
-      <input
-        type="number"
-        step="0.01"
-        name="Fee"
-        formControlName="Fee"
-        class="form-control"
-      />
-      <div
-        *ngIf="form.get('Fee')?.touched && form.get('Fee')?.invalid"
-        class="alert alert-danger"
-      >
-        Fee is required!
-      </div>
-    </div>
-    <div class="fomr-group" style="margin-bottom: 10px">
-      <label>Service Charge</label>
-      <input
-        type="number"
-        step="0.01"
-        name="ServiceCharge"
-        formControlName="ServiceCharge"
-        class="form-control"
-      />
-      <div
-        *ngIf="
-          form.get('ServiceCharge')?.touched &&
-          form.get('ServiceCharge')?.invalid
-        "
-        class="alert alert-danger"
-      >
-        ServiceCharge is required!
       </div>
     </div>
     <div class="fomr-group" style="margin-bottom: 10px">
@@ -116,7 +80,22 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close>Close</button>
-  <button mat-raised-button (click)="createPhase()" [disabled]="form.invalid">
+  <button
+    mat-raised-button
+    *ngIf="!currentValue"
+    (click)="createPhase()"
+    [disabled]="form.invalid"
+  >
     Create
+  </button>
+
+  <button
+    mat-raised-button
+    color="primary"
+    *ngIf="currentValue"
+    (click)="editPhase()"
+    [disabled]="form.invalid"
+  >
+    Update
   </button>
 </div>

@@ -8,9 +8,9 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { AuthenticationService } from '../../services';
+import { AdminService } from '../../services/admin.service';
+import { ProgressBarService } from '../../services/progress-bar.service';
 
 @Component({
   selector: 'app-category-form',
@@ -20,22 +20,33 @@ import { AuthenticationService } from '../../services';
 export class CategoryFormComponent {
   public form: FormGroup;
   public categories: Category[];
+  public currentValue: Category;
 
   constructor(
     public dialogRef: MatDialogRef<CategoryFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private snackBar: MatSnackBar,
-    private auth: AuthenticationService,
-    private modalService: NgbModal,
+    private adminHttpService: AdminService,
     private formBuilder: FormBuilder,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private progressBar: ProgressBarService
   ) {
-    this.categories = data.categories;
+    this.categories = data.data.categories;
+    this.currentValue = data.data?.currentValue;
 
     this.form = this.formBuilder.group({
-      name: ['', Validators.required],
-      code: ['', Validators.required],
-      description: ['', Validators.required],
+      name: [
+        this.currentValue ? this.currentValue.name : '',
+        Validators.required,
+      ],
+      code: [
+        this.currentValue ? this.currentValue.code : '',
+        Validators.required,
+      ],
+      description: [
+        this.currentValue ? this.currentValue.description : '',
+        Validators.required,
+      ],
     });
   }
 
@@ -44,7 +55,9 @@ export class CategoryFormComponent {
   }
 
   createCategory() {
-    this.auth.createModule(this.form.value).subscribe({
+    this.progressBar.open();
+
+    this.adminHttpService.createModule(this.form.value).subscribe({
       next: (res) => {
         if (res.success) {
           this.snackBar.open('Category was created successfully!', null, {
@@ -52,9 +65,10 @@ export class CategoryFormComponent {
           });
           this.dialogRef.close();
         }
+
+        this.progressBar.close();
       },
       error: (error) => {
-        console.log('error dis');
         this.snackBar.open(
           'Operation failed! Could not create the Category!',
           null,
@@ -62,6 +76,37 @@ export class CategoryFormComponent {
             panelClass: ['error'],
           }
         );
+        this.progressBar.close();
+      },
+    });
+  }
+
+  editCategory() {
+    this.progressBar.open();
+
+    const formValue = this.form.value as any;
+    formValue.id = this.currentValue.id;
+
+    this.adminHttpService.editModule(this.form.value).subscribe({
+      next: (res) => {
+        if (res.success) {
+          this.snackBar.open('Category was created successfully!', null, {
+            panelClass: ['success'],
+          });
+          this.dialogRef.close();
+        }
+
+        this.progressBar.close();
+      },
+      error: (error) => {
+        this.snackBar.open(
+          'Operation failed! Could not create the Category!',
+          null,
+          {
+            panelClass: ['error'],
+          }
+        );
+        this.progressBar.close();
       },
     });
   }

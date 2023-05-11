@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { homeComponent } from './home.component';
@@ -10,12 +11,10 @@ import { homeComponent } from './home.component';
     CommonModule,
     HomeRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatProgressSpinnerModule,
   ],
-  declarations: [
-    homeComponent
-  ],
+  declarations: [homeComponent],
   providers: [],
 })
-export class HomeModule { }
-
+export class HomeModule {}

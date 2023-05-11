@@ -1,47 +1,50 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map, retry } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
 import { LoginModel } from '../models/login-model';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { tokenNotExpired } from 'src/app/helpers/tokenNotExpired';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-  private currentUserSubject: BehaviorSubject<LoginModel>;
-  public currentUser: Observable<LoginModel>;
+  public currentUser$ = new Subject<any>();
   private num = 2;
   public code = '6x0x5x1x';
-  public isLoggedIn = false;
+  private _isLoggedIn = false;
+  private _isLoggedIn$ = new Subject<boolean>();
 
-  constructor(private http: HttpClient) {
-    // if(localStorage.getItem('currentUser') != null){
-    //     this.currentUserSubject = new BehaviorSubject<LoginModel>(JSON.parse(localStorage.getItem('currentUser')));
-    //     this.currentUser = this.currentUserSubject.asObservable();
-    // }
-    this.currentUserSubject = new BehaviorSubject<LoginModel>(
-      JSON.parse(localStorage.getItem('currentUser'))
-    );
-    this.currentUser = this.currentUserSubject.asObservable();
+  constructor(private http: HttpClient) {}
+
+  public get currentUser() {
+    return JSON.parse(localStorage.getItem('currentUser'));
   }
 
-  public get currentUserValue(): LoginModel {
-    return this.currentUserSubject.value;
-  }
-
-  login(email: string, code: string) {
+  login(
+    userId: string // email: string, code: string
+  ) {
     return this.http
-      .post<any>(`${environment.apiUrl}/account/login`, '', {
-        params: { email: email, code: code },
-      })
+      .get<any>(`${environment.apiUrl}/account/login?id=${userId}`)
       .pipe(
         retry(this.num),
-        map((user) => {
+        map((res) => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify(user.data));
-          //localStorage.setItem('iden', user.id);
-          this.currentUserSubject.next(user.data);
-          this.isLoggedIn = true;
+          if (res.statusCode !== 200) {
+            return null;
+          }
+
+          const user = res.data;
+          const token = user.token;
+
+          if (!token) return null;
+
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          localStorage.setItem('token', JSON.stringify(token));
+
+          this._isLoggedIn = true;
+          this._isLoggedIn$.next(true);
           return user;
         })
       );
@@ -50,9 +53,16 @@ export class AuthenticationService {
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
-    //localStorage.removeItem('iden');
-    this.currentUserSubject.next(null);
-    this.isLoggedIn = false;
+    localStorage.removeItem('token');
+
+    // this.currentUserSubject.next(null);
+    this._isLoggedIn = false;
+
+    window.location.assign(`${environment.apiUrl}/auth/log-out`);
+  }
+
+  public get isLoggedIn() {
+    return tokenNotExpired();
   }
 
   getStaffDashboard() {
@@ -158,5 +168,11 @@ export class AuthenticationService {
     return this.http
       .post<any>(`${environment.apiUrl}/configuration/add-field-office`, model)
       .pipe(retry(this.num));
+  }
+
+  submitPayment(rrr: string) {
+    return this.http.get<any>(`${environment.apiUrl}/auth/pay-online`, {
+      params: { rrr },
+    });
   }
 }

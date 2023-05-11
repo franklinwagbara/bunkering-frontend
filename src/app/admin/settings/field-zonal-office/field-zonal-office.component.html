@@ -1,4 +1,4 @@
-<div class="st-desk">
+<!-- <div class="st-desk">
     <h2 class="text-center">Field Office List</h2>
     <div style=" margin-top: 1em;">
         <button  class="btn btn-success btn-sm" style="float:right;"  (click)="open(addOfficeModal)">
@@ -58,4 +58,25 @@
           <button type="button" class="btn btn-outline-dark  btn-sm" (click)="addFieldOffice()">Create</button>
         </div>
       </ng-template>
+</div> -->
+
+<div class="setting-desk">
+  <h2 class="page-title bg-red-500 text-red-800">FIELD OFFICES SETTINGS</h2>
+  <div>
+    <div class="table-group">
+      <div class="table-wrapper">
+        <generic-table
+          [table_title]="tableTitles.fieldOffices"
+          [title-color]="'red'"
+          [table_keysMappedToHeaders]="fieldOfficeKeysMappedToHeaders"
+          [table_content]="offices"
+          [noTitle]="true"
+          [table_controls_horizontal]="true"
+          (onAddData)="onAddData($event, 'fieldOffices')"
+          (onDeleteData)="onDeleteData($event, 'fieldOffices')"
+          (onEditData)="onEditData($event, 'fieldOffices')"
+        ></generic-table>
+      </div>
+    </div>
+  </div>
 </div>

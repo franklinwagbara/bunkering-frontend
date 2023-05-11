@@ -13,6 +13,8 @@ import { ErrorInterceptor, JwtInterceptor } from './helpers';
 import { RouterModule } from '@angular/router';
 import { LayoutModule } from './layout/layout.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProgressBarService } from './shared/services/progress-bar.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,11 +31,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     AdminModule,
     LayoutModule,
     ReactiveFormsModule,
+    MatProgressSpinnerModule,
   ],
   exports: [RouterModule],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    ProgressBarService,
   ],
   bootstrap: [AppComponent],
 })
