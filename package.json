@@ -23,7 +23,6 @@
     "@angular/router": "~14.2.6",
     "@auth0/angular-jwt": "^5.1.0",
     "@flaticon/flaticon-uicons": "^1.7.0",
-    "@ng-bootstrap/ng-bootstrap": "^12.0.0-beta.4",
     "@popperjs/core": "^2.11.5",
     "bootstrap": "^5.1.3",
     "jsonwebtoken": "^8.5.1",

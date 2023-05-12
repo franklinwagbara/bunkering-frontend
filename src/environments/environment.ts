@@ -3,8 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 export const environment = {
   production: false,
-  // apiUrl: 'https://localhost:44356/api/aus',
-  apiUrl: 'https://ausv2.azurewebsites.net/api/aus',
+  apiUrl: 'https://localhost:44356/api/bunkering',
+  // apiUrl: 'https://ausv2.azurewebsites.net/api/aus',
   elpsBase: 'https://celpsnmdpra-dev.azurewebsites.net',
   appid: 'dd20c4e0-be39-4f25-90ff-a5b92693e12b',
 };
