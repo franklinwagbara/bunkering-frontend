@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from '../shared/shared.module';
 
 import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
@@ -34,7 +34,7 @@ import { CompanyTopNavComponent } from './company-layout/company-top-nav/company
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
-    NgbModule,
+    // NgbModule,
     SharedModule,
     MatIconModule,
   ],
