@@ -57,6 +57,8 @@ export class homeComponent implements OnInit {
     this.route.queryParams.subscribe((params) => {
       // this.email = params['email'];
       this.userId = params['id'];
+
+      console.log('Successfull redirect', this.userId);
       // debugger;
       if (!this.auth.isLoggedIn && this.userId) {
         this.isLoading$.next(true);
