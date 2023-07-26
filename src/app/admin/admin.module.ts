@@ -11,7 +11,7 @@ import {
   MatSnackBarModule,
 } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { ProgressBarService } from '../shared/services/progress-bar.service';
 import { SharedModule } from '../shared/shared.module';
@@ -60,7 +60,7 @@ import { PhasedocumentsComponent } from './settings/phasedocuments/phasedocument
   imports: [
     CommonModule,
     AdminRoutingModule,
-    NgbModule,
+    // NgbModule,
     ReactiveFormsModule,
     FormsModule,
     SharedModule,
