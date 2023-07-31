@@ -43,13 +43,13 @@ export class DashboardComponent implements OnInit {
     private spinner: SpinnerService,
     private cd: ChangeDetectorRef
   ) {}
-
   ngOnInit(): void {
     this.spinner.open();
 
     this.auth.getStaffDashboard().subscribe((result) => {
       if (result.success) {
-        this.dashboardInfo = new DashBoardModel(result.data.data);
+        console.log(result.data);
+        this.dashboardInfo = result.data;
         this.processingForThreeWeeks =
           this.dashboardInfo.inProcessingForThreeWeeks;
         this.onStaffDeskForFiveDays = this.dashboardInfo.onStaffDeskForFiveDays;
@@ -69,17 +69,25 @@ export class DashboardComponent implements OnInit {
 
 class DashBoardModel {
   deskCount: number;
-  approvedCount: number;
+  tApproved: number;
   rejectedCount: number;
-  processingCount: number;
+  tProcessing: number;
+  tAmount: number;
+  tFixedFacs: number;
+  tLicensedfacs: number;
+  tMobileFacs: number;
+  tRejected: number;
+  tValidLicense: number;
+  totalApps: number;
+  totalLicenses: number;
   onStaffDeskForFiveDays: [];
   inProcessingForThreeWeeks: [];
 
   constructor(obj: any) {
-    this.deskCount = obj.deskCount;
-    this.approvedCount = obj.approvedCount;
+    this.deskCount = obj?.deskCount;
+    this.tApproved = obj.approvedCount;
     this.rejectedCount = obj.rejectedCount;
-    this.processingCount = obj.processingCount;
+    this.tProcessing = obj.processingCount;
     this.onStaffDeskForFiveDays = obj.onStaffDeskForFiveDays;
     this.inProcessingForThreeWeeks = obj.inProcessingForThreeWeeks;
   }
