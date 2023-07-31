@@ -67,7 +67,7 @@ export class AuthenticationService {
 
   getStaffDashboard() {
     return this.http
-      .get<any>(`${environment.apiUrl}/admin/staff-dashboard`, {})
+      .get<any>(`${environment.apiUrl}/Staff/get-dashboard`, {})
       .pipe(
         retry(this.num),
         map((res) => {
@@ -78,7 +78,7 @@ export class AuthenticationService {
 
   getStaffDesk() {
     return this.http
-      .get<any>(`${environment.apiUrl}/admin/get-staff-desk`, {})
+      .get<any>(`${environment.apiUrl}/Application/my-desk`, {})
       .pipe(
         retry(this.num),
         map((res) => {
@@ -88,14 +88,12 @@ export class AuthenticationService {
   }
 
   getAllStaff() {
-    return this.http
-      .get<any>(`${environment.apiUrl}/account/all-staff`, {})
-      .pipe(
-        retry(this.num),
-        map((res) => {
-          return res;
-        })
-      );
+    return this.http.get<any>(`${environment.apiUrl}/Staff/all-users`, {}).pipe(
+      retry(this.num),
+      map((res) => {
+        return res;
+      })
+    );
   }
 
   getElpsStaffList() {
