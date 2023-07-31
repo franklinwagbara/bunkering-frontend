@@ -26,7 +26,7 @@ export class AuthenticationService {
     userId: string // email: string, code: string
   ) {
     return this.http
-      .get<any>(`${environment.apiUrl}/account/login?id=${userId}`)
+      .get<any>(`${environment.apiUrl}/auth/validate-user?id=${userId}`)
       .pipe(
         retry(this.num),
         map((res) => {
