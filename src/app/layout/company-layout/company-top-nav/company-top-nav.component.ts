@@ -24,7 +24,7 @@ export class CompanyTopNavComponent implements OnInit {
   public applicationsMenuItems: IMenuItem[] = [
     {
       name: 'Apply',
-      url: '',
+      url: 'company/apply',
       subMenu: [],
     },
     {
@@ -58,12 +58,12 @@ export class CompanyTopNavComponent implements OnInit {
   public templateMenuItems = [
     {
       name: 'Download Template A',
-      url: '',
+      url: 'company/download-template-a',
       subMenu: null,
     },
     {
       name: 'Download Template B',
-      url: '',
+      url: 'company/download-template-b',
       subMenu: null,
     },
   ];

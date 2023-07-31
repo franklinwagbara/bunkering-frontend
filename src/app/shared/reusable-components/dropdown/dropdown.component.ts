@@ -1,4 +1,11 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  ViewChild,
+  AfterViewInit,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { IMenuItem, ISubmenu } from '../../interfaces/menuItem';
@@ -11,13 +18,13 @@ import { IMenuItem, ISubmenu } from '../../interfaces/menuItem';
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.scss'],
 })
-export class DropdownComponent implements OnInit {
+export class DropdownComponent implements OnInit, AfterViewInit {
   public isOpen$ = new BehaviorSubject<boolean>(false);
   public isOpen = false;
   public isActive = false;
 
-  @Input() title;
-  @Input() path;
+  @Input('title') title: string;
+  @Input('path') path: string;
   @Input('menu-items') menuItems: IMenuItem[];
 
   @ViewChild('menu_item') menuItem;
@@ -31,13 +38,22 @@ export class DropdownComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.url.subscribe((url) => {
-      url.forEach((u) => {
-        if (u.path.includes(this.path)) this.isActive = true;
-        else this.isActive = false;
-
-        // u.path.includes();
-      });
+      console.log(
+        'active: ',
+        this.isPathActive(),
+        this.router.url,
+        this.menuItems
+      );
     });
+  }
+
+  ngAfterViewInit(): void {
+    console.log(
+      'active after: ',
+      this.isPathActive(),
+      this.router.url,
+      this.menuItems
+    );
   }
 
   onClickOutSide(event) {
@@ -60,7 +76,31 @@ export class DropdownComponent implements OnInit {
     this.router.navigate([menuItem.url]);
   }
 
-  navigateToUrl(url) {
-    this.router.navigate([url]);
+  navigateToUrl(url: string) {
+    if (!this.menuItems || this.menuItems.length == 0 || !url)
+      this.router.navigate([url]);
+  }
+
+  public isPathActive() {
+    if (
+      this.path &&
+      this.path.length > 0 &&
+      this.router.url.includes(this.path)
+    ) {
+      console.log('if...: ', this.path, this.router.url);
+      this.isActive = true;
+      return true;
+    }
+
+    for (var m of this.menuItems) {
+      console.log('for: ', this.router.url, m.url);
+      if (this.router.url.includes(m.url)) {
+        this.isActive = true;
+        return true;
+      }
+    }
+
+    this.isActive = false;
+    return false;
   }
 }

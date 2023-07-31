@@ -74,7 +74,7 @@
 }
 
 .pagestyle {
-  margin-top: 69px;
+  //margin-top: 5px;
 }
 
 .relcap {
@@ -123,5 +123,5 @@
 }
 
 .progress-bar {
-  @apply -mt-[20px] mb-24;
+  @apply h-1 bg-yellow-300;
 }

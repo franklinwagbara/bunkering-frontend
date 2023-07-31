@@ -6,7 +6,7 @@ import { GenericService } from '../../shared/services/generic.service';
 
 @Component({
   templateUrl: 'dashboard.component.html',
-  styleUrls: ['../company.component.scss'],
+  styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
   title = 'AUS2FrontEnd';
