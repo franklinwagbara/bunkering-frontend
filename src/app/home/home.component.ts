@@ -58,7 +58,6 @@ export class homeComponent implements OnInit {
       // this.email = params['email'];
       this.userId = params['id'];
 
-      console.log('Successfull redirect', this.userId);
       // debugger;
       if (!this.auth.isLoggedIn && this.userId) {
         this.isLoading$.next(true);
@@ -72,8 +71,8 @@ export class homeComponent implements OnInit {
             if (user) {
               let returnUrl =
                 this.route.snapshot.queryParamMap.get('returnUrl');
-
-              if (user.userType === UserType.Company) {
+              debugger;
+              if (user.userRoles === UserType.Company) {
                 this.router.navigate([returnUrl || '/company/dashboard']);
               } else {
                 this.router.navigate([returnUrl || '/admin']);
