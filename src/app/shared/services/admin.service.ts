@@ -58,10 +58,7 @@ export class AdminService {
   }
 
   createStaff(model) {
-    return this.http.post<any>(
-      `${environment.apiUrl}/account/add-staff`,
-      model
-    );
+    return this.http.post<any>(`${environment.apiUrl}/Staff/add-user`, model);
   }
 
   updateStaff(model) {
@@ -73,7 +70,7 @@ export class AdminService {
 
   getStaffDashboard() {
     return this.http
-      .get<any>(`${environment.apiUrl}/admin/staff-dashboard`, {})
+      .get<any>(`${environment.apiUrl}/Staff/get-dashboard`, {})
       .pipe(
         retry(this.num),
         map((res) => {
@@ -99,16 +96,13 @@ export class AdminService {
       { params: { id } }
     );
   }
-
   getAllStaff() {
-    return this.http
-      .get<any>(`${environment.apiUrl}/account/all-staff`, {})
-      .pipe(
-        retry(this.num),
-        map((res) => {
-          return res;
-        })
-      );
+    return this.http.get<any>(`${environment.apiUrl}/Staff/all-users`, {}).pipe(
+      retry(this.num),
+      map((res) => {
+        return res;
+      })
+    );
   }
 
   deleteStaff(id: number) {
@@ -120,7 +114,7 @@ export class AdminService {
 
   getElpsStaffList() {
     return this.http
-      .get<any>(`${environment.apiUrl}/account/all-elps-staff`, {})
+      .get<any>(`${environment.apiUrl}/Staff/get-staffby-elpsId`, {})
       .pipe(
         retry(this.num),
         map((res) => {
@@ -150,7 +144,7 @@ export class AdminService {
 
   addStaff(model: any) {
     return this.http
-      .post<any>(`${environment.apiUrl}/account/add-staff`, model)
+      .post<any>(`${environment.apiUrl}/Staff/add-user`, model)
       .pipe(retry(this.num));
   }
 
@@ -283,7 +277,7 @@ export class AdminService {
 
   getAllDocs() {
     return this.http
-      .get<any>(`${environment.apiUrl}/configuration/get-all-docs`)
+      .get<any>(`${environment.apiUrl}/AppStageDocuments/getall`)
       .pipe(retry(this.num));
   }
 
