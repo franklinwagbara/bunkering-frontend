@@ -1,4 +1,4 @@
-<div (click)="closeAll()">
+<!-- <div (click)="closeAll()">
   <div
     style="
       background-color: rgb(43, 76, 102);
@@ -170,4 +170,15 @@
   <div style="display: flex">
     <app-footer></app-footer>
   </div>
-</div>
+</div> -->
+
+<app-company-layout>
+  <div class="progress-bar">
+    <progress-bar></progress-bar>
+  </div>
+  <div class="pagestyle">
+    <router-outlet></router-outlet>
+  </div>
+
+  <app-footer></app-footer>
+</app-company-layout>

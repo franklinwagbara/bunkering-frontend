@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'previewapp/:id', component: PreviewAppComponent },
   { path: 'paymentsum/:id', component: PaymentSumComponent },
   { path: 'upload-document/:id', component: DocumentUploadComponent },
-  { path: 'test', component: TestComponent },
+  // { path: 'test', component: TestComponent },
 
   {
     path: 'companyinformation',
