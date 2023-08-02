@@ -6,8 +6,8 @@ $logo-height: 60px;
 
 #company-top-nav {
   background-color: $primary;
-  height: $nav-height;
-  @apply flex justify-evenly items-center;
+  min-height: $nav-height;
+  @apply flex justify-evenly items-center flex-wrap;
 }
 
 .brand-logo {
@@ -22,8 +22,12 @@ $logo-height: 60px;
   }
 }
 
+.nav-wrapper {
+  @apply flex flex-nowrap;
+}
+
 .nav-list {
-  @apply flex  font-semibold gap-5 text-sm -mb-[14px];
+  @apply flex  font-semibold gap-5 text-sm -mb-[14px] flex-nowrap;
 }
 
 .user,

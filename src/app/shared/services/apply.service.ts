@@ -71,30 +71,6 @@ export class ApplyService {
       );
   }
 
-  getLgaByStateId(id: number) {
-    return this.http
-      .get<any>(`${environment.apiUrl}/application/lga-list-by-Id`, {
-        params: { id },
-      })
-      .pipe(
-        retry(this.num),
-        map((res) => {
-          return res;
-        })
-      );
-  }
-
-  getStateList() {
-    return this.http
-      .get<any>(`${environment.apiUrl}/application/state-list`)
-      .pipe(
-        retry(this.num),
-        map((res) => {
-          return res;
-        })
-      );
-  }
-
   uploadApplyform(conbody: FormData) {
     return this.http
       .post<any>(`${environment.apiUrl}/application/application-form`, conbody)

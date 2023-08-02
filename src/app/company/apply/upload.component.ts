@@ -10,6 +10,7 @@ import { uploadFile } from '../../shared/models/apply.model';
 import { GenericService } from '../../shared/services';
 import { ApplyService } from '../../shared/services/apply.service';
 import { ModalService } from '../../shared/services/modal.service';
+import { LibaryService } from 'src/app/shared/services/libary.service';
 
 @Component({
   templateUrl: 'upload.component.html',
@@ -50,6 +51,7 @@ export class UploadComponent implements OnInit {
     private modalService: ModalService,
     private router: Router,
     private gen: GenericService,
+    private libraryService: LibaryService,
     private fb: FormBuilder
   ) {
     this.genk = gen;
@@ -111,14 +113,14 @@ export class UploadComponent implements OnInit {
   }
 
   getStateList() {
-    this.apply.getStateList().subscribe((res) => {
+    this.libraryService.getStates().subscribe((res) => {
       this.stateList = res.data.data;
     });
     this.cd.markForCheck();
   }
 
   getLgaByState(e) {
-    this.apply.getLgaByStateId(e.target.value).subscribe((res) => {
+    this.libraryService.getLGAByStateId(e.target.value).subscribe((res) => {
       this.lgalist = res.data.data;
     });
     this.cd.markForCheck();

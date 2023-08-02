@@ -4,7 +4,7 @@ import { GenericService } from 'src/app/shared/services';
 
 @Component({
   templateUrl: 'companyinformation.component.html',
-  styleUrls: ['../company.component.scss'],
+  styleUrls: ['./companyinformation.component.scss'],
 })
 export class CompanyInformationComponent {
   genk: GenericService;

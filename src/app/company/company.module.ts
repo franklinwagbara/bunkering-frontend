@@ -4,6 +4,8 @@ import { ChangePasswordComponent } from './changepassword/changepassword.compone
 import { MatDialog } from '@angular/material/dialog';
 import { CompanyRoutingModule } from './company-routing.module';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MessagesComponent } from './messages/messeges.component';
 import { MyScheduleComponent } from './schedules/myschedule.component';
@@ -24,6 +26,8 @@ import { AdditionalDocListFormComponent } from './document-upload/additional-doc
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TestComponent } from './test/test.component';
+import { NewApplicationComponent } from './apply/new-application/new-application.component';
+import { RenewApplicationComponent } from './apply/renew-application/renew-application.component';
 
 @NgModule({
   imports: [
@@ -36,6 +40,7 @@ import { TestComponent } from './test/test.component';
     MatButtonModule,
     NgMultiSelectDropDownModule.forRoot(),
     MatProgressSpinnerModule,
+    MatIconModule,
   ],
   declarations: [
     DashboardComponent,
@@ -54,6 +59,8 @@ import { TestComponent } from './test/test.component';
     DocumentUploadComponent,
     AdditionalDocListFormComponent,
     TestComponent,
+    NewApplicationComponent,
+    RenewApplicationComponent,
   ],
   providers: [],
 })

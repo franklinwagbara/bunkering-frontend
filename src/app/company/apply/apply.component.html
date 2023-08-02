@@ -1,119 +1,18 @@
-<div style=" box-shadow:0 0 5px #c5c5c5; padding: 0 15px 20px 15px; background:white;">
-    <div class="panel-body">
-        <br><br>
-        <p></p>
+<div class="apply-container">
+  <div class="apply-wrapper">
+    <h1>SELECT LICENCE TYPE</h1>
+    <div class="option-wrapper">
+      <div class="option">
+        <h3>New Licence</h3>
+        <p>Apply for a new licence</p>
+        <button (click)="onSelect('new')">Select</button>
+      </div>
 
-        <div class="row" id="BackImage">
-
-            <br>
-            <h3 style="font-family: Candara; font-size: 50px; justify-self: center;"
-                class="DashCompanyName">Proposal Application</h3>
-            <br>
-        </div>
-        <br>
-        <div style="font-family: Candara; font-size: 15px; ">Steps to apply for Survey Pressure Proposal
-            <br><br>
-            <ul>
-                <li>Download Template A (Excel) file above.</li>
-                <li>Fill the excel sheet.</li>
-                <li>Click on the <b class="text-dark">Apply</b> button and upload the filled Template A (Excel)
-                    file.</li>
-                <li>Click on submit and continue button.</li>
-                <li>Make your REMITA payment.</li>
-                <li>Submit your proposal.</li>
-                <li>Please not that your Excel version should be <b class="text-danger">Excel 2007</b> and
-                    above.</li>
-            </ul>
-
-        </div>
-
-    
-        <div style="display:flex; width: 100%; justify-content: space-between;">
-
-            <div style = "border: solid 1px grey; width: 90%; margin: 5% auto 0 auto; border-radius: 50px; box-shadow: 4px 4px 8px rgba(246, 243, 243, 0.3); box-shadow: 10px 10px 35px 0px rgba(0,0,0,0.75);background-color:rgb(222, 228, 231); width: 30%">
-                <div style="border: 2px; padding:20px; height: 100%; text-align: center;">
-                    <div>
-                        <b style="color:rgb(19, 83, 147); font-size: 20px; ">WELL LOCATION NOTICE</b><br><hr><br>
-                        <ul style="text-align: left; font-family: Candara; text-shadow: 1px black; font-size: 18px; text-shadow: 1px 1px white;">
-                            <li>Application for well location notice permit<br>
-                            <li> Application for a well side-track permit<br>
-                            <li> Application for a well re-drill permit<br>
-                            <li> Application for a well deepening permit<br>
-                        </ul>
-                    </div>
-                    <br>
-                    <div style="margin-top: 35%;"><a href="assets/image/WellLocationNotice.xlsx" download
-                            class="btn btn-success btn-sm" title="Click to download this excel template"><i
-                                class="fas fa-download"></i> Download Template A</a>
-                    </div>
-                </div>
-            </div>
-
-           
-
-            <div style = "border: solid 1px grey; width: 90%; margin: 5% auto 0 auto; border-radius: 50px; box-shadow: 3px 3px 6px rgba(246, 243, 243, 0.3); box-shadow: 10px 10px 35px 0px rgba(0,0,0,0.75);background-color:rgb(222, 228, 231); width: 30%">
-                <div style="padding:20px; text-align: center">
-
-
-                    <b style="color:rgb(19, 83, 147);  font-size: 20px; ">Well ReEntry Well-Suspension Permit Plug and Abandonment Permit Application</b><hr style="color:black;">
-
-                    <ul style="text-align:left; font-size: 18px; font-family:Candara; color:black; text-shadow: 1px 1px white;">
-
-                        <li> Application for Well Workover permit
-                        <li> Application for an Initial Completion Permit
-                        <li> Application for an Acid Stimulation Permit
-                        <li> Application for a Well Suspension Permit
-                        <li> Application for a Plug and Abandonment Permit
-                        <li> Application for a Well Re-perforation Permit
-                        <li> Application for a CO-Logging Permit
-                        <li> Application for a Well Clean up permit
-                        <li> Application for a Water Shut-off Permit
-                        <li> Application for a Zone-Switch permit
-
-                    </ul>
-                    <br><br>
-                    <div style="display:flex; justify-content:center;"><a
-                            href="/assets/image/WellReEntryWellSuspensionPermitPlugandAbandonmentPermitApplication.xlsx"
-                            download class="btn btn-success btn-sm" title="Click to download this excel template"><i
-                                class="fas fa-download"></i> Download Template B</a>
-                    </div>
-
-                </div>
-            </div>
-
-            <div style = "border: solid 1px grey; width: 90%; margin: 5% auto 0 auto; border-radius: 50px; box-shadow: 4px 4px 8px rgba(246, 243, 243, 0.3); box-shadow: 10px 10px 35px 0px rgba(0,0,0,0.75);background-color:rgb(222, 228, 231);width: 30%">
-                <div style="border: 2px; padding:20px; height: 100%; text-align: center;">
-                    <div>
-                        <b style="color:rgb(19, 83, 147);   font-size: 20px; ">WELL RE-ENTRIES PERMIT</b>
-                        <hr>
-                        <ul style="text-align:left; font-family: Candara; font-size: 18px; text-shadow: 1px 1px white;">
-                            <li>Well Workover Permit
-                            <li>Initial Completion Permit
-                            <li> Acid Stimulation
-                            <li> Well Re-perforation
-                            <li> CO-Logging Permit 
-                            <li>Well Clean up permit 
-                            <li>Water Shut-off Permit
-                            <li> Zone-Switch permit
-                        </ul>
-                    </div>
-                    <br><br>
-                    <div style="margin-top: 15%;"><a href="assets/image/WellReEntryApplicationForm.xlsx" download
-                            class="btn btn-success btn-sm" title="Click to download this excel template"><i
-                                class="fas fa-download"></i> Download
-                            Template C</a>
-                    </div>
-                </div>
-            </div>
-
-
-
-        </div>
-        <br><br><br><br><br><br>
-
-        <div style="text-align: center;">
-
-            <button [routerLink]="['/' + genk.company, 'upload']"
-                style=" padding: 15px 30px; border: none; background-color:teal; color: white; border-radius: 10px; font-size: 20px; width: 30%;">Continue</button>
-        </div>
-        <br><br><br><br>
+      <div class="option">
+        <h3>Renewal Licence</h3>
+        <p>Apply for a renewal licence</p>
+        <button (click)="onSelect('renew')">Select</button>
+      </div>
+    </div>
+  </div>
+</div>
