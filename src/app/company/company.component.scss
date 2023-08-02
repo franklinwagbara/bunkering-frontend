@@ -75,6 +75,9 @@
 
 .pagestyle {
   //margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 285px);
 }
 
 .relcap {
@@ -120,8 +123,4 @@
   font-weight: 600;
   font-size: 16px;
   background-color: transparent;
-}
-
-.progress-bar {
-  @apply h-1 bg-yellow-300;
 }

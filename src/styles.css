@@ -5,6 +5,7 @@
 
 html,
 body {
+  min-width: fit-content;
 }
 
 .collapsible-header {
