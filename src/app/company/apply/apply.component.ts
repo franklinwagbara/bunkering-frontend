@@ -8,7 +8,7 @@ import { AuthenticationService, GenericService } from '../../shared/services';
   styleUrls: ['./apply.component.scss'],
 })
 export class ApplyComponent {
-  genk: GenericService;
+  public genk: GenericService;
 
   constructor(
     private gen: GenericService,
@@ -16,5 +16,9 @@ export class ApplyComponent {
     private auth: AuthenticationService
   ) {
     this.genk = gen;
+  }
+
+  public onSelect(type: 'new' | 'renew') {
+    this.router.navigate(['company', type]);
   }
 }

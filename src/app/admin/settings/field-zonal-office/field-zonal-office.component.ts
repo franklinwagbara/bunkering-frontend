@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SpinnerService } from 'src/app/shared/services/spinner.service';
+import { LibaryService } from 'src/app/shared/services/libary.service';
 
 @Component({
   selector: 'app-field-zonal-office',
@@ -34,7 +35,8 @@ export class FieldZonalOfficeComponent implements OnInit {
     private applyHttpService: ApplyService,
     private progressBarService: ProgressBarService,
     private spinner: SpinnerService,
-    private adminHttpService: AdminService
+    private adminHttpService: AdminService,
+    private libraryService: LibaryService
   ) {}
 
   ngOnInit(): void {
@@ -43,7 +45,7 @@ export class FieldZonalOfficeComponent implements OnInit {
 
     forkJoin([
       this.adminHttpService.getOffices(),
-      this.applyHttpService.getStateList(),
+      this.libraryService.getStates(),
     ]).subscribe({
       next: (res) => {
         if (res[0].success) {

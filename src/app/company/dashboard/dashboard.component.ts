@@ -1,30 +1,56 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginModel } from '../../shared/models/login-model';
 import { AuthenticationService } from '../../shared/services';
 import { GenericService } from '../../shared/services/generic.service';
+import { CompanyService } from 'src/app/shared/services/company.service';
+import { ProgressBarService } from 'src/app/shared/services/progress-bar.service';
+import { PopupService } from 'src/app/shared/services/popup.service';
 
 @Component({
   templateUrl: 'dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  title = 'AUS2FrontEnd';
-  showapply = false;
-  showaccount = false;
-  generic: GenericService;
-  currentUsername: LoginModel;
+  public title = 'AUS2FrontEnd';
+  public showapply = false;
+  public showaccount = false;
+  public generic: GenericService;
+  public currentUsername: LoginModel;
+  public companyDashboardInfo;
 
   constructor(
     private gen: GenericService,
     private router: Router,
-    private auth: AuthenticationService
+    private auth: AuthenticationService,
+    private companyService: CompanyService,
+    private progress: ProgressBarService,
+    private cd: ChangeDetectorRef,
+    private popUp: PopupService
   ) {
     this.generic = gen;
     this.currentUsername = auth.currentUser;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getCompanyDashboard();
+  }
+
+  public getCompanyDashboard() {
+    this.progress.open();
+
+    this.companyService.getCompanyDashboard().subscribe({
+      next: (res) => {
+        this.companyDashboardInfo = res.data;
+        this.progress.close();
+        this.cd.markForCheck();
+      },
+      error: (error) => {
+        this.popUp.open(error.message, 'error');
+        this.progress.close();
+      },
+    });
+  }
 
   showApply() {
     if (this.showapply) {
