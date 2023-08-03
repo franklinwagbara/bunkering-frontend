@@ -73,7 +73,7 @@ export class AdminService {
 
   getStaffDashboard() {
     return this.http
-      .get<any>(`${environment.apiUrl}/admin/staff-dashboard`, {})
+      .get<any>(`${environment.apiUrl}/staff/staff-dashboard`)
       .pipe(
         retry(this.num),
         map((res) => {
