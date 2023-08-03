@@ -13,6 +13,7 @@ import {
 } from '../../../shared/services';
 import { ApplyService } from '../../../shared/services/apply.service';
 import { ModalService } from '../../../shared/services/modal.service';
+import { LibaryService } from 'src/app/shared/services/libary.service';
 
 @Component({
   templateUrl: 'previewapp.component.html',
@@ -62,6 +63,7 @@ export class PreviewAppComponent {
     private modalService: ModalService,
     private route: ActivatedRoute,
     private gen: GenericService,
+    private libraryService: LibaryService,
     private fb: FormBuilder
   ) {
     this.genk = gen;
@@ -154,7 +156,7 @@ export class PreviewAppComponent {
   }
 
   getStateList() {
-    this.apply.getStateList().subscribe((res) => {
+    this.libraryService.getStates().subscribe((res) => {
       this.stateList = res.data.data;
     });
     this.cd.markForCheck();
@@ -171,7 +173,7 @@ export class PreviewAppComponent {
   //  }
 
   getLgaByState(e) {
-    this.apply.getLgaByStateId(e.target.value).subscribe((res) => {
+    this.libraryService.getLGAByStateId(e.target.value).subscribe((res) => {
       this.lgaList = res.data.data;
     });
     this.cd.markForCheck();
@@ -184,10 +186,12 @@ export class PreviewAppComponent {
     this.apply.getappdetailsbyId(this.appid).subscribe((res) => {
       this.previewBody = res.data.data as PreviewModel;
 
-      this.apply.getLgaByStateId(this.previewBody.stateId).subscribe((res) => {
-        this.lgaList = res.data.data;
-        this.cd.markForCheck();
-      });
+      this.libraryService
+        .getLGAByStateId(this.previewBody.stateId)
+        .subscribe((res) => {
+          this.lgaList = res.data.data;
+          this.cd.markForCheck();
+        });
 
       this.apply.getpermitstages().subscribe((res) => {
         this.phasestages = res.data.data.filter((ps) => {
@@ -243,7 +247,6 @@ export class PreviewAppComponent {
   }
 
   submit() {
-    debugger;
     // let addr = this.f['address'].value;
     let a = this.categoryId;
     let b = this.phaseId;
