@@ -107,7 +107,7 @@ export class AdminService {
 
   deleteStaff(id: number) {
     return this.http.delete<any>(
-      `${environment.apiUrl}/account/delete-staff?id=${id}`,
+      `${environment.apiUrl}/Staff/Delete-User?id=${id}`,
       {}
     );
   }
