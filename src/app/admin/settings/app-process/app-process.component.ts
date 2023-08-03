@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { forkJoin } from 'rxjs';
@@ -10,6 +10,12 @@ import { AdminService } from 'src/app/shared/services/admin.service';
 import { ProgressBarService } from 'src/app/shared/services/progress-bar.service';
 import { SpinnerService } from 'src/app/shared/services/spinner.service';
 import { PermitStage } from '../modules-setting/modules-setting.component';
+import { ApplicationProcessesService } from 'src/app/shared/services/application-processes.service';
+import { LibaryService } from 'src/app/shared/services/libary.service';
+import {
+  IApplicationType,
+  IFacilityType,
+} from 'src/app/company/apply/new-application/new-application.component';
 
 @Component({
   selector: 'app-app-process',
@@ -23,20 +29,22 @@ export class AppProcessComponent implements OnInit {
   public roles: IRole[];
   public actions: string[];
   public statuses: string[];
+  public facilityTypes: IFacilityType[];
+  public applicationTypes: IApplicationType[];
 
   public tableTitles = {
     branches: 'APPLICATION PROCESS',
   };
 
   public branchKeysMappedToHeaders = {
-    permitStageName: 'Permit Stage',
-    branchName: 'Branch',
-    office: 'Office',
+    applicationType: 'Application Type',
+    facilityType: 'Facility Type',
     triggeredByRole: 'Triggered By',
     action: 'Action',
     targetRole: 'Target Role',
     status: 'Application Status',
     rate: 'State',
+    isArchived: 'Archived',
   };
 
   constructor(
@@ -44,7 +52,10 @@ export class AppProcessComponent implements OnInit {
     public dialog: MatDialog,
     private progressBarService: ProgressBarService,
     private adminHttpService: AdminService,
-    private spinner: SpinnerService
+    private spinner: SpinnerService,
+    private processFlow: ApplicationProcessesService,
+    private libraryService: LibaryService,
+    private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -52,26 +63,32 @@ export class AppProcessComponent implements OnInit {
     this.spinner.open();
 
     forkJoin([
-      this.adminHttpService.getApplicationProcesses(),
-      this.adminHttpService.getBranches(),
-      this.adminHttpService.getRoles(),
-      this.adminHttpService.getActionsAndStatuses(),
-      this.adminHttpService.getPhaseCategories(),
+      this.processFlow.getApplicationProcesses(),
+      this.libraryService.getRoles(),
+      this.libraryService.getAppActions(),
+      this.libraryService.getAppStatuses(),
+      this.libraryService.getFacilityTypes(),
+      this.libraryService.getApplicationTypes(),
+      // this.adminHttpService.getBranches(),
+      // this.adminHttpService.getPhaseCategories(),
     ]).subscribe({
       next: (res) => {
-        if (res[0].success) this.applicationProcesses = res[0].data.data;
+        if (res[0].success) this.applicationProcesses = res[0].data;
 
-        if (res[1].success) this.branches = res[1].data.data;
+        if (res[1].success) this.roles = res[1].data;
 
-        if (res[2].success) this.roles = res[2].data.data;
-
-        if (res[3].success) {
-          this.actions = res[3].data.data.actions;
-          this.statuses = res[3].data.data.status;
+        if (res[2]) {
+          this.actions = res[2];
         }
 
-        if (res[4].success) this.permitStages = res[4].data.data.permitStages;
+        if (res[3]) this.statuses = res[3];
 
+        if (res[4].success) this.facilityTypes = res[4].data;
+
+        if (res[5].success) this.applicationTypes = res[5].data;
+
+        // if (res[4].success) this.permitStages = res[4].data.data.permitStages;
+        // if (res[1].success) this.branches = res[1].data.data;
         // this.progressBarService.close();
         this.spinner.close();
       },
@@ -100,6 +117,8 @@ export class AppProcessComponent implements OnInit {
           roles: this.roles,
           actions: this.actions,
           statuses: this.statuses,
+          facilityTypes: this.facilityTypes,
+          applicationTypes: this.applicationTypes,
         },
         form: ApplicationProcessFormComponent,
       },
@@ -114,10 +133,10 @@ export class AppProcessComponent implements OnInit {
     dialogRef.afterClosed().subscribe((res) => {
       this.progressBarService.open();
 
-      this.adminHttpService.getApplicationProcesses().subscribe((res) => {
-        this.applicationProcesses = res.data.data;
-
+      this.processFlow.getApplicationProcesses().subscribe((res) => {
+        this.applicationProcesses = res.data;
         this.progressBarService.close();
+        this.cd.markForCheck();
       });
     });
   }
@@ -134,11 +153,11 @@ export class AppProcessComponent implements OnInit {
 
     const requests = (listOfDataToDelete as any[]).map((req) => {
       if (type === 'applicationProcesses') {
-        return this.adminHttpService.deleteApplicationProcess(
+        return this.processFlow.deleteApplicationProcess(
           req[typeToModelMapper[type].id]
         );
       } else {
-        return this.adminHttpService.deleteApplicationProcess(
+        return this.processFlow.deleteApplicationProcess(
           req[typeToModelMapper[type].id]
         );
       }
@@ -165,6 +184,7 @@ export class AppProcessComponent implements OnInit {
         }
 
         this.progressBarService.close();
+        this.cd.markForCheck();
       },
 
       error: (error) => {
@@ -173,6 +193,7 @@ export class AppProcessComponent implements OnInit {
         });
 
         this.progressBarService.close();
+        this.cd.markForCheck();
       },
     });
   }
@@ -187,6 +208,8 @@ export class AppProcessComponent implements OnInit {
           actions: this.actions,
           statuses: this.statuses,
           applicationProcess: event,
+          facilityTypes: this.facilityTypes,
+          applicationTypes: this.applicationTypes,
         },
         form: ApplicationProcessFormComponent,
       },
@@ -201,9 +224,10 @@ export class AppProcessComponent implements OnInit {
     dialogRef.afterClosed().subscribe((res) => {
       this.progressBarService.open();
 
-      this.adminHttpService.getApplicationProcesses().subscribe((res) => {
-        this.applicationProcesses = res.data.data;
+      this.processFlow.getApplicationProcesses().subscribe((res) => {
+        this.applicationProcesses = res.data;
         this.progressBarService.close();
+        this.cd.markForCheck();
       });
     });
   }

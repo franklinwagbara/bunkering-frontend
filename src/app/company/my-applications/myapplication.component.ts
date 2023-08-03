@@ -10,6 +10,7 @@ import { CompanyService } from 'src/app/shared/services/company.service';
 import { ProgressBarService } from 'src/app/shared/services/progress-bar.service';
 import { environment } from 'src/environments/environment';
 import { PaymentSummary } from '../paymnet-summary/paymentsum.component';
+import { ApplicationService } from 'src/app/shared/services/application.service';
 
 @Component({
   templateUrl: 'myapplication.component.html',
@@ -50,7 +51,8 @@ export class MyApplicationComponent implements OnInit {
     private progressbar: ProgressBarService,
     private applicationServer: ApplyService,
     private snackBar: MatSnackBar,
-    private _company: CompanyService
+    private _company: CompanyService,
+    private applicationService: ApplicationService
   ) {
     this.genk = gen;
     this.rrr$.subscribe((data) => {
@@ -64,7 +66,7 @@ export class MyApplicationComponent implements OnInit {
 
   getCompanyApplication() {
     this.progressbar.open();
-    this._company.getCompanyApplications().subscribe({
+    this.applicationService.getApplicationsOnDesk().subscribe({
       next: (res) => {
         if (res.success) {
           this.applications = res.data.data.map((app) => app);

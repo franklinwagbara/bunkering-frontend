@@ -6,6 +6,8 @@ import {
   Phase,
 } from 'src/app/admin/settings/modules-setting/modules-setting.component';
 import { IMenuItem, ISubmenu } from 'src/app/shared/interfaces/menuItem';
+import { LoginModel } from 'src/app/shared/models/login-model';
+import { AuthenticationService } from 'src/app/shared/services';
 import { ApplyService } from 'src/app/shared/services/apply.service';
 import { SpinnerService } from 'src/app/shared/services/spinner.service';
 
@@ -19,6 +21,7 @@ export class CompanyTopNavComponent implements OnInit {
   public permitTypes$ = new Subject<Phase[]>();
   public categories: Category[];
   public permitTypes: Phase[];
+  public currentUsername: LoginModel;
 
   public dashboardMenuItems: IMenuItem[] = [];
   public applicationsMenuItems: IMenuItem[] = [
@@ -33,6 +36,7 @@ export class CompanyTopNavComponent implements OnInit {
       subMenu: null,
     },
   ];
+
   public myAccountMenuItems: IMenuItem[] = [
     {
       name: 'Company Profile',
@@ -55,6 +59,7 @@ export class CompanyTopNavComponent implements OnInit {
       subMenu: null,
     },
   ];
+
   public templateMenuItems = [
     {
       name: 'Download Template A',
@@ -71,11 +76,13 @@ export class CompanyTopNavComponent implements OnInit {
   constructor(
     private applyService: ApplyService,
     private spinner: SpinnerService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    public auth: AuthenticationService
   ) {}
 
   ngOnInit(): void {
     this.getCategoriesAndPermitTypes();
+    this.currentUsername = this.auth.currentUser;
 
     this.categories$.subscribe((cats: Category[]) => {
       this.permitTypes$.subscribe((permitTypes) => {

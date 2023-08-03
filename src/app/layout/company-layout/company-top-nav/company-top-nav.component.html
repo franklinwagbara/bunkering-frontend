@@ -24,10 +24,10 @@
     <div class="user-group">
       <div class="user">
         <svg-icon [icon]="'user'" fill="black" [size]="32"></svg-icon>
-        <span>username</span>
+        <span>{{ currentUsername.lastName }}</span>
       </div>
 
-      <div class="logout">
+      <div class="logout" (click)="auth.logout()">
         <svg-icon
           [icon]="'logout'"
           fill="none"

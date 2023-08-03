@@ -85,9 +85,12 @@
             <select
               type="text"
               class="border border-t border-b rounded-r p-2"
-              placeholder="lga"
+              formControlName="lgaId"
             >
               <option disabled>--select--</option>
+              <option *ngFor="let l of lga" [ngValue]="l.id">
+                {{ l.name }}
+              </option>
             </select>
           </div>
         </form>
@@ -117,7 +120,9 @@
               formControlName="productId"
             >
               <option disabled>--select--</option>
-              <option *ngFor="let p of products">{{ p.name }}</option>
+              <option *ngFor="let p of products" [ngValue]="p.id">
+                {{ p.name }}
+              </option>
             </select>
           </div>
 
@@ -126,6 +131,7 @@
             color="primary"
             class="m-4"
             [disabled]="tankForm.invalid ? true : null"
+            (click)="addTank()"
           >
             Add Tank
           </button>
@@ -135,37 +141,37 @@
               <thead>
                 <tr>
                   <th>Tank</th>
+                  <th>capacity</th>
                   <th>Product</th>
                 </tr>
               </thead>
 
               <tbody>
-                <tr>
-                  <td></td>
-                  <td></td>
+                <tr *ngFor="let t of selectedTanks">
+                  <td>{{ t.name }}</td>
+                  <td>{{ t.capacity }}</td>
+                  <td>{{ t.product }}</td>
                   <td>
-                    <button mat-flat-button color="accent">Remove</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td>
-                    <button mat-flat-button color="accent">Remove</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td>
-                    <button mat-flat-button color="accent">Remove</button>
+                    <button
+                      (click)="removeTank(t)"
+                      mat-flat-button
+                      color="accent"
+                    >
+                      Remove
+                    </button>
                   </td>
                 </tr>
               </tbody>
             </table>
 
-            <button mat-raised-button color="primary" class="primary">
-              Remove
+            <button
+              *ngIf="faciltyForm.valid && selectedTanks.length > 0"
+              mat-raised-button
+              color="primary"
+              class="primary"
+              (click)="submit()"
+            >
+              Continue
             </button>
           </div>
         </form>
