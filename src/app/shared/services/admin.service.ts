@@ -124,14 +124,12 @@ export class AdminService {
   }
 
   getRoles() {
-    return this.http
-      .get<any>(`${environment.apiUrl}/account/all-staff-roles`, {})
-      .pipe(
-        retry(this.num),
-        map((res) => {
-          return res;
-        })
-      );
+    return this.http.get<any>(`${environment.apiUrl}/Library/Roles`, {}).pipe(
+      retry(this.num),
+      map((res) => {
+        return res;
+      })
+    );
   }
 
   getCompanyResource(companyCode: string) {
@@ -246,7 +244,7 @@ export class AdminService {
 
   createStageDocs(model: any) {
     return this.http.post<any>(
-      `${environment.apiUrl}/configuration/post-permit-stage-docs`,
+      `${environment.apiUrl}/Library/Create-FacilityType-Doc`,
       model
     );
   }
@@ -283,15 +281,13 @@ export class AdminService {
 
   getAllPermitStageDocs() {
     return this.http
-      .get<any>(`${environment.apiUrl}/configuration/get-permit-stage-docs`)
+      .get<any>(`${environment.apiUrl}/Library/GetAll-Facility-Type-Doc`)
       .pipe(retry(this.num));
   }
 
   deletePermitStageDocs(id: number) {
     return this.http
-      .delete(
-        `${environment.apiUrl}/configuration/delete-permit-stage-doc-by-id?id=${id}`
-      )
+      .delete(`${environment.apiUrl}/Library/Delete-FacilityType-Doc?id=${id}`)
       .pipe(retry(this.num));
   }
 

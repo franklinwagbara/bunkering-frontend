@@ -55,7 +55,7 @@ export class AllStaffComponent implements OnInit {
     forkJoin([
       this.adminHttpService.getAllStaff(),
       this.adminHttpService.getElpsStaffList(),
-      // this.adminHttpService.getRoles(),
+      this.adminHttpService.getRoles(),
       // this.adminHttpService.getOffices(),
       // this.adminHttpService.getBranches(),
     ]).subscribe({
@@ -67,7 +67,7 @@ export class AllStaffComponent implements OnInit {
           this.staffList = res[1].data;
         }
 
-        // if (res[2].success) this.roles = res[2].data.data;
+        if (res[2].success) this.roles = res[2].data;
 
         // if (res[3].success) this.offices = res[3].data.data;
 
