@@ -86,8 +86,8 @@ export class UserFormComponent implements OnInit {
         this.currentValue ? this.currentValue.role : '',
         Validators.required,
       ],
-      officeId: [this.currentValue ? this.currentValue.officeId : ''],
-      branchId: [this.currentValue ? this.currentValue.branchId : ''],
+      // officeId: [this.currentValue ? this.currentValue.officeId : ''],
+      // branchId: [this.currentValue ? this.currentValue.branchId : ''],
       status: [
         this.currentValue ? this.currentValue.status : '',
         Validators.required,
