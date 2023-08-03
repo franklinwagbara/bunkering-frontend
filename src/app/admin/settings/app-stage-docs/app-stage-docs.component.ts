@@ -57,7 +57,7 @@ export class AppStageDocsComponent implements OnInit {
     this.spinner.open();
 
     forkJoin([
-      this.adminHttpService.getPhaseCategories(),
+      // this.adminHttpService.getPhaseCategories(), not required at the moment
       this.adminHttpService.getAllPermitStageDocs(),
       this.adminHttpService.getAllDocs(),
       // this.adminHttpService.getAppTypes(),
@@ -72,7 +72,7 @@ export class AppStageDocsComponent implements OnInit {
 
         if (res[1].success) this.permitStageDocuments = res[1].data.data;
 
-        if (res[2].success) this.docs = res[2].data.data;
+        // if (res[2].success) this.docs = res[2].data.data;
 
         // if (res[3].success) this.appTypes = res[3].data.data;
 
@@ -114,7 +114,7 @@ export class AppStageDocsComponent implements OnInit {
       this.progressBarService.open();
 
       forkJoin([
-        this.adminHttpService.getPhaseCategories(),
+        // this.adminHttpService.getPhaseCategories(),
         this.adminHttpService.getAllPermitStageDocs(),
         this.adminHttpService.getAllDocs(),
         // this.adminHttpService.getAppTypes(),
@@ -130,9 +130,9 @@ export class AppStageDocsComponent implements OnInit {
             this.permitStageDocuments = res[1].data.data;
           }
 
-          if (res[2].success) {
-            this.docs = res[2].data.data;
-          }
+          // if (res[2].success) {
+          //   this.docs = res[2].data.data;
+          // }
 
           // if (res[3].success) {
           //   this.appTypes = res[3].data.data;
