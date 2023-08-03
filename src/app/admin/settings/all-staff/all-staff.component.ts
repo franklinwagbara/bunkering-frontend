@@ -23,15 +23,14 @@ export class AllStaffComponent implements OnInit {
   public staffList: any;
   public offices: FieldOffice[];
   public branches: IBranch[];
-  public word: string = 'Hello world';
 
   tableTitles = {
     users: 'User Settings',
   };
 
   userKeysMappedToHeaders = {
-    firstName: 'First Name',
-    lastName: 'Last Name',
+    name: 'Name',
+    // lastName: 'Last Name',
     email: 'Email',
     phoneNo: 'Phone Number',
     role: 'Role',
