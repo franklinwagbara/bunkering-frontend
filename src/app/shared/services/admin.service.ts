@@ -359,26 +359,6 @@ export class AdminService {
       .pipe(retry(this.num));
   }
 
-  createApplicationProcess(model: IApplicationProcess) {
-    return this.http
-      .post<any>(`${environment.apiUrl}/configuration/add-app-process`, model)
-      .pipe(retry(this.num));
-  }
-
-  getApplicationProcesses() {
-    return this.http
-      .get<any>(`${environment.apiUrl}/configuration/all-processes`)
-      .pipe(retry(this.num));
-  }
-
-  deleteApplicationProcess(id: number) {
-    return this.http
-      .delete<any>(
-        `${environment.apiUrl}/configuration/delete-application-process/${id}`
-      )
-      .pipe(retry(this.num));
-  }
-
   getActionsAndStatuses() {
     return this.http
       .get<any>(`${environment.apiUrl}/configuration/all-actions-status`)
