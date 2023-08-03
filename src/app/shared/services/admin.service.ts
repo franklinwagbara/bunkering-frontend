@@ -58,10 +58,7 @@ export class AdminService {
   }
 
   createStaff(model) {
-    return this.http.post<any>(
-      `${environment.apiUrl}/account/add-staff`,
-      model
-    );
+    return this.http.post<any>(`${environment.apiUrl}/Staff/add-user`, model);
   }
 
   updateStaff(model) {
@@ -73,7 +70,7 @@ export class AdminService {
 
   getStaffDashboard() {
     return this.http
-      .get<any>(`${environment.apiUrl}/admin/staff-dashboard`, {})
+      .get<any>(`${environment.apiUrl}/Staff/get-dashboard`, {})
       .pipe(
         retry(this.num),
         map((res) => {
@@ -99,28 +96,25 @@ export class AdminService {
       { params: { id } }
     );
   }
-
   getAllStaff() {
-    return this.http
-      .get<any>(`${environment.apiUrl}/account/all-staff`, {})
-      .pipe(
-        retry(this.num),
-        map((res) => {
-          return res;
-        })
-      );
+    return this.http.get<any>(`${environment.apiUrl}/Staff/all-users`, {}).pipe(
+      retry(this.num),
+      map((res) => {
+        return res;
+      })
+    );
   }
 
   deleteStaff(id: number) {
     return this.http.delete<any>(
-      `${environment.apiUrl}/account/delete-staff?id=${id}`,
+      `${environment.apiUrl}/Staff/Delete-User?id=${id}`,
       {}
     );
   }
 
   getElpsStaffList() {
     return this.http
-      .get<any>(`${environment.apiUrl}/account/all-elps-staff`, {})
+      .get<any>(`${environment.apiUrl}/Staff/get-staffby-elpsId`, {})
       .pipe(
         retry(this.num),
         map((res) => {
@@ -130,14 +124,12 @@ export class AdminService {
   }
 
   getRoles() {
-    return this.http
-      .get<any>(`${environment.apiUrl}/account/all-staff-roles`, {})
-      .pipe(
-        retry(this.num),
-        map((res) => {
-          return res;
-        })
-      );
+    return this.http.get<any>(`${environment.apiUrl}/Library/Roles`, {}).pipe(
+      retry(this.num),
+      map((res) => {
+        return res;
+      })
+    );
   }
 
   getCompanyResource(companyCode: string) {
@@ -150,7 +142,7 @@ export class AdminService {
 
   addStaff(model: any) {
     return this.http
-      .post<any>(`${environment.apiUrl}/account/add-staff`, model)
+      .post<any>(`${environment.apiUrl}/Staff/add-user`, model)
       .pipe(retry(this.num));
   }
 
@@ -252,7 +244,7 @@ export class AdminService {
 
   createStageDocs(model: any) {
     return this.http.post<any>(
-      `${environment.apiUrl}/configuration/post-permit-stage-docs`,
+      `${environment.apiUrl}/Library/Create-FacilityType-Doc`,
       model
     );
   }
@@ -283,21 +275,19 @@ export class AdminService {
 
   getAllDocs() {
     return this.http
-      .get<any>(`${environment.apiUrl}/configuration/get-all-docs`)
+      .get<any>(`${environment.apiUrl}/AppStageDocuments/getall`)
       .pipe(retry(this.num));
   }
 
   getAllPermitStageDocs() {
     return this.http
-      .get<any>(`${environment.apiUrl}/configuration/get-permit-stage-docs`)
+      .get<any>(`${environment.apiUrl}/Library/GetAll-Facility-Type-Doc`)
       .pipe(retry(this.num));
   }
 
   deletePermitStageDocs(id: number) {
     return this.http
-      .delete(
-        `${environment.apiUrl}/configuration/delete-permit-stage-doc-by-id?id=${id}`
-      )
+      .delete(`${environment.apiUrl}/Library/Delete-FacilityType-Doc?id=${id}`)
       .pipe(retry(this.num));
   }
 

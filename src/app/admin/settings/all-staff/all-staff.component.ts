@@ -29,8 +29,8 @@ export class AllStaffComponent implements OnInit {
   };
 
   userKeysMappedToHeaders = {
-    firstName: 'First Name',
-    lastName: 'Last Name',
+    name: 'Name',
+    // lastName: 'Last Name',
     email: 'Email',
     phoneNo: 'Phone Number',
     role: 'Role',
@@ -55,19 +55,22 @@ export class AllStaffComponent implements OnInit {
       this.adminHttpService.getAllStaff(),
       this.adminHttpService.getElpsStaffList(),
       this.adminHttpService.getRoles(),
-      this.adminHttpService.getOffices(),
-      this.adminHttpService.getBranches(),
+      // this.adminHttpService.getOffices(),
+      // this.adminHttpService.getBranches(),
     ]).subscribe({
       next: (res) => {
-        if (res[0].success) this.users = res[0].data.data;
+        if (res[0].success) {
+          this.users = res[0].data;
+        }
+        if (res[1].success) {
+          this.staffList = res[1].data;
+        }
 
-        if (res[1].success) this.staffList = res[1].data.data;
+        if (res[2].success) this.roles = res[2].data;
 
-        if (res[2].success) this.roles = res[2].data.data;
+        // if (res[3].success) this.offices = res[3].data.data;
 
-        if (res[3].success) this.offices = res[3].data.data;
-
-        if (res[4].success) this.branches = res[4].data.data;
+        // if (res[4].success) this.branches = res[4].data.data;
 
         // this.progressBar.close();
         this.spinner.close();
@@ -111,7 +114,7 @@ export class AllStaffComponent implements OnInit {
       this.progressBar.open();
 
       this.adminHttpService.getAllStaff().subscribe((res) => {
-        this.users = res.data.data;
+        this.users = res.data;
 
         this.progressBar.close();
       });
@@ -207,7 +210,7 @@ export class AllStaffComponent implements OnInit {
       this.progressBar.open();
 
       this.adminHttpService.getAllStaff().subscribe((res) => {
-        this.users = res.data.data;
+        this.users = res.data;
 
         this.progressBar.close();
       });
@@ -239,7 +242,7 @@ export class AllStaffComponent implements OnInit {
       this.progressBar.open();
 
       this.adminHttpService.getAllStaff().subscribe((res) => {
-        this.users = res.data.data;
+        this.users = res.data;
 
         this.progressBar.close();
       });

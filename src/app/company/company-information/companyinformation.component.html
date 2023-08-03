@@ -1,40 +1,43 @@
-<!-- <div style="display:flex; width:30%; justify-content: space-between; font-weight: 500; " class="nav nav-pills mb-3" role="tablist">
-  <div class="nav-item nav-link active" data-toggle="pill"href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true" [routerLink]="['/' + genk.company, genk.companyinformation, 'companyprofile']" style="margin-bottom: 7px;">Company Profile</div>
-  <div  class="nav-item nav-link" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false" [routerLink]="['/' + genk.company, genk.companyinformation, 'companyaddress']" style="margin-bottom: 7px;">Company Address </div>
-  <div  class="nav-item nav-link" data-toggle="pill" data-toggle="pill" href="#pills-contact" role="tab" aria-selected="false" [routerLink]="['/' + genk.company, genk.companyinformation, 'companydirector']" style="margin-bottom: 7px;">Company Director</div>
-</div> -->
-
-<div class="tab">
-  <div
-    [routerLink]="[
-      '/' + genk.company,
-      genk.companyinformation,
-      'companyprofile'
-    ]"
-  >
-    Company Profile
-  </div>
-
-  <div
-    [routerLink]="[
-      '/' + genk.company,
-      genk.companyinformation,
-      'companyprofile'
-    ]"
-  >
-    Company Profile
-  </div>
-
-  <div
-    [routerLink]="[
-      '/' + genk.company,
-      genk.companyinformation,
-      'companyprofile'
-    ]"
-  >
-    Company Profile
-  </div>
-</div>
+<ul class="nav nav-tabs">
+  <li class="nav-item" routerLinkActive="active">
+    <a
+      class="nav-link"
+      [routerLink]="[
+        '/' + genk.company,
+        genk.companyinformation,
+        'companyprofile'
+      ]"
+      role="tab"
+      data-toggle="tab"
+    >
+      Company Profile
+    </a>
+  </li>
+  <li class="nav-item" routerLinkActive="active">
+    <a
+      class="nav-link"
+      [routerLink]="[
+        '/' + genk.company,
+        genk.companyinformation,
+        'companyaddress'
+      ]"
+    >
+      Company Address
+    </a>
+  </li>
+  <li class="nav-item" routerLinkActive="active">
+    <a
+      class="nav-link"
+      [routerLink]="[
+        '/' + genk.company,
+        genk.companyinformation,
+        'companydirector'
+      ]"
+    >
+      Company Director
+    </a>
+  </li>
+</ul>
 <router-outlet></router-outlet>
 
 <!--
