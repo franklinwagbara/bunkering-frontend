@@ -92,11 +92,13 @@ export class DropdownComponent implements OnInit, AfterViewInit {
       return true;
     }
 
-    for (var m of this.menuItems) {
-      console.log('for: ', this.router.url, m.url);
-      if (this.router.url.includes(m.url)) {
-        this.isActive = true;
-        return true;
+    if (this.menuItems?.length > 0) {
+      for (var m of this.menuItems) {
+        console.log('for: ', this.router.url, m.url);
+        if (this.router.url.includes(m.url)) {
+          this.isActive = true;
+          return true;
+        }
       }
     }
 
