@@ -327,7 +327,7 @@ export class AdminService {
 
   getApps() {
     return this.http
-      .get<any>(`${environment.apiUrl}/admin/all-applications`)
+      .get<any>(`${environment.apiUrl}/Application/all-applications`)
       .pipe(retry(this.num));
   }
 
