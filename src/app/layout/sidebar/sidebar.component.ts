@@ -118,7 +118,7 @@ const ROUTES: RouteInfo[] = [
       {
         id: 1,
         title: 'APPLICATION REPORT',
-        url: '#',
+        url: '/admin/application-report',
       },
       {
         id: 2,

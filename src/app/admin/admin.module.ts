@@ -34,6 +34,11 @@ import { BarChartComponent } from './admin/dashboard/bar-chart/bar-chart.compone
 import { FirstNPipe } from './application/view-application/first-n.pipe';
 import { ShowMoreComponent } from './application/view-application/show-more/show-more.component';
 import { PhasedocumentsComponent } from './settings/phasedocuments/phasedocuments.component';
+import { FilterleftComponent } from './admin/application-report/filterleft/filterleft.component';
+import { FilterrightComponent } from './admin/application-report/filterright/filterright.component';
+import { ExtrasComponent } from './admin/application-report/extras/extras.component';
+import { GraphModalComponent } from './admin/application-report/graph-modal/graph-modal.component';
+import { ApplicationReportComponent } from './admin/application-report/application-report.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +60,11 @@ import { PhasedocumentsComponent } from './settings/phasedocuments/phasedocument
     BarChartComponent,
     FirstNPipe,
     ShowMoreComponent,
+    FilterleftComponent,
+    GraphModalComponent,
+    ExtrasComponent,
+    FilterrightComponent,
+    ApplicationReportComponent,
   ],
 
   imports: [

@@ -6,6 +6,7 @@
 html,
 body {
   min-width: fit-content;
+  overflow-x: hidden;
 }
 
 .collapsible-header {
