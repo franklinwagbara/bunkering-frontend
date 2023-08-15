@@ -81,32 +81,32 @@ export class CompanyTopNavComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getCategoriesAndPermitTypes();
+    // this.getCategoriesAndPermitTypes();
     this.currentUsername = this.auth.currentUser;
 
-    this.categories$.subscribe((cats: Category[]) => {
-      this.permitTypes$.subscribe((permitTypes) => {
-        cats.forEach((cat) => {
-          this.applicationsMenuItems[0].subMenu.push({
-            name: cat.name,
-            url: '',
-            subMenu: ((): ISubmenu[] => {
-              const subMenu: ISubmenu[] = [];
+    // this.categories$.subscribe((cats: Category[]) => {
+    //   this.permitTypes$.subscribe((permitTypes) => {
+    //     cats.forEach((cat) => {
+    //       this.applicationsMenuItems[0].subMenu.push({
+    //         name: cat.name,
+    //         url: '',
+    //         subMenu: ((): ISubmenu[] => {
+    //           const subMenu: ISubmenu[] = [];
 
-              permitTypes.forEach((p) => {
-                if (p.categoryName === cat.name)
-                  subMenu.push({
-                    name: p.code,
-                    url: `company/apply/${cat.id}/${p.id}`,
-                    subMenu: null,
-                  });
-              });
-              return subMenu;
-            })(),
-          });
-        });
-      });
-    });
+    //           permitTypes.forEach((p) => {
+    //             if (p.categoryName === cat.name)
+    //               subMenu.push({
+    //                 name: p.code,
+    //                 url: `company/apply/${cat.id}/${p.id}`,
+    //                 subMenu: null,
+    //               });
+    //           });
+    //           return subMenu;
+    //         })(),
+    //       });
+    //     });
+    //   });
+    // });
   }
 
   getCategoriesAndPermitTypes() {

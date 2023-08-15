@@ -38,7 +38,7 @@ export class AppProcessComponent implements OnInit {
 
   public branchKeysMappedToHeaders = {
     applicationType: 'Application Type',
-    facilityType: 'Facility Type',
+    vesselType: 'Vessel Type',
     triggeredByRole: 'Triggered By',
     action: 'Action',
     targetRole: 'Target Role',

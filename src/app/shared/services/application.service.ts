@@ -22,6 +22,22 @@ export class ApplicationService {
   }
 
   getApplicationsOnDesk() {
-    return this.http.get<any>(`${API}/my-desk`).pipe();
+    return this.http.get<any>(`${API}/my-desk`);
+  }
+
+  public getUploadDocuments(appId: number) {
+    return this.http.get<any>(`${API}/get-documents`, {
+      params: { id: appId },
+    });
+  }
+
+  viewApplication(id: any) {
+    return this.http.get<any>(`${API}/view-application`, {
+      params: { id },
+    });
+  }
+
+  getAllApplications() {
+    return this.http.get<any>(`${API}/all-applications`);
   }
 }

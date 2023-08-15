@@ -48,7 +48,7 @@
         <div class="payment-details__table-wrapper">
           <table class="table" cellspacing="0">
             <tbody>
-              <tr>
+              <!-- <tr>
                 <td class="bold">Reference No</td>
                 <td>{{ paymentSummary?.appReference }}</td>
               </tr>
@@ -65,19 +65,51 @@
               <tr>
                 <td class="bold">Permit Type</td>
                 <td>{{ paymentSummary?.permitType }}</td>
+              </tr> -->
+              <tr>
+                <td class="bold">Application Type</td>
+                <td>{{ paymentSummary?.applicationType }}</td>
+              </tr>
+              <!-- <tr>
+                <td class="bold">Accreditation Fee</td>
+                <td>{{ paymentSummary?.accreditationFee }}</td>
               </tr>
               <tr>
-                <td class="bold">Fee</td>
-                <td>{{ paymentSummary?.fee }}</td>
+                <td class="bold">Administrative Fee</td>
+                <td>{{ paymentSummary?.administrativeFee }}</td>
               </tr>
               <tr>
+                <td class="bold">Application Fee</td>
+                <td>{{ paymentSummary?.applicationFee }}</td>
+              </tr> -->
+              <tr>
+                <td class="bold">Facility Type</td>
+                <td>{{ paymentSummary?.facilityType }}</td>
+              </tr>
+              <!-- <tr>
+                <td class="bold">Inspection Fee</td>
+                <td>{{ paymentSummary?.inspectionFee }}</td>
+              </tr>
+              <tr>
+                <td class="bold">Vessel Licence Fee</td>
+                <td>{{ paymentSummary?.vesselLicenseFee }}</td>
+              </tr> -->
+              <tr>
+                <td class="bold">Service Charge</td>
+                <td>{{ paymentSummary?.serciveCharge }}</td>
+              </tr>
+              <tr>
+                <td class="bold">Total</td>
+                <td>{{ paymentSummary?.total }}</td>
+              </tr>
+              <!-- <tr>
                 <td class="bold">Service Charge</td>
                 <td>{{ paymentSummary?.serviceCharge }}</td>
               </tr>
               <tr>
                 <td class="bold">Total Amount</td>
                 <td>{{ paymentSummary?.totalAmount }}</td>
-              </tr>
+              </tr> -->
               <tr>
                 <td class="bold">Documents</td>
                 <td>
@@ -139,7 +171,7 @@
               </button>
 
               <button
-                *ngIf="isPaymentConfirmed$ | async"
+                *ngIf="!!(isPaymentConfirmed$ | async)"
                 class="submitbtn"
                 style="
                   padding: 10px 20px;

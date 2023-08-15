@@ -273,24 +273,6 @@ export class AdminService {
     );
   }
 
-  getAllDocs() {
-    return this.http
-      .get<any>(`${environment.apiUrl}/AppStageDocuments/getall`)
-      .pipe(retry(this.num));
-  }
-
-  getAllPermitStageDocs() {
-    return this.http
-      .get<any>(`${environment.apiUrl}/Library/GetAll-Facility-Type-Doc`)
-      .pipe(retry(this.num));
-  }
-
-  deletePermitStageDocs(id: number) {
-    return this.http
-      .delete(`${environment.apiUrl}/Library/Delete-FacilityType-Doc?id=${id}`)
-      .pipe(retry(this.num));
-  }
-
   getAppTypes() {
     return this.http
       .get<any>(

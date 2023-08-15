@@ -14,6 +14,7 @@ import { SpinnerService } from 'src/app/shared/services/spinner.service';
 import { Staff } from '../../settings/all-staff/all-staff.component';
 import { FieldOffice } from '../../settings/field-zonal-office/field-zonal-office.component';
 import { Category } from '../../settings/modules-setting/modules-setting.component';
+import { ApplicationService } from 'src/app/shared/services/application.service';
 
 @Component({
   selector: 'app-my-desk',
@@ -38,19 +39,20 @@ export class MyDeskComponent implements OnInit {
   };
 
   public applicationKeysMappedToHeaders = {
-    appReference: 'Reference Number',
+    reference: 'Reference Number',
     companyName: 'Company Name',
-    appType: 'Application Type',
-    addedDate: 'Initiation Date',
+    companyEmail: 'Company Email',
+    // appType: 'Application Type',
+    createdDate: 'Initiation Date',
     submittedDate: 'Submission Date',
-    permitType: 'Permit Type',
-    stateName: 'State',
-    location: 'Location / Address',
+    facilityType: 'Facility Type',
+    state: 'State',
+    facilityAddress: 'Location / Address',
   };
 
   constructor(
     private adminService: AdminService,
-    private applicationService: ApplyService,
+    private applicationService: ApplicationService,
     public snackBar: MatSnackBar,
     public dialog: MatDialog,
     private progressBar: ProgressBarService,
@@ -71,34 +73,34 @@ export class MyDeskComponent implements OnInit {
     this.spinner.open();
 
     forkJoin([
-      this.applicationService.getApplicationsOnMyDesk(),
-      this.adminService.getModule(),
-      this.adminService.getAllStaff(),
-      this.adminService.getElpsStaffList(),
-      this.adminService.getRoles(),
-      this.adminService.getOffices(),
-      this.adminService.getBranches(),
+      this.applicationService.getApplicationsOnDesk(),
+      // this.adminService.getAllStaff(),
+      // this.adminService.getElpsStaffList(),
+      // this.adminService.getRoles(),
+      // this.adminService.getModule(),
+      // this.adminService.getOffices(),
+      // this.adminService.getBranches(),
     ]).subscribe({
       next: (res) => {
         if (res[0].success) {
-          this.applications = res[0].data.data;
+          this.applications = res[0].data;
           this.applications$.next(this.applications);
         }
 
-        if (res[1].success) {
-          this.categories = res[1].data.data;
-          this.categories$.next(res[1].data.data);
-        }
+        // if (res[1].success) {
+        //   this.categories = res[1].data.data;
+        //   this.categories$.next(res[1].data.data);
+        // }
 
-        if (res[2].success) this.users = res[2].data.data;
+        // if (res[2].success) this.users = res[2].data.data;
 
-        if (res[3].success) this.staffList = res[3].data.data;
+        // if (res[3].success) this.staffList = res[3].data.data;
 
-        if (res[4].success) this.roles = res[4].data.data;
+        // if (res[4].success) this.roles = res[4].data.data;
 
-        if (res[5].success) this.offices = res[5].data.data;
+        // if (res[5].success) this.offices = res[5].data.data;
 
-        if (res[6].success) this.branches = res[6].data.data;
+        // if (res[6].success) this.branches = res[6].data.data;
 
         // this.progressBar.close();
         this.spinner.close();
@@ -125,7 +127,7 @@ export class MyDeskComponent implements OnInit {
 
   onViewData(event: any, type: string) {
     this.router.navigate([`/admin/view-application/${event.id}`], {
-      queryParams: { id: event.id, appSource: AppSource.MyDesk },
+      queryParams: { id: event.appId, appSource: AppSource.MyDesk },
     });
   }
 

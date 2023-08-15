@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ApplyService } from 'src/app/shared/services/apply.service';
 import { AdditionalDocListFormComponent } from './additional-doc-list-form/additional-doc-list-form.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ApplicationService } from 'src/app/shared/services/application.service';
 
 @Component({
   selector: 'app-document-upload',
@@ -34,7 +35,8 @@ export class DocumentUploadComponent implements OnInit {
     private progressBar: ProgressBarService,
     private snackBar: MatSnackBar,
     private route: ActivatedRoute,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public appService: ApplicationService
   ) {}
 
   ngOnInit(): void {
@@ -51,9 +53,9 @@ export class DocumentUploadComponent implements OnInit {
   getUploadDocuments() {
     this.progressBar.open();
 
-    this.companyService.getUploadDocuments(this.application_id).subscribe({
+    this.appService.getUploadDocuments(this.application_id).subscribe({
       next: (res) => {
-        this.documents = res.data.data.docs;
+        this.documents = res.data.docs;
         this.documents = this.documents.map((d) => {
           d.source = d.docSource
             ? `<a href="${d.docSource}" target="_blank" rel="noopener noreferrer"><img width="20" src="assets/image/pdfIcon.png" /></a>`
@@ -65,7 +67,7 @@ export class DocumentUploadComponent implements OnInit {
           return d;
         });
         this.documents$.next(this.documents);
-        this.documentConfig = res.data.data.app;
+        this.documentConfig = res.data.apiData;
 
         this.progressBar.close();
       },
@@ -92,11 +94,12 @@ export class DocumentUploadComponent implements OnInit {
     const formdata = new FormData();
     formdata.append('file', file);
 
+    debugger;
     this.applicationService
       .uploadCompanyFileToElps(
         doc.docId,
-        this.documentConfig.companyId,
-        this.documentConfig.facilityId,
+        this.documentConfig.companyElpsId,
+        this.documentConfig.facilityElpsId,
         this.documentConfig.apiEmail,
         this.documentConfig.apiHash,
         doc.docName,
@@ -110,7 +113,7 @@ export class DocumentUploadComponent implements OnInit {
           this.documents = this.documents.map((d) => {
             if (d.docId === doc.docId) {
               d.docSource = res.source;
-              d.fileId = res.FileId;
+              d.fileId = res.fileId;
               d.available = 'Document Uploaded';
               d.source = d.docSource
                 ? `<a href="${d.docSource}" target="_blank" rel="noopener noreferrer"><img width="20" src="assets/image/pdfIcon.png" /></a>`
@@ -136,7 +139,6 @@ export class DocumentUploadComponent implements OnInit {
   }
 
   uploadAdditionalFile(data) {
-    console.log('in additional');
     this.progressBar.open();
 
     const fileEvent = data.file;
@@ -153,8 +155,8 @@ export class DocumentUploadComponent implements OnInit {
     this.applicationService
       .uploadCompanyFileToElps(
         doc.docId,
-        this.documentConfig.companyId,
-        this.documentConfig.facilityId,
+        this.documentConfig.companyElpsId,
+        this.documentConfig.facilityElpsId,
         this.documentConfig.apiEmail,
         this.documentConfig.apiHash,
         doc.docName,
@@ -168,7 +170,7 @@ export class DocumentUploadComponent implements OnInit {
           this.additionalDocuments = this.additionalDocuments.map((d) => {
             if (d.docId === doc.docId) {
               d.docSource = res.source;
-              d.fileId = res.FileId;
+              d.fileId = res.fileId;
               d.available = 'Document Uploaded';
               d.source = d.docSource
                 ? `<a href="${d.docSource}" target="_blank" rel="noopener noreferrer"><img width="20" src="assets/image/pdfIcon.png" /></a>`
@@ -178,8 +180,6 @@ export class DocumentUploadComponent implements OnInit {
             return d;
           });
           this.additionalDocuments$.next(this.additionalDocuments);
-
-          console.log('let check', this.additionalDocuments, this.documents);
 
           this.progressBar.close();
           this.snackBar.open('File was uploaded successfully!', null, {
@@ -259,18 +259,20 @@ export class DocumentUploadComponent implements OnInit {
 export class DocumentConfig {
   apiEmail: string;
   apiHash: string;
-  appid: string;
-  companyId: string;
-  facilityId: string;
+  appid?: string;
+  companyElpsId: string;
+  facilityElpsId: string;
 }
 
 export class DocumentInfo {
-  id: string;
+  Id: string;
   docId: string;
   docName: string;
   docSource: string;
+  applicationId: number;
   source: string;
   fileId: string;
   available: string;
   docType: string;
+  company: string;
 }

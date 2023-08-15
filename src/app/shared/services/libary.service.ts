@@ -14,6 +14,14 @@ export class LibaryService {
     return this.http.get<any>(`${api}/facilitytypes`);
   }
 
+  public getVesselTypes() {
+    return this.http.get<any>(`${api}/vesseltype`);
+  }
+
+  getAllFacilityTypeDocs() {
+    return this.http.get<any>(`${api}/GetAll-Facility-Type-Doc`);
+  }
+
   public getApplicationTypes() {
     return this.http.get<any>(`${api}/applicationTypes`);
   }

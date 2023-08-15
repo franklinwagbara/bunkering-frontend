@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppSource } from 'src/app/shared/constants/appSource';
 import { IApplication } from 'src/app/shared/interfaces/IApplication';
 import { AddScheduleFormComponent } from 'src/app/shared/reusable-components/add-schedule-form copy/add-schedule-form.component';
@@ -13,6 +13,7 @@ import { ApplyService } from 'src/app/shared/services/apply.service';
 import { ProgressBarService } from 'src/app/shared/services/progress-bar.service';
 import { SpinnerService } from 'src/app/shared/services/spinner.service';
 import { ShowMoreComponent } from './show-more/show-more.component';
+import { ApplicationService } from 'src/app/shared/services/application.service';
 
 @Component({
   selector: 'app-view-application',
@@ -29,24 +30,30 @@ export class ViewApplicationComponent implements OnInit {
     private snackBar: MatSnackBar,
     private auth: AuthenticationService,
     private appService: ApplyService,
+    private applicationService: ApplicationService,
     public dialog: MatDialog,
     public progressBar: ProgressBarService,
     private spinner: SpinnerService,
     public route: ActivatedRoute,
+    private router: Router,
     private cd: ChangeDetectorRef
-  ) {
+  ) {}
+
+  ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
       this.spinner.open();
       this.appId = parseInt(params['id']);
+      this.appSource = params['appSource'];
 
       this.getApplication().subscribe({
         next: (res) => {
           if (res.success) {
-            this.application = res.data.data;
+            this.application = res.data;
           }
 
           this.progressBar.close();
           this.spinner.close();
+          this.cd.markForCheck();
         },
         error: (error) => {
           this.snackBar.open(
@@ -59,12 +66,11 @@ export class ViewApplicationComponent implements OnInit {
 
           this.progressBar.close();
           this.spinner.close();
+          this.cd.markForCheck();
         },
       });
     });
   }
-
-  ngOnInit(): void {}
 
   isCreatedByMe(scheduleBy: string) {
     const currentUser = this.auth.currentUser;
@@ -72,7 +78,11 @@ export class ViewApplicationComponent implements OnInit {
   }
 
   getApplication() {
-    return this.appService.viewApplication(this.appId);
+    return this.applicationService.viewApplication(this.appId);
+  }
+
+  public get isStaffDesk() {
+    return this.appSource == AppSource.MyDesk;
   }
 
   action(type: string, param = null) {
@@ -126,7 +136,7 @@ export class ViewApplicationComponent implements OnInit {
     const operationConfiguration = {
       appHistory: {
         data: {
-          appHistory: this.application.appHistory,
+          appHistory: this.application.appHistories,
         },
       },
       schedules: {

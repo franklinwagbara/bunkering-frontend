@@ -136,7 +136,7 @@ export class ApplyService {
 
   getpaymentbyappId(appID: number) {
     return this.http
-      .get<any>(`${environment.apiUrl}/application/payment-summary`, {
+      .get<any>(`${environment.apiUrl}/application/payment`, {
         params: { id: appID },
       })
       .pipe(
@@ -153,18 +153,12 @@ export class ApplyService {
       .pipe(retry(this.num));
   }
 
-  viewApplication(id: any) {
-    return this.http.get<any>(`${environment.apiUrl}/admin/view-application`, {
-      params: { id },
-    });
-  }
-
-  createPayment_RRR(appID: any) {
+  createPayment_RRR(id: any) {
     return this.http
       .post<any>(
         `${environment.apiUrl}/payment/create-payment`,
         {},
-        { params: { appID } }
+        { params: { id } }
       )
       .pipe();
   }
@@ -189,27 +183,27 @@ export class ApplyService {
   ) {
     if (!action || (action === 'create' && docType === 'company')) {
       return this.http.post<any>(
-        `https://elpsdemo.dpr.gov.ng/api/UploadCompanyDoc/${docTypeId}/${compId}/${email}/${apiHash}?docName=${docName}&uniqueid=${uniqueid}`,
+        `${environment.elpsBase}/api/UploadCompanyDoc/${docTypeId}/${compId}/${email}/${apiHash}?docName=${docName}&uniqueid=${uniqueid}`,
         file
       );
     } else if (action === 'update' && docType === 'company') {
       return this.http.post<any>(
-        `https://elpsdemo.dpr.gov.ng/api/CompanyDocument/UpdateFile/${docTypeId}/${compId}/company?docid=${docTypeId}`,
+        `${environment.elpsBase}/api/CompanyDocument/UpdateFile/${docTypeId}/${compId}/company?docid=${docTypeId}`,
         file
       );
     } else if (!action || (action === 'create' && docType === 'facility')) {
       return this.http.post<any>(
-        `https://elpsdemo.dpr.gov.ng/api/Facility/UploadFile/${docTypeId}/${compId}/${facilityId}/${email}/${apiHash}?docName=${docName}&uniqueid=${uniqueid}`,
+        `${environment.elpsBase}/api/Facility/UploadFile/${docTypeId}/${compId}/${facilityId}/${email}/${apiHash}?docName=${docName}&uniqueid=${uniqueid}`,
         file
       );
     } else if (action === 'update' && docType === 'facility') {
       return this.http.post<any>(
-        `https://elpsdemo.dpr.gov.ng/api/FacilityDocument/UpdateFile/${docTypeId}/${facilityId}?docid=${docTypeId}`,
+        `${environment.elpsBase}/api/FacilityDocument/UpdateFile/${docTypeId}/${facilityId}?docid=${docTypeId}`,
         file
       );
     } else
       return this.http.post<any>(
-        `https://elpsdemo.dpr.gov.ng/api/UploadCompanyDoc/${docTypeId}/${compId}/${email}/${apiHash}?docName=${docName}&uniqueid=${uniqueid}`,
+        `${environment.elpsBase}/api/UploadCompanyDoc/${docTypeId}/${compId}/${email}/${apiHash}?docName=${docName}&uniqueid=${uniqueid}`,
         file
       );
   }
@@ -222,18 +216,22 @@ export class ApplyService {
     let url: string;
 
     if (docType === 'company') {
-      url = `https://elpsdemo.dpr.gov.ng/api/Documents/Types/${email}/${apiHash}`;
+      url = `${environment.elpsBase}/api/Documents/Types/${email}/${apiHash}`;
     } else {
-      url = `https://elpsdemo.dpr.gov.ng/api/Documents/Facility/${email}/${apiHash}/${docType}`;
+      url = `${environment.elpsBase}/api/Documents/Facility/${email}/${apiHash}/${docType}`;
     }
 
     return this.http.get<any>(url);
   }
 
   submitApplication(payload) {
-    return this.http.post<any>(
-      `${environment.apiUrl}/application/submit-application`,
-      payload
+    // return this.http.post<any>(
+    //   `${environment.apiUrl}/application/submit-application`,
+    //   payload
+    // );
+    return this.http.get<any>(
+      `${environment.apiUrl}/application/add-documents`,
+      { params: { id: payload.appId } }
     );
   }
 }
