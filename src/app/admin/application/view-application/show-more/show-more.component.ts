@@ -1,21 +1,11 @@
-import { Category } from 'src/app/admin/settings/modules-setting/modules-setting.component';
-
 import { Component, Inject, OnInit } from '@angular/core';
-import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import {
   MAT_DIALOG_DATA,
   MatDialog,
   MatDialogRef,
 } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-// import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
-import { AuthenticationService } from 'src/app/shared/services';
-import { ProgressBarService } from 'src/app/shared/services/progress-bar.service';
-import { AdminService } from 'src/app/shared/services/admin.service';
 import { IApplication } from 'src/app/shared/interfaces/IApplication';
-import { ApplyService } from 'src/app/shared/services/apply.service';
-import { ApplicationActionType } from 'src/app/shared/constants/applicationActions';
 import { Staff } from 'src/app/admin/settings/all-staff/all-staff.component';
 import { BehaviorSubject, Subject } from 'rxjs';
 
@@ -34,8 +24,8 @@ export class ShowMoreComponent implements OnInit {
   public tableTitle: string;
 
   appHistoryKeysMappedToHeaders = {
-    actionBy: 'Action By',
-    sentTo: 'Action To',
+    triggeredBy: 'Action By',
+    targetedTo: 'Action To',
     comment: 'Remark',
     date: 'Date',
   };

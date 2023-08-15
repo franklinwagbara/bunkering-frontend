@@ -1,6 +1,6 @@
 <div class="view-application">
   <h2 mat-dialog-title class="text-center title">
-    APPLICATION REFERENCE : {{ application?.appReference }}
+    APPLICATION REFERENCE : {{ application?.reference }}
   </h2>
   <div mat-dialog-content class="content">
     <div class="application-view">
@@ -22,15 +22,15 @@
         </mat-expansion-panel-header>
         <div
           class="card-list"
-          *ngFor="let history of application?.appHistory | firstN : 4"
+          *ngFor="let history of application?.appHistories | firstN : 4"
         >
           <div class="card-item">
             <div class="item-title">Initiator</div>
-            <div class="item-content">{{ history.actionBy }}</div>
+            <div class="item-content">{{ history.triggeredBy }}</div>
           </div>
           <div class="card-item">
             <div class="item-title">Recipient</div>
-            <div class="item-content">{{ history.sentTo }}</div>
+            <div class="item-content">{{ history.targetedTo }}</div>
           </div>
           <div class="card-item">
             <div class="item-title">Remark</div>
@@ -199,7 +199,7 @@
         <p class="show-more" (click)="showMore('applicationDocs')">Show more</p>
       </mat-expansion-panel>
     </div>
-    <div class="application-controls">
+    <div class="application-controls" *ngIf="isStaffDesk">
       <div class="actions">
         <button mat-raised-button color="primary" (click)="action('approve')">
           Approve

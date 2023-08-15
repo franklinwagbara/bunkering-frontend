@@ -57,4 +57,8 @@ export class CompanyService {
   public getCompanyDashboard() {
     return this.http.get<any>(`${API}/dashboard`);
   }
+
+  public getCompanyMessages() {
+    return this.http.get<any>(`${API}/get-all-message`);
+  }
 }

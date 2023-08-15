@@ -10,6 +10,8 @@ import { CompanyService } from 'src/app/shared/services/company.service';
 import { ProgressBarService } from 'src/app/shared/services/progress-bar.service';
 import { environment } from 'src/environments/environment';
 import { PaymentSummary } from '../paymnet-summary/paymentsum.component';
+import { ApplicationService } from 'src/app/shared/services/application.service';
+import { AppSource } from 'src/app/shared/constants/appSource';
 
 @Component({
   templateUrl: 'myapplication.component.html',
@@ -50,7 +52,8 @@ export class MyApplicationComponent implements OnInit {
     private progressbar: ProgressBarService,
     private applicationServer: ApplyService,
     private snackBar: MatSnackBar,
-    private _company: CompanyService
+    private applicationService: ApplicationService,
+    private cd: ChangeDetectorRef
   ) {
     this.genk = gen;
     this.rrr$.subscribe((data) => {
@@ -64,19 +67,21 @@ export class MyApplicationComponent implements OnInit {
 
   getCompanyApplication() {
     this.progressbar.open();
-    this._company.getCompanyApplications().subscribe({
+    this.applicationService.getApplicationsOnDesk().subscribe({
       next: (res) => {
         if (res.success) {
-          this.applications = res.data.data.map((app) => app);
-          this.applications$.next(res.data.data);
+          this.applications = res.data;
+          this.applications$.next(res.data);
 
           //todo: display success dialog
           this.progressbar.close();
+          this.cd.markForCheck();
         }
       },
       error: (error) => {
         //todo: display error dialog
         this.progressbar.close();
+        this.cd.markForCheck();
       },
     });
   }
@@ -86,7 +91,7 @@ export class MyApplicationComponent implements OnInit {
     this.applicationServer.createPayment_RRR(app.id).subscribe({
       next: (res) => {
         if (res.success) {
-          this.rrr$.next(res.data.data);
+          this.rrr$.next(res.data.rrr);
 
           this.router.navigate(['/company/paymentsum/' + app.id]);
 
@@ -96,6 +101,7 @@ export class MyApplicationComponent implements OnInit {
 
           //todo: display success dialog
           this.progressbar.close();
+          this.cd.markForCheck();
         }
       },
       error: (error) => {
@@ -105,6 +111,7 @@ export class MyApplicationComponent implements OnInit {
 
         //todo: display error dialog
         this.progressbar.close();
+        this.cd.markForCheck();
       },
     });
   }
@@ -132,30 +139,35 @@ export class MyApplicationComponent implements OnInit {
   }
 
   uploadDocument(app: Application) {
-    console.log(`/company/upload-document/${app.id}`);
     this.router.navigate([`/company/upload-document/${app.id}`]);
   }
 
-  viewApplication(event: Event, type: string) {
-    const operationConfiguration = {
-      applications: {
-        data: {
-          application: event,
-        },
-        view: ViewApplicationComponent,
-      },
-    };
+  // viewApplication(event: Event, type: string) {
+  //   const operationConfiguration = {
+  //     applications: {
+  //       data: {
+  //         application: event,
+  //       },
+  //       view: ViewApplicationComponent,
+  //     },
+  //   };
 
-    let dialogRef = this.dialog.open(operationConfiguration[type].view, {
-      data: {
-        data: operationConfiguration[type].data,
-      },
-      minHeight: '99vh',
-      minWidth: '94vw',
-    });
+  //   let dialogRef = this.dialog.open(operationConfiguration[type].view, {
+  //     data: {
+  //       data: operationConfiguration[type].data,
+  //     },
+  //     minHeight: '99vh',
+  //     minWidth: '94vw',
+  //   });
 
-    dialogRef.afterClosed().subscribe((res) => {
-      //The need to Refetch data not apparent at the moment
+  //   dialogRef.afterClosed().subscribe((res) => {
+  //     //The need to Refetch data not apparent at the moment
+  //   });
+  // }
+
+  viewApplication(event: any, type: string) {
+    this.router.navigate([`/company/view-application/${event.appId}`], {
+      queryParams: { id: event.appId, appSource: AppSource.Application },
     });
   }
 }

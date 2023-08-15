@@ -52,18 +52,18 @@ export class PaymentSumComponent implements OnInit {
     this.applicationServer.getpaymentbyappId(this.application_id).subscribe({
       next: (res) => {
         if (res.success) {
-          this.paymentSummary = res.data.data;
+          this.paymentSummary = res.data;
           this.rrr$.next(this.paymentSummary.rrr);
-          this.applicationStatus$.next(this.paymentSummary.status);
+          this.applicationStatus$.next(this.paymentSummary.paymentStatus);
 
           this.isPaymentConfirmed$.next(
             this.paymentSummary.rrr &&
-              this.paymentSummary.status === 'PaymentConfirmed'
+              this.paymentSummary.paymentStatus === 'PaymentConfirmed'
           );
 
           this.isPaymentNotComfirmed$.next(
             this.paymentSummary.rrr &&
-              this.paymentSummary.status !== 'PaymentConfirmed'
+              this.paymentSummary.paymentStatus !== 'PaymentConfirmed'
           );
         }
         this.progressbar.close();
@@ -84,10 +84,11 @@ export class PaymentSumComponent implements OnInit {
       this.applicationServer.createPayment_RRR(this.application_id).subscribe({
         next: (res) => {
           if (res.success) {
-            this.rrr$.next(res.data.data);
+            this.rrr$.next(res.data.rrr);
 
             this.isPaymentNotComfirmed$.next(
-              res.data.data && this.paymentSummary.status !== 'PaymentConfirmed'
+              res.data.rrr &&
+                this.paymentSummary.paymentStatus !== 'PaymentConfirmed'
             );
 
             //todo: display success dialog
@@ -107,7 +108,7 @@ export class PaymentSumComponent implements OnInit {
   submitPayment() {
     //this.router.navigate(['/auth/pay-online?rrr=' + this.rrr]);
     window.location.href =
-      environment.apiUrl + '/auth/pay-online?rrr=' + this.rrr;
+      environment.apiUrl + '/payment/pay-online?rrr=' + this.rrr;
   }
 
   uploadDocument() {
@@ -124,6 +125,17 @@ export class PaymentSummary {
   fee: string = '';
   rrr: string = '';
   serviceCharge: string = '';
+  serciveCharge: number;
   totalAmount: string = '';
-  status: string = '';
+  // status: string = '';
+  paymentStatus: string = '';
+
+  applicationType: string;
+  accreditationFee: number;
+  administrativeFee: number;
+  applicationFee: number;
+  facilityType: string;
+  inspectionFee: number;
+  total: number;
+  vesselLicenseFee: number;
 }

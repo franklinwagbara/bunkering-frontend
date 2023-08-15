@@ -273,24 +273,6 @@ export class AdminService {
     );
   }
 
-  getAllDocs() {
-    return this.http
-      .get<any>(`${environment.apiUrl}/AppStageDocuments/getall`)
-      .pipe(retry(this.num));
-  }
-
-  getAllPermitStageDocs() {
-    return this.http
-      .get<any>(`${environment.apiUrl}/Library/GetAll-Facility-Type-Doc`)
-      .pipe(retry(this.num));
-  }
-
-  deletePermitStageDocs(id: number) {
-    return this.http
-      .delete(`${environment.apiUrl}/Library/Delete-FacilityType-Doc?id=${id}`)
-      .pipe(retry(this.num));
-  }
-
   getAppTypes() {
     return this.http
       .get<any>(
@@ -346,26 +328,6 @@ export class AdminService {
   getApps() {
     return this.http
       .get<any>(`${environment.apiUrl}/Application/all-applications`)
-      .pipe(retry(this.num));
-  }
-
-  createApplicationProcess(model: IApplicationProcess) {
-    return this.http
-      .post<any>(`${environment.apiUrl}/configuration/add-app-process`, model)
-      .pipe(retry(this.num));
-  }
-
-  getApplicationProcesses() {
-    return this.http
-      .get<any>(`${environment.apiUrl}/configuration/all-processes`)
-      .pipe(retry(this.num));
-  }
-
-  deleteApplicationProcess(id: number) {
-    return this.http
-      .delete<any>(
-        `${environment.apiUrl}/configuration/delete-application-process/${id}`
-      )
       .pipe(retry(this.num));
   }
 

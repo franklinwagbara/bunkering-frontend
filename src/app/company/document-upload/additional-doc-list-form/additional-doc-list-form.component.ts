@@ -123,7 +123,6 @@ export class AdditionalDocListFormComponent implements OnInit {
       ];
     });
 
-    console.log('newdoctypes...', newDocTypes);
     const additionalDocuments = newDocTypes.map((d) => {
       const doc: DocumentInfo = new DocumentInfo();
       doc.docId = d.id;

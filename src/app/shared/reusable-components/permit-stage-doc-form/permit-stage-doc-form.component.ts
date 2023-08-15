@@ -26,6 +26,11 @@ import { AppException } from '../../exceptions/AppException';
 import { AdminService } from '../../services/admin.service';
 import { ListItem } from 'ng-multiselect-dropdown/multiselect.model';
 import { ProgressBarService } from '../../services/progress-bar.service';
+import {
+  IApplicationType,
+  IFacilityType,
+} from 'src/app/company/apply/new-application/new-application.component';
+import { AppStageDocumentService } from '../../services/app-stage-document.service';
 
 @Component({
   selector: 'app-permit-stage-doc-form',
@@ -41,12 +46,15 @@ export class PermitStageDocFormComponent implements OnInit {
   public appTypes: AppType[];
   public selectedDocs = [];
   public docsDropdownSettings: IDropdownSettings = {};
+  // public facilityTypes: IFacilityType[];
+  public applicationTypes: IApplicationType[];
+  public vesselTypes: IVesselType[];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<PermitStageDocFormComponent>,
     private snackBar: MatSnackBar,
-    private adminServe: AdminService,
+    private appDocService: AppStageDocumentService,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
     private progressBar: ProgressBarService
@@ -54,6 +62,9 @@ export class PermitStageDocFormComponent implements OnInit {
     this.categories = data.data.categories;
     this.permitStages = data.data.permitStages;
     this.phases = data.data.phases;
+    // this.facilityTypes = data.data.facilityTypes;
+    this.vesselTypes = data.data.vesselTypes;
+    this.applicationTypes = data.data.applicationTypes;
 
     this.docs = data.data.docs;
     this.appTypes = data.data.appTypes || [
@@ -62,9 +73,9 @@ export class PermitStageDocFormComponent implements OnInit {
     ];
 
     this.form = this.formBuilder.group({
-      phaseStageId: ['', Validators.required],
-      appTypeId: ['', Validators.required],
-      docId: formBuilder.array([], Validators.required),
+      vesselTypeId: ['', Validators.required],
+      applicationTypeId: ['', Validators.required],
+      documentTypeId: formBuilder.array([], Validators.required),
       isMandatory: [false, Validators.required],
       status: [false, Validators.required],
     });
@@ -88,7 +99,7 @@ export class PermitStageDocFormComponent implements OnInit {
   createPermitStageDoc() {
     this.progressBar.open();
 
-    this.adminServe.createStageDocs(this.form.value).subscribe({
+    this.appDocService.addDoc(this.form.value).subscribe({
       next: (res) => {
         if (res.success) {
           this.snackBar.open(
@@ -113,20 +124,29 @@ export class PermitStageDocFormComponent implements OnInit {
     });
   }
 
-  onItemSelect(event: ListItem) {
-    (this.form.get('docId') as FormArray).push(new FormControl(event.id));
+  onItemSelect(event: ListItem | any) {
+    (this.form.get('documentTypeId') as FormArray).push(
+      new FormControl(event.id)
+    );
   }
 
-  onSelectAll(event: ListItem[]) {
+  onSelectAll(event: (ListItem | any)[]) {
     event.forEach((item) => {
-      (this.form.get('docId') as FormArray).push(new FormControl(item.id));
+      (this.form.get('documentTypeId') as FormArray).push(
+        new FormControl(item.id)
+      );
     });
   }
 
-  onDeSelect(event: ListItem) {
+  onDeSelect(event: ListItem | any) {
     const targetIndex = (
-      (this.form.get('docId') as FormArray).value as Array<number>
+      (this.form.get('documentTypeId') as FormArray).value as Array<number>
     ).indexOf(event.id as number);
-    (this.form.get('docId') as FormArray).removeAt(targetIndex);
+    (this.form.get('documentTypeId') as FormArray).removeAt(targetIndex);
   }
+}
+
+export interface IVesselType {
+  id: number;
+  name: string;
 }
