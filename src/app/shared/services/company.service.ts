@@ -23,7 +23,42 @@ export class CompanyService {
     );
   }
 
+  public saveCompanyProfile(data) {
+    return this.http.post<any>(
+      `${environment.apiUrl}/Company/update-profile`,
+      data
+    );
+  }
+
+  public getCompanyProfile(email) {
+    return this.http.get<any>(`${environment.apiUrl}/Company/get-profile`, {
+      params: { email: email },
+    });
+  }
+
+  getCountries() {
+    return this.http.get<any>(`${environment.apiUrl}/Library/Countries`).pipe(
+      retry(this.num),
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  getStates() {
+    return this.http.get<any>(`${environment.apiUrl}/Library/states`).pipe(
+      retry(this.num),
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
   public getCompanyDashboard() {
     return this.http.get<any>(`${API}/dashboard`);
+  }
+
+  public getCompanyMessages() {
+    return this.http.get<any>(`${API}/get-all-message`);
   }
 }

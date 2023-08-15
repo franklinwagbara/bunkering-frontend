@@ -14,9 +14,21 @@ export class LibaryService {
     return this.http.get<any>(`${api}/facilitytypes`);
   }
 
+  public getVesselTypes() {
+    return this.http.get<any>(`${api}/vesseltype`);
+  }
+
+  getAllFacilityTypeDocs() {
+    return this.http.get<any>(`${api}/GetAll-Facility-Type-Doc`);
+  }
+
+  public getApplicationTypes() {
+    return this.http.get<any>(`${api}/applicationTypes`);
+  }
+
   public getLGAByStateId(id: number) {
     return this.http.get<any>(`${api}/LgaByStateId`, {
-      params: { id },
+      params: { stateId: id },
     });
   }
 
@@ -26,5 +38,21 @@ export class LibaryService {
 
   public getStates() {
     return this.http.get<any>(`${api}/states`);
+  }
+
+  public getProducts() {
+    return this.http.get<any>(`${api}/getProducts`);
+  }
+
+  public getRoles() {
+    return this.http.get<any>(`${api}/Roles`);
+  }
+
+  public getAppActions() {
+    return this.http.get<any>(`${api}/getAllAppActions`);
+  }
+
+  public getAppStatuses() {
+    return this.http.get<any>(`${api}/getAppStatus`);
   }
 }

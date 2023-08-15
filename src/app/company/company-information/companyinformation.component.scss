@@ -7,5 +7,26 @@
 // }
 
 .active {
-  background-color: rgb(234, 229, 229);
+  background-color: rgb(4, 92, 4);
+  font-size: 18px;
+  font-weight: 500;
+}
+.nav {
+  margin-top: 20px;
+  margin-left: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+li {
+  border: 1px solid green;
+  border-radius: 20px;
+}
+
+.active a {
+  text-decoration: none;
+  color: white;
 }

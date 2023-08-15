@@ -32,11 +32,12 @@ export class AllStaffComponent implements OnInit {
     name: 'Name',
     // lastName: 'Last Name',
     email: 'Email',
-    phoneNo: 'Phone Number',
+    phoneNumber: 'Phone Number',
     role: 'Role',
     office: 'Office',
     appCount: 'Applications on Desk',
-    status: 'Status',
+    isActive: 'Status',
+    createdBy: 'Created By',
   };
 
   constructor(

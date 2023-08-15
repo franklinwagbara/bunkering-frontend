@@ -16,6 +16,11 @@ import { IStatus } from '../../interfaces/IStatus';
 import { AdminService } from '../../services/admin.service';
 import { ProgressBarService } from '../../services/progress-bar.service';
 import { PermitStageDocFormComponent } from '../permit-stage-doc-form/permit-stage-doc-form.component';
+import { ApplicationProcessesService } from '../../services/application-processes.service';
+import {
+  IApplicationType,
+  IFacilityType,
+} from 'src/app/company/apply/new-application/new-application.component';
 
 const RATES = [
   '0%',
@@ -56,6 +61,8 @@ export class ApplicationProcessFormComponent {
   public actions: IAction[];
   public statuses: IStatus[];
   public rates: string[] = RATES;
+  public facilityTypes: IFacilityType[];
+  public applicationTypes: IApplicationType[];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -64,7 +71,8 @@ export class ApplicationProcessFormComponent {
     private adminServe: AdminService,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
-    private progressBar: ProgressBarService
+    private progressBar: ProgressBarService,
+    private processFlow: ApplicationProcessesService
   ) {
     this.permitStages = data.data.permitStages;
     this.branches = data.data.branches;
@@ -72,18 +80,30 @@ export class ApplicationProcessFormComponent {
     this.actions = data.data.actions;
     this.statuses = data.data.statuses;
     this.applicationProccess = data.data?.applicationProcess;
-
-    console.log('application process....', this.applicationProccess);
+    this.facilityTypes = data.data?.facilityTypes;
+    this.applicationTypes = data.data?.applicationTypes;
 
     this.form = this.formBuilder.group({
-      permitStageId: [
+      // permitStageId: [
+      //   this.applicationProccess
+      //     ? this.applicationProccess.permitStageId
+      //     : 'none',
+      //   Validators.required,
+      // ],
+      // branchId: [
+      //   this.applicationProccess ? this.applicationProccess.branchId : 'none',
+      //   Validators.required,
+      // ],
+      facilityTypeId: [
         this.applicationProccess
-          ? this.applicationProccess.permitStageId
+          ? this.applicationProccess.facilityTypeId
           : 'none',
         Validators.required,
       ],
-      branchId: [
-        this.applicationProccess ? this.applicationProccess.branchId : 'none',
+      applicationTypeId: [
+        this.applicationProccess
+          ? this.applicationProccess.applicationTypeId
+          : 'none',
         Validators.required,
       ],
       triggeredByRole: [
@@ -119,10 +139,10 @@ export class ApplicationProcessFormComponent {
     this.dialogRef.close();
   }
 
-  createPermitStageDoc() {
+  createProcessFlow() {
     this.progressBar.open();
 
-    this.adminServe.createApplicationProcess(this.form.value).subscribe({
+    this.processFlow.createApplicationProcess(this.form.value).subscribe({
       next: (res) => {
         if (res.success) {
           this.snackBar.open(

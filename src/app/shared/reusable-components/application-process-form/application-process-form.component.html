@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>Add New Application Process</h1>
 <div mat-dialog-content class="min-w-[500px]">
-  <form [formGroup]="form" (ngSubmit)="createPermitStageDoc()">
-    <div class="fomr-group" style="margin-bottom: 10px">
+  <form [formGroup]="form" (ngSubmit)="createProcessFlow()">
+    <!-- <div class="fomr-group" style="margin-bottom: 10px">
       <label>Permit Stage</label>
       <select
         name="permitStageId"
@@ -45,6 +45,62 @@
       >
         Application Type is required!
       </div>
+    </div> -->
+
+    <div class="fomr-group" style="margin-bottom: 10px">
+      <label>Facility Type</label>
+      <select
+        name="facilityTypeId"
+        formControlName="facilityTypeId"
+        class="form-control"
+      >
+        <option value="none" selected disabled hidden>
+          --Select from options --
+        </option>
+        <option
+          *ngFor="let facilityType of facilityTypes"
+          [ngValue]="facilityType.id"
+        >
+          {{ facilityType.name }}
+        </option>
+      </select>
+      <div
+        *ngIf="
+          form.get('facilityTypeId')?.touched &&
+          form.get('facilityTypeId')?.invalid
+        "
+        class="alert alert-danger"
+      >
+        (Facility Type) is required!
+      </div>
+    </div>
+
+    <div class="fomr-group" style="margin-bottom: 10px">
+      <label>Application Type</label>
+      <select
+        name="applicationTypeId"
+        formControlName="applicationTypeId"
+        class="form-control"
+      >
+        <option value="none" selected disabled hidden>
+          --Select from options --
+        </option>
+        <option
+          *ngFor="let applicationType of applicationTypes"
+          [ngValue]="applicationType.id"
+        >
+          {{ applicationType.name }}
+        </option>
+      </select>
+      <div
+        *ngIf="
+          form.get('applicationTypeId')?.touched &&
+          form.get('applicationTypeId')?.invalid
+        "
+        class="alert alert-danger"
+      >
+        Application Type is required!
+      </div>
     </div>
 
     <div class="fomr-group" style="margin-bottom: 10px">
@@ -57,7 +113,7 @@
         <option value="none" selected disabled hidden>
           --Select from options --
         </option>
-        <option *ngFor="let role of roles" [ngValue]="role.name">
+        <option *ngFor="let role of roles" [ngValue]="role.id">
           {{ role.name }}
         </option>
       </select>
@@ -82,7 +138,7 @@
         <option value="none" selected disabled hidden>
           --Select from options --
         </option>
-        <option *ngFor="let role of roles" [ngValue]="role.name">
+        <option *ngFor="let role of roles" [ngValue]="role.id">
           {{ role.name }}
         </option>
       </select>
@@ -178,7 +234,7 @@
   <button mat-button mat-dialog-close (click)="onClose()">Close</button>
   <button
     mat-raised-button
-    (click)="createPermitStageDoc()"
+    (click)="createProcessFlow()"
     [disabled]="form.invalid"
   >
     Create

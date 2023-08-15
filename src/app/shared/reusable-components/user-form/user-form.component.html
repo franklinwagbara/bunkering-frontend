@@ -64,13 +64,13 @@
     <div class="fomr-group" style="margin-bottom: 10px">
       <label>Phone Number</label>
       <input
-        name="phoneNo"
-        formControlName="phoneNo"
+        name="phone"
+        formControlName="phone"
         class="form-control"
         [attr.disabled]="true"
       />
       <div
-        *ngIf="form.get('phoneNo')?.touched && form.get('phoneNo')?.invalid"
+        *ngIf="form.get('phone')?.touched && form.get('phone')?.invalid"
         class="alert alert-danger"
       >
         Phone Number is required!
@@ -79,13 +79,13 @@
 
     <div class="fomr-group" style="margin-bottom: 10px">
       <label>User Role</label>
-      <select name="role" formControlName="role" class="form-control">
-        <option *ngFor="let ut of roles" [ngValue]="ut.name">
+      <select name="roleId" formControlName="roleId" class="form-control">
+        <option *ngFor="let ut of roles" [ngValue]="ut.id">
           {{ ut.name }}
         </option>
       </select>
       <div
-        *ngIf="form.get('role')?.touched && form.get('role')?.invalid"
+        *ngIf="form.get('roleId')?.touched && form.get('roleId')?.invalid"
         class="alert alert-danger"
       >
         User role is required!
@@ -124,7 +124,7 @@
 
     <div class="fomr-group" style="margin-bottom: 10px">
       <label>
-        <input name="status" formControlName="status" type="checkbox" />
+        <input name="isActive" formControlName="isActive" type="checkbox" />
         Active?
       </label>
     </div>

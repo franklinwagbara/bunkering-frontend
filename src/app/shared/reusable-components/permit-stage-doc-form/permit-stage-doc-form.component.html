@@ -2,38 +2,45 @@
 <div mat-dialog-content class="w-[1000px] h-screen">
   <form [formGroup]="form" (ngSubmit)="createPermitStageDoc()">
     <div class="fomr-group" style="margin-bottom: 10px">
-      <label>Phase Stage</label>
+      <label>Vessel Type</label>
       <select
-        name="phaseStageId"
-        formControlName="phaseStageId"
+        name="vesselTypeId"
+        formControlName="vesselTypeId"
         class="form-control"
       >
         <option
-          *ngFor="let permitStage of permitStages"
-          [ngValue]="permitStage.id"
+          *ngFor="let vesselType of vesselTypes"
+          [ngValue]="vesselType.id"
         >
-          {{ permitStage.name }}
+          {{ vesselType.name }}
         </option>
       </select>
       <div
         *ngIf="
-          form.get('phaseStageId')?.touched && form.get('phaseStageId')?.invalid
+          form.get('vesselTypeId')?.touched && form.get('vesselTypeId')?.invalid
         "
         class="alert alert-danger"
       >
-        Phase Stage is required!
+        Vessel Type is required!
       </div>
     </div>
 
     <div class="fomr-group" style="margin-bottom: 10px">
       <label>Application Type</label>
-      <select name="appTypeId" formControlName="appTypeId" class="form-control">
-        <option *ngFor="let at of appTypes" [ngValue]="at.id">
+      <select
+        name="applicationTypeId"
+        formControlName="applicationTypeId"
+        class="form-control"
+      >
+        <option *ngFor="let at of applicationTypes" [ngValue]="at.id">
           {{ at.name }}
         </option>
       </select>
       <div
-        *ngIf="form.get('appTypeId')?.touched && form.get('appTypeId')?.invalid"
+        *ngIf="
+          form.get('applicationTypeId')?.touched &&
+          form.get('applicationTypeId')?.invalid
+        "
         class="alert alert-danger"
       >
         Application Type is required!
@@ -46,7 +53,7 @@
         [placeholder]="'Select document(s)'"
         [settings]="docsDropdownSettings"
         [data]="docs"
-        formArrayName="docId"
+        formArrayName="documentTypeId"
         (onSelect)="onItemSelect($event)"
         (onSelectAll)="onSelectAll($event)"
         (onDeSelect)="onDeSelect($event)"

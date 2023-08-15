@@ -1,4 +1,9 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -6,10 +11,10 @@ import { forkJoin } from 'rxjs';
 import { AppSource } from 'src/app/shared/constants/appSource';
 import { IApplication } from 'src/app/shared/interfaces/IApplication';
 import { AdminService } from 'src/app/shared/services/admin.service';
-import { ApplyService } from 'src/app/shared/services/apply.service';
 import { ProgressBarService } from 'src/app/shared/services/progress-bar.service';
 import { SpinnerService } from 'src/app/shared/services/spinner.service';
 import { Category } from '../settings/modules-setting/modules-setting.component';
+import { ApplicationService } from 'src/app/shared/services/application.service';
 
 @Component({
   selector: 'app-application',
@@ -25,24 +30,24 @@ export class ApplicationComponent implements OnInit, AfterViewInit {
   };
 
   public applicationKeysMappedToHeaders = {
-    appReference: 'Reference Number',
+    reference: 'Reference Number',
     companyName: 'Company Name',
-    appType: 'Application Type',
-    addedDate: 'Initiation Date',
+    // appType: 'Application Type',
+    createdDate: 'Initiation Date',
     submittedDate: 'Submission Date',
-    permitType: 'Permit Type',
-    stateName: 'State',
-    location: 'Location / Address',
+    facilityType: 'Facility Type',
+    state: 'State',
+    facilityAddress: 'Location / Address',
   };
 
   constructor(
-    private adminService: AdminService,
-    private applicationService: ApplyService,
+    private applicationService: ApplicationService,
     public snackBar: MatSnackBar,
     public dialog: MatDialog,
     private progressBar: ProgressBarService,
     private spinner: SpinnerService,
-    private router: Router
+    private router: Router,
+    private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -50,16 +55,17 @@ export class ApplicationComponent implements OnInit, AfterViewInit {
     this.spinner.open();
 
     forkJoin([
-      this.adminService.getApps(),
-      this.adminService.getModule(),
+      this.applicationService.getAllApplications(),
+      // this.adminService.getModule(),
     ]).subscribe({
       next: (res) => {
-        if (res[0].success) this.applications = res[0].data.data;
+        if (res[0].success) this.applications = res[0].data;
 
-        if (res[1].success) this.categories = res[1].data.data;
+        // if (res[1].success) this.categories = res[1].data;
 
         // this.progressBar.close();
         this.spinner.close();
+        this.cd.markForCheck();
       },
       error: (error) => {
         this.snackBar.open(
@@ -72,16 +78,18 @@ export class ApplicationComponent implements OnInit, AfterViewInit {
 
         // this.progressBar.close();
         this.spinner.close();
+        this.cd.markForCheck();
       },
     });
   }
 
   ngAfterViewInit(): void {
-    this.categories = [...this.categories];
+    // this.categories = [...this.categories];
   }
 
   onViewData(event: any, type: string) {
-    this.router.navigate([`/admin/view-application/${event.id}`], {
+    debugger;
+    this.router.navigate([`/admin/view-application/${event.appId}`], {
       queryParams: { id: event.id, appSource: AppSource.Application },
     });
   }

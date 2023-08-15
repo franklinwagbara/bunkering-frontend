@@ -16,6 +16,7 @@ import { DocumentUploadComponent } from './document-upload/document-upload.compo
 import { TestComponent } from './test/test.component';
 import { NewApplicationComponent } from './apply/new-application/new-application.component';
 import { RenewApplicationComponent } from './apply/renew-application/renew-application.component';
+import { ViewApplicationComponent } from '../admin/application/view-application/view-application.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
@@ -33,6 +34,7 @@ const routes: Routes = [
   { path: 'upload-document/:id', component: DocumentUploadComponent },
   { path: 'new', component: NewApplicationComponent },
   { path: 'renew', component: RenewApplicationComponent },
+  { path: 'view-application/:id', component: ViewApplicationComponent },
   // { path: 'test', component: TestComponent },
 
   {

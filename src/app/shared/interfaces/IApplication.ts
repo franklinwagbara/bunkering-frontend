@@ -7,34 +7,44 @@ import { ISchedule } from './ISchedule';
 export interface IApplication {
   id: number;
   addedDate: Date;
-  appHistory: IAppHistory[];
-  appReference: string;
+  appHistories: IAppHistory[];
+  reference: string;
   appType: string;
-  applicationforms: IApplicationForm[];
-  category: string;
-  categoryCode: string;
-  categoryId: string;
   companyName: string;
-  companyEmail: string;
-  companyAddress: string;
-  currentDesk: string;
-  currentUser: string;
-  extraPayments: IExtraPayment[];
+  email: string;
   facilityAddress: string;
+  currentDesk: string;
+  companyAddress: string;
   facilityName: string;
+  facilityType: string;
+  lga: string;
+  paymentDescription: string;
+  paymnetDate: string;
+  paymnetStatus: string;
+  currentUser: string;
+  schedules: ISchedule[];
+  state: string;
+  status: boolean;
+  submittedDate: string;
+  totalAmount: number;
+  createdDate: string;
+
+  extraPayments: IExtraPayment[];
   gpsCordinates: string;
   inspectionForm: IInspectionForm[];
   permitType: string;
   rrr: string;
-  schedules: ISchedule[];
-  submittedDate: string;
   lgaId: number;
   location: string;
   phaseName: string;
   phaseStageId: number;
   stateId: number;
-  status: boolean;
   applicationDocs: IDoc[];
+
+  applicationforms: IApplicationForm[];
+  category: string;
+  categoryCode: string;
+  categoryId: string;
 }
 
 export interface IDoc {
