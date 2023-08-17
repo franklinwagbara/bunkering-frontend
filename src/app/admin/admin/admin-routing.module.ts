@@ -16,6 +16,7 @@ import { MyDeskComponent } from '../desk/my-desk/my-desk.component';
 import { ViewApplicationComponent } from '../application/view-application/view-application.component';
 import { TestComponent } from 'src/app/company/test/test.component';
 import { ApplicationReportComponent } from './application-report/application-report.component';
+import { PaymentReportComponent } from './payment-report/payment-report.component';
 
 const routes: Routes = [
   { path: '', component: AdminComponent },
@@ -33,6 +34,7 @@ const routes: Routes = [
   { path: 'view-application/:id', component: ViewApplicationComponent },
   { path: 'test', component: TestComponent },
   { path: 'application-report', component: ApplicationReportComponent },
+  { path: 'payment-report', component: PaymentReportComponent },
 ];
 
 @NgModule({

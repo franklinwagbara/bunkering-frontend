@@ -35,10 +35,17 @@ import { FirstNPipe } from './application/view-application/first-n.pipe';
 import { ShowMoreComponent } from './application/view-application/show-more/show-more.component';
 import { PhasedocumentsComponent } from './settings/phasedocuments/phasedocuments.component';
 import { FilterleftComponent } from './admin/application-report/filterleft/filterleft.component';
+import { PaymentFilterleftComponent } from './admin/payment-report/payment-filterleft/payment-filterleft.component';
 import { FilterrightComponent } from './admin/application-report/filterright/filterright.component';
+import { PaymentFilterrightComponent } from './admin/payment-report/payment-filterright/payment-filterright.component';
 import { ExtrasComponent } from './admin/application-report/extras/extras.component';
+import { PaymentExtrasComponent } from './admin/payment-report/payment-extras/payments-extras.component';
+import { PaymentGraphModalComponent } from './admin/payment-report/payment-graph/payment-graph-modal.component';
 import { GraphModalComponent } from './admin/application-report/graph-modal/graph-modal.component';
 import { ApplicationReportComponent } from './admin/application-report/application-report.component';
+import { PaymentReportComponent } from './admin/payment-report/payment-report.component';
+import { ApplicationReportBarChartComponent } from './admin/application-report/bar-chart/bar-chart.component';
+import { PaymentReportBarChartComponent } from './admin/payment-report/bar-chart/bar-chart.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +72,13 @@ import { ApplicationReportComponent } from './admin/application-report/applicati
     ExtrasComponent,
     FilterrightComponent,
     ApplicationReportComponent,
+    PaymentReportComponent,
+    PaymentFilterleftComponent,
+    PaymentFilterrightComponent,
+    PaymentGraphModalComponent,
+    PaymentExtrasComponent,
+    ApplicationReportBarChartComponent,
+    PaymentReportBarChartComponent,
   ],
 
   imports: [
