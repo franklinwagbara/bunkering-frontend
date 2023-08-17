@@ -166,8 +166,8 @@ export class MyApplicationComponent implements OnInit {
   // }
 
   viewApplication(event: any, type: string) {
-    this.router.navigate([`/company/view-application/${event.appId}`], {
-      queryParams: { id: event.appId, appSource: AppSource.Application },
+    this.router.navigate([`/company/view-application/${event.id}`], {
+      queryParams: { id: event.id, appSource: AppSource.Application },
     });
   }
 }
