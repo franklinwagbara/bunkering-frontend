@@ -18,14 +18,21 @@ export class ApplyService {
 
   processApplication(model: {
     applicationId: number;
-    currentUserId: string;
     action: string;
-    delegatedUserId: string;
     comment: string;
+    // currentUserId: string;
+    // delegatedUserId: string;
   }) {
     return this.http.post<any>(
-      `${environment.apiUrl}/application/process-application`,
-      model
+      `${environment.apiUrl}/application/process`,
+      model,
+      {
+        params: {
+          id: model.applicationId,
+          act: model.action,
+          comment: model.comment,
+        },
+      }
     );
   }
 

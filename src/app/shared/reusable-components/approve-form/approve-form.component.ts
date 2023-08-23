@@ -16,6 +16,7 @@ import { IApplication } from '../../interfaces/IApplication';
 import { ApplyService } from '../../services/apply.service';
 import { ApplicationActionType } from '../../constants/applicationActions';
 import { Staff } from 'src/app/admin/settings/all-staff/all-staff.component';
+import { PopupService } from '../../services/popup.service';
 
 @Component({
   selector: 'app-approve-form',
@@ -32,10 +33,10 @@ export class ApproveFormComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private snackBar: MatSnackBar,
     private formBuilder: FormBuilder,
-    private dialog: MatDialog,
     private appService: ApplyService,
     private progressBarService: ProgressBarService,
-    private auth: AuthenticationService
+    private auth: AuthenticationService,
+    private popup: PopupService
   ) {
     this.application = data.data.application;
 
@@ -56,14 +57,10 @@ export class ApproveFormComponent implements OnInit {
       },
 
       error: (error) => {
-        this.snackBar.open(
+        this.popup.open(
           'Operation failed! Could not user information!',
-          null,
-          {
-            panelClass: ['error'],
-          }
+          'error'
         );
-
         this.progressBarService.close();
       },
     });
@@ -75,22 +72,19 @@ export class ApproveFormComponent implements OnInit {
 
   approve() {
     this.progressBarService.open();
-
+    debugger;
     const model = {
       applicationId: this.application.id,
-      currentUserId: this.currentUser.id,
       action: ApplicationActionType.Approve,
-      delegatedUserId: '',
       comment: this.form.controls['comment'].value,
+      // currentUserId: this.currentUser.id,
+      // delegatedUserId: '',
     };
 
     this.appService.processApplication(model).subscribe({
       next: (res) => {
         if (res.success) {
-          this.snackBar.open('Operation was successfully!', null, {
-            panelClass: ['success'],
-          });
-
+          this.popup.open('Operation was successfully!', 'success');
           this.dialogRef.close();
         }
 
@@ -98,12 +92,9 @@ export class ApproveFormComponent implements OnInit {
       },
 
       error: (error) => {
-        this.snackBar.open(
-          'Operation failed! Could not perform operation!',
-          null,
-          {
-            panelClass: ['error'],
-          }
+        this.popup.open(
+          'Operation failed! Could not user information!',
+          'error'
         );
 
         this.progressBarService.close();

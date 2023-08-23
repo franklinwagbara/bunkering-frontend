@@ -111,7 +111,6 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit {
         },
       });
     }
-
     if (
       this.enableUploadDocument ||
       this.enableConfirmPayment ||

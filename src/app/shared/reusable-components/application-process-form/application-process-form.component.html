@@ -47,7 +47,7 @@
       </div>
     </div> -->
 
-    <div class="fomr-group" style="margin-bottom: 10px">
+    <!-- <div class="fomr-group" style="margin-bottom: 10px">
       <label>Facility Type</label>
       <select
         name="facilityTypeId"
@@ -68,6 +68,33 @@
         *ngIf="
           form.get('facilityTypeId')?.touched &&
           form.get('facilityTypeId')?.invalid
+        "
+        class="alert alert-danger"
+      >
+        (Facility Type) is required!
+      </div>
+    </div> -->
+
+    <div class="fomr-group" style="margin-bottom: 10px">
+      <label>Vessel Type</label>
+      <select
+        name="vesselTypeId"
+        formControlName="vesselTypeId"
+        class="form-control"
+      >
+        <option value="none" selected disabled hidden>
+          --Select from options --
+        </option>
+        <option
+          *ngFor="let vesselType of vesselTypes"
+          [ngValue]="vesselType.id"
+        >
+          {{ vesselType.name }}
+        </option>
+      </select>
+      <div
+        *ngIf="
+          form.get('vesselTypeId')?.touched && form.get('vesselTypeId')?.invalid
         "
         class="alert alert-danger"
       >

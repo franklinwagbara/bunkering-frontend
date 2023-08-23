@@ -8,6 +8,7 @@ import { ProgressBarService } from 'src/app/shared/services/progress-bar.service
 import { environment } from 'src/environments/environment';
 
 import { AuthenticationService, GenericService } from '../../shared/services';
+import { PopupService } from 'src/app/shared/services/popup.service';
 
 @Component({
   templateUrl: 'paymentsum.component.html',
@@ -30,7 +31,7 @@ export class PaymentSumComponent implements OnInit {
     private route: ActivatedRoute,
     private progressbar: ProgressBarService,
     private applicationServer: ApplyService,
-    private snackBar: MatSnackBar,
+    private popUp: PopupService,
     private cd: ChangeDetectorRef
   ) {
     this.genk = gen;
@@ -58,12 +59,12 @@ export class PaymentSumComponent implements OnInit {
 
           this.isPaymentConfirmed$.next(
             this.paymentSummary.rrr &&
-              this.paymentSummary.paymentStatus === 'PaymentConfirmed'
+              this.paymentSummary.paymentStatus === 'PaymentCompleted'
           );
 
           this.isPaymentNotComfirmed$.next(
             this.paymentSummary.rrr &&
-              this.paymentSummary.paymentStatus !== 'PaymentConfirmed'
+              this.paymentSummary.paymentStatus !== 'PaymentCompleted'
           );
         }
         this.progressbar.close();
@@ -91,13 +92,14 @@ export class PaymentSumComponent implements OnInit {
                 this.paymentSummary.paymentStatus !== 'PaymentConfirmed'
             );
 
-            //todo: display success dialog
+            this.popUp.open('RRR was generated successfully!', 'success');
             this.progressbar.close();
             this.cd.markForCheck();
           }
         },
         error: (error) => {
           //todo: display error dialog
+          this.popUp.open('RRR generation failed!', 'error');
           this.progressbar.close();
           this.cd.markForCheck();
         },

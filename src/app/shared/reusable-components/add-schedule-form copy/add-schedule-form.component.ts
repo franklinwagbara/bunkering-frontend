@@ -15,6 +15,7 @@ import { Staff } from 'src/app/admin/settings/all-staff/all-staff.component';
 import { convertTimeToMilliseconds } from 'src/app/helpers/convertTimeToMilliseconds';
 import { AdminService } from '../../services/admin.service';
 import { ISchedule } from '../../interfaces/ISchedule';
+import { ScheduleService } from '../../services/schedule.service';
 
 const TypesOfAppointment = ['Inspection', 'Meeting', 'Preparation'];
 const Venue = ['Application field location', 'Commission Office'];
@@ -39,8 +40,7 @@ export class AddScheduleFormComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private snackBar: MatSnackBar,
     private formBuilder: FormBuilder,
-    private dialog: MatDialog,
-    private appService: ApplyService,
+    private scheduleService: ScheduleService,
     private progressBarService: ProgressBarService,
     private auth: AuthenticationService,
     private adminService: AdminService
@@ -116,14 +116,15 @@ export class AddScheduleFormComponent implements OnInit {
     const model = {
       id: 0,
       applicationId: this.application.id,
-      scheduleBy: this.currentUser.id,
-      inspectionDate: this.form.controls['selectedDate'].value,
-      comment: this.form.controls['comment'].value,
-      venue: this.form.controls['venue'].value,
-      typeOfAppoinment: this.form.controls['typeOfAppoinment'].value,
+      scheduleType: this.form.controls['typeOfAppoinment'].value,
+      scheduledDate: this.form.controls['selectedDate'].value,
+      scheduleMessage: this.form.controls['comment'].value,
+      // approvalMessage: this.form.controls['comment'].value,
+      // venue: this.form.controls['venue'].value,
+      // scheduleBy: this.currentUser.id,
     };
 
-    this.adminService.addSchedule(model).subscribe({
+    this.scheduleService.addSchedule(model).subscribe({
       next: (res) => {
         if (res.success) {
           this.snackBar.open('Operation was successfully!', null, {
@@ -166,14 +167,18 @@ export class AddScheduleFormComponent implements OnInit {
     const model = {
       id: this.schedule.id,
       applicationId: this.application.id,
-      scheduleBy: this.currentUser.id,
-      inspectionDate: this.form.controls['selectedDate'].value,
-      comment: this.form.controls['comment'].value,
-      venue: this.form.controls['venue'].value,
-      typeOfAppoinment: this.form.controls['typeOfAppoinment'].value,
+      scheduleType: this.form.controls['typeOfAppoinment'].value,
+      scheduledDate: this.form.controls['selectedDate'].value,
+      scheduleMessage: this.form.controls['comment'].value,
+
+      // typeOfAppoinment: this.form.controls['typeOfAppoinment'].value,
+      // venue: this.form.controls['venue'].value,
+      // comment: this.form.controls['comment'].value,
+      // inspectionDate: this.form.controls['selectedDate'].value,
+      // scheduleBy: this.currentUser.id,
     };
 
-    this.adminService.addSchedule(model).subscribe({
+    this.scheduleService.addSchedule(model).subscribe({
       next: (res) => {
         if (res.success) {
           this.snackBar.open('Operation was successfully!', null, {
@@ -208,11 +213,22 @@ export class AddScheduleFormComponent implements OnInit {
 export interface Schedule {
   id: number;
   applicationId: number;
-  scheduleBy: string;
-  inspectionDate: string;
-  comment: string;
-  venue: string;
-  typeOfAppoinment: string;
   contactPerson?: string;
   contactPhone?: string;
+  venue?: string;
+  // scheduleBy: string;
+  // inspectionDate: string;
+  // comment: string;
+  // typeOfAppoinment: string;
+
+  scheduleType: string;
+  scheduledDate: string;
+  scheduleMessage: string;
+  approvalMessage?: string;
+  isAccepted?: boolean;
+  clientMessage?: string;
+  contactName?: string;
+  phoneNo?: string;
+  expiryDate?: string;
+  act?: string;
 }

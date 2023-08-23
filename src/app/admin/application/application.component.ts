@@ -33,11 +33,10 @@ export class ApplicationComponent implements OnInit, AfterViewInit {
     reference: 'Reference Number',
     companyName: 'Company Name',
     // appType: 'Application Type',
+    vesselName: 'Vessel Name',
     createdDate: 'Initiation Date',
-    submittedDate: 'Submission Date',
-    facilityType: 'Facility Type',
-    state: 'State',
-    facilityAddress: 'Location / Address',
+    capacity: 'Capacity',
+    status: 'Status',
   };
 
   constructor(
@@ -88,7 +87,6 @@ export class ApplicationComponent implements OnInit, AfterViewInit {
   }
 
   onViewData(event: any, type: string) {
-    debugger;
     this.router.navigate([`/admin/view-application/${event.appId}`], {
       queryParams: { id: event.id, appSource: AppSource.Application },
     });

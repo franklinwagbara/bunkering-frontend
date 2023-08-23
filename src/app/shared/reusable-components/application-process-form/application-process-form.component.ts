@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {
   MAT_DIALOG_DATA,
@@ -20,7 +20,10 @@ import { ApplicationProcessesService } from '../../services/application-processe
 import {
   IApplicationType,
   IFacilityType,
+  IVessel,
 } from 'src/app/company/apply/new-application/new-application.component';
+import { LibaryService } from '../../services/libary.service';
+import { PopupService } from '../../services/popup.service';
 
 const RATES = [
   '0%',
@@ -51,7 +54,7 @@ const RATES = [
   templateUrl: './application-process-form.component.html',
   styleUrls: ['./application-process-form.component.css'],
 })
-export class ApplicationProcessFormComponent {
+export class ApplicationProcessFormComponent implements OnInit {
   public form: FormGroup;
   public applicationProccess: IApplicationProcess;
   public permitStages: PermitStage[];
@@ -63,16 +66,18 @@ export class ApplicationProcessFormComponent {
   public rates: string[] = RATES;
   public facilityTypes: IFacilityType[];
   public applicationTypes: IApplicationType[];
+  public vesselTypes: IVessel[];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<PermitStageDocFormComponent>,
     private snackBar: MatSnackBar,
-    private adminServe: AdminService,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
     private progressBar: ProgressBarService,
-    private processFlow: ApplicationProcessesService
+    private processFlow: ApplicationProcessesService,
+    private libService: LibaryService,
+    private popUp: PopupService
   ) {
     this.permitStages = data.data.permitStages;
     this.branches = data.data.branches;
@@ -94,9 +99,15 @@ export class ApplicationProcessFormComponent {
       //   this.applicationProccess ? this.applicationProccess.branchId : 'none',
       //   Validators.required,
       // ],
-      facilityTypeId: [
+      // facilityTypeId: [
+      //   this.applicationProccess
+      //     ? this.applicationProccess.facilityTypeId
+      //     : 'none',
+      //   Validators.required,
+      // ],
+      vesselTypeId: [
         this.applicationProccess
-          ? this.applicationProccess.facilityTypeId
+          ? this.applicationProccess.vesselTypeId
           : 'none',
         Validators.required,
       ],
@@ -135,8 +146,26 @@ export class ApplicationProcessFormComponent {
     });
   }
 
+  ngOnInit(): void {
+    this.getVesselTypes();
+  }
+
   onClose() {
     this.dialogRef.close();
+  }
+
+  public getVesselTypes() {
+    this.progressBar.open();
+    this.libService.getVesselTypes().subscribe({
+      next: (res) => {
+        this.vesselTypes = res.data;
+        this.progressBar.close();
+      },
+      error: (err) => {
+        this.progressBar.close();
+        this.popUp.open(err.message, 'error');
+      },
+    });
   }
 
   createProcessFlow() {
@@ -146,7 +175,7 @@ export class ApplicationProcessFormComponent {
       next: (res) => {
         if (res.success) {
           this.snackBar.open(
-            'Application Process was created successfull!',
+            'Application Process was created successfully!',
             null,
             {
               panelClass: ['success'],

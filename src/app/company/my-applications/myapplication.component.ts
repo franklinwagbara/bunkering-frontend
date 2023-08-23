@@ -3,15 +3,17 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { ViewApplicationComponent } from 'src/app/admin/application/view-application/view-application.component';
-import { AuthenticationService, GenericService } from 'src/app/shared/services';
+import { GenericService } from 'src/app/shared/services';
 import { ApplyService } from 'src/app/shared/services/apply.service';
-import { CompanyService } from 'src/app/shared/services/company.service';
 import { ProgressBarService } from 'src/app/shared/services/progress-bar.service';
-import { environment } from 'src/environments/environment';
 import { PaymentSummary } from '../paymnet-summary/paymentsum.component';
 import { ApplicationService } from 'src/app/shared/services/application.service';
 import { AppSource } from 'src/app/shared/constants/appSource';
+import { PopupService } from 'src/app/shared/services/popup.service';
+import {
+  IFacility,
+  ITankDTO,
+} from '../apply/new-application/new-application.component';
 
 @Component({
   templateUrl: 'myapplication.component.html',
@@ -33,17 +35,14 @@ export class MyApplicationComponent implements OnInit {
   };
 
   applicationTableKeysMappedToHeaders = {
-    appReference: 'Ap. pReference',
+    reference: 'App. Reference',
     companyName: 'Company Name',
-    permitType: 'Permit Type',
-    facilityAddress: 'Address/Location',
-    submittedDate: 'Date Submitted',
+    vesselName: 'Vessel Name',
+    vesselType: 'Vessel Type',
+    capacity: 'Capacity',
+    createdDate: 'Date Initiated',
     status: 'Status',
   };
-
-  /**
-   *
-   */
 
   constructor(
     private gen: GenericService,
@@ -53,7 +52,8 @@ export class MyApplicationComponent implements OnInit {
     private applicationServer: ApplyService,
     private snackBar: MatSnackBar,
     private applicationService: ApplicationService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private popUp: PopupService
   ) {
     this.genk = gen;
     this.rrr$.subscribe((data) => {
@@ -99,17 +99,13 @@ export class MyApplicationComponent implements OnInit {
             panelClass: ['success'],
           });
 
-          //todo: display success dialog
+          this.popUp.open('RRR was generated successfully!', 'success');
           this.progressbar.close();
           this.cd.markForCheck();
         }
       },
       error: (error) => {
-        this.snackBar.open('RRR generation failed!', null, {
-          panelClass: ['error'],
-        });
-
-        //todo: display error dialog
+        this.popUp.open('RRR generation failed!', 'error');
         this.progressbar.close();
         this.cd.markForCheck();
       },
@@ -185,7 +181,6 @@ export interface Application {
   currentDesk: string;
   extraPayments: any[];
   facilityAddress: string;
-  facilityName: string;
   gpsCordinates: string;
   id: string;
   inspectionForm: any[];
@@ -196,4 +191,50 @@ export interface Application {
   stateName: string;
   status: string;
   submittedDate: string;
+  applicationDocs: any[];
+
+  createdDate: string;
+  paymnetDate: string;
+  paymnetStatus: string;
+  email: string;
+  reference: string;
+  applicationTypeId: number;
+  facilityName: string;
+  vesselTypeId: number;
+  capacity: number;
+  operator: string;
+  imoNumber: string;
+  callSIgn: string;
+  flag: string;
+  yearOfBuild: string;
+  placeOfBuild: string;
+  deadWeight: number;
+  vessel: Vessel;
+  appHistories: any[];
+}
+
+export interface Vessel {
+  name: string;
+  capacity: number;
+  operator: string;
+  vesselType: string;
+  placeOfBuild: string;
+  yearOfBuild: number;
+  flag: string;
+  callSIgn: string;
+  imoNumber: string;
+  tanks: ITankDTO[];
+  facilitySources: IFacility[];
+}
+
+export interface ApplicationHistory {
+  action: string;
+  applicationId: number;
+  comment: string;
+  date: string;
+  id: number;
+  targetRole: string;
+  targetedTo: string;
+  triggeredBy: string;
+  triggeredByRole: string;
 }

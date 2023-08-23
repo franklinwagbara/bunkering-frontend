@@ -43,11 +43,12 @@ export class MyDeskComponent implements OnInit {
     companyName: 'Company Name',
     companyEmail: 'Company Email',
     // appType: 'Application Type',
+    vesselName: 'Vessel Name',
+    vesselType: 'Vessel Type',
+    capacity: 'Capacity',
+    paymnetStatus: 'Payment Status',
+    status: 'Status',
     createdDate: 'Initiation Date',
-    submittedDate: 'Submission Date',
-    facilityType: 'Facility Type',
-    state: 'State',
-    facilityAddress: 'Location / Address',
   };
 
   constructor(
@@ -126,8 +127,9 @@ export class MyDeskComponent implements OnInit {
   }
 
   onViewData(event: any, type: string) {
+    debugger;
     this.router.navigate([`/admin/view-application/${event.id}`], {
-      queryParams: { id: event.appId, appSource: AppSource.MyDesk },
+      queryParams: { id: event.id, appSource: AppSource.MyDesk },
     });
   }
 

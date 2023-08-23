@@ -14,6 +14,7 @@ import { ProgressBarService } from 'src/app/shared/services/progress-bar.service
 import { SpinnerService } from 'src/app/shared/services/spinner.service';
 import { ShowMoreComponent } from './show-more/show-more.component';
 import { ApplicationService } from 'src/app/shared/services/application.service';
+import { Application } from 'src/app/company/my-applications/myapplication.component';
 
 @Component({
   selector: 'app-view-application',
@@ -21,7 +22,7 @@ import { ApplicationService } from 'src/app/shared/services/application.service'
   styleUrls: ['./view-application.component.scss'],
 })
 export class ViewApplicationComponent implements OnInit {
-  public application: IApplication;
+  public application: Application;
   public appActions: any;
   public appId: number;
   public appSource: AppSource;
@@ -129,6 +130,9 @@ export class ViewApplicationComponent implements OnInit {
         this.progressBar.close();
         this.cd.markForCheck();
       });
+
+      this.router.navigate(['/admin/my-desk']);
+      this.cd.markForCheck();
     });
   }
 
@@ -136,7 +140,7 @@ export class ViewApplicationComponent implements OnInit {
     const operationConfiguration = {
       appHistory: {
         data: {
-          appHistory: this.application.appHistories,
+          appHistory: this.application.appHistory,
         },
       },
       schedules: {

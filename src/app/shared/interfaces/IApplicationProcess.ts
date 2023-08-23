@@ -1,5 +1,6 @@
 export interface IApplicationProcess {
   id: number;
+  vesselTypeId: number;
   facilityTypeId: number;
   applicationTypeId: number;
   triggeredByRole: string;

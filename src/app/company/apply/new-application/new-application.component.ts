@@ -179,7 +179,7 @@ export class NewApplicationComponent implements OnInit {
       applicationTypeId: this.applicationTypeId,
       facilityName: this.vesselForm.value.vesselName,
       // vesselTypeId: this.vesselForm.value.vesselTypeId,
-      vesselTypeId: 1,
+      vesselTypeId: this.vesselForm.value.vesselTypeId,
       capacity: this.vesselForm.value.capacity,
       deadWeight: this.vesselForm.value.deadWeight,
       operator: this.vesselForm.value.operator,
@@ -213,7 +213,7 @@ export class NewApplicationComponent implements OnInit {
     const newTank: ITankDTO = {
       id: 0,
       name: formValue.name,
-      capacity: formValue.capacity,
+      capacity: formValue.capacity as number,
       productId: formValue.productId,
       product: this.products.find((x) => x.id == formValue.productId).name,
       facilityId: 0,
@@ -393,14 +393,14 @@ export interface ILGA {
 export interface ITank {
   id: number;
   name: string;
-  capacity: string;
+  capacity: number;
   product: string;
 }
 
 export interface ITankDTO {
   id: number;
   name: string;
-  capacity: string;
+  capacity: number;
   productId: number;
   product?: string;
   facilityId: number;
@@ -431,4 +431,19 @@ export interface IApplicationFormDTO {
   deadWeight: number;
   facilitySources: IFacility[];
   tankList: ITankDTO[];
+}
+
+export interface IVessel {
+  id?: number;
+  vesselName: string;
+  name?: string;
+  capacity: number;
+  operator: string;
+  vesselTypeId: string;
+  vesselType?: string;
+  placeOfBuild: string;
+  yearOfBuild: number;
+  flag: string;
+  callSIgn: string;
+  imoNumber: string;
 }

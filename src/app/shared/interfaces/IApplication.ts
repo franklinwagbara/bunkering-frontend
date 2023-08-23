@@ -1,3 +1,4 @@
+import { IVessel } from 'src/app/company/apply/new-application/new-application.component';
 import { IAppHistory } from './IAppHistory';
 import { IApplicationForm } from './IApplicationForm';
 import { IExtraPayment } from './IExtraPayment';
@@ -45,6 +46,8 @@ export interface IApplication {
   category: string;
   categoryCode: string;
   categoryId: string;
+
+  vessel: IVessel;
 }
 
 export interface IDoc {

@@ -8,6 +8,7 @@ import { ApplyService } from 'src/app/shared/services/apply.service';
 import { AdditionalDocListFormComponent } from './additional-doc-list-form/additional-doc-list-form.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ApplicationService } from 'src/app/shared/services/application.service';
+import { PopupService } from 'src/app/shared/services/popup.service';
 
 @Component({
   selector: 'app-document-upload',
@@ -36,7 +37,8 @@ export class DocumentUploadComponent implements OnInit {
     private snackBar: MatSnackBar,
     private route: ActivatedRoute,
     public dialog: MatDialog,
-    public appService: ApplicationService
+    public appService: ApplicationService,
+    private popUp: PopupService
   ) {}
 
   ngOnInit(): void {
@@ -233,24 +235,11 @@ export class DocumentUploadComponent implements OnInit {
     this.applicationService.submitApplication(payload).subscribe({
       next: (res) => {
         this.progressBar.close();
-        this.snackBar.open(
-          'Your Application was submitted successfully!',
-          null,
-          {
-            panelClass: ['success'],
-          }
-        );
+        this.popUp.open('Document(s) upload was successfull.', 'success');
       },
       error: (res) => {
-        this.snackBar.open(
-          'Your Application submission was not successful.',
-          null,
-          {
-            panelClass: ['error'],
-          }
-        );
         this.progressBar.close();
-        this.progressBar.close();
+        this.popUp.open('Document(s) upload failed!', 'error');
       },
     });
   }
