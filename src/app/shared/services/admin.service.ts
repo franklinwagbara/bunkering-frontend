@@ -152,6 +152,12 @@ export class AdminService {
       .pipe(retry(this.num));
   }
 
+  getPayments() {
+    return this.http
+      .get<any>(`${environment.apiUrl}/Payment/pay-online`)
+      .pipe(retry(this.num));
+  }
+
   createModule(model: any) {
     return this.http
       .post<any>(
