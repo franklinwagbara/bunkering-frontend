@@ -14,4 +14,16 @@ export class ScheduleService {
   addSchedule(model: Schedule) {
     return this.http.post<any>(`${API}/add-schedule`, model);
   }
+
+  getAllSchedules() {
+    return this.http.get<any>(`${API}/all-schedules`);
+  }
+
+  approveSchedules(model: Schedule) {
+    return this.http.post<any>(`${API}/approve-schedule`, model);
+  }
+
+  getSchedule(id: number) {
+    return this.http.get<any>(`${API}/get-schedule`, { params: { id } });
+  }
 }

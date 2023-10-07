@@ -17,6 +17,8 @@ import { ViewApplicationComponent } from '../application/view-application/view-a
 import { TestComponent } from 'src/app/company/test/test.component';
 import { ApplicationReportComponent } from './application-report/application-report.component';
 import { PaymentReportComponent } from './payment-report/payment-report.component';
+import { LicenceComponent } from '../licence/licence.component';
+import { ScheduleComponent } from '../schedule/schedule.component';
 
 const routes: Routes = [
   { path: '', component: AdminComponent },
@@ -35,6 +37,9 @@ const routes: Routes = [
   { path: 'test', component: TestComponent },
   { path: 'application-report', component: ApplicationReportComponent },
   { path: 'payment-report', component: PaymentReportComponent },
+  { path: 'licences', component: LicenceComponent },
+  { path: 'schedules', component: ScheduleComponent },
+  { path: 'view-schedule/:id', component: ScheduleComponent },
 ];
 
 @NgModule({

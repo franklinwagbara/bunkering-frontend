@@ -71,7 +71,6 @@ export class homeComponent implements OnInit {
             if (user) {
               let returnUrl =
                 this.route.snapshot.queryParamMap.get('returnUrl');
-              debugger;
               if (user.userRoles === UserType.Company) {
                 this.router.navigate([returnUrl || '/company/dashboard']);
               } else {

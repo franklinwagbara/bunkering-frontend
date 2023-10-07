@@ -81,6 +81,8 @@
               column.cell(row) === "undefined" ||
               column.cell(row) === "edit_control" ||
               column.cell(row) === "view_control" ||
+              column.cell(row) === "view_licence_control" ||
+              column.cell(row) === "view_schedule_control" ||
               column.cell(row) === "rrr_control" ||
               column.cell(row) === "uploadDocument_control" ||
               column.cell(row) === "confirmPayment_control" ||
@@ -115,6 +117,26 @@
                 (click)="viewData(row)"
               >
                 View Application
+              </button>
+
+              <button
+                mat-flat-button
+                color="accent"
+                class="view-button"
+                *ngIf="column.cell(row) === 'view_licence_control'"
+                (click)="viewData(row)"
+              >
+                View Licence
+              </button>
+
+              <button
+                mat-flat-button
+                color="accent"
+                class="view-button"
+                *ngIf="column.cell(row) === 'view_schedule_control'"
+                (click)="viewData(row)"
+              >
+                View Schedule
               </button>
 
               <button

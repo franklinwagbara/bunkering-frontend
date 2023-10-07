@@ -67,51 +67,31 @@
 
           <div class="card-item">
             <div class="item-title">Initiator</div>
-            <div class="item-content">{{ schedule.scheduledBy }}</div>
+            <div class="item-content">{{ schedule.scheduleBy }}</div>
           </div>
           <div class="card-item">
             <div class="item-title">Schedule Date</div>
-            <div class="item-content">{{ schedule.inspectionDate }}</div>
+            <div class="item-content">{{ schedule.scheduleDate }}</div>
           </div>
           <div class="card-item">
             <div class="item-title">Expiry Date</div>
-            <div class="item-content">{{ schedule.expiryDate }}</div>
+            <div class="item-content">{{ schedule.scheduleExpiry }}</div>
           </div>
-          <!-- <div class="card-item">
+          <div class="card-item">
             <div class="item-title">Company Status</div>
             <div class="item-content">{{ schedule.companyStatus }}</div>
-          </div> -->
+          </div>
           <div class="card-item">
             <div class="item-title">Remark</div>
-            <div class="item-content">{{ schedule.approvalMessage }}</div>
+            <div class="item-content">{{ schedule.comment }}</div>
           </div>
           <div class="card-item">
             <div class="item-title">Approver</div>
-            <div class="item-content">{{ schedule.approvedBy }}</div>
+            <div class="item-content">{{ schedule.approver }}</div>
           </div>
           <div class="card-item">
-            <div class="item-title">Approval Status</div>
-            <div class="item-content">
-              {{
-                schedule.isApproved == true
-                  ? "Approved"
-                  : schedule.isApproved == null
-                  ? "Approval Pending"
-                  : "Disapproved"
-              }}
-            </div>
-          </div>
-          <div class="card-item">
-            <div class="item-title">Approval Accepted</div>
-            <div class="item-content">
-              {{
-                schedule.isApproved == true
-                  ? "Approved"
-                  : schedule.isApproved == null
-                  ? "Approval Pending"
-                  : "Disapproved"
-              }}
-            </div>
+            <div class="item-title">Date</div>
+            <div class="item-content">{{ schedule.status }}</div>
           </div>
         </div>
         <p class="show-more" (click)="showMore('schedules')">Show more</p>
@@ -180,7 +160,9 @@
         </mat-expansion-panel-header>
         <div
           class="card-list"
-          *ngFor="let applicationDoc of application?.documents | firstN : 4"
+          *ngFor="
+            let applicationDoc of application?.applicationDocs | firstN : 4
+          "
         >
           <div class="card-item">
             <div class="item-title">

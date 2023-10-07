@@ -1,6 +1,6 @@
 import { Category } from 'src/app/admin/settings/modules-setting/modules-setting.component';
 
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
   MAT_DIALOG_DATA,
@@ -17,6 +17,7 @@ import { ApplyService } from '../../services/apply.service';
 import { ApplicationActionType } from '../../constants/applicationActions';
 import { Staff } from 'src/app/admin/settings/all-staff/all-staff.component';
 import { PopupService } from '../../services/popup.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-approve-form',
@@ -36,7 +37,9 @@ export class ApproveFormComponent implements OnInit {
     private appService: ApplyService,
     private progressBarService: ProgressBarService,
     private auth: AuthenticationService,
-    private popup: PopupService
+    private popup: PopupService,
+    private cd: ChangeDetectorRef,
+    private router: Router
   ) {
     this.application = data.data.application;
 
@@ -89,6 +92,8 @@ export class ApproveFormComponent implements OnInit {
         }
 
         this.progressBarService.close();
+        this.router.navigate(['/admin/my-desk']);
+        this.cd.markForCheck();
       },
 
       error: (error) => {

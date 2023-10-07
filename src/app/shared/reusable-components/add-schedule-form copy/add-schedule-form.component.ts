@@ -47,6 +47,8 @@ export class AddScheduleFormComponent implements OnInit {
   ) {
     this.application = data.data.application;
     this.schedule = data.data?.schedule;
+    console.log('sechldoo', this.schedule);
+    debugger;
 
     if (this.schedule) {
       this.form = this.formBuilder.group({
@@ -75,9 +77,7 @@ export class AddScheduleFormComponent implements OnInit {
 
     this.auth.getAllStaff().subscribe({
       next: (res) => {
-        this.currentUser = res.data.data.find(
-          (u) => u.email === tempUser.userId
-        );
+        this.currentUser = res.data.find((u) => u.email === tempUser.userId);
 
         this.progressBarService.close();
       },

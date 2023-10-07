@@ -211,6 +211,7 @@ export interface Application {
   deadWeight: number;
   vessel: Vessel;
   appHistories: any[];
+  documents?: any[];
 }
 
 export interface Vessel {

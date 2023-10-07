@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
   MAT_DIALOG_DATA,
@@ -13,6 +13,7 @@ import { IApplication } from '../../interfaces/IApplication';
 import { ApplyService } from '../../services/apply.service';
 import { ApplicationActionType } from '../../constants/applicationActions';
 import { Staff } from 'src/app/admin/settings/all-staff/all-staff.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-send-back-form',
@@ -32,7 +33,9 @@ export class SendBackFormComponent implements OnInit {
     private dialog: MatDialog,
     private appService: ApplyService,
     private progressBarService: ProgressBarService,
-    private auth: AuthenticationService
+    private auth: AuthenticationService,
+    private cd: ChangeDetectorRef,
+    private router: Router
   ) {
     this.application = data.data.application;
 
@@ -75,10 +78,10 @@ export class SendBackFormComponent implements OnInit {
 
     const model = {
       applicationId: this.application.id,
-      currentUserId: this.currentUser.id,
       action: ApplicationActionType.Reject,
-      delegatedUserId: '',
       comment: this.form.controls['comment'].value,
+      // delegatedUserId: '',
+      // currentUserId: this.currentUser.id,
     };
 
     this.appService.processApplication(model).subscribe({
@@ -92,6 +95,8 @@ export class SendBackFormComponent implements OnInit {
         }
 
         this.progressBarService.close();
+        this.router.navigate(['/admin/my-desk']);
+        this.cd.markForCheck();
       },
 
       error: (error) => {

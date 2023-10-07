@@ -84,6 +84,40 @@ const ROUTES: RouteInfo[] = [
     ],
   },
   {
+    id: 3,
+    title: 'LICENCES',
+    iconName: 'apps',
+    iconId: 'Outline',
+    iconColor: 'blue',
+    active: false,
+    subMenuActive: false,
+
+    subRoutes: [
+      {
+        id: 1,
+        title: 'ALL LICENCES',
+        url: '/admin/licences',
+      },
+    ],
+  },
+  {
+    id: 3,
+    title: 'SCHEDULES',
+    iconName: 'apps',
+    iconId: 'Outline',
+    iconColor: 'blue',
+    active: false,
+    subMenuActive: false,
+
+    subRoutes: [
+      {
+        id: 1,
+        title: 'ALL SCHEDULES',
+        url: '/admin/schedules',
+      },
+    ],
+  },
+  {
     id: 4,
     title: 'PAYMENTS',
     iconName: 'money-bill-wave',

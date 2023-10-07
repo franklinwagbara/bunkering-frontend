@@ -15,7 +15,6 @@ import { SpinnerService } from 'src/app/shared/services/spinner.service';
 import { ShowMoreComponent } from './show-more/show-more.component';
 import { ApplicationService } from 'src/app/shared/services/application.service';
 import { Application } from 'src/app/company/my-applications/myapplication.component';
-import { LicenceService } from 'src/app/shared/services/licence.service';
 
 @Component({
   selector: 'app-view-application',
@@ -27,7 +26,6 @@ export class ViewApplicationComponent implements OnInit {
   public appActions: any;
   public appId: number;
   public appSource: AppSource;
-  public licence: any;
 
   constructor(
     private snackBar: MatSnackBar,
@@ -39,8 +37,7 @@ export class ViewApplicationComponent implements OnInit {
     private spinner: SpinnerService,
     public route: ActivatedRoute,
     private router: Router,
-    private cd: ChangeDetectorRef,
-    private licenceService: LicenceService
+    private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -49,8 +46,30 @@ export class ViewApplicationComponent implements OnInit {
       this.appId = parseInt(params['id']);
       this.appSource = params['appSource'];
 
-      if (this.appSource != AppSource.Licence) this.getApplication();
-      else this.getLicence();
+      this.getApplication().subscribe({
+        next: (res) => {
+          if (res.success) {
+            this.application = res.data;
+          }
+
+          this.progressBar.close();
+          this.spinner.close();
+          this.cd.markForCheck();
+        },
+        error: (error) => {
+          this.snackBar.open(
+            'Something went wrong while retrieving data.',
+            null,
+            {
+              panelClass: ['error'],
+            }
+          );
+
+          this.progressBar.close();
+          this.spinner.close();
+          this.cd.markForCheck();
+        },
+      });
     });
   }
 
@@ -60,57 +79,7 @@ export class ViewApplicationComponent implements OnInit {
   }
 
   getApplication() {
-    this.applicationService.viewApplication(this.appId).subscribe({
-      next: (res) => {
-        if (res.success) {
-          this.application = res.data;
-        }
-
-        this.progressBar.close();
-        this.spinner.close();
-        this.cd.markForCheck();
-      },
-      error: (error) => {
-        this.snackBar.open(
-          'Something went wrong while retrieving data.',
-          null,
-          {
-            panelClass: ['error'],
-          }
-        );
-
-        this.progressBar.close();
-        this.spinner.close();
-        this.cd.markForCheck();
-      },
-    });
-  }
-
-  getLicence() {
-    this.licenceService.getLicence(this.appId).subscribe({
-      next: (res) => {
-        if (res.success) {
-          this.licence = res.data;
-        }
-
-        this.progressBar.close();
-        this.spinner.close();
-        this.cd.markForCheck();
-      },
-      error: (error) => {
-        this.snackBar.open(
-          'Something went wrong while retrieving data.',
-          null,
-          {
-            panelClass: ['error'],
-          }
-        );
-
-        this.progressBar.close();
-        this.spinner.close();
-        this.cd.markForCheck();
-      },
-    });
+    return this.applicationService.viewApplication(this.appId);
   }
 
   public get isStaffDesk() {
@@ -155,7 +124,12 @@ export class ViewApplicationComponent implements OnInit {
     dialogRef.afterClosed().subscribe((res) => {
       this.progressBar.open();
 
-      this.getApplication();
+      this.getApplication().subscribe((res) => {
+        this.application = res.data.data;
+
+        this.progressBar.close();
+        this.cd.markForCheck();
+      });
     });
   }
 
@@ -197,7 +171,12 @@ export class ViewApplicationComponent implements OnInit {
     dialogRef.afterClosed().subscribe((res) => {
       this.progressBar.open();
 
-      this.getApplication();
+      this.getApplication().subscribe((res) => {
+        this.application = res.data.data;
+
+        this.progressBar.close();
+        this.cd.markForCheck();
+      });
     });
   }
 

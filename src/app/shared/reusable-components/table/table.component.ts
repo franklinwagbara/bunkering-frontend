@@ -50,6 +50,9 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit {
   @Input('noCheckControls') noCheckControls?: boolean = false;
   @Input('noEditControl') noEditControl?: boolean = false;
   @Input('EnableViewControl') enableViewControl?: boolean = false;
+  @Input('EnableViewLicenceControl') enableViewLicenceControl?: boolean = false;
+  @Input('EnableViewScheduleControl') enableViewScheduleControl?: boolean =
+    false;
   @Input('table_keysMappedToHeaders')
   keysMappedToHeaders: ITableKeysMappedToHeaders = {};
   @Input('table_controls_horizontal') table_controls_horizontal: boolean =
@@ -144,6 +147,22 @@ export class TableComponent implements OnInit, OnChanges, AfterViewInit {
         columnDef: 'view_control',
         header: '',
         cell: (item) => 'view_control',
+      });
+    }
+
+    if (this.enableViewLicenceControl) {
+      this.columns.push({
+        columnDef: 'view_control',
+        header: '',
+        cell: (item) => 'view_licence_control',
+      });
+    }
+
+    if (this.enableViewScheduleControl) {
+      this.columns.push({
+        columnDef: 'view_control',
+        header: '',
+        cell: (item) => 'view_schedule_control',
       });
     }
 
