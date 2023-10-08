@@ -50,6 +50,7 @@ export class NewApplicationComponent implements OnInit {
     this.vesselForm = this.formBuilder.group({
       vesselName: ['', Validators.required],
       capacity: ['', Validators.required],
+      deadWeight: ['', Validators.required],
       operator: ['', Validators.required],
       vesselTypeId: ['', Validators.required],
       placeOfBuild: ['', Validators.required],
@@ -77,10 +78,10 @@ export class NewApplicationComponent implements OnInit {
 
     this.isLoading = true;
 
-    this.licenseNumberControl.valueChanges.subscribe((res) => {
-      this.isLoading = true;
-      this.cd.markForCheck();
-    });
+    // this.licenseNumberControl.valueChanges.subscribe((res) => {
+    //   this.isLoading = true;
+    //   this.cd.markForCheck();
+    // });
 
     // this.facilityTypeControl.valueChanges.subscribe((res: '1' | '2') => {
     //   if (res == '1') this.isMobile = true;

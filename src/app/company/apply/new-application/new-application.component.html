@@ -16,11 +16,21 @@
             </div>
 
             <div class="flex flex-col">
-              <span class="input-label"> Dead Weight / Capacity </span>
+              <span class="input-label"> Dead Weight </span>
               <input
                 type="number"
                 class="border border-t border-b rounded-r p-2"
-                placeholder="Dead Weight / Capacity "
+                placeholder="Dead Weight "
+                formControlName="deadWeight"
+              />
+            </div>
+
+            <div class="flex flex-col">
+              <span class="input-label"> Capacity </span>
+              <input
+                type="number"
+                class="border border-t border-b rounded-r p-2"
+                placeholder="Capacity "
                 formControlName="capacity"
               />
             </div>
@@ -274,22 +284,6 @@
                     placeholder="License Number"
                     formControlName="licenseNumber"
                   />
-                </div>
-                <div *ngIf="licenseNumberControl.dirty">
-                  <p *ngIf="isLoading">Verifying...</p>
-                  <span
-                    *ngIf="isLicenceVerified && !isLoading"
-                    class="material-symbols-outlined green-icon"
-                  >
-                    done_outline
-                  </span>
-
-                  <span
-                    *ngIf="!isLicenceVerified && !isLoading"
-                    class="material-symbols-outlined red-icon"
-                  >
-                    block
-                  </span>
                 </div>
               </div>
             </div>
