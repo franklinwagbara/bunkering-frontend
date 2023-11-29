@@ -52,10 +52,7 @@
           class="card-list"
           *ngFor="let schedule of application?.schedules | firstN : 4"
         >
-          <div
-            *ngIf="isCreatedByMe(schedule.scheduleBy)"
-            class="flex justify-end"
-          >
+          <div class="flex justify-end">
             <button
               mat-stroked-button
               color="accent"

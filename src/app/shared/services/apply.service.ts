@@ -236,8 +236,9 @@ export class ApplyService {
     //   `${environment.apiUrl}/application/submit-application`,
     //   payload
     // );
-    return this.http.get<any>(
+    return this.http.post<any>(
       `${environment.apiUrl}/application/add-documents`,
+      null,
       { params: { id: payload.appId } }
     );
   }

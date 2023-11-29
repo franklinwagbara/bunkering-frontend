@@ -98,9 +98,16 @@
                 <td>{{ paymentSummary?.vesselLicenseFee }}</td>
               </tr> -->
               <tr>
-                <td class="bold">Service Charge</td>
+                <td class="bold">Processing Fee</td>
                 <td>{{ paymentSummary?.serciveCharge }}</td>
               </tr>
+              <tr>
+                <td class="bold">Application Fee</td>
+                <td>
+                  {{ paymentSummary?.total - paymentSummary?.serciveCharge }}
+                </td>
+              </tr>
+
               <tr>
                 <td class="bold">Total</td>
                 <td>{{ paymentSummary?.total }}</td>

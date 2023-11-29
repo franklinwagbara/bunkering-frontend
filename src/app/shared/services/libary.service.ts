@@ -10,6 +10,10 @@ const api = `${environment.apiUrl}/library`;
 export class LibaryService {
   constructor(private http: HttpClient) {}
 
+  getStaffsForNomination() {
+    return this.http.get<any>(`${api}/all-usersFO`);
+  }
+
   public getFacilityTypes() {
     return this.http.get<any>(`${api}/facilitytypes`);
   }

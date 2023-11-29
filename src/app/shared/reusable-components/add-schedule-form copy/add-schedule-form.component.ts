@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
   MAT_DIALOG_DATA,
@@ -16,9 +16,11 @@ import { convertTimeToMilliseconds } from 'src/app/helpers/convertTimeToMillisec
 import { AdminService } from '../../services/admin.service';
 import { ISchedule } from '../../interfaces/ISchedule';
 import { ScheduleService } from '../../services/schedule.service';
+import { SpinnerService } from '../../services/spinner.service';
+import { LibaryService } from '../../services/libary.service';
 
 const TypesOfAppointment = ['Inspection', 'Meeting', 'Preparation'];
-const Venue = ['Application field location', 'Commission Office'];
+const Venue = ['Application field location', 'Authority Office'];
 
 @Component({
   selector: 'app-add-schedule-form',
@@ -34,6 +36,7 @@ export class AddScheduleFormComponent implements OnInit {
   public venues = [...Venue];
   public selected: Date | null;
   public time: string | null;
+  public staffs: any[];
 
   constructor(
     public dialogRef: MatDialogRef<AddScheduleFormComponent>,
@@ -41,25 +44,25 @@ export class AddScheduleFormComponent implements OnInit {
     private snackBar: MatSnackBar,
     private formBuilder: FormBuilder,
     private scheduleService: ScheduleService,
-    private progressBarService: ProgressBarService,
     private auth: AuthenticationService,
-    private adminService: AdminService
+    private spinner: SpinnerService,
+    private libService: LibaryService,
+    private cd: ChangeDetectorRef
   ) {
     this.application = data.data.application;
     this.schedule = data.data?.schedule;
-    console.log('sechldoo', this.schedule);
-    debugger;
 
     if (this.schedule) {
       this.form = this.formBuilder.group({
         selectedDate: [
-          new Date(this.schedule.scheduleDate),
+          new Date(this.schedule?.inspectionDate),
           Validators.required,
         ],
         time: [this.schedule.time, Validators.required],
-        typeOfAppoinment: [this.schedule.typeOfAppoinment, Validators.required],
+        typeOfAppoinment: [this.schedule.scheduleType, Validators.required],
         venue: [this.schedule.venue, Validators.required],
-        comment: [this.schedule.comment, Validators.required],
+        comment: [this.schedule.scheduleMessage, Validators.required],
+        nominatedStaffId: [this.schedule.nominatedStaffId, Validators.required],
       });
     } else
       this.form = this.formBuilder.group({
@@ -70,16 +73,40 @@ export class AddScheduleFormComponent implements OnInit {
         typeOfAppoinment: ['', Validators.required],
         venue: ['', Validators.required],
         comment: ['', Validators.required],
+        nominatedStaffId: ['', Validators.required],
       });
+
+    // if (this.schedule) {
+    //   this.form = this.formBuilder.group({
+    //     selectedDate: [
+    //       new Date(this.schedule.scheduleDate),
+    //       Validators.required,
+    //     ],
+    //     time: [this.schedule.time, Validators.required],
+    //     typeOfAppoinment: [this.schedule.typeOfAppoinment, Validators.required],
+    //     venue: [this.schedule.venue, Validators.required],
+    //     comment: [this.schedule.comment, Validators.required],
+    //   });
+    // } else
+    //   this.form = this.formBuilder.group({
+    //     // applicationId: [this.application.id, Validators.required],
+    //     // scheduleBy: [this.currentUser.userId, Validators.required],
+    //     selectedDate: ['', Validators.required],
+    //     time: ['', Validators.required],
+    //     typeOfAppoinment: ['', Validators.required],
+    //     venue: ['', Validators.required],
+    //     comment: ['', Validators.required],
+    //   });
   }
   ngOnInit(): void {
     const tempUser = this.auth.currentUser;
+    this.spinner.open();
 
     this.auth.getAllStaff().subscribe({
       next: (res) => {
         this.currentUser = res.data.find((u) => u.email === tempUser.userId);
 
-        this.progressBarService.close();
+        this.spinner.close();
       },
 
       error: (error) => {
@@ -91,17 +118,43 @@ export class AddScheduleFormComponent implements OnInit {
           }
         );
 
-        this.progressBarService.close();
+        this.spinner.close();
       },
     });
+
+    this.currentUser = this.auth.currentUser;
+
+    this.getStaffsForNomination();
   }
 
   onClose() {
     this.dialogRef.close();
   }
 
+  public get isSupervisor() {
+    return (this.currentUser as any).userRoles === 'Supervisor';
+  }
+
+  getStaffsForNomination() {
+    this.spinner.open();
+    this.libService.getStaffsForNomination().subscribe({
+      next: (res) => {
+        this.staffs = res.data;
+        this.spinner.close();
+        this.cd.markForCheck();
+      },
+      error: (error) => {
+        this.snackBar.open(error?.message, null, {
+          panelClass: ['error'],
+        });
+        this.spinner.close();
+        this.cd.markForCheck();
+      },
+    });
+  }
+
   addSchedule() {
-    this.progressBarService.open();
+    this.spinner.open();
 
     this.selected = new Date(this.form.get('selectedDate').value);
 
@@ -119,6 +172,7 @@ export class AddScheduleFormComponent implements OnInit {
       scheduleType: this.form.controls['typeOfAppoinment'].value,
       scheduledDate: this.form.controls['selectedDate'].value,
       scheduleMessage: this.form.controls['comment'].value,
+      nominatedStaffId: this.form.controls['nominatedStaffId'].value,
       // approvalMessage: this.form.controls['comment'].value,
       // venue: this.form.controls['venue'].value,
       // scheduleBy: this.currentUser.id,
@@ -134,7 +188,7 @@ export class AddScheduleFormComponent implements OnInit {
           this.dialogRef.close();
         }
 
-        this.progressBarService.close();
+        this.spinner.close();
       },
 
       error: (error) => {
@@ -146,13 +200,13 @@ export class AddScheduleFormComponent implements OnInit {
           }
         );
 
-        this.progressBarService.close();
+        this.spinner.close();
       },
     });
   }
 
   editSchedule() {
-    this.progressBarService.open();
+    this.spinner.open();
 
     this.selected = new Date(this.form.get('selectedDate').value);
 
@@ -170,6 +224,7 @@ export class AddScheduleFormComponent implements OnInit {
       scheduleType: this.form.controls['typeOfAppoinment'].value,
       scheduledDate: this.form.controls['selectedDate'].value,
       scheduleMessage: this.form.controls['comment'].value,
+      nominatedStaffId: this.form.controls['nominatedStaffId'].value,
 
       // typeOfAppoinment: this.form.controls['typeOfAppoinment'].value,
       // venue: this.form.controls['venue'].value,
@@ -188,7 +243,7 @@ export class AddScheduleFormComponent implements OnInit {
           this.dialogRef.close();
         }
 
-        this.progressBarService.close();
+        this.spinner.close();
       },
 
       error: (error) => {
@@ -200,7 +255,62 @@ export class AddScheduleFormComponent implements OnInit {
           }
         );
 
-        this.progressBarService.close();
+        this.spinner.close();
+      },
+    });
+  }
+
+  approveSchedule() {
+    this.spinner.open();
+
+    this.selected = new Date(this.form.get('selectedDate').value);
+
+    const dateToTime = this.selected.getTime();
+
+    this.selected.setTime(
+      dateToTime + convertTimeToMilliseconds(this.form.get('time').value)
+    );
+
+    this.form.get('selectedDate').setValue(this.selected);
+
+    const model = {
+      id: this.schedule.id,
+      applicationId: this.application.id,
+      scheduleType: this.form.controls['typeOfAppoinment'].value,
+      scheduledDate: this.form.controls['selectedDate'].value,
+      scheduleMessage: this.form.controls['comment'].value,
+      nominatedStaffId: this.form.controls['nominatedStaffId'].value,
+
+      // typeOfAppoinment: this.form.controls['typeOfAppoinment'].value,
+      // venue: this.form.controls['venue'].value,
+      // comment: this.form.controls['comment'].value,
+      // inspectionDate: this.form.controls['selectedDate'].value,
+      // scheduleBy: this.currentUser.id,
+    };
+
+    this.scheduleService.addSchedule(model).subscribe({
+      next: (res) => {
+        if (res.success) {
+          this.snackBar.open('Operation was successfully!', null, {
+            panelClass: ['success'],
+          });
+
+          this.dialogRef.close();
+        }
+
+        this.spinner.close();
+      },
+
+      error: (error) => {
+        this.snackBar.open(
+          'Operation failed! Could not perform operation!',
+          null,
+          {
+            panelClass: ['error'],
+          }
+        );
+
+        this.spinner.close();
       },
     });
   }

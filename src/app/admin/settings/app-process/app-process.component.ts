@@ -43,6 +43,8 @@ export class AppProcessComponent implements OnInit {
     action: 'Action',
     targetRole: 'Target Role',
     status: 'Application Status',
+    fromLocation: 'From Location',
+    toLocation: 'To Location',
     rate: 'State',
     isArchived: 'Archived',
   };

@@ -39,6 +39,15 @@
       </mat-form-field>
 
       <mat-form-field appearance="fill">
+        <mat-label>Staff</mat-label>
+        <mat-select name="nominatedStaffId" formControlName="nominatedStaffId">
+          <mat-option *ngFor="let staff of staffs" [value]="staff.id">
+            {{ staff.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
         <mat-label>Venue</mat-label>
         <mat-select name="venue" formControlName="venue">
           <mat-option *ngFor="let venue of venues" [value]="venue">
@@ -78,12 +87,22 @@
   </button>
 
   <button
-    *ngIf="schedule"
+    *ngIf="schedule && !isSupervisor"
     mat-raised-button
     color="primary"
     (click)="editSchedule()"
     [disabled]="form.invalid"
   >
-    Schedule
+    Edit Schedule
+  </button>
+
+  <button
+    *ngIf="schedule && isSupervisor"
+    mat-raised-button
+    color="primary"
+    (click)="approveSchedule()"
+    [disabled]="form.invalid"
+  >
+    Approve Schedule
   </button>
 </div>

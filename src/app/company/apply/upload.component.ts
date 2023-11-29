@@ -51,8 +51,7 @@ export class UploadComponent implements OnInit {
     private modalService: ModalService,
     private router: Router,
     private gen: GenericService,
-    private libraryService: LibaryService,
-    private fb: FormBuilder
+    private libraryService: LibaryService
   ) {
     this.genk = gen;
   }

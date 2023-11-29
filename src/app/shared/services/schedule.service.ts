@@ -15,6 +15,10 @@ export class ScheduleService {
     return this.http.post<any>(`${API}/add-schedule`, model);
   }
 
+  approveSchedule(model: Schedule) {
+    return this.http.post<any>(`${API}/approve-schedule`, model);
+  }
+
   getAllSchedules() {
     return this.http.get<any>(`${API}/all-schedules`);
   }

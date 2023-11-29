@@ -150,6 +150,24 @@ export class AppStageDocsComponent implements OnInit {
   }
 
   onDeleteData(event: any, type: string) {
+    debugger;
+    this.spinner.open();
+    this.appDocService.deleteFacilityTypeDoc(event.id).subscribe({
+      next: (res) => {
+        this.snackBar.open('Deletion was successfull.', null, {
+          panelClass: ['success'],
+        });
+        this.spinner.close();
+        this.cd.markForCheck();
+      },
+      error: (error) => {
+        this.snackBar.open('Deletion failed.', null, {
+          panelClass: ['error'],
+        });
+        this.spinner.close();
+        this.cd.markForCheck();
+      },
+    });
     // const typeToModelMapper = {
     //   permitStageDocument: {
     //     name: 'PermitStageDocument',

@@ -28,6 +28,7 @@ export class ViewApplicationComponent implements OnInit {
   public appId: number;
   public appSource: AppSource;
   public licence: any;
+  public currentUser: any;
 
   constructor(
     private snackBar: MatSnackBar,
@@ -52,6 +53,12 @@ export class ViewApplicationComponent implements OnInit {
       if (this.appSource != AppSource.Licence) this.getApplication();
       else this.getLicence();
     });
+
+    this.currentUser = this.auth.currentUser;
+  }
+
+  public get isSupervisor() {
+    return (this.currentUser as any).userRoles === 'Supervisor';
   }
 
   isCreatedByMe(scheduleBy: string) {

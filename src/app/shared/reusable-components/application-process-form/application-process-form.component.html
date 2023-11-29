@@ -180,6 +180,54 @@
     </div>
 
     <div class="fomr-group" style="margin-bottom: 10px">
+      <label>Trigger Location</label>
+      <select
+        name="fromLocation"
+        formControlName="fromLocation"
+        class="form-control"
+      >
+        <option value="none" selected disabled hidden>
+          --Select from options --
+        </option>
+        <option *ngFor="let role of roles" [ngValue]="role.id">
+          {{ role.name }}
+        </option>
+      </select>
+      <div
+        *ngIf="
+          form.get('fromLocation')?.touched && form.get('fromLocation')?.invalid
+        "
+        class="alert alert-danger"
+      >
+        Trigger Location is required!
+      </div>
+    </div>
+
+    <div class="fomr-group" style="margin-bottom: 10px">
+      <label>Target Location</label>
+      <select
+        name="toLocation"
+        formControlName="toLocation"
+        class="form-control"
+      >
+        <option value="none" selected disabled hidden>
+          --Select from options --
+        </option>
+        <option *ngFor="let role of roles" [ngValue]="role.id">
+          {{ role.name }}
+        </option>
+      </select>
+      <div
+        *ngIf="
+          form.get('toLocation')?.touched && form.get('toLocation')?.invalid
+        "
+        class="alert alert-danger"
+      >
+        Target Location is required!
+      </div>
+    </div>
+
+    <div class="fomr-group" style="margin-bottom: 10px">
       <label>Action</label>
       <select name="action" formControlName="action" class="form-control">
         <option value="none" selected disabled hidden>

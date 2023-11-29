@@ -6,6 +6,8 @@ export interface IApplicationProcess {
   triggeredByRole: string;
   action: string;
   targetRole: string;
+  toLocation: string;
+  fromLocation: string;
   status: string;
   rate: string;
   isArchived: boolean;

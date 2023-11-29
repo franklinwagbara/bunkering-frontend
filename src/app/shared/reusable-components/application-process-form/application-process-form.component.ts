@@ -131,6 +131,16 @@ export class ApplicationProcessFormComponent implements OnInit {
         this.applicationProccess ? this.applicationProccess.targetRole : 'none',
         Validators.required,
       ],
+      fromLocation: [
+        this.applicationProccess
+          ? this.applicationProccess.fromLocation
+          : 'none',
+        Validators.required,
+      ],
+      toLocation: [
+        this.applicationProccess ? this.applicationProccess.toLocation : 'none',
+        Validators.required,
+      ],
       status: [
         this.applicationProccess ? this.applicationProccess.status : 'none',
         Validators.required,
@@ -195,4 +205,6 @@ export class ApplicationProcessFormComponent implements OnInit {
       },
     });
   }
+
+  get;
 }

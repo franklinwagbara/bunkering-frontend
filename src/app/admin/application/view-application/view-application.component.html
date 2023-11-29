@@ -53,7 +53,7 @@
           *ngFor="let schedule of application?.schedules | firstN : 4"
         >
           <div
-            *ngIf="isCreatedByMe(schedule.scheduleBy)"
+            *ngIf="isCreatedByMe(schedule.scheduledBy)"
             class="flex justify-end"
           >
             <button
@@ -62,6 +62,16 @@
               (click)="action('editSchedule', schedule)"
             >
               <mat-icon>edit</mat-icon>
+            </button>
+          </div>
+
+          <div *ngIf="isSupervisor" class="flex justify-end">
+            <button
+              mat-stroked-button
+              color="accent"
+              (click)="action('editSchedule', schedule)"
+            >
+              <mat-icon>check</mat-icon>
             </button>
           </div>
 
@@ -82,7 +92,7 @@
             <div class="item-content">{{ schedule.companyStatus }}</div>
           </div> -->
           <div class="card-item">
-            <div class="item-title">Remark</div>
+            <div class="item-title">Approval Remark</div>
             <div class="item-content">{{ schedule.approvalMessage }}</div>
           </div>
           <div class="card-item">

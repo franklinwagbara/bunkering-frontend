@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 import { CompanyService } from 'src/app/shared/services/company.service';
 import { ProgressBarService } from 'src/app/shared/services/progress-bar.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApplyService } from 'src/app/shared/services/apply.service';
 import { AdditionalDocListFormComponent } from './additional-doc-list-form/additional-doc-list-form.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -31,14 +31,14 @@ export class DocumentUploadComponent implements OnInit {
   };
 
   constructor(
-    private companyService: CompanyService,
     private applicationService: ApplyService,
     private progressBar: ProgressBarService,
     private snackBar: MatSnackBar,
     private route: ActivatedRoute,
     public dialog: MatDialog,
     public appService: ApplicationService,
-    private popUp: PopupService
+    private popUp: PopupService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -236,6 +236,7 @@ export class DocumentUploadComponent implements OnInit {
       next: (res) => {
         this.progressBar.close();
         this.popUp.open('Document(s) upload was successfull.', 'success');
+        this.router.navigate(['/company/apply']);
       },
       error: (res) => {
         this.progressBar.close();
